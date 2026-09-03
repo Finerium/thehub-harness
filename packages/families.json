@@ -1,0 +1,86 @@
+[
+ {
+  "basis": "root cause records PTFE packing worn, hardened or seized against a moving element (valve stem, rotating drum gland, compressor rod); YD-2301 gland rows and KC-4501 rod packing are the same wear-out mechanism of a PTFE dynamic seal. Scope: a packing is the static sealing element compressed against a moving surface, so WO-240085 'PTFE piston rings worn beyond limit' (KC-4501 2nd-stage piston and rider rings, where the PTFE ring is the moving element running on the cylinder bore) is deliberately out of this family and belongs to no family; it is a wear-out of the same material on the same machine and OPL-KC-4501-04 lists it beside WO-240094, so the exclusion is stated rather than left to be inferred (PS-V8)",
+  "family": "PTFE packing and stem friction",
+  "member_basis": {
+   "WO-240028": "packing: PTFE 4526L discharge gland packing worn beyond service limit (YD-2301)",
+   "WO-240029": "packing: PTFE 4505L feed-end gland packing hardened and worn (YD-2301)",
+   "WO-240094": "packing: PTFE pressure packing rings worn at distance piece (KC-4501)",
+   "WO-240135": "packing: stem seized in PTFE packing, over-tightened + fines (LV-6701)",
+   "WO-240138": "packing: PTFE V-ring stem packing worn (LV-6701)"
+  },
+  "member_wos": [
+   "WO-240028",
+   "WO-240029",
+   "WO-240094",
+   "WO-240135",
+   "WO-240138"
+  ]
+ },
+ {
+  "basis": "root cause records misalignment or a worn / spalled bearing, crosshead or coupling in a rotating drive train; KC-4501 is represented by WO-240088 (crosshead pin clearance) alone, because WO-240091's recorded root cause is a restricted oil supply passage, not a degraded bearing (PS-09)",
+  "family": "alignment and bearing degradation",
+  "member_basis": {
+   "WO-240003": "misalignment: angular misalignment 0.12 mm/100mm after foundation settlement (GA-1201A)",
+   "WO-240004": "bearing: outer race spalling on DE bearing due to prolonged misalignment (GA-1201A)",
+   "WO-240007": "coupling: Rexnord coupling element cracked from repeated misalignment cycles (GA-1201A)",
+   "WO-240034": "bearing: NDE trunnion support roller bearing worn/spalled (YD-2301)",
+   "WO-240088": "crosshead: crosshead pin clearance excessive (KC-4501)",
+   "WO-240166": "bearing: spherical roller fan bearing worn (CT-7801)",
+   "WO-240169": "coupling: composite floating-shaft coupling worn (CT-7801)"
+  },
+  "member_wos": [
+   "WO-240003",
+   "WO-240004",
+   "WO-240007",
+   "WO-240034",
+   "WO-240088",
+   "WO-240166",
+   "WO-240169"
+  ]
+ },
+ {
+  "basis": "root cause records fouling deposits on heat-transfer surfaces raising dP or degrading heat transfer (WO-240119 is a planned inspection row kept for the mechanism record; it is outside the unplanned-failure population)",
+  "family": "exchanger fouling and thermal performance",
+  "member_basis": {
+   "WO-240089": "fouling: waterside fouling of intercooler tubes, high interstage temperature (KC-4501)",
+   "WO-240110": "fouling: hexane / polymer fines deposit on tube bores, high tube dP (EA-5601)",
+   "WO-240119": "fouling: general fouling found at scheduled bundle inspection (EA-5601, planned row)",
+   "WO-240164": "fouling: degraded oil and fouled gearbox oil cooler, TSHH-7803 rising (CT-7801)"
+  },
+  "member_wos": [
+   "WO-240089",
+   "WO-240110",
+   "WO-240119",
+   "WO-240164"
+  ]
+ },
+ {
+  "basis": "root cause records a spiral-wound gasket unevenly seated or relaxed at a bolted joint (manway, channel flange, body/bonnet)",
+  "family": "gasket seating and manway leaks",
+  "member_basis": {
+   "WO-240062": "gasket: spiral-wound gasket unevenly seated at bottom manway (DC-3401A)",
+   "WO-240111": "gasket: spiral-wound channel gasket relaxed / damaged (EA-5601)",
+   "WO-240145": "gasket: spiral-wound body gasket relaxed at body/bonnet joint (LV-6701)",
+   "WO-240195": "gasket: SW gasket unevenly seated at manway (FA-8901)"
+  },
+  "member_wos": [
+   "WO-240062",
+   "WO-240111",
+   "WO-240145",
+   "WO-240195"
+  ]
+ },
+ {
+  "basis": "root cause records the lubrication supply itself as the failed item: a starved or restricted oil passage or a failed lube oil pump and relief setting, with the bearing named as the location rather than the mechanism. WO-240164 (degraded oil and fouled oil cooler) is not a member: its cooler is a fouled heat-transfer surface, so it stays in 'exchanger fouling and thermal performance' and every row belongs to exactly one family (CR-20)",
+  "family": "lubrication supply and oil-system degradation",
+  "member_basis": {
+   "WO-240084": "lube oil supply: lube oil pump gears worn and relief valve set low, discharge restored to 2.5 barg (KC-4501)",
+   "WO-240091": "lube oil supply: restricted oil supply groove to No.2 main bearing, passage cleared and clearance checked; the bearing is the location, not the failed item (KC-4501)"
+  },
+  "member_wos": [
+   "WO-240084",
+   "WO-240091"
+  ]
+ }
+]

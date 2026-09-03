@@ -1,0 +1,652 @@
+[
+ {
+  "basis": "OPL-GA-1201A-01 teaches the mechanism and the fix in its body: step 4 'If dP low, isolate and inspect orifice RO-1201 for plugging by polymer/dirt' and key learning 'Low flush = seal face overheating and hexane leak to atmosphere'; the WO row is also copied (truncated) into the section-5 table of OPL-GA-1201A-01..06.",
+  "covered_by": [
+   "OPL-GA-1201A-01",
+   "OPL-GA-1201A-02",
+   "OPL-GA-1201A-03",
+   "OPL-GA-1201A-04",
+   "OPL-GA-1201A-05",
+   "OPL-GA-1201A-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "GA-1201A",
+  "wo_number": "WO-240002"
+ },
+ {
+  "basis": "OPL-GA-1201A-03 body: key learning 'Shaft misalignment is the #1 root cause of GA-1201A high-vibration trips (VSHH-1201)' with steps 2-5 ('Mount laser alignment brackets', 'Target angular < 0.05 mm/100 mm', 'Add/remove shims under motor feet'), and OPL-GA-1201A-05 step 4 'Adjust thermal-growth compensation if repeat vibration trips occur'; the row is also copied into the table of OPL-GA-1201A-01..06.",
+  "covered_by": [
+   "OPL-GA-1201A-01",
+   "OPL-GA-1201A-02",
+   "OPL-GA-1201A-03",
+   "OPL-GA-1201A-04",
+   "OPL-GA-1201A-05",
+   "OPL-GA-1201A-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "GA-1201A",
+  "wo_number": "WO-240003"
+ },
+ {
+  "basis": "OPL-GA-1201A-03 key learning names the recorded cause, 'Shaft misalignment is the #1 root cause of ... premature bearing/seal failure', and OPL-GA-1201A-07 teaches the symptom path, 'A rising vibration trend predicts bearing failure days in advance' / step 4 'Correlate the vibration rise with TI-1201 bearing temperature'; the row is also copied into the table of OPL-GA-1201A-01..06.",
+  "covered_by": [
+   "OPL-GA-1201A-01",
+   "OPL-GA-1201A-02",
+   "OPL-GA-1201A-03",
+   "OPL-GA-1201A-04",
+   "OPL-GA-1201A-05",
+   "OPL-GA-1201A-06",
+   "OPL-GA-1201A-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "GA-1201A",
+  "wo_number": "WO-240004"
+ },
+ {
+  "basis": "No lesson body or table row addresses the cracked coupling element or its replacement; OPL-GA-1201A-03 and -05 teach alignment (the WO's secondary action 're-aligned') and mention the coupling only as a handling step ('Mount laser alignment brackets across the coupling spacer', 'do a hot-check on the coupling').",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "GA-1201A",
+  "wo_number": "WO-240007"
+ },
+ {
+  "basis": "Only the copied row in OPL-GA-1201A-07 section 5 ('PDI-1201 reading erratic, seal-flush low alarm nuisance-tripping | Impulse lines fouled with hexane residue/polymer fines | Cleaned impulse lines and re-zeroed PDI-1201 transmitter'); OPL-GA-1201A-01 step 4 sends the reader to the orifice RO-1201, not to the transmitter impulse lines.",
+  "covered_by": [
+   "OPL-GA-1201A-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "GA-1201A",
+  "wo_number": "WO-240008"
+ },
+ {
+  "basis": "Only the copied row in OPL-GA-1201A-07 section 5 ('Discharge flow control hunting, FIC-1201 oscillating | Loop poorly tuned after transmitter re-range | Re-ranged FT-1201 and retuned FIC-1201 PID parameters'); no step or key-learning point on any GA-1201A lesson covers loop tuning or re-ranging.",
+  "covered_by": [
+   "OPL-GA-1201A-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "GA-1201A",
+  "wo_number": "WO-240009"
+ },
+ {
+  "basis": "No GA-1201A lesson mentions the baseplate, grout or hold-down bolts in any section, and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "GA-1201A",
+  "wo_number": "WO-240013"
+ },
+ {
+  "basis": "OPL-YD-2301-02 body: key learning 'Worn gland packing lets powder and steam leak at the drum ends' and steps 2-5 ('Remove the old PTFE rings (8 pcs 4526L at discharge ...)', 'staggering the joints by 90 deg', 're-nip after 24 h'); the row is also copied into the table of all seven YD-2301 lessons.",
+  "covered_by": [
+   "OPL-YD-2301-01",
+   "OPL-YD-2301-02",
+   "OPL-YD-2301-03",
+   "OPL-YD-2301-04",
+   "OPL-YD-2301-05",
+   "OPL-YD-2301-06",
+   "OPL-YD-2301-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "YD-2301",
+  "wo_number": "WO-240028"
+ },
+ {
+  "basis": "OPL-YD-2301-02 body: step 2 'Remove the old PTFE rings (8 pcs 4526L at discharge, 2 pcs 4505L at feed)' and key learning 'Worn gland packing lets powder and steam leak at the drum ends'; the row is also copied into the table of all seven YD-2301 lessons.",
+  "covered_by": [
+   "OPL-YD-2301-01",
+   "OPL-YD-2301-02",
+   "OPL-YD-2301-03",
+   "OPL-YD-2301-04",
+   "OPL-YD-2301-05",
+   "OPL-YD-2301-06",
+   "OPL-YD-2301-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "YD-2301",
+  "wo_number": "WO-240029"
+ },
+ {
+  "basis": "OPL-YD-2301-03 body: key learning 'A dry or slack drive chain slips and drops the drum speed, tripping SSLL-2305' and steps 'Adjust the take-up if sag is excessive and re-lube', 'Inspect the SCM440 sprocket teeth for hooking/wear', 'Record chain elongation'; the row is also copied into the table of OPL-YD-2301-02/-03/-05/-07.",
+  "covered_by": [
+   "OPL-YD-2301-02",
+   "OPL-YD-2301-03",
+   "OPL-YD-2301-05",
+   "OPL-YD-2301-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "YD-2301",
+  "wo_number": "WO-240031"
+ },
+ {
+  "basis": "OPL-YD-2301-05 body: steps 'Identify the leak at the rotary joint carbon seal face', 'Replace the rotary joint seal kit and inspect the nipple', 'Check the O-ring (NBR)', 'Leak test on steam-up'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-YD-2301-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "YD-2301",
+  "wo_number": "WO-240032"
+ },
+ {
+  "basis": "No lesson addresses a fouled FT-2302 flow element or its cleaning; OPL-YD-2301-01 only uses FT-2302 as a permissive ('raise FT-2302 flow above 200 kg/h', 'Never bypass the FSLL-2302 low-flow inert trip'), and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "YD-2301",
+  "wo_number": "WO-240033"
+ },
+ {
+  "basis": "OPL-YD-2301-07 body: key learning 'worn rollers cause vibration and mis-tracking of the drum' and steps 'Do a listening / vibration check on both trunnions each round', 'Inspect the thrust roller for wear and correct tracking'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-YD-2301-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "YD-2301",
+  "wo_number": "WO-240034"
+ },
+ {
+  "basis": "OPL-YD-2301-04 key learning names the mechanism in paraphrase: 'Heating the drum too quickly warps the shell and cracks the steam tubes, causing tube leaks and long downtime' (WO root cause 'Two steam tubes cracked from thermal cycling'); no table row carries this work order.",
+  "covered_by": [
+   "OPL-YD-2301-04"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "YD-2301",
+  "wo_number": "WO-240037"
+ },
+ {
+  "basis": "No lesson addresses an O2 sensor cell at end of life, its replacement or span-gas calibration; OPL-YD-2301-01 only reads the analyzer ('Confirm the vent O2 analyzer AT-2307 reads below 5 %') and describes the ASHH-2307 trip, and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "YD-2301",
+  "wo_number": "WO-240039"
+ },
+ {
+  "basis": "OPL-DC-3401A-06 body: key learning 'a failed or drifting thermocouple can hide a hot spot' and steps 'Replace any open-circuit or drifting TC at the next opportunity', 'Confirm TSHH-3401 selects the highest bed temperature for the trip'; the row (symptom and cause) is also copied into the table of OPL-DC-3401A-01..06, and the fragment 'Replaced TC point 3 in the multipoint assembly, verified reading.' at the end of -01 and -04 is that row's spilled action cell, not a key-learning point.",
+  "covered_by": [
+   "OPL-DC-3401A-01",
+   "OPL-DC-3401A-02",
+   "OPL-DC-3401A-03",
+   "OPL-DC-3401A-04",
+   "OPL-DC-3401A-05",
+   "OPL-DC-3401A-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "DC-3401A",
+  "wo_number": "WO-240056"
+ },
+ {
+  "basis": "Only the copied row in OPL-DC-3401A-01..05 section 5 ('One heater bank drawing no current, slow heat-up | Electric heater element bank open circuit / element burnt | Replaced heater element bank, meggered, verified TIC-17343 response'); the heating-up lessons only switch the heater on ('Energise heater EA-3401 (power on)') and never address element failure.",
+  "covered_by": [
+   "OPL-DC-3401A-01",
+   "OPL-DC-3401A-02",
+   "OPL-DC-3401A-03",
+   "OPL-DC-3401A-04",
+   "OPL-DC-3401A-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "DC-3401A",
+  "wo_number": "WO-240057"
+ },
+ {
+  "basis": "Only the copied row in OPL-DC-3401A-06 section 5 ('N2 inert valve slow / sticking during inerting step | Actuator seals hardened, positioner out of calibration | Serviced actuator, replaced seals, recalibrated positioner'); OPL-DC-3401A-02 only injects nitrogen 'through FV-17343' and never addresses the valve actuator or positioner.",
+  "covered_by": [
+   "OPL-DC-3401A-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "DC-3401A",
+  "wo_number": "WO-240059"
+ },
+ {
+  "basis": "OPL-DC-3401A-07 is written for this job ('Manway Gasket & Box-Up After Catalyst Change'): step 4 'Record the catalyst batch number and the loaded volume (3.2 m3)' and step 5 'Re-instate PSV-3401 and all instruments before start-up' address the catalyst-change close-out (moderate: unloading and grid inspection are not taught); the row is also copied into its table.",
+  "covered_by": [
+   "OPL-DC-3401A-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "DC-3401A",
+  "wo_number": "WO-240061"
+ },
+ {
+  "basis": "OPL-DC-3401A-07 body: steps 'Always fit a new spiral-wound SS316/graphite gasket', 'Torque the manway bolts in a star pattern to the specified value', 'Leak test the joint with nitrogen at 2 kg/cm2' and key learning 'A leaking manway loses inert gas'; the row (symptom only, truncated) is also copied into its table.",
+  "covered_by": [
+   "OPL-DC-3401A-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "DC-3401A",
+  "wo_number": "WO-240062"
+ },
+ {
+  "basis": "No lesson addresses the reduction H2 analyzer cell or its replacement/calibration (OPL-DC-3401A-02 covers the O2 analyzer AI-3401 only), and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "DC-3401A",
+  "wo_number": "WO-240063"
+ },
+ {
+  "basis": "No lesson addresses TIC-17343 loop tuning; OPL-DC-3401A-03/-05 only prescribe ramp rates ('Raise TIC-17343 slowly', 'no faster than 0.5 degC/s'), and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "DC-3401A",
+  "wo_number": "WO-240064"
+ },
+ {
+  "basis": "OPL-KC-4501-02 body: key learning 'Broken plate valves are the classic cause of high discharge temperature (TSHH-4503) and lost capacity on KC-4501' and steps 'Inspect valve plates, springs and seats; replace as a complete set', 'Torque the valve caps to spec and leak test before start'; the row is also copied into the table of OPL-KC-4501-01/-02/-03/-04/-06/-07.",
+  "covered_by": [
+   "OPL-KC-4501-01",
+   "OPL-KC-4501-02",
+   "OPL-KC-4501-03",
+   "OPL-KC-4501-04",
+   "OPL-KC-4501-06",
+   "OPL-KC-4501-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "KC-4501",
+  "wo_number": "WO-240083"
+ },
+ {
+  "basis": "Only the copied row in OPL-KC-4501-01/-02/-03/-04/-06/-07 section 5 ('KC-4501 tripped on PSLL-4504 low lube oil pressure | Lube oil pump gears worn, relief valve set low | Overhauled lube oil pump, reset relief valve, verified 2.5 barg'); OPL-KC-4501-01 teaches pre-start priming ('build pressure above 2 barg', 'Confirm PSLL-4504 shows healthy oil pressure') but nothing about the pump gears or the relief valve (borderline).",
+  "covered_by": [
+   "OPL-KC-4501-01",
+   "OPL-KC-4501-02",
+   "OPL-KC-4501-03",
+   "OPL-KC-4501-04",
+   "OPL-KC-4501-06",
+   "OPL-KC-4501-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "KC-4501",
+  "wo_number": "WO-240084"
+ },
+ {
+  "basis": "Only the copied row in OPL-KC-4501-01/-02/-03/-04/-06/-07 section 5 ('High blow-by, low 2nd stage efficiency | PTFE piston rings worn beyond limit | Renewed 2nd stage PTFE piston and rider rings, honed cylinder'); no KC-4501 lesson body mentions piston or rider rings.",
+  "covered_by": [
+   "OPL-KC-4501-01",
+   "OPL-KC-4501-02",
+   "OPL-KC-4501-03",
+   "OPL-KC-4501-04",
+   "OPL-KC-4501-06",
+   "OPL-KC-4501-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "KC-4501",
+  "wo_number": "WO-240085"
+ },
+ {
+  "basis": "Only the copied row in OPL-KC-4501-05 section 5 ('Seal gas flow FT-4506 low, buffer pressure unstable | N2 buffer regulator diaphragm failed | Replaced seal gas regulator, re-established buffer dP'); OPL-KC-4501-03 teaches seal-gas operation ('Verify FT-4506 seal gas flow is established before start', 'Respond immediately to a seal-gas low alarm') but never the regulator or its diaphragm (borderline).",
+  "covered_by": [
+   "OPL-KC-4501-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "KC-4501",
+  "wo_number": "WO-240087"
+ },
+ {
+  "basis": "OPL-KC-4501-05 body: step 4 'Investigate rod-load reversals and crosshead pin clearance' and key learning 'A rising crosshead vibration trend warns of loose running gear before it trips or fails'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-KC-4501-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "KC-4501",
+  "wo_number": "WO-240088"
+ },
+ {
+  "basis": "OPL-KC-4501-07 body: steps 'Clean the intercooler tubes if the approach temperature rises', 'Report fouling trends so cleaning can be planned' and key learning 'Poor intercooling raises the 2nd-stage suction temperature'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-KC-4501-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "KC-4501",
+  "wo_number": "WO-240089"
+ },
+ {
+  "basis": "No lesson addresses a restricted oil supply groove or bearing clearance; OPL-KC-4501-05 step 3 only says 'Correlate any rise with TE-4507 main bearing temperature' (the symptom), and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "KC-4501",
+  "wo_number": "WO-240091"
+ },
+ {
+  "basis": "No lesson addresses worn pressure packing rings or their renewal; OPL-KC-4501-03 step 3 'Watch the distance-piece vent for signs of leakage' covers the symptom only (borderline), and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "KC-4501",
+  "wo_number": "WO-240094"
+ },
+ {
+  "basis": "OPL-EA-5601-01 body: key learning 'Hexane fouling on the tube side raises the differential pressure (PDT-5605) and cuts the heat duty' and steps 'Hydrojet the tube bores', 'Verify tube-side dP restored', 'Re-gasket with new SW SS316 gasket', plus OPL-EA-5601-06 'Plan cleaning before the duty loss becomes critical'; the row is also copied into the table of OPL-EA-5601-01/-02/-03/-04/-05/-07.",
+  "covered_by": [
+   "OPL-EA-5601-01",
+   "OPL-EA-5601-02",
+   "OPL-EA-5601-03",
+   "OPL-EA-5601-04",
+   "OPL-EA-5601-05",
+   "OPL-EA-5601-06",
+   "OPL-EA-5601-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "EA-5601",
+  "wo_number": "WO-240110"
+ },
+ {
+  "basis": "OPL-EA-5601-02 body: key learning 'Spiral-wound gaskets are single-use; reusing one causes hexane leaks at the channel and shell flanges' and steps 'Fit new SW SS316/graphite gaskets', 'Torque the flange bolts in a cross pattern in passes'; the row is also copied into the table of OPL-EA-5601-01/-02/-03/-04/-05/-07.",
+  "covered_by": [
+   "OPL-EA-5601-01",
+   "OPL-EA-5601-02",
+   "OPL-EA-5601-03",
+   "OPL-EA-5601-04",
+   "OPL-EA-5601-05",
+   "OPL-EA-5601-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "EA-5601",
+  "wo_number": "WO-240111"
+ },
+ {
+  "basis": "OPL-EA-5601-03 body: key learning 'A failed steam trap either floods the shell (killing duty) or blows live steam' and steps 'a continuously hot blow means leak-through', 'Compare the condensate temperature TI-5604 to steam temperature', 'Replace the trap element or trap as required'; the row is also copied into the table of OPL-EA-5601-01/-02/-03/-04/-05/-07.",
+  "covered_by": [
+   "OPL-EA-5601-01",
+   "OPL-EA-5601-02",
+   "OPL-EA-5601-03",
+   "OPL-EA-5601-04",
+   "OPL-EA-5601-05",
+   "OPL-EA-5601-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "EA-5601",
+  "wo_number": "WO-240112"
+ },
+ {
+  "basis": "OPL-EA-5601-05 body: key learning 'A tube leak lets steam into the solvent (rising outlet temperature and water in the solvent)' and steps 'hydrotest the shell side to find the leak', 'Plug both ends of the tube with tapered plugs', and OPL-EA-5601-04 names the mechanism 'cracks the tube-to-tubesheet joints, causing internal leaks'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-EA-5601-04",
+   "OPL-EA-5601-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "EA-5601",
+  "wo_number": "WO-240113"
+ },
+ {
+  "basis": "Only the copied row in OPL-EA-5601-06 section 5 ('Outlet temperature hunting around set-point | Steam valve TV-5602 loop poorly tuned | Retuned TIC-5602 PID, verified stable control'); OPL-EA-5601-04 only ramps 'the TV-5602 / TIC-5602 set-point' and never addresses loop tuning.",
+  "covered_by": [
+   "OPL-EA-5601-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "EA-5601",
+  "wo_number": "WO-240114"
+ },
+ {
+  "basis": "Only the copied row in OPL-EA-5601-06 section 5 ('Erratic tube dP reading | Impulse lines plugged with fines | Cleaned and re-zeroed PDT-5605 transmitter'); the -06 body only logs PDT-5605 weekly and never addresses impulse lines.",
+  "covered_by": [
+   "OPL-EA-5601-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "EA-5601",
+  "wo_number": "WO-240115"
+ },
+ {
+  "basis": "Only the copied row in OPL-EA-5601-06 section 5 ('Cracked gauge glass on condensate pot | Thermal/mechanical stress on glass | Replaced LG-5606 gauge glass and seals'); OPL-EA-5601-03 step 4 only reads 'the condensate pot level gauge LG-5606'.",
+  "covered_by": [
+   "OPL-EA-5601-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "EA-5601",
+  "wo_number": "WO-240118"
+ },
+ {
+  "basis": "No EA-5601 lesson mentions saddles, hold-down bolts or corrosion under insulation in any section, and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "EA-5601",
+  "wo_number": "WO-240120"
+ },
+ {
+  "basis": "OPL-LV-6701-03 body names the mechanism: key learning 'over-tight packing makes the stem stick and the valve hunt' and step 4 'Do not over-torque - excessive friction degrades control' (WO cause 'Stem seized in PTFE packing (over-tightened + fines)'); the row is also copied into the table of OPL-LV-6701-01/-02/-04/-05/-06/-07.",
+  "covered_by": [
+   "OPL-LV-6701-01",
+   "OPL-LV-6701-02",
+   "OPL-LV-6701-03",
+   "OPL-LV-6701-04",
+   "OPL-LV-6701-05",
+   "OPL-LV-6701-06",
+   "OPL-LV-6701-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "LV-6701",
+  "wo_number": "WO-240135"
+ },
+ {
+  "basis": "Only the copied row in OPL-LV-6701-03 and -05 section 5 ('Manual handwheel jack on LV-6701 seized | Corrosion in handwheel thread | Overhauled handwheel assembly, greased thread'); no LV-6701 lesson body mentions the handwheel.",
+  "covered_by": [
+   "OPL-LV-6701-03",
+   "OPL-LV-6701-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "LV-6701",
+  "wo_number": "WO-240136"
+ },
+ {
+  "basis": "OPL-LV-6701-01 body teaches the corrective action: steps 'Connect ValveLink to the DVC6200 positioner', 'Run the auto-calibration over the full stroke', 'Verify 4 mA = closed and 20 mA = 38 mm fully open'; the row is also copied into the table of OPL-LV-6701-01/-02/-04/-06/-07.",
+  "covered_by": [
+   "OPL-LV-6701-01",
+   "OPL-LV-6701-02",
+   "OPL-LV-6701-04",
+   "OPL-LV-6701-06",
+   "OPL-LV-6701-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "LV-6701",
+  "wo_number": "WO-240137"
+ },
+ {
+  "basis": "OPL-LV-6701-03 body: key learning 'Loose packing leaks hexane at the stem' and step 2 'Snug the packing nuts evenly in small increments' (adjustment rather than the WO's ring renewal, but the same mechanism and gland re-torque); the row is also copied into the table of OPL-LV-6701-01/-02/-04/-06/-07.",
+  "covered_by": [
+   "OPL-LV-6701-01",
+   "OPL-LV-6701-02",
+   "OPL-LV-6701-03",
+   "OPL-LV-6701-04",
+   "OPL-LV-6701-06",
+   "OPL-LV-6701-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "LV-6701",
+  "wo_number": "WO-240138"
+ },
+ {
+  "basis": "OPL-LV-6701-07 body: key learning 'A ruptured actuator diaphragm causes loss of control and a continuous air leak' and steps 'Replace the NBR/fabric diaphragm if hardened', 'Check the bench set is 0.2-1.0 barg', 'Re-stroke and recalibrate after any diaphragm work'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-LV-6701-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "LV-6701",
+  "wo_number": "WO-240140"
+ },
+ {
+  "basis": "Only the copied row in OPL-LV-6701-03 section 5 ('LV-6701 passing when closed (Class IV exceeded) | Seat/plug erosion from polymer bottoms | Lapped seat and plug, restored Class IV shut-off'); OPL-LV-6701-04 step 5 'Verify the valve seats fully at 4 mA (Class IV)' checks the outcome but never addresses erosion or lapping (borderline).",
+  "covered_by": [
+   "OPL-LV-6701-03"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "LV-6701",
+  "wo_number": "WO-240143"
+ },
+ {
+  "basis": "Only the copied row in OPL-LV-6701-03 section 5 ('Minor weep at body/bonnet joint | Spiral-wound body gasket relaxed | Renewed body gasket, torqued bonnet bolts'); no LV-6701 lesson body mentions the body/bonnet gasket.",
+  "covered_by": [
+   "OPL-LV-6701-03"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "LV-6701",
+  "wo_number": "WO-240145"
+ },
+ {
+  "basis": "OPL-CT-7801-03 body: key learning 'A cracked or eroded FRP blade unbalances the fan and causes the VSHH-7802 vibration trip' and steps 'Check for cracks, leading-edge erosion and tip clearance', 'Re-balance the fan if vibration is high'; the row is also copied into the table of OPL-CT-7801-01/-02/-03/-04/-05/-07.",
+  "covered_by": [
+   "OPL-CT-7801-01",
+   "OPL-CT-7801-02",
+   "OPL-CT-7801-03",
+   "OPL-CT-7801-04",
+   "OPL-CT-7801-05",
+   "OPL-CT-7801-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "CT-7801",
+  "wo_number": "WO-240163"
+ },
+ {
+  "basis": "OPL-CT-7801-02 body: key learning 'Low or degraded gearbox oil causes overheating (TSHH-7803)' and steps 'Sample the oil for water contamination and metal', 'Change the ISO VG 220 (4.5 L) per the schedule' (the fouled oil cooler is not taught); the row is also copied into the table of OPL-CT-7801-02/-03/-05.",
+  "covered_by": [
+   "OPL-CT-7801-02",
+   "OPL-CT-7801-03",
+   "OPL-CT-7801-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "CT-7801",
+  "wo_number": "WO-240164"
+ },
+ {
+  "basis": "OPL-CT-7801-06 body names the mechanism generically: key learning 'A rising vibration trend warns of gear or bearing wear before the fan trips or throws a blade' with steps 'Trend the VS-7802 reading on the PdM route', 'Escalate a step-change to reliability' (moderate: bearing replacement is not taught); no table row carries this work order.",
+  "covered_by": [
+   "OPL-CT-7801-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "CT-7801",
+  "wo_number": "WO-240166"
+ },
+ {
+  "basis": "OPL-CT-7801-05 body: step 2 'Check the drift eliminator packs are aligned' and key learning 'Fouled or collapsed fill and drift eliminators cut the cooling performance'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-CT-7801-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "CT-7801",
+  "wo_number": "WO-240167"
+ },
+ {
+  "basis": "Only the copied row in OPL-CT-7801-06 section 5 ('Blowdown conductivity reading unreliable | Conductivity cell fouled with scale | Cleaned and recalibrated AI-7806 conductivity cell'); OPL-CT-7801-07 only reads 'the AI-7806 conductivity value' and never addresses cell fouling or calibration.",
+  "covered_by": [
+   "OPL-CT-7801-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "CT-7801",
+  "wo_number": "WO-240168"
+ },
+ {
+  "basis": "OPL-CT-7801-06 body: step 4 'Inspect the floating drive-shaft couplings' as the response to a rising vibration trend (the WO's 'Vibration traced to drive-shaft coupling ... Composite floating-shaft coupling worn'); no table row carries this work order.",
+  "covered_by": [
+   "OPL-CT-7801-06"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "CT-7801",
+  "wo_number": "WO-240169"
+ },
+ {
+  "basis": "OPL-CT-7801-05 body: key learning 'Fouled or collapsed fill and drift eliminators cut the cooling performance and raise the basin temperature' and steps 'Inspect the PVC fill for scaling and collapse', 'Plan fill replacement if degradation is widespread'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-CT-7801-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "CT-7801",
+  "wo_number": "WO-240171"
+ },
+ {
+  "basis": "Only the copied row in OPL-FA-8901-02/-03/-04/-06/-07 section 5 ('Boot drain valve N4 passing / leaking | Seat eroded by water/solids | Reseated / replaced boot drain valve HV-8904'); OPL-FA-8901-03 only operates the valve ('Drain the boot N4 to the oily-water sewer via HV-8904') and never addresses seat erosion or replacement.",
+  "covered_by": [
+   "OPL-FA-8901-02",
+   "OPL-FA-8901-03",
+   "OPL-FA-8901-04",
+   "OPL-FA-8901-06",
+   "OPL-FA-8901-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "FA-8901",
+  "wo_number": "WO-240190"
+ },
+ {
+  "basis": "Only the copied row in OPL-FA-8901-01 and -05 section 5 ('Blanket / vent split-range valve hunting | Split-range calibration overlap incorrect | Re-tuned PCV-8905 split-range, verified PT-8902 hold'); OPL-FA-8901-04 step 1 'Verify the PCV-8905 split-range holds PT-8902 pressure' is the acceptance check, not the split-range re-tune (borderline).",
+  "covered_by": [
+   "OPL-FA-8901-01",
+   "OPL-FA-8901-05"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": true,
+  "tag": "FA-8901",
+  "wo_number": "WO-240191"
+ },
+ {
+  "basis": "OPL-FA-8901-01 body: step 2 'Blow down the bridle to clear any plugging' and step 1 'Cross-check LT-8901 against the level bridle gauge'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-FA-8901-01"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "FA-8901",
+  "wo_number": "WO-240193"
+ },
+ {
+  "basis": "OPL-FA-8901-07 body: steps 'Fit a new SW SS316/graphite manway gasket', 'Torque the manway bolts in a star pattern in passes', 'Leak test with the nitrogen blanket' and key learning 'Correct gasket selection and bolt torque after inspection prevent a hexane leak from the manway'; no table row carries this work order.",
+  "covered_by": [
+   "OPL-FA-8901-07"
+  ],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "FA-8901",
+  "wo_number": "WO-240195"
+ },
+ {
+  "basis": "No lesson addresses a plugged PT-8902 impulse line or re-zeroing the transmitter; OPL-FA-8901-04 only reads PT-8902 as the blanket pressure, and no table row carries this work order.",
+  "covered_by": [],
+  "labeller": "AGENT-L1",
+  "table_only": false,
+  "tag": "FA-8901",
+  "wo_number": "WO-240196"
+ }
+]

@@ -1,0 +1,361 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/evidence_packet.schema.json",
+  "title": "The evidence packet and the outbound shapes",
+  "description": "Blueprint 9.8: the evidence packet served on every answer, partial, abstention and refusal, its outbound shapes, and the two-stage ndjson stream of POST /api/ask; a block with no evidence is omitted from blocks, never emitted empty.",
+  "x-blueprint": "9.8",
+  "$defs": {
+    "Citation": {
+      "title": "Citation",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "doc_no": { "type": "string" },
+        "document_id": { "type": "string" },
+        "revision": { "type": "string" },
+        "approval_status": { "$ref": "entities/document.schema.json#/$defs/ApprovalStatus" },
+        "approval_status_text": { "type": "string" },
+        "page": { "type": "integer" },
+        "span_id": { "type": "string" },
+        "quote_hash": { "type": "string" },
+        "integrity_findings": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "rule ids open against the document"
+        },
+        "superseded": { "type": "boolean" }
+      },
+      "required": [
+        "doc_no", "document_id", "revision", "approval_status", "approval_status_text", "page", "span_id", "quote_hash",
+        "integrity_findings", "superseded"
+      ]
+    },
+    "Claim": {
+      "title": "Claim",
+      "description": "The packet claim of 9.8 (an outbound, cited, entailed sentence), distinct from the corpus Claim of 9.2 (entities/document.schema.json#/$defs/Claim).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string" },
+        "citations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Citation" },
+          "minItems": 1,
+          "description": "at least one"
+        },
+        "entailment": { "type": "string", "const": "entailed" }
+      },
+      "required": ["id", "text", "citations", "entailment"]
+    },
+    "TypedFact": {
+      "title": "TypedFact",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string" },
+        "value_text": { "type": "string" },
+        "value_num": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "comparator": { "type": ["string", "null"] },
+        "source": { "$ref": "#/$defs/Citation" },
+        "qualifier": { "type": ["string", "null"], "description": "the sheet's own note, verbatim" },
+        "source_class": {
+          "type": "string",
+          "enum": ["ce_row", "datasheet_param", "opl_step", "work_order", "bom_item", "proof_test"]
+        }
+      },
+      "required": ["label", "value_text", "value_num", "unit", "comparator", "source", "qualifier", "source_class"]
+    },
+    "Block": {
+      "title": "Block",
+      "description": "A block with no evidence is omitted from blocks, never emitted empty.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "permissives", "proof_tests", "steps", "permit", "standing_bypasses", "initiator_row", "effects", "reset_note",
+            "related_work_orders", "causal_chain", "lessons", "datasheet_limits", "bom_parts", "functions_out_of_service",
+            "return_to_service", "ladder", "documented_response", "precedent"
+          ]
+        },
+        "order": { "type": "integer" },
+        "label": { "type": "string" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "description": "typed per kind"
+        }
+      },
+      "required": ["kind", "order", "label", "items"]
+    },
+    "Procedure": {
+      "title": "Procedure",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "opl_id": { "type": "string" },
+        "revision": { "type": "string" },
+        "permit_block": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "text": { "type": "string" },
+              "span_id": { "type": "string" }
+            },
+            "required": ["text", "span_id"]
+          }
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "n": { "type": "integer" },
+              "text": { "type": "string" },
+              "hash_ok": { "type": "boolean", "const": true },
+              "span_id": { "type": "string" }
+            },
+            "required": ["n", "text", "hash_ok", "span_id"]
+          }
+        },
+        "protective_functions_affected": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "seq_id": { "type": "string" },
+              "sil": { "type": ["integer", "null"] },
+              "effects_through_isolated_element": { "type": "array", "items": { "type": "string" } },
+              "surviving_effects": { "type": "array", "items": { "type": "string" } },
+              "standing_permissive_defeated": { "type": ["string", "null"] }
+            },
+            "required": ["seq_id", "sil", "effects_through_isolated_element", "surviving_effects", "standing_permissive_defeated"]
+          }
+        }
+      },
+      "required": ["opl_id", "revision", "permit_block", "steps", "protective_functions_affected"]
+    },
+    "Abstention": {
+      "title": "Abstention",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reason": { "type": "string" },
+        "escalation_role": {
+          "type": "string",
+          "enum": [
+            "On-call Instrument and Control engineer",
+            "Process Safety",
+            "Reliability engineer",
+            "On-call Electrical engineer",
+            "Panel operator on shift",
+            "Shift Superintendent",
+            "Reviewing Supervisor for the asset set"
+          ]
+        },
+        "nearest_documents": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Citation" },
+          "maxItems": 3,
+          "description": "exactly 3 where 3 exist"
+        },
+        "cluster": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "type": "string" },
+            "request_action": { "type": "boolean", "const": true }
+          },
+          "required": ["id", "request_action"]
+        },
+        "served_beside": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/TypedFact" },
+          "description": "e.g. the typed ladder beside a live-reading abstention"
+        }
+      },
+      "required": ["reason", "escalation_role", "nearest_documents", "cluster", "served_beside"]
+    },
+    "Refusal": {
+      "title": "Refusal",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "class": { "type": "string", "enum": ["defeat", "permanent_change"] },
+        "function": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "seq_id": { "type": "string" },
+            "sil": { "type": ["integer", "null"] },
+            "ce_doc_no": { "type": "string" },
+            "ce_revision": { "type": "string" }
+          },
+          "required": ["seq_id", "sil", "ce_doc_no", "ce_revision"]
+        },
+        "permissives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "n": { "type": "integer" },
+              "text": { "type": "string" },
+              "signal_tag": { "type": ["string", "null"] }
+            },
+            "required": ["n", "text", "signal_tag"]
+          }
+        },
+        "reset_note": { "type": ["string", "null"] },
+        "route_text": { "type": "string" },
+        "moc_text": { "type": ["string", "null"] },
+        "rule_id": { "type": "string" },
+        "matched_phrase": { "type": "string" }
+      },
+      "required": ["class", "function", "permissives", "reset_note", "route_text", "moc_text", "rule_id", "matched_phrase"]
+    },
+    "EvidencePacket": {
+      "title": "EvidencePacket",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "trace_id": { "type": "string" },
+        "corpus_version": { "type": "string" },
+        "outcome": { "type": "string", "enum": ["answer", "partial", "abstention", "refusal"] },
+        "template": { "type": ["string", "null"], "enum": ["readiness", "trip", "job", "reading", null] },
+        "rulepack": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "version": { "type": "string" },
+            "class": { "type": "string" }
+          },
+          "required": ["version", "class"]
+        },
+        "claims": { "type": "array", "items": { "$ref": "#/$defs/Claim" } },
+        "typed_facts": { "type": "array", "items": { "$ref": "#/$defs/TypedFact" } },
+        "blocks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Block" },
+          "description": "A block with no evidence is omitted from blocks, never emitted empty."
+        },
+        "procedure": { "oneOf": [{ "$ref": "#/$defs/Procedure" }, { "type": "null" }] },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "subject": { "type": "string" },
+              "readings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "text": { "type": "string" },
+                    "citation": { "$ref": "#/$defs/Citation" }
+                  },
+                  "required": ["text", "citation"]
+                }
+              },
+              "governing_document": { "$ref": "#/$defs/Citation" }
+            },
+            "required": ["subject", "readings", "governing_document"]
+          }
+        },
+        "abstention": { "oneOf": [{ "$ref": "#/$defs/Abstention" }, { "type": "null" }] },
+        "refusal": { "oneOf": [{ "$ref": "#/$defs/Refusal" }, { "type": "null" }] },
+        "gaps_declared": { "type": "array", "items": { "type": "string" } },
+        "confidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "band": { "type": "string", "enum": ["high", "medium", "low"] }
+          },
+          "required": ["band"]
+        },
+        "caveat": {
+          "type": ["string", "null"],
+          "enum": [
+            "Values are read from the cited document revision. Confirm them against the panel or the safety instrumented system before any action is taken. The Hub holds no as-built state.",
+            null
+          ],
+          "description": "the fixed as-built caveat, verbatim, on every protective-function answer"
+        },
+        "safety_notice": { "type": ["string", "null"] },
+        "mode": { "type": "string", "enum": ["seeded", "live"] }
+      },
+      "required": [
+        "trace_id", "corpus_version", "outcome", "template", "rulepack", "claims", "typed_facts", "blocks", "procedure",
+        "contradictions", "abstention", "refusal", "gaps_declared", "confidence", "caveat", "safety_notice", "mode"
+      ]
+    },
+    "AskStream": {
+      "title": "AskStream",
+      "description": "The two-stage stream on POST /api/ask: Content-Type: application/x-ndjson; each ndjson line validates against one branch. Line 1 (stage \"evidence\") is flushed before any provider call returns; line 2 (stage \"packet\") carries the EvidencePacket; a refusal returns a single line with stage \"packet\", outcome \"refusal\" and no provider call; a seeded chip returns both lines from storage.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "stage": { "type": "string", "const": "evidence" },
+            "trace_id": { "type": "string" },
+            "corpus_version": { "type": "string" },
+            "scope": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "tags": { "type": "array", "items": { "type": "string" } },
+                "basis": { "type": "string" }
+              },
+              "required": ["tags", "basis"],
+              "description": "the scope of AnswerTrace (9.7)"
+            },
+            "rulepack": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "version": { "type": "string" },
+                "class": { "type": "string" }
+              },
+              "required": ["version", "class"],
+              "description": "the rulepack of EvidencePacket"
+            },
+            "evidence": { "type": "array", "items": { "$ref": "#/$defs/Citation" } }
+          },
+          "required": ["stage", "trace_id", "corpus_version", "scope", "rulepack", "evidence"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "stage": { "type": "string", "const": "packet" },
+            "packet": { "$ref": "#/$defs/EvidencePacket" }
+          },
+          "required": ["stage", "packet"]
+        }
+      ]
+    },
+    "FixedStrings": {
+      "title": "FixedStrings",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "as_built_caveat": {
+          "type": "string",
+          "const": "Values are read from the cited document revision. Confirm them against the panel or the safety instrumented system before any action is taken. The Hub holds no as-built state.",
+          "description": "The fixed as-built caveat, verbatim wherever it appears; carried in EvidencePacket.caveat on every protective-function answer"
+        }
+      },
+      "required": ["as_built_caveat"]
+    }
+  }
+}

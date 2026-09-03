@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/connectors/aims.schema.json",
+  "title": "AIMS connector",
+  "description": "Blueprint section 9.14: the typed work-order row shape of 9.4 as a read-only AIMS connector would exchange it, watermark on report date, closeout completeness computed on arrival; the connector panel and GET /api/connectors/:name/schema serve this file byte for byte.",
+  "x-blueprint": "9.14",
+  "x-status": "specified, not connected",
+  "x-sync": "watermark on report date; closeout completeness computed on arrival",
+  "x-conflict-rule": "the system of record wins on typed fields",
+  "x-failure-behaviour": "the register is not recomputed on a failed sync",
+  "$defs": {
+    "AimsWorkOrderRow": {
+      "title": "AimsWorkOrderRow",
+      "description": "The typed work-order row shape of 9.4 (WorkOrder), reused by reference. The watermark is report_date; closeout_complete and completeness_flags are computed on arrival from the eleven outcome fields, not supplied by the system of record; the system of record wins on typed fields; the register is not recomputed on a failed sync.",
+      "$ref": "../entities/operations.schema.json#/$defs/WorkOrder"
+    }
+  }
+}

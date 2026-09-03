@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/entities/drafts.schema.json",
+  "title": "Drafts, review and the SME note (isolated schema)",
+  "description": "Isolated draft, review, redline, transition and SME note records of blueprint section 9.6; no retrieval query references any table in this schema, a static query audit in CI asserts it and a runtime test asks a question answerable only by a draft and expects an abstention.",
+  "x-blueprint": "9.6",
+  "x-transitions": [
+    { "from": "proposed", "to": "drafted", "actor": "system AG-3" },
+    { "from": "drafted", "to": "redlined", "actor": "system AG-4" },
+    { "from": "redlined", "to": "in_review", "actor": "system, verdict pass" },
+    { "from": "redlined", "to": "drafted", "actor": "system, first block, retry once" },
+    { "from": "redlined", "to": "blocked", "actor": "system, second block" },
+    { "from": "in_review", "to": "in_review", "actor": "Reviewing Supervisor, edit with reasons" },
+    { "from": "in_review", "to": "accepted", "actor": "Reviewing Supervisor" },
+    { "from": "in_review", "to": "rejected", "actor": "Reviewing Supervisor" },
+    { "from": "accepted", "to": "published", "actor": "Manager, via G3 only" },
+    { "from": "accepted", "to": "rejected", "actor": "Manager" },
+    { "from": "blocked", "to": "proposed", "actor": "Reviewing Supervisor, re-propose creates a new linked draft" },
+    { "from": "rejected", "to": "proposed", "actor": "Reviewing Supervisor, re-propose creates a new linked draft" },
+    { "from": "any non-terminal", "to": "blocked", "actor": "system, lease expiry, ADR-004", "reason": "deadline_exceeded" }
+  ],
+  "$defs": {
+    "DraftState": {
+      "title": "DraftState",
+      "type": "string",
+      "enum": ["proposed", "drafted", "redlined", "in_review", "accepted", "published", "blocked", "rejected"]
+    },
+    "DraftDocument": {
+      "title": "DraftDocument",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "cluster_id": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "state": { "$ref": "#/$defs/DraftState" },
+        "lease_expires_at": { "type": ["string", "null"], "format": "date-time" },
+        "corpus_version_id": { "type": "string" },
+        "opl_id_reserved": { "type": "string" },
+        "title": { "type": "string" },
+        "classification": { "type": "string" },
+        "aspect": { "type": "string" },
+        "created_by_alias": { "type": "string" },
+        "model_id": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "previous_draft_id": { "type": ["string", "null"] },
+        "session_scope": { "type": ["string", "null"], "description": "non-null on the per-session demo sandbox" }
+      },
+      "required": [
+        "id", "cluster_id", "equipment_tag", "state", "lease_expires_at", "corpus_version_id", "opl_id_reserved",
+        "title", "classification", "aspect", "created_by_alias", "model_id", "prompt_version", "previous_draft_id", "session_scope"
+      ]
+    },
+    "DraftField": {
+      "title": "DraftField",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "draft_id": { "type": "string" },
+        "section": { "type": "integer", "enum": [1, 2, 3, 4, 5, 6] },
+        "ordinal": { "type": "integer" },
+        "text": { "type": "string" },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["work_order", "datasheet_param", "interlock_row", "bom_item", "opl_step", "opl_section", "sme_note", "slot"]
+            },
+            "ref": { "type": ["string", "null"] },
+            "span_id": { "type": ["string", "null"] }
+          },
+          "required": ["type", "ref", "span_id"]
+        },
+        "numeric_provenance": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "numeral": { "type": "string" },
+              "source_ref": { "type": "string" },
+              "unit": { "type": "string" }
+            },
+            "required": ["numeral", "source_ref", "unit"]
+          }
+        },
+        "quarantined": { "type": "boolean" },
+        "is_slot": { "type": "boolean", "description": "text is exactly \"REQUIRES ENGINEER INPUT\" when true" }
+      },
+      "required": ["id", "draft_id", "section", "ordinal", "text", "provenance", "numeric_provenance", "quarantined", "is_slot"],
+      "if": { "properties": { "is_slot": { "const": true } }, "required": ["is_slot"] },
+      "then": { "properties": { "text": { "const": "REQUIRES ENGINEER INPUT" } } }
+    },
+    "RedlineVerdict": {
+      "title": "RedlineVerdict",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "draft_id": { "type": "string" },
+        "round": { "type": "integer", "enum": [1, 2] },
+        "verdict": { "type": "string", "enum": ["pass", "block"] },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": ["technical_plausibility", "safety_framing", "template_conformance", "outstanding_slot"]
+              },
+              "text": { "type": "string" },
+              "field_id": { "type": ["string", "null"] }
+            },
+            "required": ["category", "text", "field_id"]
+          }
+        },
+        "model_id": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["draft_id", "round", "verdict", "reasons", "model_id", "prompt_version", "created_at"]
+    },
+    "DraftTransition": {
+      "title": "DraftTransition",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "draft_id": { "type": "string" },
+        "from_state": { "$ref": "#/$defs/DraftState" },
+        "to_state": { "$ref": "#/$defs/DraftState" },
+        "actor_alias": { "type": "string", "description": "an alias, or the literal \"system\"" },
+        "actor_role": {
+          "type": "string",
+          "enum": ["Engineer", "Reviewing Supervisor", "Manager", "Admin", "system"],
+          "description": "Role (9.7), or the literal \"system\""
+        },
+        "reason": { "type": ["string", "null"] },
+        "edit_diff": { "type": ["string", "null"] },
+        "server_ts": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "draft_id", "from_state", "to_state", "actor_alias", "actor_role", "reason", "edit_diff", "server_ts"]
+    },
+    "SmeNote": {
+      "title": "SmeNote",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "draft_id": { "type": "string" },
+        "field_id": { "type": "string" },
+        "author_alias": { "type": "string" },
+        "author_role": {
+          "type": "string",
+          "enum": ["Engineer", "Reviewing Supervisor", "Manager", "Admin"],
+          "description": "Role (9.7)"
+        },
+        "captured_at": { "type": "string", "format": "date-time" },
+        "text": { "type": "string" },
+        "source_reference": { "type": ["string", "null"] },
+        "provenance": { "type": "string", "const": "human, dated, unreviewed" },
+        "citeable": { "type": "boolean", "description": "false until the carrying lesson is published" }
+      },
+      "required": ["id", "draft_id", "field_id", "author_alias", "author_role", "captured_at", "text", "source_reference", "provenance", "citeable"]
+    },
+    "FixedStrings": {
+      "title": "FixedStrings",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "unverified_value_line": {
+          "type": "string",
+          "const": "This value is an engineer's judgement recorded on a date. No supplied document states it. The approval covers its publication and not its verification.",
+          "description": "rendered under every published SME note, verbatim"
+        }
+      },
+      "required": ["unverified_value_line"]
+    }
+  }
+}

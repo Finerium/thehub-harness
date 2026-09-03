@@ -1,0 +1,194 @@
+[
+ {
+  "field": "gearbox_oil_grade",
+  "quote": "GEARBOX OIL ISO VG 220 (4.5 L)",
+  "tag": "CT-7801",
+  "unit": "ISO VG",
+  "value_num": 220,
+  "value_text": "ISO VG 220"
+ },
+ {
+  "field": "gearbox_oil_volume",
+  "quote": "GEARBOX OIL ISO VG 220 (4.5 L)",
+  "tag": "CT-7801",
+  "unit": "L",
+  "value_num": 4.5,
+  "value_text": "4.5 L"
+ },
+ {
+  "field": "motor_output",
+  "quote": "OUTPUT 55 kW",
+  "tag": "CT-7801",
+  "unit": "kW",
+  "value_num": 55,
+  "value_text": "55 kW"
+ },
+ {
+  "field": "design_pressure",
+  "quote": "DESIGN PRESSURE 6 barg / FV",
+  "tag": "DC-3401A",
+  "unit": "barg",
+  "value_num": 6,
+  "value_text": "6 barg / FV"
+ },
+ {
+  "field": "design_temperature",
+  "quote": "DESIGN TEMP. 250 degC",
+  "tag": "DC-3401A",
+  "unit": "degC",
+  "value_num": 250,
+  "value_text": "250 degC"
+ },
+ {
+  "field": "psv_set_pressure",
+  "quote": "PSV PSV-3401 set 6 barg",
+  "tag": "DC-3401A",
+  "unit": "barg",
+  "value_num": 6,
+  "value_text": "6 barg"
+ },
+ {
+  "field": "duty",
+  "quote": "DUTY 1.85 MW",
+  "tag": "EA-5601",
+  "unit": "MW",
+  "value_num": 1.85,
+  "value_text": "1.85 MW"
+ },
+ {
+  "field": "tube_design_pressure",
+  "quote": "TUBE DESIGN P/T 16 barg / 200 degC",
+  "tag": "EA-5601",
+  "unit": "barg",
+  "value_num": 16,
+  "value_text": "16 barg"
+ },
+ {
+  "field": "tube_design_temperature",
+  "quote": "TUBE DESIGN P/T 16 barg / 200 degC",
+  "tag": "EA-5601",
+  "unit": "degC",
+  "value_num": 200,
+  "value_text": "200 degC"
+ },
+ {
+  "field": "design_pressure",
+  "quote": "DESIGN PRESSURE 10 barg / FV",
+  "tag": "FA-8901",
+  "unit": "barg",
+  "value_num": 10,
+  "value_text": "10 barg / FV"
+ },
+ {
+  "field": "design_temperature",
+  "quote": "DESIGN TEMP. 120 degC",
+  "tag": "FA-8901",
+  "unit": "degC",
+  "value_num": 120,
+  "value_text": "120 degC"
+ },
+ {
+  "field": "psv_set_pressure",
+  "quote": "PSV PSV-8901 set 10 barg",
+  "tag": "FA-8901",
+  "unit": "barg",
+  "value_num": 10,
+  "value_text": "10 barg"
+ },
+ {
+  "field": "differential_pressure",
+  "quote": "DIFF. PRESSURE 8.6 bar",
+  "tag": "GA-1201A",
+  "unit": "bar",
+  "value_num": 8.6,
+  "value_text": "8.6 bar"
+ },
+ {
+  "field": "pumping_temperature",
+  "quote": "PUMPING TEMP. 40 degC",
+  "tag": "GA-1201A",
+  "unit": "degC",
+  "value_num": 40,
+  "value_text": "40 degC"
+ },
+ {
+  "field": "rated_flow",
+  "quote": "RATED FLOW 45 m3/h",
+  "tag": "GA-1201A",
+  "unit": "m3/h",
+  "value_num": 45,
+  "value_text": "45 m3/h"
+ },
+ {
+  "field": "discharge_pressure",
+  "quote": "DISCHARGE PRESSURE 12.5 barg",
+  "tag": "KC-4501",
+  "unit": "barg",
+  "value_num": 12.5,
+  "value_text": "12.5 barg"
+ },
+ {
+  "field": "discharge_temperature",
+  "quote": "DISCHARGE TEMP. 115 degC (max)",
+  "tag": "KC-4501",
+  "unit": "degC",
+  "value_num": 115,
+  "value_text": "115 degC (max)"
+ },
+ {
+  "field": "suction_capacity",
+  "quote": "CAPACITY (SUCTION) 1250 Nm3/h",
+  "tag": "KC-4501",
+  "unit": "Nm3/h",
+  "value_num": 1250,
+  "value_text": "1250 Nm3/h"
+ },
+ {
+  "field": "body_rating",
+  "quote": "BODY RATING ASME 300#",
+  "tag": "LV-6701",
+  "unit": "ASME class",
+  "value_num": 300,
+  "value_text": "ASME 300#"
+ },
+ {
+  "field": "body_size",
+  "quote": "BODY SIZE 3 inch (DN80)",
+  "tag": "LV-6701",
+  "unit": "inch",
+  "value_num": 3,
+  "value_text": "3 inch (DN80)"
+ },
+ {
+  "field": "rated_cv",
+  "quote": "RATED CV 110",
+  "tag": "LV-6701",
+  "unit": "Cv",
+  "value_num": 110,
+  "value_text": "110"
+ },
+ {
+  "field": "lp_steam_pressure",
+  "quote": "HEATING MEDIUM LP STEAM 4.5 barg",
+  "tag": "YD-2301",
+  "unit": "barg",
+  "value_num": 4.5,
+  "value_text": "4.5 barg"
+ },
+ {
+  "field": "motor_output",
+  "quote": "OUTPUT 22 kW",
+  "tag": "YD-2301",
+  "unit": "kW",
+  "value_num": 22,
+  "value_text": "22 kW"
+ },
+ {
+  "field": "motor_speed",
+  "quote": "SPEED 1450 rpm",
+  "tag": "YD-2301",
+  "unit": "rpm",
+  "value_num": 1450,
+  "value_text": "1450 rpm"
+ }
+]

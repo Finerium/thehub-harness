@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/entities/asset.schema.json",
+  "title": "Asset and safety graph",
+  "description": "FR-106 rule of blueprint 9.3, frozen: an equipment-to-protective-function relation is read from source data only; YD-2301 resolves to SEQ-5500 and never to SEQ-2301; EA-5601 resolves to no protective function; no sequence id is derived from a tag number anywhere in code.",
+  "x-blueprint": "9.3",
+  "$defs": {
+    "Equipment": {
+      "title": "Equipment",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": { "type": "string", "description": "PK, e.g. \"GA-1201A\"" },
+        "name": { "type": "string" },
+        "functional_location": { "type": "string" },
+        "area_code": { "type": "string" },
+        "service": { "type": "string" },
+        "criticality_datasheet": { "type": "string", "enum": ["HIGH CRITICAL", "LOW CRITICAL", "NON CRITICAL"] },
+        "criticality_workbook": { "type": "string" },
+        "interlock_ref": { "type": "string", "description": "verbatim LOGIC No text, e.g. \"SEQ-1201\" or \"N/A (control loop only)\"" },
+        "datasheet_doc_no": { "type": "string" },
+        "ga_drawing_doc_no": { "type": "string" },
+        "pid_document_id": { "type": "string" },
+        "plot_plan_doc_no": { "type": "string" },
+        "ce_doc_no": { "type": "string" }
+      },
+      "required": [
+        "tag",
+        "name",
+        "functional_location",
+        "area_code",
+        "service",
+        "criticality_datasheet",
+        "criticality_workbook",
+        "interlock_ref",
+        "datasheet_doc_no",
+        "ga_drawing_doc_no",
+        "pid_document_id",
+        "plot_plan_doc_no",
+        "ce_doc_no"
+      ]
+    },
+    "Area": {
+      "title": "Area",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": { "type": "string" },
+        "workbook_name": { "type": "string" },
+        "datasheet_name": { "type": "string" },
+        "opl_header_name": { "type": "string" },
+        "plot_plan_title_name": { "type": "string" }
+      },
+      "required": ["code", "workbook_name", "datasheet_name", "opl_header_name", "plot_plan_title_name"]
+    },
+    "Interlock": {
+      "title": "Interlock",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "seq_id": { "type": ["string", "null"], "description": "\"SEQ-1201\"" },
+        "equipment_tag": { "type": "string" },
+        "logic_kind": { "type": "string", "enum": ["trip_logic", "control_loop_only"] },
+        "sil_sheet": { "type": ["integer", "null"] },
+        "ce_doc_no": { "type": "string" },
+        "ce_revision": { "type": "string" },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "n": { "type": "integer" },
+              "text": { "type": "string" },
+              "span_id": { "type": "string" }
+            },
+            "required": ["n", "text", "span_id"]
+          }
+        },
+        "permissive_gate": { "type": ["string", "null"], "enum": ["AND", null] }
+      },
+      "required": ["seq_id", "equipment_tag", "logic_kind", "sil_sheet", "ce_doc_no", "ce_revision", "notes", "permissive_gate"]
+    },
+    "InterlockRow": {
+      "title": "InterlockRow",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "seq_id": { "type": ["string", "null"] },
+        "equipment_tag": { "type": "string" },
+        "row_id": { "type": "string", "description": "\"T3\", \"C1\", \"A1\", \"R1\"" },
+        "row_kind": { "type": "string", "enum": ["trip", "control", "alarm", "mech"] },
+        "initiator": { "type": "string" },
+        "instrument_tag": { "type": "string" },
+        "setpoint_value": { "type": ["number", "null"] },
+        "setpoint_unit": { "type": ["string", "null"] },
+        "comparator": { "type": ["string", "null"], "enum": [">", "<", ">=", "<=", "=", null] },
+        "setpoint_text": { "type": "string" },
+        "voting": { "type": ["string", "null"], "description": "\"1oo2\"; null on non-trip rows" },
+        "vote_cell_text": { "type": "string" },
+        "effects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "effect_id": { "type": "string" },
+              "final_element": { "type": "string" },
+              "marked": { "type": "boolean" }
+            },
+            "required": ["effect_id", "final_element", "marked"]
+          }
+        },
+        "effects_basis": { "type": "string" },
+        "source_page": { "type": "integer" },
+        "span_id": { "type": "string" }
+      },
+      "required": [
+        "id",
+        "seq_id",
+        "equipment_tag",
+        "row_id",
+        "row_kind",
+        "initiator",
+        "instrument_tag",
+        "setpoint_value",
+        "setpoint_unit",
+        "comparator",
+        "setpoint_text",
+        "voting",
+        "vote_cell_text",
+        "effects",
+        "effects_basis",
+        "source_page",
+        "span_id"
+      ]
+    },
+    "StartPermissive": {
+      "title": "StartPermissive",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "seq_id": { "type": "string" },
+        "n": { "type": "integer" },
+        "text": { "type": "string" },
+        "signal_tag": { "type": ["string", "null"] },
+        "standing_bypass_state": { "type": ["string", "null"] },
+        "span_id": { "type": "string" }
+      },
+      "required": ["seq_id", "n", "text", "signal_tag", "standing_bypass_state", "span_id"]
+    },
+    "DatasheetParam": {
+      "title": "DatasheetParam",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "group": { "type": "string" },
+        "field": { "type": "string" },
+        "unit": { "type": ["string", "null"] },
+        "value_text": { "type": "string" },
+        "value_num": { "type": ["number", "null"] },
+        "span_id": { "type": "string" }
+      },
+      "required": ["id", "equipment_tag", "group", "field", "unit", "value_text", "value_num", "span_id"]
+    },
+    "InstrumentTag": {
+      "title": "InstrumentTag",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": { "type": "string", "description": "PK" },
+        "equipment_tag": { "type": "string" },
+        "role": {
+          "type": "string",
+          "enum": ["initiator", "final_element", "permissive", "control", "alarm", "relief", "monitor", "unknown"]
+        },
+        "sources": { "type": "array", "items": { "type": "string" }, "description": "document ids" }
+      },
+      "required": ["tag", "equipment_tag", "role", "sources"]
+    },
+    "PidSidecar": {
+      "title": "PidSidecar",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "set": { "type": "integer" },
+        "document_id": { "type": "string" },
+        "title_box": { "type": "string" },
+        "reference_box": { "type": "string" },
+        "notes": { "type": "array", "items": { "type": "string" } },
+        "equipment_shown": { "type": "array", "items": { "type": "string" } },
+        "hotspots": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string" },
+              "as_drawn_text": { "type": "string" },
+              "bound_tag": { "type": ["string", "null"] },
+              "unbound_reason": { "type": ["string", "null"] },
+              "role": { "type": "string" },
+              "drawn_setpoint": { "type": ["string", "null"] },
+              "foreign": { "type": "boolean" },
+              "x_frac": { "type": "number" },
+              "y_frac": { "type": "number" },
+              "w_frac": { "type": "number" },
+              "h_frac": { "type": "number" }
+            },
+            "required": [
+              "id",
+              "as_drawn_text",
+              "bound_tag",
+              "unbound_reason",
+              "role",
+              "drawn_setpoint",
+              "foreign",
+              "x_frac",
+              "y_frac",
+              "w_frac",
+              "h_frac"
+            ]
+          }
+        },
+        "defects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "rule": { "type": "string" },
+              "detail": { "type": "string" }
+            },
+            "required": ["rule", "detail"]
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "ADR-007 and deviation D-12: adopted sidecars carry basis agent_transcription with review_status pending; reviewed_by and reviewed_at are null until a human review is recorded.",
+          "properties": {
+            "basis": { "type": "string", "enum": ["manual", "agent_transcription"] },
+            "alias": { "type": "string" },
+            "date": { "type": "string" },
+            "reviewed_by": { "type": ["string", "null"] },
+            "reviewed_at": { "type": ["string", "null"], "format": "date-time" },
+            "review_status": { "type": "string", "enum": ["reviewed", "pending"] }
+          },
+          "required": ["basis", "alias", "date", "reviewed_by", "reviewed_at", "review_status"]
+        }
+      },
+      "required": [
+        "set",
+        "document_id",
+        "title_box",
+        "reference_box",
+        "notes",
+        "equipment_shown",
+        "hotspots",
+        "defects",
+        "provenance"
+      ]
+    }
+  }
+}

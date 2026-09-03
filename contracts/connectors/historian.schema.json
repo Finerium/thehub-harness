@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/connectors/historian.schema.json",
+  "title": "Historian connector",
+  "description": "Blueprint section 9.14: the reading (tag, timestamp, value, quality) a read-only historian connector would return through a Level 3.5 replica, polled on request with no storage; the connector panel and GET /api/connectors/:name/schema serve this file byte for byte.",
+  "x-blueprint": "9.14",
+  "x-status": "specified, not connected",
+  "x-sync": "read-only through a Level 3.5 replica; polled on request; no storage",
+  "x-conflict-rule": "no storage (9.14 states no conflict rule for the historian: nothing is stored, so nothing is reconciled)",
+  "x-failure-behaviour": "an unreachable mirror renders typed setpoints alone",
+  "$defs": {
+    "HistorianReading": {
+      "title": "HistorianReading",
+      "description": "One live reading: tag, timestamp, value, quality. Never stored; rendered beside the typed setpoints of 9.3, and an unreachable mirror renders the typed setpoints alone. No write path toward any control system exists (blueprint 1).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tag": { "type": "string", "description": "InstrumentTag.tag of 9.3" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "value": { "type": "number" },
+        "quality": { "type": "string", "description": "the replica's own quality text" }
+      },
+      "required": ["tag", "timestamp", "value", "quality"]
+    }
+  }
+}

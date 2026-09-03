@@ -1,0 +1,1274 @@
+{
+ "tok_doc_w2_scores": {
+  "WO-240109": 0.5,
+  "WO-240157": 0.25,
+  "WO-240035": 0.4286,
+  "WO-240181": 0.1667,
+  "WO-240087": 1.0,
+  "WO-240128": 0.5,
+  "WO-240186": 0.3333,
+  "WO-240085": 1.0,
+  "WO-240130": 0.0,
+  "WO-240195": 0.75,
+  "WO-240190": 1.0,
+  "WO-240177": 0.3333,
+  "WO-240103": 0.1667,
+  "WO-240056": 0.8571,
+  "WO-240138": 1.0,
+  "WO-240090": 1.0,
+  "WO-240146": 0.25,
+  "WO-240202": 0.3333,
+  "WO-240172": 0.3333,
+  "WO-240154": 0.0,
+  "WO-240012": 0.5,
+  "WO-240129": 0.0,
+  "WO-240049": 0.1667,
+  "WO-240201": 0.3333,
+  "WO-240059": 1.0,
+  "WO-240116": 0.5,
+  "WO-240060": 1.0,
+  "WO-240039": 0.2857,
+  "WO-240009": 1.0,
+  "WO-240014": 0.3333,
+  "WO-240211": 0.5,
+  "WO-240094": 0.6,
+  "WO-240106": 0.3333,
+  "WO-240017": 0.3333,
+  "WO-240196": 0.5,
+  "WO-240111": 1.0,
+  "WO-240097": 0.3333,
+  "WO-240027": 0.5,
+  "WO-240173": 0.3333,
+  "WO-240147": 0.25,
+  "WO-240042": 0.3333,
+  "WO-240188": 1.0,
+  "WO-240150": 0.3333,
+  "WO-240102": 0.1667,
+  "WO-240167": 0.5,
+  "WO-240045": 0.6667,
+  "WO-240084": 1.0,
+  "WO-240208": 0.3333,
+  "WO-240115": 1.0,
+  "WO-240134": 0.3333,
+  "WO-240184": 0.3333,
+  "WO-240074": 0.5,
+  "WO-240022": 0.3333,
+  "WO-240165": 1.0,
+  "WO-240069": 0.3333,
+  "WO-240016": 0.3333,
+  "WO-240024": 0.3333,
+  "WO-240076": 0.0,
+  "WO-240033": 0.5,
+  "WO-240119": 0.3333,
+  "WO-240169": 0.25,
+  "WO-240170": 0.3333,
+  "WO-240212": 0.5,
+  "WO-240079": 0.5,
+  "WO-240040": 0.25,
+  "WO-240008": 1.0,
+  "WO-240178": 0.5,
+  "WO-240136": 1.0,
+  "WO-240030": 1.0,
+  "WO-240131": 0.0,
+  "WO-240057": 1.0,
+  "WO-240189": 1.0,
+  "WO-240058": 1.0,
+  "WO-240139": 0.6667,
+  "WO-240199": 0.3333,
+  "WO-240210": 0.5,
+  "WO-240010": 0.25,
+  "WO-240110": 1.0,
+  "WO-240198": 0.3333,
+  "WO-240063": 0.4,
+  "WO-240140": 0.75,
+  "WO-240191": 1.0,
+  "WO-240145": 1.0,
+  "WO-240161": 1.0,
+  "WO-240077": 0.0,
+  "WO-240203": 0.6667,
+  "WO-240029": 1.0,
+  "WO-240174": 0.3333,
+  "WO-240133": 0.3333,
+  "WO-240112": 1.0,
+  "WO-240207": 0.3333,
+  "WO-240081": 0.3333,
+  "WO-240135": 1.0,
+  "WO-240095": 0.25,
+  "WO-240006": 1.0,
+  "WO-240185": 0.3333,
+  "WO-240142": 1.0,
+  "WO-240171": 0.8,
+  "WO-240132": 0.3333,
+  "WO-240104": 0.3333,
+  "WO-240126": 0.5,
+  "WO-240089": 0.5,
+  "WO-240093": 0.3333,
+  "WO-240054": 0.5,
+  "WO-240152": 0.75,
+  "WO-240091": 0.8,
+  "WO-240011": 0.3333,
+  "WO-240003": 0.9,
+  "WO-240053": 0.5,
+  "WO-240100": 0.6667,
+  "WO-240051": 0.3333,
+  "WO-240028": 1.0,
+  "WO-240166": 0.75,
+  "WO-240113": 1.0,
+  "WO-240018": 0.3333,
+  "WO-240036": 0.4,
+  "WO-240160": 0.5,
+  "WO-240071": 0.3333,
+  "WO-240143": 1.0,
+  "WO-240013": 0.2,
+  "WO-240108": 0.5,
+  "WO-240050": 0.3333,
+  "WO-240004": 1.0,
+  "WO-240123": 0.3333,
+  "WO-240193": 0.75,
+  "WO-240073": 0.5,
+  "WO-240061": 1.0,
+  "WO-240052": 0.3333,
+  "WO-240023": 0.3333,
+  "WO-240164": 1.0,
+  "WO-240101": 0.6667,
+  "WO-240204": 0.6667,
+  "WO-240122": 0.3333,
+  "WO-240127": 0.5,
+  "WO-240206": 0.3333,
+  "WO-240121": 0.3333,
+  "WO-240048": 0.1667,
+  "WO-240080": 0.5,
+  "WO-240044": 0.3333,
+  "WO-240098": 0.3333,
+  "WO-240031": 1.0,
+  "WO-240005": 0.5,
+  "WO-240137": 1.0,
+  "WO-240194": 1.0,
+  "WO-240068": 0.3333,
+  "WO-240075": 0.5,
+  "WO-240141": 0.5,
+  "WO-240083": 1.0,
+  "WO-240070": 0.3333,
+  "WO-240179": 0.5,
+  "WO-240026": 0.5,
+  "WO-240144": 0.5,
+  "WO-240187": 0.3333,
+  "WO-240183": 0.3333,
+  "WO-240105": 0.3333,
+  "WO-240086": 1.0,
+  "WO-240082": 0.3333,
+  "WO-240124": 0.3333,
+  "WO-240156": 0.0,
+  "WO-240043": 0.3333,
+  "WO-240175": 0.3333,
+  "WO-240192": 1.0,
+  "WO-240182": 0.1667,
+  "WO-240065": 0.4,
+  "WO-240078": 0.5,
+  "WO-240021": 0.3333,
+  "WO-240162": 1.0,
+  "WO-240007": 0.4286,
+  "WO-240002": 0.7857,
+  "WO-240034": 0.4,
+  "WO-240200": 0.3333,
+  "WO-240151": 0.75,
+  "WO-240092": 0.2857,
+  "WO-240037": 0.3333,
+  "WO-240168": 1.0,
+  "WO-240038": 0.5,
+  "WO-240153": 0.75,
+  "WO-240096": 0.25,
+  "WO-240046": 0.6667,
+  "WO-240176": 0.3333,
+  "WO-240067": 0.3333,
+  "WO-240025": 0.5,
+  "WO-240015": 0.3333,
+  "WO-240062": 0.9,
+  "WO-240163": 1.0,
+  "WO-240055": 0.5,
+  "WO-240072": 0.3333,
+  "WO-240120": 0.25,
+  "WO-240019": 0.5,
+  "WO-240125": 0.3333,
+  "WO-240107": 0.5,
+  "WO-240088": 0.75,
+  "WO-240180": 0.1667,
+  "WO-240149": 0.3333,
+  "WO-240197": 0.6667,
+  "WO-240148": 0.25,
+  "WO-240032": 0.7143,
+  "WO-240020": 0.5,
+  "WO-240118": 1.0,
+  "WO-240041": 0.25,
+  "WO-240114": 1.0,
+  "WO-240158": 0.25,
+  "WO-240117": 0.5,
+  "WO-240159": 0.5,
+  "WO-240155": 0.0,
+  "WO-240066": 0.375,
+  "WO-240099": 0.3333,
+  "WO-240205": 0.3333,
+  "WO-240064": 0.4,
+  "WO-240047": 0.1667,
+  "WO-240209": 0.3333
+ },
+ "tok_doc_w2_units": {
+  "WO-240109": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240157": [
+   "Root_Cause",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240035": [
+   "Problem_Description",
+   "OPL-YD-2301-06"
+  ],
+  "WO-240181": [
+   "Corrective_Action",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240087": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240128": [
+   "Problem_Description",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240186": [
+   "Root_Cause",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240085": [
+   "Problem_Description",
+   "OPL-KC-4501-01"
+  ],
+  "WO-240130": null,
+  "WO-240195": [
+   "Problem_Description",
+   "OPL-FA-8901-07"
+  ],
+  "WO-240190": [
+   "Problem_Description",
+   "OPL-FA-8901-02"
+  ],
+  "WO-240177": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240103": [
+   "Corrective_Action",
+   "OPL-KC-4501-01"
+  ],
+  "WO-240056": [
+   "Problem_Description",
+   "OPL-DC-3401A-01"
+  ],
+  "WO-240138": [
+   "Problem_Description",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240090": [
+   "Root_Cause",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240146": [
+   "Problem_Description",
+   "OPL-LV-6701-07"
+  ],
+  "WO-240202": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240172": [
+   "Root_Cause",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240154": null,
+  "WO-240012": [
+   "Root_Cause",
+   "OPL-GA-1201A-04"
+  ],
+  "WO-240129": null,
+  "WO-240049": [
+   "Corrective_Action",
+   "OPL-YD-2301-07"
+  ],
+  "WO-240201": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240059": [
+   "Root_Cause",
+   "OPL-DC-3401A-06"
+  ],
+  "WO-240116": [
+   "Problem_Description",
+   "OPL-EA-5601-07"
+  ],
+  "WO-240060": [
+   "Problem_Description",
+   "OPL-DC-3401A-07"
+  ],
+  "WO-240039": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240009": [
+   "Root_Cause",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240014": [
+   "Root_Cause",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240211": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240094": [
+   "Problem_Description",
+   "OPL-KC-4501-03"
+  ],
+  "WO-240106": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240017": [
+   "Problem_Description",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240196": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240111": [
+   "Problem_Description",
+   "OPL-EA-5601-01"
+  ],
+  "WO-240097": [
+   "Problem_Description",
+   "OPL-KC-4501-01"
+  ],
+  "WO-240027": [
+   "Problem_Description",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240173": [
+   "Root_Cause",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240147": [
+   "Problem_Description",
+   "OPL-LV-6701-07"
+  ],
+  "WO-240042": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240188": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240150": [
+   "Problem_Description",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240102": [
+   "Corrective_Action",
+   "OPL-KC-4501-01"
+  ],
+  "WO-240167": [
+   "Corrective_Action",
+   "OPL-CT-7801-05"
+  ],
+  "WO-240045": [
+   "Root_Cause",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240084": [
+   "Root_Cause",
+   "OPL-KC-4501-01"
+  ],
+  "WO-240208": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240115": [
+   "Problem_Description",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240134": [
+   "Problem_Description",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240184": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240074": [
+   "Problem_Description",
+   "OPL-DC-3401A-06"
+  ],
+  "WO-240022": [
+   "Corrective_Action",
+   "OPL-GA-1201A-03"
+  ],
+  "WO-240165": [
+   "Problem_Description",
+   "OPL-CT-7801-06"
+  ],
+  "WO-240069": [
+   "Root_Cause",
+   "OPL-DC-3401A-07"
+  ],
+  "WO-240016": [
+   "Problem_Description",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240024": [
+   "Problem_Description",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240076": null,
+  "WO-240033": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240119": [
+   "Root_Cause",
+   "OPL-EA-5601-01"
+  ],
+  "WO-240169": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240170": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240212": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240079": [
+   "Root_Cause",
+   "OPL-DC-3401A-03"
+  ],
+  "WO-240040": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240008": [
+   "Root_Cause",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240178": [
+   "Problem_Description",
+   "OPL-CT-7801-06"
+  ],
+  "WO-240136": [
+   "Root_Cause",
+   "OPL-LV-6701-03"
+  ],
+  "WO-240030": [
+   "Root_Cause",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240131": null,
+  "WO-240057": [
+   "Root_Cause",
+   "OPL-DC-3401A-01"
+  ],
+  "WO-240189": [
+   "Problem_Description",
+   "OPL-FA-8901-02"
+  ],
+  "WO-240058": [
+   "Root_Cause",
+   "OPL-DC-3401A-01"
+  ],
+  "WO-240139": [
+   "Root_Cause",
+   "OPL-LV-6701-02"
+  ],
+  "WO-240199": [
+   "Root_Cause",
+   "OPL-FA-8901-02"
+  ],
+  "WO-240210": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240010": [
+   "Problem_Description",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240110": [
+   "Corrective_Action",
+   "OPL-EA-5601-01"
+  ],
+  "WO-240198": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240063": [
+   "Problem_Description",
+   "OPL-DC-3401A-01"
+  ],
+  "WO-240140": [
+   "Root_Cause",
+   "OPL-LV-6701-07"
+  ],
+  "WO-240191": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240145": [
+   "Problem_Description",
+   "OPL-LV-6701-03"
+  ],
+  "WO-240161": [
+   "Root_Cause",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240077": null,
+  "WO-240203": [
+   "Root_Cause",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240029": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240174": [
+   "Root_Cause",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240133": [
+   "Problem_Description",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240112": [
+   "Root_Cause",
+   "OPL-EA-5601-01"
+  ],
+  "WO-240207": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240081": [
+   "Root_Cause",
+   "OPL-DC-3401A-01"
+  ],
+  "WO-240135": [
+   "Corrective_Action",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240095": [
+   "Problem_Description",
+   "OPL-KC-4501-02"
+  ],
+  "WO-240006": [
+   "Root_Cause",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240185": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240142": [
+   "Root_Cause",
+   "OPL-LV-6701-05"
+  ],
+  "WO-240171": [
+   "Problem_Description",
+   "OPL-CT-7801-05"
+  ],
+  "WO-240132": [
+   "Problem_Description",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240104": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240126": [
+   "Problem_Description",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240089": [
+   "Root_Cause",
+   "OPL-KC-4501-07"
+  ],
+  "WO-240093": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240054": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240152": [
+   "Problem_Description",
+   "OPL-LV-6701-04"
+  ],
+  "WO-240091": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240011": [
+   "Root_Cause",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240003": [
+   "Corrective_Action",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240053": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240100": [
+   "Root_Cause",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240051": [
+   "Problem_Description",
+   "OPL-YD-2301-07"
+  ],
+  "WO-240028": [
+   "Root_Cause",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240166": [
+   "Problem_Description",
+   "OPL-CT-7801-06"
+  ],
+  "WO-240113": [
+   "Problem_Description",
+   "OPL-EA-5601-05"
+  ],
+  "WO-240018": [
+   "Problem_Description",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240036": [
+   "Problem_Description",
+   "OPL-YD-2301-03"
+  ],
+  "WO-240160": [
+   "Corrective_Action",
+   "OPL-LV-6701-06"
+  ],
+  "WO-240071": [
+   "Problem_Description",
+   "OPL-DC-3401A-01"
+  ],
+  "WO-240143": [
+   "Root_Cause",
+   "OPL-LV-6701-03"
+  ],
+  "WO-240013": [
+   "Root_Cause",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240108": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240050": [
+   "Problem_Description",
+   "OPL-YD-2301-07"
+  ],
+  "WO-240004": [
+   "Corrective_Action",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240123": [
+   "Problem_Description",
+   "OPL-EA-5601-01"
+  ],
+  "WO-240193": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240073": [
+   "Problem_Description",
+   "OPL-DC-3401A-06"
+  ],
+  "WO-240061": [
+   "Root_Cause",
+   "OPL-DC-3401A-07"
+  ],
+  "WO-240052": [
+   "Problem_Description",
+   "OPL-YD-2301-07"
+  ],
+  "WO-240023": [
+   "Problem_Description",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240164": [
+   "Root_Cause",
+   "OPL-CT-7801-02"
+  ],
+  "WO-240101": [
+   "Root_Cause",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240204": [
+   "Root_Cause",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240122": [
+   "Root_Cause",
+   "OPL-EA-5601-05"
+  ],
+  "WO-240127": [
+   "Problem_Description",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240206": [
+   "Problem_Description",
+   "OPL-FA-8901-02"
+  ],
+  "WO-240121": [
+   "Root_Cause",
+   "OPL-EA-5601-05"
+  ],
+  "WO-240048": [
+   "Corrective_Action",
+   "OPL-YD-2301-07"
+  ],
+  "WO-240080": [
+   "Root_Cause",
+   "OPL-DC-3401A-03"
+  ],
+  "WO-240044": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240098": [
+   "Problem_Description",
+   "OPL-KC-4501-01"
+  ],
+  "WO-240031": [
+   "Root_Cause",
+   "OPL-YD-2301-02"
+  ],
+  "WO-240005": [
+   "Corrective_Action",
+   "OPL-GA-1201A-02"
+  ],
+  "WO-240137": [
+   "Problem_Description",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240194": [
+   "Problem_Description",
+   "OPL-FA-8901-02"
+  ],
+  "WO-240068": [
+   "Root_Cause",
+   "OPL-DC-3401A-07"
+  ],
+  "WO-240075": [
+   "Problem_Description",
+   "OPL-DC-3401A-06"
+  ],
+  "WO-240141": [
+   "Corrective_Action",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240083": [
+   "Root_Cause",
+   "OPL-KC-4501-01"
+  ],
+  "WO-240070": [
+   "Root_Cause",
+   "OPL-DC-3401A-07"
+  ],
+  "WO-240179": [
+   "Problem_Description",
+   "OPL-CT-7801-06"
+  ],
+  "WO-240026": [
+   "Problem_Description",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240144": [
+   "Problem_Description",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240187": [
+   "Root_Cause",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240183": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240105": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240086": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240082": [
+   "Root_Cause",
+   "OPL-DC-3401A-01"
+  ],
+  "WO-240124": [
+   "Problem_Description",
+   "OPL-EA-5601-01"
+  ],
+  "WO-240156": null,
+  "WO-240043": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240175": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240192": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ],
+  "WO-240182": [
+   "Corrective_Action",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240065": [
+   "Problem_Description",
+   "OPL-DC-3401A-05"
+  ],
+  "WO-240078": [
+   "Root_Cause",
+   "OPL-DC-3401A-03"
+  ],
+  "WO-240021": [
+   "Corrective_Action",
+   "OPL-GA-1201A-03"
+  ],
+  "WO-240162": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240007": [
+   "Corrective_Action",
+   "OPL-GA-1201A-03"
+  ],
+  "WO-240002": [
+   "Root_Cause",
+   "OPL-GA-1201A-01"
+  ],
+  "WO-240034": [
+   "Problem_Description",
+   "OPL-YD-2301-07"
+  ],
+  "WO-240200": [
+   "Root_Cause",
+   "OPL-FA-8901-02"
+  ],
+  "WO-240151": [
+   "Problem_Description",
+   "OPL-LV-6701-04"
+  ],
+  "WO-240092": [
+   "Corrective_Action",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240037": [
+   "Problem_Description",
+   "OPL-YD-2301-02"
+  ],
+  "WO-240168": [
+   "Root_Cause",
+   "OPL-CT-7801-06"
+  ],
+  "WO-240038": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240153": [
+   "Problem_Description",
+   "OPL-LV-6701-04"
+  ],
+  "WO-240096": [
+   "Problem_Description",
+   "OPL-KC-4501-02"
+  ],
+  "WO-240046": [
+   "Root_Cause",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240176": [
+   "Problem_Description",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240067": [
+   "Problem_Description",
+   "OPL-DC-3401A-03"
+  ],
+  "WO-240025": [
+   "Problem_Description",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240015": [
+   "Root_Cause",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240062": [
+   "Corrective_Action",
+   "OPL-DC-3401A-07"
+  ],
+  "WO-240163": [
+   "Root_Cause",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240055": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240072": [
+   "Problem_Description",
+   "OPL-DC-3401A-01"
+  ],
+  "WO-240120": [
+   "Problem_Description",
+   "OPL-EA-5601-02"
+  ],
+  "WO-240019": [
+   "Problem_Description",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240125": [
+   "Problem_Description",
+   "OPL-EA-5601-01"
+  ],
+  "WO-240107": [
+   "Problem_Description",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240088": [
+   "Root_Cause",
+   "OPL-KC-4501-05"
+  ],
+  "WO-240180": [
+   "Corrective_Action",
+   "OPL-CT-7801-01"
+  ],
+  "WO-240149": [
+   "Problem_Description",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240197": [
+   "Problem_Description",
+   "OPL-FA-8901-07"
+  ],
+  "WO-240148": [
+   "Problem_Description",
+   "OPL-LV-6701-07"
+  ],
+  "WO-240032": [
+   "Problem_Description",
+   "OPL-YD-2301-05"
+  ],
+  "WO-240020": [
+   "Problem_Description",
+   "OPL-GA-1201A-07"
+  ],
+  "WO-240118": [
+   "Root_Cause",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240041": [
+   "Problem_Description",
+   "OPL-YD-2301-01"
+  ],
+  "WO-240114": [
+   "Root_Cause",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240158": [
+   "Root_Cause",
+   "OPL-LV-6701-01"
+  ],
+  "WO-240117": [
+   "Problem_Description",
+   "OPL-EA-5601-06"
+  ],
+  "WO-240159": [
+   "Corrective_Action",
+   "OPL-LV-6701-06"
+  ],
+  "WO-240155": null,
+  "WO-240066": [
+   "Corrective_Action",
+   "OPL-DC-3401A-06"
+  ],
+  "WO-240099": [
+   "Problem_Description",
+   "OPL-KC-4501-01"
+  ],
+  "WO-240205": [
+   "Problem_Description",
+   "OPL-FA-8901-02"
+  ],
+  "WO-240064": [
+   "Problem_Description",
+   "OPL-DC-3401A-06"
+  ],
+  "WO-240047": [
+   "Corrective_Action",
+   "OPL-YD-2301-07"
+  ],
+  "WO-240209": [
+   "Problem_Description",
+   "OPL-FA-8901-01"
+  ]
+ },
+ "tok_doc_w2_table": {
+  "0.5": {
+   "unc": 142,
+   "pct": 67.3,
+   "bd": 9,
+   "h": 168.5,
+   "idr": 141203000,
+   "by_tag": {
+    "CT-7801": 19,
+    "DC-3401A": 20,
+    "EA-5601": 18,
+    "FA-8901": 14,
+    "GA-1201A": 20,
+    "KC-4501": 16,
+    "LV-6701": 14,
+    "YD-2301": 21
+   },
+   "bd_wos": [
+    "WO-240007",
+    "WO-240037",
+    "WO-240039",
+    "WO-240065",
+    "WO-240089",
+    "WO-240116",
+    "WO-240117",
+    "WO-240119",
+    "WO-240169"
+   ]
+  },
+  "0.55": {
+   "unc": 142,
+   "pct": 67.3,
+   "bd": 9,
+   "h": 168.5,
+   "idr": 141203000,
+   "by_tag": {
+    "CT-7801": 19,
+    "DC-3401A": 20,
+    "EA-5601": 18,
+    "FA-8901": 14,
+    "GA-1201A": 20,
+    "KC-4501": 16,
+    "LV-6701": 14,
+    "YD-2301": 21
+   },
+   "bd_wos": [
+    "WO-240007",
+    "WO-240037",
+    "WO-240039",
+    "WO-240065",
+    "WO-240089",
+    "WO-240116",
+    "WO-240117",
+    "WO-240119",
+    "WO-240169"
+   ]
+  },
+  "0.6": {
+   "unc": 143,
+   "pct": 67.8,
+   "bd": 9,
+   "h": 168.5,
+   "idr": 141203000,
+   "by_tag": {
+    "CT-7801": 19,
+    "DC-3401A": 20,
+    "EA-5601": 18,
+    "FA-8901": 14,
+    "GA-1201A": 20,
+    "KC-4501": 17,
+    "LV-6701": 14,
+    "YD-2301": 21
+   },
+   "bd_wos": [
+    "WO-240007",
+    "WO-240037",
+    "WO-240039",
+    "WO-240065",
+    "WO-240089",
+    "WO-240116",
+    "WO-240117",
+    "WO-240119",
+    "WO-240169"
+   ]
+  },
+  "0.62": {
+   "unc": 143,
+   "pct": 67.8,
+   "bd": 9,
+   "h": 168.5,
+   "idr": 141203000,
+   "by_tag": {
+    "CT-7801": 19,
+    "DC-3401A": 20,
+    "EA-5601": 18,
+    "FA-8901": 14,
+    "GA-1201A": 20,
+    "KC-4501": 17,
+    "LV-6701": 14,
+    "YD-2301": 21
+   },
+   "bd_wos": [
+    "WO-240007",
+    "WO-240037",
+    "WO-240039",
+    "WO-240065",
+    "WO-240089",
+    "WO-240116",
+    "WO-240117",
+    "WO-240119",
+    "WO-240169"
+   ]
+  },
+  "0.65": {
+   "unc": 143,
+   "pct": 67.8,
+   "bd": 9,
+   "h": 168.5,
+   "idr": 141203000,
+   "by_tag": {
+    "CT-7801": 19,
+    "DC-3401A": 20,
+    "EA-5601": 18,
+    "FA-8901": 14,
+    "GA-1201A": 20,
+    "KC-4501": 17,
+    "LV-6701": 14,
+    "YD-2301": 21
+   },
+   "bd_wos": [
+    "WO-240007",
+    "WO-240037",
+    "WO-240039",
+    "WO-240065",
+    "WO-240089",
+    "WO-240116",
+    "WO-240117",
+    "WO-240119",
+    "WO-240169"
+   ]
+  },
+  "0.7": {
+   "unc": 151,
+   "pct": 71.6,
+   "bd": 10,
+   "h": 204.5,
+   "idr": 147875000,
+   "by_tag": {
+    "CT-7801": 19,
+    "DC-3401A": 20,
+    "EA-5601": 18,
+    "FA-8901": 17,
+    "GA-1201A": 20,
+    "KC-4501": 19,
+    "LV-6701": 15,
+    "YD-2301": 23
+   },
+   "bd_wos": [
+    "WO-240007",
+    "WO-240037",
+    "WO-240039",
+    "WO-240065",
+    "WO-240089",
+    "WO-240116",
+    "WO-240117",
+    "WO-240119",
+    "WO-240169",
+    "WO-240197"
+   ]
+  },
+  "0.75": {
+   "unc": 160,
+   "pct": 75.8,
+   "bd": 13,
+   "h": 224.5,
+   "idr": 178960000,
+   "by_tag": {
+    "CT-7801": 20,
+    "DC-3401A": 20,
+    "EA-5601": 18,
+    "FA-8901": 19,
+    "GA-1201A": 20,
+    "KC-4501": 20,
+    "LV-6701": 19,
+    "YD-2301": 24
+   },
+   "bd_wos": [
+    "WO-240007",
+    "WO-240037",
+    "WO-240039",
+    "WO-240065",
+    "WO-240089",
+    "WO-240116",
+    "WO-240117",
+    "WO-240119",
+    "WO-240140",
+    "WO-240169",
+    "WO-240193",
+    "WO-240195",
+    "WO-240197"
+   ]
+  },
+  "0.8": {
+   "unc": 163,
+   "pct": 77.3,
+   "bd": 15,
+   "h": 270.5,
+   "idr": 212905000,
+   "by_tag": {
+    "CT-7801": 21,
+    "DC-3401A": 20,
+    "EA-5601": 18,
+    "FA-8901": 19,
+    "GA-1201A": 21,
+    "KC-4501": 21,
+    "LV-6701": 19,
+    "YD-2301": 24
+   },
+   "bd_wos": [
+    "WO-240007",
+    "WO-240037",
+    "WO-240039",
+    "WO-240065",
+    "WO-240089",
+    "WO-240091",
+    "WO-240116",
+    "WO-240117",
+    "WO-240119",
+    "WO-240140",
+    "WO-240169",
+    "WO-240171",
+    "WO-240193",
+    "WO-240195",
+    "WO-240197"
+   ]
+  }
+ }
+}

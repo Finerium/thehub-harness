@@ -1,0 +1,617 @@
+{
+ "datasheet_cited_as_drawn": "TJC-LLD-PF-GA-4501A",
+ "defects": [
+  {
+   "detail": "NOTE 2 cites 'Datasheet TJC-LLD-PF-GA-4501A'; KC-4501's datasheet is TJC-LLD-DS-KC-4501 (no PF series exists in the corpus).",
+   "kind": "wrong_datasheet_citation"
+  },
+  {
+   "detail": "PI 1201 (GA-1201A suction indicator) beside PT-4501; 'FROM STORAGE TANK 12-T-01' (Set 1's suction source) feeding the KO drum, where GA N1 reads 'From KO drum FA-4510'.",
+   "kind": "foreign_tag"
+  },
+  {
+   "detail": "Title block REV. 02 / DATE. 02 and revision table rows '1 | 01 | 02', '2 | – | 02'; the KC-4501 GA drawing and plot plan are Rev 0 'ISSUED FOR CONSTRUCTION 05-06-2026' and the datasheet and C&E are REV 3.",
+   "kind": "revision_conflict"
+  },
+  {
+   "detail": "TITLE cell reads 'KA-4501' where the equipment is KC-4501 (the second title cell reads 'P&ID: RECYCLE GAS COMPRESSOR (KC-4501) SYSTEM').",
+   "kind": "other"
+  },
+  {
+   "detail": "'PSLL-4501 Suction OPEN' puts Set 1's valve-position permissive text on the C&E T6 pressure trip (SEQ-4501 has no ZSO permissive); 'PSL-4504 Permissive 1' where C&E permissive 1 is PSLL-4504; XV-4501 on three valves; PSV-4502 drawn three times but absent from the datasheet and the C&E; VT-4501 (datasheet crosshead vibration monitor) drawn on the jacket cooling water line; a GEARBOX on a machine whose datasheet driver is a direct 4-pole motor.",
+   "kind": "label_vs_ce_mismatch"
+  },
+  {
+   "detail": "C&E initiators T2 TSHH-4503, T3 PSHH-4502, T4 VSHH-4505 and T5 LSHH-4510 and effect EFF-4 'MAINTAIN SEAL GAS N2' are not drawn; the top-left TRIP box drives an actuator with no valve; line numbers '3\"-HC-1002-CS021' and '4\"-HC-602-CS021' echo Set 1's 4\"-HC-1002-CS02-I; the large legend repeats rows (DCS/Local, P3/Interlock, FV, Line Spec/Line Specification/Line Specified, 'gate Type'); the notes end with the dangling line 'Materials of construction.'.",
+   "kind": "other"
+  },
+  {
+   "detail": "The sheet captions the recycle valving 'ANTI-SURGE RECYCLE CONTROL VALVING.' and TJC-LLD-IL-KC-4501 EFF-2 reads 'OPEN ANTI-SURGE RECYCLE FV-4502', but surge is a phenomenon of dynamic compressors and KC-4501 is typed reciprocating in three places: TJC-LLD-DS-KC-4501 'RECIPROCATING COMPRESSOR DATA SHEET', 'TYPE Reciprocating Compressor (2-stage)', 'COMPRESSOR TYPE RECIPROCATING, 2-STAGE, 2-THROW' and TJC-LLD-GA-KC-4501 'Type:ReciprocatingCompressor(2-stage)'. OPL-KC-4501-04 carries both readings itself: titled 'Anti-Surge / Recycle Operation' with step 5 'Investigate any repeated surge cycling with the vendor curve', while its purpose line uses the machine's own term, 'The recycle (spillback) valve protects the machine at low throughput'. Reported as a naming conflict, not resolved here (golden GS-102).",
+   "kind": "other"
+  }
+ ],
+ "equipment_shown": [
+  "RECYCLE GAS COMPRESSOR KC-4501 '(Two-stage, two-throw reciprocating machine (GA drawing)' with motor M and GEARBOX on a common base",
+  "KO DRUM FA-4510 (suction)",
+  "EA-4502 intercooler (box 'EA-4502 / SS / EA-4502' with Cooling Water arrows)",
+  "FROM STORAGE TANK 12-T-01 (6\" feed into the KO drum)",
+  "Insets: SEAL GAS SYSTEM (Nitrogen Buffer, FT-4506, PRES. RED.), LUBE OIL SYSTEM (N2, FORCE VALVE, NRV, OLL-4504 Relief Valve, Oil Pump, PSLL-4504, PSL-4504), JACKET COOLING WATER (VT-4501, FSL-4508)",
+  "Large LEGEND (DCS, Local, P3 Interlock, XV Valve, Valve, Gate, FV, Globe, FV, Check, Check/Check valve, gate Type, Flow Transmitter, Flow Indicator, Line Spec, Line Specification, Line Specified) and small LEGEND (LOGIC hmi, START PERMISSIVE, TRIP, CAUSE/EFFECT)"
+ ],
+ "file": "P&ID SET 4.png",
+ "image_px": [
+  1477,
+  1065
+ ],
+ "instruments": [
+  {
+   "as_drawn_text": "PSV-4502",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble above the intercooler; no PSV in the KC-4501 datasheet or C&E",
+   "role": "relief",
+   "setpoint_as_drawn": null,
+   "x": 0.503,
+   "y": 0.066
+  },
+  {
+   "as_drawn_text": "TIC-4502",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble above the intercooler; not in the C&E",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.542,
+   "y": 0.066
+  },
+  {
+   "as_drawn_text": "PSV-4502",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "relief valve symbol on the intercooler inlet, label to its left",
+   "role": "relief",
+   "setpoint_as_drawn": null,
+   "x": 0.477,
+   "y": 0.16
+  },
+  {
+   "as_drawn_text": "TIC-4503",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble with an actuator symbol labelled PSV-4502 to its right",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.546,
+   "y": 0.157
+  },
+  {
+   "as_drawn_text": "PSV-4502",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "third PSV-4502 label, on the TIC-4503 actuator",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.601,
+   "y": 0.164
+  },
+  {
+   "as_drawn_text": "TIC-4503",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "second TIC-4503 bubble, below the intercooler",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.58,
+   "y": 0.296
+  },
+  {
+   "as_drawn_text": "TRIP",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "TRIP box driving an actuator symbol with no valve, on the 4\"-HC-602-CS021 line",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.273,
+   "y": 0.225
+  },
+  {
+   "as_drawn_text": "4\"-HC-602-CS021",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "recycle line number; pattern copied from Set 1's 4\"-HC-1002-CS02-I",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.344,
+   "y": 0.293
+  },
+  {
+   "as_drawn_text": "NRV",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.415,
+   "y": 0.268
+  },
+  {
+   "as_drawn_text": "N2, 4\"",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "GA N2 1ST STG DISCH 4\"-300# RF 'To intercooler'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.443,
+   "y": 0.212
+  },
+  {
+   "as_drawn_text": "EA-4502",
+   "bound_tag": "EA-4502",
+   "foreign": false,
+   "note": "datasheet COOLING 'JACKET WATER + INTERCOOLER EA-4502'; GA BOM item 12 INTERCOOLER EA-4502",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.511,
+   "y": 0.225
+  },
+  {
+   "as_drawn_text": "Cooling Water",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.454,
+   "y": 0.289
+  },
+  {
+   "as_drawn_text": "N3, 4\"",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "GA N3 2ND STG SUCTION 4\"-300# RF 'From intercooler'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.582,
+   "y": 0.212
+  },
+  {
+   "as_drawn_text": "DISCHARGE",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.655,
+   "y": 0.212
+  },
+  {
+   "as_drawn_text": "ANTI-SURGE RECYCLE CONTROL VALVING.",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.667,
+   "y": 0.103
+  },
+  {
+   "as_drawn_text": "SEQ-4501",
+   "bound_tag": "SEQ-4501",
+   "foreign": false,
+   "note": "box fed by a TRIP box under the anti-surge caption",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.78,
+   "y": 0.107
+  },
+  {
+   "as_drawn_text": "FV-4502 OPEN on Low Flow",
+   "bound_tag": "FV-4502",
+   "foreign": false,
+   "note": "C&E EFF-2 'OPEN ANTI-SURGE RECYCLE FV-4502'; drawn in the discharge line to the reactor loop",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.722,
+   "y": 0.223
+  },
+  {
+   "as_drawn_text": "3\"-HC-1002-CS021",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "discharge line number; 1002 is Set 1's line number",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.787,
+   "y": 0.211
+  },
+  {
+   "as_drawn_text": "TO REACTOR LOOP",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "GA N4 2ND STG DISCH 'To reactor loop'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.91,
+   "y": 0.221
+  },
+  {
+   "as_drawn_text": "XV-4501",
+   "bound_tag": "XV-4501",
+   "foreign": false,
+   "note": "valve on the 6\" line into the compressor first-stage suction; C&E EFF-3 'CLOSE SUCTION XV-4501'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.415,
+   "y": 0.359
+  },
+  {
+   "as_drawn_text": "KC-4501",
+   "bound_tag": "KC-4501",
+   "foreign": false,
+   "note": "two labels 'KC-4501' at the first- and second-stage suctions",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.447,
+   "y": 0.458
+  },
+  {
+   "as_drawn_text": "PSLL-4501 Suction OPEN",
+   "bound_tag": "PSLL-4501",
+   "foreign": false,
+   "note": "C&E T6 'Suction pressure LOW-LOW PSLL-4501 < 0.3 barg'; 'Suction OPEN' is Set 1's ZSO-1201 permissive text",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.237,
+   "y": 0.397
+  },
+  {
+   "as_drawn_text": "PT-4501",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "feeds the START PERMISSIVE box; not in the C&E",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.293,
+   "y": 0.39
+  },
+  {
+   "as_drawn_text": "PI 1201",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A suction pressure indicator",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.331,
+   "y": 0.39
+  },
+  {
+   "as_drawn_text": "FROM STORAGE TANK 12-T-01",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "Set 1 pump-suction label; GA N1 1ST STG SUCTION 'From KO drum FA-4510'; a free-text destination label, not a tag, so it is not a CD-9 foreign tag (Addendum P8 records it in hand_verified notes)",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.046,
+   "y": 0.462
+  },
+  {
+   "as_drawn_text": "XV-4501",
+   "bound_tag": "XV-4501",
+   "foreign": false,
+   "note": "first of two suction-line valves tagged XV-4501 (three XV-4501 on the sheet)",
+   "role": "isolation",
+   "setpoint_as_drawn": null,
+   "x": 0.195,
+   "y": 0.458
+  },
+  {
+   "as_drawn_text": "XV-4501",
+   "bound_tag": "XV-4501",
+   "foreign": false,
+   "note": "second suction-line XV-4501, with START PERMISSIVE/TRIP and 'SEQ-4501 Permissive 3' arrows",
+   "role": "isolation",
+   "setpoint_as_drawn": null,
+   "x": 0.277,
+   "y": 0.458
+  },
+  {
+   "as_drawn_text": "KO DRUM FA-4510",
+   "bound_tag": "FA-4510",
+   "foreign": false,
+   "note": "GA N1 'From KO drum FA-4510'; C&E T5 LSHH-4510 / permissive 3 LT-4510",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.132,
+   "y": 0.535
+  },
+  {
+   "as_drawn_text": "LT-4510",
+   "bound_tag": "LT-4510",
+   "foreign": false,
+   "note": "C&E start permissive 3 'KO drum level normal (< 50%) LT-4510'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.223,
+   "y": 0.542
+  },
+  {
+   "as_drawn_text": "SEQ-4501 Permissive 3",
+   "bound_tag": "LT-4510",
+   "foreign": false,
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.286,
+   "y": 0.56
+  },
+  {
+   "as_drawn_text": "GEARBOX",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet DRIVER TYPE 'Electric Motor, 4-pole'; no gearbox in the datasheet or GA BOM",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.626,
+   "y": 0.404
+  },
+  {
+   "as_drawn_text": "M",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "motor; datasheet OUTPUT 250 kW, 6000 V",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.548,
+   "y": 0.458
+  },
+  {
+   "as_drawn_text": "RECYCLE GAS COMPRESSOR (Two-stage, two-throw reciprocating machine (GA drawing)",
+   "bound_tag": "KC-4501",
+   "foreign": false,
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.531,
+   "y": 0.565
+  },
+  {
+   "as_drawn_text": "Nitrogen Buffer",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet SEAL GAS 'NITROGEN BUFFER'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.726,
+   "y": 0.385
+  },
+  {
+   "as_drawn_text": "FT-4506",
+   "bound_tag": "FT-4506",
+   "foreign": false,
+   "note": "bubble; C&E start permissive 2 'Seal gas established FT-4506'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.787,
+   "y": 0.347
+  },
+  {
+   "as_drawn_text": "FT-4506",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "label above the PRES. RED. control valve",
+   "role": "control_valve",
+   "setpoint_as_drawn": null,
+   "x": 0.841,
+   "y": 0.338
+  },
+  {
+   "as_drawn_text": "PRES. RED.",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "control_valve",
+   "setpoint_as_drawn": null,
+   "x": 0.841,
+   "y": 0.38
+  },
+  {
+   "as_drawn_text": "FT-4506",
+   "bound_tag": "FT-4506",
+   "foreign": false,
+   "note": "third FT-4506 label, under a small valve",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.787,
+   "y": 0.404
+  },
+  {
+   "as_drawn_text": "SEQ-4501 Permissive 2",
+   "bound_tag": "FT-4506",
+   "foreign": false,
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.924,
+   "y": 0.383
+  },
+  {
+   "as_drawn_text": "SEAL GAS SYSTEM",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.922,
+   "y": 0.307
+  },
+  {
+   "as_drawn_text": "LUBE OIL SYSTEM",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.92,
+   "y": 0.462
+  },
+  {
+   "as_drawn_text": "N2",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.712,
+   "y": 0.484
+  },
+  {
+   "as_drawn_text": "FORCE VALVE",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.741,
+   "y": 0.563
+  },
+  {
+   "as_drawn_text": "NRV",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.787,
+   "y": 0.519
+  },
+  {
+   "as_drawn_text": "OLL-4504 Relief Valve",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "not in the datasheet or C&E",
+   "role": "relief",
+   "setpoint_as_drawn": null,
+   "x": 0.802,
+   "y": 0.563
+  },
+  {
+   "as_drawn_text": "Oil Pump",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "GA BOM item 11 LUBE OIL PUMP GEAR TYPE; datasheet LUBE SYSTEM FORCED FEED + FRAME SPLASH",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.86,
+   "y": 0.563
+  },
+  {
+   "as_drawn_text": "PSLL-4504",
+   "bound_tag": "PSLL-4504",
+   "foreign": false,
+   "note": "box; C&E T1 'Lube oil pressure LOW-LOW PSLL-4504 < 1.5 barg 2oo3'",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.861,
+   "y": 0.5
+  },
+  {
+   "as_drawn_text": "P1",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.88,
+   "y": 0.525
+  },
+  {
+   "as_drawn_text": "PSL-4504 Permissive 1",
+   "bound_tag": "PSLL-4504",
+   "foreign": false,
+   "note": "C&E start permissive 1 'Lube oil pressure OK (> 2 barg) PSLL-4504'; drawn as PSL-4504",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.924,
+   "y": 0.563
+  },
+  {
+   "as_drawn_text": "JACKET COOLING WATER",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.821,
+   "y": 0.642
+  },
+  {
+   "as_drawn_text": "VT-4501",
+   "bound_tag": "VT-4501",
+   "foreign": false,
+   "note": "datasheet 'VIBRATION MON. VT-4501 CROSSHEAD'; drawn as a switch on the jacket cooling water line",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.807,
+   "y": 0.668
+  },
+  {
+   "as_drawn_text": "FSL-4508",
+   "bound_tag": "FSL-4508",
+   "foreign": false,
+   "note": "C&E start permissive 4 'Jacket water flow OK FSL-4508'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.856,
+   "y": 0.668
+  },
+  {
+   "as_drawn_text": "Permissive 4",
+   "bound_tag": "FSL-4508",
+   "foreign": false,
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.924,
+   "y": 0.668
+  },
+  {
+   "as_drawn_text": "TITLE KA-4501",
+   "bound_tag": "KC-4501",
+   "foreign": false,
+   "note": "title cell; the next cell reads 'P&ID: RECYCLE GAS COMPRESSOR (KC-4501) SYSTEM'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.893,
+   "y": 0.809
+  },
+  {
+   "as_drawn_text": "Ref. Dwg. TJC-LLD-PID-4501 REV. 02 DATE. 02",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.893,
+   "y": 0.959
+  },
+  {
+   "as_drawn_text": "REVISION HISTORY",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "rows '1 | 01 | 02', '2 | – | 02', '3 | – | –', '4 | – | –'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.936,
+   "y": 0.07
+  }
+ ],
+ "notes_as_drawn": [
+  "NOTE 1. All values are fictional for training.",
+  "NOTE 2. Refer to Datasheet TJC-LLD-PF-GA-4501A for design parameters.",
+  "NOTE 3. See SEQ-4501 logic diagram",
+  "Reference Drawing: Plot Plan TJC-LLD-PP-KC-4501",
+  "Reference Drawing: Interlock Logic SEQ-4501",
+  "Materials of construction."
+ ],
+ "provenance": {
+  "basis": "manual transcription of the image",
+  "by": "EXEC-1",
+  "date": "2026-08-27"
+ },
+ "ref_dwg_as_drawn": "Ref. Dwg. TJC-LLD-PID-4501",
+ "revision_block_as_drawn": "REVISION HISTORY (Rev. | REVISION | Date.): 1 | 01 | 02; 2 | – | 02; 3 | – | –; 4 | – | –; title block REV. 02 DATE. 02",
+ "seq_cited_as_drawn": "SEQ-4501",
+ "set": 4,
+ "tag": "KC-4501",
+ "title_as_drawn": "KA-4501",
+ "title_block_as_drawn": [
+  "This is sample data provided for CALIBER purposes only",
+  "TITLE KA-4501",
+  "P&ID: RECYCLE GAS COMPRESSOR (KC-4501) SYSTEM",
+  "TITLE INSTRUMENTATION & CONTROL DIAGRAM",
+  "Ref. Dwg. TJC-LLD-PID-4501 | REV. 02 | DATE. 02"
+ ]
+}

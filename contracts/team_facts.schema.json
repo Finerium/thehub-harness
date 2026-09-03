@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/team_facts.schema.json",
+  "title": "Team facts",
+  "description": "Blueprint section 9.12: the supplied/team-facts.json object read by the deck build; the TBD_ prefix is the placeholder marker the pre-submit script greps for.",
+  "x-blueprint": "9.12",
+  "$ref": "#/$defs/TeamFacts",
+  "$defs": {
+    "TeamFacts": {
+      "title": "TeamFacts",
+      "description": "The team-facts object of 9.12 as overridden by deviation D-08: semester 3 for all three members; team string 3V; supervisor name withheld by owner decision (slide 7 carries the fixed line and pre-submit check 6 is redefined to a labelled supervisor line present); registration date and final-round window dropped from the deliverable path. The four fixed literals are pinned as const so the deck cannot drift from them.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "team_name_registered": { "type": "string", "const": "3V" },
+        "university": { "type": "string", "const": "Politeknik Negeri Bandung" },
+        "case_title": { "type": "string", "const": "CALIBER 2026, Case 1: Manufacturing Knowledge Hub (AI-Powered Knowledge Integration)" },
+        "theme_line": { "type": "string", "const": "Future-Ready Operational Excellence: Knowledge, Reliability, and Smart Manufacturing" },
+        "supervisor": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-status": "name withheld by owner decision (D-08); slide 7 carries \"Faculty supervisor: as registered with the CALIBER 2026 Committee\"",
+          "properties": {
+            "name": { "type": "string" },
+            "title": { "type": "string" }
+          },
+          "required": ["name", "title"]
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "no": { "type": "integer" },
+              "name": { "type": "string" },
+              "role": { "type": "string" },
+              "major": { "type": "string" },
+              "semester": { "type": "string", "description": "3 for all three members (D-08)" },
+              "area": { "type": "string" },
+              "contribution": { "type": "string" }
+            },
+            "required": ["no", "name", "role", "major", "semester", "area", "contribution"]
+          }
+        },
+        "final_round_window": { "type": "string", "x-status": "dropped from the deliverable path (D-08)" },
+        "registration_date": { "type": "string", "x-status": "dropped from the deliverable path (D-08)" }
+      },
+      "required": [
+        "team_name_registered",
+        "university",
+        "case_title",
+        "theme_line",
+        "supervisor",
+        "members",
+        "final_round_window",
+        "registration_date"
+      ]
+    }
+  }
+}

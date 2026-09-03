@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/connectors/edms.schema.json",
+  "title": "EDMS connector",
+  "description": "Blueprint section 9.14: the records a read-only EDMS connector would exchange (document number, revision, issue status, approval chain, checksum, watermark), the publication handshake, and the digital twin row with its deep_link field left empty; the connector panel and GET /api/connectors/:name/schema serve this file byte for byte.",
+  "x-blueprint": "9.14",
+  "x-status": "specified, not connected",
+  "x-sync": "scheduled pull",
+  "x-conflict-rule": "EDMS wins on revision facts",
+  "x-failure-behaviour": "last good watermark shown, statuses kept",
+  "$defs": {
+    "EdmsDocumentRecord": {
+      "title": "EdmsDocumentRecord",
+      "description": "One document revision as the EDMS states it: document number, revision, issue status, approval chain, checksum, watermark. On a scheduled pull the EDMS wins on revision facts (DocumentRevision of 9.2); on failure the last good watermark is shown and the statuses are kept.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "document_number": { "type": "string" },
+        "revision": { "type": "string" },
+        "issue_status": { "type": "string", "description": "the EDMS's own status text; mapped to ApprovalStatus of 9.2 on arrival, approval_status_text keeps the original" },
+        "approval_chain": { "type": "array", "items": { "type": "string" }, "description": "the approval chain in the EDMS's own order, one entry per step" },
+        "checksum": { "type": "string", "description": "the EDMS's checksum of the file; compared with Document.sha256 of 9.2" },
+        "watermark": { "type": "string", "format": "date-time", "description": "the pull watermark; the last good watermark is shown when a pull fails" }
+      },
+      "required": ["document_number", "revision", "issue_status", "approval_chain", "checksum", "watermark"]
+    },
+    "EdmsPublicationHandshake": {
+      "title": "EdmsPublicationHandshake",
+      "description": "Publication as a handshake with a reserved local id and an empty document-number field the EDMS writes back; the local id is DraftDocument.opl_id_reserved of 9.6.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "local_id": { "type": "string", "description": "the reserved local id" },
+        "document_number": { "type": "string", "default": "", "description": "empty on the outbound handshake; the EDMS writes the assigned document number back" }
+      },
+      "required": ["local_id", "document_number"]
+    },
+    "DigitalTwinRow": {
+      "title": "DigitalTwinRow",
+      "description": "The digital twin row of the connector panel carries a deep_link field left empty; there is no digital-twin connection (blueprint 4, 6 ConnectorPanel, AC-CTX-04).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deep_link": { "type": "string", "const": "" }
+      },
+      "required": ["deep_link"]
+    }
+  }
+}

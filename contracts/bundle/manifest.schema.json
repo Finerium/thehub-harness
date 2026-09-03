@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/bundle/manifest.schema.json",
+  "title": "The package bundle (harness to application seam)",
+  "description": "The manifest of the package bundle the harness publishes and the application seeds from (blueprint section 9.1); G1 admits a bundle only when every file's SHA-256 matches, every schema validates, the fixture counts match the corpus (98 files, 56 lessons, 211 work orders, the register total), referential closure holds, closed-set bindings are members of their sets, and every quoted span's hash recomputes from the extracted text.",
+  "x-blueprint": "9.1",
+  "$ref": "#/$defs/Manifest",
+  "$defs": {
+    "Manifest": {
+      "title": "Manifest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bundle_version": {
+          "type": "string",
+          "description": "semver, e.g. \"1.0.0\""
+        },
+        "harness_commit": {
+          "type": "string",
+          "description": "git sha"
+        },
+        "corpus_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "over sorted relative paths and file digests"
+        },
+        "extractor": {
+          "type": "string",
+          "description": "exact build string, e.g. \"pdftotext version 24.02.0\"; the build pinned in this run is 26.02.0 (deviation D-11)"
+        },
+        "canonical_form_version": {
+          "type": "string",
+          "const": "1"
+        },
+        "recipe_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "over the harness coverage source"
+        },
+        "stop_list_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rulepack_version": {
+          "type": "string",
+          "description": "\"1\" for rulepack/v1.json",
+          "x-expected": "1"
+        },
+        "embedding_model": {
+          "type": ["string", "null"],
+          "description": "null in the bundle; set on the corpus version at seed"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "relative path inside the bundle; the frozen tree is BundleLayout"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "bytes": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": ["path", "sha256", "bytes"]
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "bundle_version",
+        "harness_commit",
+        "corpus_sha256",
+        "extractor",
+        "canonical_form_version",
+        "recipe_sha256",
+        "stop_list_sha256",
+        "rulepack_version",
+        "embedding_model",
+        "files",
+        "created_at"
+      ]
+    },
+    "BundleLayout": {
+      "title": "BundleLayout",
+      "description": "Every file path of the bundle tree of blueprint section 9.1, relative to bundle/. UNTRACKED in any public repository and produced at seed time from the corpus: chunks.jsonl (it is absent from the released bundle and from the manifest's files list of a public release; the seed job writes it where the corpus exists, ADR-010). Optional (POLISH): simulated/ga-1201a.json. The three contracts/*.schema.json entries are copies of contracts/connectors/ of the harness repository taken at bundle time.",
+      "type": "string",
+      "enum": [
+        "manifest.json",
+        "inventory.json",
+        "fixtures.json",
+        "documents.json",
+        "revisions.json",
+        "claims.json",
+        "chunks.jsonl",
+        "interlocks.json",
+        "datasheet_params.json",
+        "datasheet_spot.json",
+        "revision_spot.json",
+        "pid_sidecars/set_01.json",
+        "pid_sidecars/set_02.json",
+        "pid_sidecars/set_03.json",
+        "pid_sidecars/set_04.json",
+        "pid_sidecars/set_05.json",
+        "pid_sidecars/set_06.json",
+        "pid_sidecars/set_07.json",
+        "pid_sidecars/set_08.json",
+        "hand_verified.json",
+        "work_orders.json",
+        "failure_events.json",
+        "families.json",
+        "chains.json",
+        "coverage_scores.json",
+        "coverage_labels.json",
+        "adjudication_log.md",
+        "debt.json",
+        "proof_tests.json",
+        "integrity_findings.json",
+        "area_aliases.json",
+        "bom.json",
+        "opls.json",
+        "simulated/ga-1201a.json",
+        "rulepack/v1.json",
+        "golden/cases.yaml",
+        "contracts/edms.schema.json",
+        "contracts/aims.schema.json",
+        "contracts/historian.schema.json",
+        "seeded/packets.json",
+        "seeded/drafts.json",
+        "seeded/traces.json"
+      ],
+      "x-untracked": ["chunks.jsonl"],
+      "x-optional": ["simulated/ga-1201a.json"],
+      "x-file-notes": {
+        "claims.json": "spans at citation length only",
+        "chunks.jsonl": "UNTRACKED in any public repo; produced at seed time from the corpus",
+        "datasheet_spot.json": "24 pinned spot values, 3 per asset",
+        "revision_spot.json": "one expected (revision, approval_status) tuple per class per asset",
+        "coverage_labels.json": "adjudicated reading with its status",
+        "opls.json": "parsed lessons: header fields, sections 1 to 6, steps with hashes, troubleshooting rows, footer",
+        "simulated/ga-1201a.json": "(optional, POLISH)"
+      }
+    }
+  }
+}

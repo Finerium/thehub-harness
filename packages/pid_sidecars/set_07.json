@@ -1,0 +1,402 @@
+{
+ "datasheet_cited_as_drawn": "TJC-LLD-DS-GA-7801A",
+ "defects": [
+  {
+   "detail": "Bottom-right box reads 'Ref. Plog. TJC-LLD-PID-XXXX'; datasheet, GA drawing and C&E cross-reference TJC-LLD-PID-7801.",
+   "kind": "placeholder_ref"
+  },
+  {
+   "detail": "NOTE 2 cites 'Datasheet TJC-LLD-DS-GA-7801A'; CT-7801's datasheet is TJC-LLD-DS-CT-7801.",
+   "kind": "wrong_datasheet_citation"
+  },
+  {
+   "detail": "GA-1201A instruments FI 1201, PT-1201 and PSLL 1201 drawn at the fan gearbox.",
+   "kind": "foreign_tag"
+  },
+  {
+   "detail": "'Gearbox oil temp | TSHH-7802 | =90 dag C' where C&E T2 is TSHH-7803 > 90 degC, and its final element is 'Annunciate Alarm on DCS' where the C&E trips the fan (EFF-1, EFF-2, EFF-3); a second 'Fan vibration | VSHH-7802' row carries '=90 dag C'; the hub bubble reads 'VSIFH-7802'; effect cells of row 1 read '1 | X̄ | T1 T2 T3 T4'; 'Spare Coil CT-7802' for C&E 'SPARE CELL CT-7802'; the permissive list mixes LT-7804 and LSL-7804 and adds 'L Gearbox oil level OK < Other (LSL-7804)'.",
+   "kind": "label_vs_ce_mismatch"
+  },
+  {
+   "detail": "'Ref. Plog.', 'IDlimitator', 'test/act.', '=90 dag C', 'LOGIC hum/', '( per image_0.png)', '(as in <IMAGE 1>)', 'Lockout release logic in orllf per image_0.png', 'Drainess Drain'.",
+   "kind": "garbled_text"
+  },
+  {
+   "detail": "No title block; the sheet has the caption 'P&ID: COOLING TOWER FAN (CT-7801) SYSTEM' bottom-left and the Ref. Plog. box only.",
+   "kind": "other"
+  }
+ ],
+ "equipment_shown": [
+  "CT-7801 axial fan ('Axial induced draft fan 6 FRP blades (as in <IMAGE 1>)') on a fan deck over COOLING TOWER CELL / COOLING TOWER with fill",
+  "CT-7801 motor M ('55 kW, TEFC IP56 Area Non-hazardous Voltage 380 V/3 Ph/50 Hz ( per image_0.png)'), 'CT-7801 Composite Drive Shaft Arrangement', right-angle gearbox",
+  "VENT (three), Basin Drain, DRAIN, 'Drainess Drain'",
+  "Table 'INTERLOCK SEQ-7801' (columns IDlimitator | Tag | test/act. | Effects EFF-1 EFF-2 EFF-3 | Final Element / Action) with a START PERMISSIVE (AND-gate) list and an AND-gate symbol",
+  "Legend: LOGIC hum/, START PERMISSIVE, TRIP, CAUSE EFFECT"
+ ],
+ "file": "P&ID_Set 7.png",
+ "image_px": [
+  1536,
+  1024
+ ],
+ "instruments": [
+  {
+   "as_drawn_text": "CT-7801 Composite Drive Shaft Arrangement",
+   "bound_tag": "CT-7801",
+   "foreign": false,
+   "note": "datasheet DRIVE SHAFT 'COMPOSITE FLOATING SHAFT'",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.16,
+   "y": 0.198
+  },
+  {
+   "as_drawn_text": "CT-7801",
+   "bound_tag": "CT-7801",
+   "foreign": false,
+   "note": "fan label and fan symbol",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.308,
+   "y": 0.22
+  },
+  {
+   "as_drawn_text": "VSIFH-7802",
+   "bound_tag": "VSHH-7802",
+   "foreign": false,
+   "note": "bubble on the fan hub; C&E T1 'Fan/gearbox vibration HIGH-HIGH VSHH-7802 > 9 mm/s'; garbled tag",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.303,
+   "y": 0.156
+  },
+  {
+   "as_drawn_text": "Axial induced draft fan 6 FRP blades (as in <IMAGE 1>)",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet FAN TYPE 'AXIAL, 6 FRP BLADES'; '<IMAGE 1>' is a leftover placeholder",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.391,
+   "y": 0.161
+  },
+  {
+   "as_drawn_text": "FI 1201",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A flow indicator, above two hand valves on the gearbox line",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.474,
+   "y": 0.225
+  },
+  {
+   "as_drawn_text": "CT-7801 55 kW, TEFC IP56 Area Non-hazardous Voltage 380 V/3 Ph/50 Hz ( per image_0.png)",
+   "bound_tag": "CT-7801",
+   "foreign": false,
+   "note": "datasheet OUTPUT 55 kW, ENCLOSURE TEFC IP56 (wet duty), AREA CLASSIFICATION NON-HAZARDOUS, VOLTAGE 380 V / 3 Ph / 50 Hz",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.093,
+   "y": 0.317
+  },
+  {
+   "as_drawn_text": "M",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "fan motor; GA BOM item 5 MOTOR TECO 55kW",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.184,
+   "y": 0.325
+  },
+  {
+   "as_drawn_text": "PT-1201",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A pressure transmitter drawn at the gearbox",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.436,
+   "y": 0.313
+  },
+  {
+   "as_drawn_text": "PSLL 1201",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A suction pressure trip drawn at the gearbox",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.436,
+   "y": 0.369
+  },
+  {
+   "as_drawn_text": "VENT",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.047,
+   "y": 0.483
+  },
+  {
+   "as_drawn_text": "COOLING TOWER CELL",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.352,
+   "y": 0.474
+  },
+  {
+   "as_drawn_text": "COOLING TOWER",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.296,
+   "y": 0.753
+  },
+  {
+   "as_drawn_text": "Basin Drain",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.081,
+   "y": 0.838
+  },
+  {
+   "as_drawn_text": "DRAIN",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.313,
+   "y": 0.828
+  },
+  {
+   "as_drawn_text": "Drainess Drain",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "garbled label on the right-hand basin valve",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.531,
+   "y": 0.777
+  },
+  {
+   "as_drawn_text": "INTERLOCK SEQ-7801",
+   "bound_tag": "SEQ-7801",
+   "foreign": false,
+   "note": "table title",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.787,
+   "y": 0.107
+  },
+  {
+   "as_drawn_text": "IDlimitator | Tag | test/act. | Effects EFF-1 EFF-2 EFF-3 | Final Element / Action",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "table header, garbled",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.776,
+   "y": 0.156
+  },
+  {
+   "as_drawn_text": "Fan vibration | VSHH-7802 | >9 mm/s | 1 | X̄ | T1 T2 T3 T4 | Trip Fan Motor CT-7801",
+   "bound_tag": "VSHH-7802",
+   "foreign": false,
+   "note": "row 1; C&E T1 VSHH-7802 > 9 mm/s 1oo1 -> EFF-1, EFF-2, EFF-3; effect cells hold '1', an overstruck X and the row ids T1..T4",
+   "role": "initiator",
+   "setpoint_as_drawn": ">9 mm/s",
+   "x": 0.679,
+   "y": 0.199
+  },
+  {
+   "as_drawn_text": "Fan vibration | VSHH-7802 | =90 dag C | 1 X | X | X | Trip Fan Motor CT-7801",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "row 2; duplicate VSHH-7802 row carrying a temperature setpoint; no C&E counterpart",
+   "role": "initiator",
+   "setpoint_as_drawn": "=90 dag C",
+   "x": 0.679,
+   "y": 0.232
+  },
+  {
+   "as_drawn_text": "Gearbox oil temp | TSHH-7802 | =90 dag C | 1 | X | X | Annunciate Alarm on DCS",
+   "bound_tag": "TSHH-7803",
+   "foreign": false,
+   "note": "row 3; C&E T2 'Gearbox oil temperature HIGH-HIGH TSHH-7803 > 90 degC' -> EFF-1, EFF-2, EFF-3",
+   "role": "initiator",
+   "setpoint_as_drawn": "=90 dag C",
+   "x": 0.679,
+   "y": 0.266
+  },
+  {
+   "as_drawn_text": "Gearbox oil pressure | PSL-7807 | 0.8 barg | 1 X | X | Request Start of Spare Coil CT-7802",
+   "bound_tag": "PSL-7807",
+   "foreign": false,
+   "note": "row 4; C&E T3 'Gearbox oil pressure LOW PSL-7807 < 0.8 barg' -> EFF-1, EFF-2",
+   "role": "initiator",
+   "setpoint_as_drawn": "0.8 barg",
+   "x": 0.679,
+   "y": 0.297
+  },
+  {
+   "as_drawn_text": "Fan motor overload | MPR-7801 | MPR pickup | 1 | X | Request Start of Spare Coil CT-7802",
+   "bound_tag": "MPR-7801",
+   "foreign": false,
+   "note": "row 5; C&E T4 'Fan motor overload MPR-7801 MPR pickup' -> EFF-1, EFF-2, EFF-3",
+   "role": "initiator",
+   "setpoint_as_drawn": "MPR pickup",
+   "x": 0.679,
+   "y": 0.33
+  },
+  {
+   "as_drawn_text": "Trip Fan Motor CT-7801",
+   "bound_tag": "CT-7801",
+   "foreign": false,
+   "note": "C&E EFF-1 'TRIP FAN MOTOR CT-7801'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.912,
+   "y": 0.199
+  },
+  {
+   "as_drawn_text": "Annunciate Alarm on DCS",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "C&E EFF-2 'ANNUNCIATE ALARM ON DCS'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.912,
+   "y": 0.266
+  },
+  {
+   "as_drawn_text": "Request Start of Spare Coil CT-7802",
+   "bound_tag": "CT-7802",
+   "foreign": false,
+   "note": "C&E EFF-3 'REQUEST START OF SPARE CELL CT-7802'; 'Coil' for 'Cell'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.912,
+   "y": 0.297
+  },
+  {
+   "as_drawn_text": "Spare Coil P&ID",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "arrowed cell under the effects",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.896,
+   "y": 0.361
+  },
+  {
+   "as_drawn_text": "START PERMISSIVE (AND-gate)",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.831,
+   "y": 0.471
+  },
+  {
+   "as_drawn_text": "LG Gearbox oil level OK",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "C&E start permissive 1 'Gearbox oil level OK' signal 'LG gearbox'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.811,
+   "y": 0.503
+  },
+  {
+   "as_drawn_text": "LT-7804 Basin level normal",
+   "bound_tag": "LT-7804",
+   "foreign": false,
+   "note": "C&E start permissive 2 'Basin level normal (> LSL-7804) LT-7804'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.821,
+   "y": 0.527
+  },
+  {
+   "as_drawn_text": "Basin level normal (LSL-7804)",
+   "bound_tag": "LSL-7804",
+   "foreign": false,
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.863,
+   "y": 0.55
+  },
+  {
+   "as_drawn_text": "lockout release logic",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "C&E start permissive 3 'No fan lockout / maintenance key released'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.805,
+   "y": 0.575
+  },
+  {
+   "as_drawn_text": "L Gearbox oil level OK < Other (LSL-7804)",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "garbled",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.863,
+   "y": 0.596
+  },
+  {
+   "as_drawn_text": "Lockout release logic in orllf per image_0.png",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "garbled; leftover file name",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.87,
+   "y": 0.618
+  },
+  {
+   "as_drawn_text": "AND",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "AND-gate symbol at the left edge of the permissive list",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.727,
+   "y": 0.522
+  },
+  {
+   "as_drawn_text": "P&ID: COOLING TOWER FAN (CT-7801) SYSTEM",
+   "bound_tag": "CT-7801",
+   "foreign": false,
+   "note": "caption bottom-left; no title block",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.218,
+   "y": 0.926
+  }
+ ],
+ "notes_as_drawn": [
+  "NOTE 1. This is sample data provided for CALIBER purpose only;",
+  "NOTE 2: Refer to Datasheet TJC-LLD-DS-GA-7801A for design parameters;",
+  "NOTE 3: See SEQ-7801 logic diagram."
+ ],
+ "provenance": {
+  "basis": "manual transcription of the image",
+  "by": "EXEC-1",
+  "date": "2026-08-27"
+ },
+ "ref_dwg_as_drawn": "Ref. Plog. TJC-LLD-PID-XXXX",
+ "revision_block_as_drawn": null,
+ "seq_cited_as_drawn": "SEQ-7801",
+ "set": 7,
+ "tag": "CT-7801",
+ "title_as_drawn": "P&ID: COOLING TOWER FAN (CT-7801) SYSTEM"
+}

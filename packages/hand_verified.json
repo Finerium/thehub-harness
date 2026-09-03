@@ -1,0 +1,177 @@
+{
+ "basis": "manual reading of the eight P&ID PNGs (no text layer)",
+ "note": "`verified_by` / `verified_on` at the top level are the file-level default; each entry of `sets` carries its own pair so a later re-check of one sheet can be recorded without making the file-level date wrong for the other seven (plan Task 1.5, 'verifier role alias and date on every entry'). Mirrors the per-file `provenance` block in packages/pid_sidecars/set_0N.json.",
+ "sets": [
+  {
+   "contradictions": [],
+   "datasheet_cited": "TJC-LLD-DS-GA-1201A",
+   "file": "PID_Set_01.png",
+   "foreign_tags": [],
+   "notes": [],
+   "ref_dwg": "TJC-LLD-PID-XXXX",
+   "seq_cited": "SEQ-1201",
+   "set": 1,
+   "tag": "GA-1201A",
+   "verified_by": "executor (role alias EXEC-1)",
+   "verified_on": "2026-08-27"
+  },
+  {
+   "contradictions": [
+    {
+     "kind": "footprint",
+     "pid": "4.0 x 8.5 m",
+     "sibling": "plot_plan",
+     "sibling_values": [
+      "4.0 x 9.5 m"
+     ]
+    },
+    {
+     "kind": "instrument identity",
+     "pid": "PSLL-2303 / S5LL-2305",
+     "sibling": "interlock",
+     "sibling_values": [
+      "LSHH-2303",
+      "SSLL-2305"
+     ]
+    }
+   ],
+   "datasheet_cited": "TJC-LLD-DS-GA-1201A",
+   "file": "P&ID_Set_02.png",
+   "foreign_tags": [
+    "HS-1201",
+    "RO-1201",
+    "PDI-1201",
+    "EQ1000012011"
+   ],
+   "notes": [
+    "API Plan 11 seal-flush inset on a dryer",
+    "PSLL-2303 where C&E has LSHH-2303",
+    "S5LL-2305 typo",
+    "permissive box labelled EFF-3",
+    "footprint 4.0 x 8.5 m vs plot plan 4.0 x 9.5 m"
+   ],
+   "ref_dwg": "TJC-LLD-PID-XXXX",
+   "seq_cited": "SEQ-1201",
+   "set": 2,
+   "tag": "YD-2301",
+   "verified_by": "executor (role alias EXEC-1)",
+   "verified_on": "2026-08-27"
+  },
+  {
+   "contradictions": [],
+   "datasheet_cited": null,
+   "file": "P&ID Set 3.png",
+   "foreign_tags": [],
+   "notes": [
+    "no title block / reference box"
+   ],
+   "ref_dwg": null,
+   "seq_cited": "SEQ-3401",
+   "set": 3,
+   "tag": "DC-3401A",
+   "verified_by": "executor (role alias EXEC-1)",
+   "verified_on": "2026-08-27"
+  },
+  {
+   "contradictions": [
+    {
+     "kind": "revision",
+     "pid": "Rev 02",
+     "sibling": "ga_drawing",
+     "sibling_values": [
+      "REV:0"
+     ]
+    }
+   ],
+   "datasheet_cited": "TJC-LLD-PF-GA-4501A",
+   "file": "P&ID SET 4.png",
+   "foreign_tags": [
+    "PI-1201"
+   ],
+   "notes": [
+    "title KA-4501",
+    "revision block Rev 02 vs Rev 0 elsewhere",
+    "FROM STORAGE TANK 12-T-01 on a gas-compressor sheet (pump-line label)"
+   ],
+   "ref_dwg": "TJC-LLD-PID-4501",
+   "seq_cited": "SEQ-4501",
+   "set": 4,
+   "tag": "KC-4501",
+   "verified_by": "executor (role alias EXEC-1)",
+   "verified_on": "2026-08-27"
+  },
+  {
+   "contradictions": [],
+   "datasheet_cited": null,
+   "file": "P&ID SET 5.png",
+   "foreign_tags": [],
+   "notes": [
+    "cites OPL-EA-5601-04 and PP-EA-5601"
+   ],
+   "ref_dwg": "TJC-LLD-PID-5601",
+   "seq_cited": "IL-EA-5601",
+   "set": 5,
+   "tag": "EA-5601",
+   "verified_by": "executor (role alias EXEC-1)",
+   "verified_on": "2026-08-27"
+  },
+  {
+   "contradictions": [],
+   "datasheet_cited": null,
+   "file": "P&ID SET 6.png",
+   "foreign_tags": [],
+   "notes": [
+    "cites OPL-LV-6701-07",
+    "OPL reference printed as OPL-OPL-LV-6701-07"
+   ],
+   "ref_dwg": "TJC-LLD-PID-XXXX",
+   "seq_cited": "SEQ-6701",
+   "set": 6,
+   "tag": "LV-6701",
+   "verified_by": "executor (role alias EXEC-1)",
+   "verified_on": "2026-08-27"
+  },
+  {
+   "contradictions": [],
+   "datasheet_cited": "TJC-LLD-DS-GA-7801A",
+   "file": "P&ID_Set 7.png",
+   "foreign_tags": [
+    "PT-1201",
+    "PSLL-1201",
+    "FI-1201"
+   ],
+   "notes": [
+    "garbled table text"
+   ],
+   "ref_dwg": "TJC-LLD-PID-XXXX",
+   "seq_cited": "SEQ-7801",
+   "set": 7,
+   "tag": "CT-7801",
+   "verified_by": "executor (role alias EXEC-1)",
+   "verified_on": "2026-08-27"
+  },
+  {
+   "contradictions": [],
+   "datasheet_cited": "TJC-LLD-GA-FA-8901",
+   "file": "P&ID_Set 8.png",
+   "foreign_tags": [
+    "XV-1201A/B",
+    "PSLL-1201",
+    "PI-1201",
+    "TSHH-1201"
+   ],
+   "notes": [
+    "PSV-8901 labelled 'Suction Pressure LOW-LOW'",
+    "HS-5901"
+   ],
+   "ref_dwg": "TJC-LLD-PID-XXXX",
+   "seq_cited": "SEQ-8901",
+   "set": 8,
+   "tag": "FA-8901",
+   "verified_by": "executor (role alias EXEC-1)",
+   "verified_on": "2026-08-27"
+  }
+ ],
+ "verified_by": "executor (role alias EXEC-1)",
+ "verified_on": "2026-08-27"
+}

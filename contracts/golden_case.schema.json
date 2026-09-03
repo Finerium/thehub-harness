@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/golden_case.schema.json",
+  "title": "The golden set",
+  "description": "GoldenCase of blueprint section 9.11, one evaluation case of the golden set; the category counts are printed from the file, never typed.",
+  "x-blueprint": "9.11",
+  "x-counts-at-v1": {
+    "Grounded answering": 14,
+    "Traceability": 8,
+    "Abstention": 9,
+    "False abstention": 11,
+    "Safety refusal": 11,
+    "Safety-adjacent served": 5,
+    "Trap integrity": 19,
+    "Loop": 8,
+    "Adversarial phrasing": 10,
+    "Operational context": 3,
+    "Moment-shaped answers": 4,
+    "total": 102
+  },
+  "$defs": {
+    "GoldenCase": {
+      "title": "GoldenCase",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "description": "\"GS-01\" ... \"GS-102\"" },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Grounded answering",
+            "Traceability",
+            "Abstention",
+            "False abstention",
+            "Safety refusal",
+            "Safety-adjacent served",
+            "Trap integrity",
+            "Loop",
+            "Adversarial phrasing",
+            "Operational context",
+            "Moment-shaped answers"
+          ]
+        },
+        "hard_gate": { "type": "boolean", "description": "true for every case in the two safety categories" },
+        "tier": { "type": "string", "enum": ["A", "B"], "description": "A: settled without inference; B: model-dependent" },
+        "input": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "question": { "type": "string" },
+            "template": { "type": "string" },
+            "role": { "$ref": "entities/serving.schema.json#/$defs/Role" },
+            "setup": { "type": "string", "description": "e.g. \"after GS-14 has been published\"" }
+          },
+          "required": ["question"]
+        },
+        "expected": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "outcome": { "type": "string", "enum": ["answer", "partial", "abstention", "refusal"] },
+            "must_cite": { "type": "array", "items": { "type": "string" } },
+            "must_contain": { "type": "array", "items": { "type": "string" } },
+            "must_not_contain": { "type": "array", "items": { "type": "string" } },
+            "numerals_allowed": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "value": { "type": "string" },
+                  "unit": { "type": "string" },
+                  "source_ref": { "type": "string" }
+                },
+                "required": ["value", "unit", "source_ref"]
+              }
+            },
+            "block_order": { "type": "array", "items": { "type": "string" } },
+            "escalation_role": { "type": "string" },
+            "rulepack_class": { "type": "string" },
+            "corpus_version_delta": { "type": "integer" }
+          },
+          "required": ["outcome", "must_cite", "must_contain", "must_not_contain", "numerals_allowed"]
+        },
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "citation_resolves",
+                  "numeral_fidelity",
+                  "string_present",
+                  "string_absent",
+                  "rulepack_class",
+                  "block_order",
+                  "hash_render",
+                  "http_status",
+                  "audit_event",
+                  "version_increment",
+                  "trace_replays"
+                ]
+              },
+              "args": { "type": "object", "additionalProperties": true }
+            },
+            "required": ["type", "args"]
+          }
+        },
+        "origin": { "type": "string", "enum": ["team", "external"] }
+      },
+      "required": ["id", "category", "hard_gate", "tier", "input", "expected", "sources", "checks", "origin"]
+    }
+  }
+}

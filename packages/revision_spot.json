@@ -1,0 +1,514 @@
+{
+ "CT-7801": {
+  "datasheet": {
+   "doc_no": "TJC-LLD-DS-CT-7801",
+   "rev": 3,
+   "status": "ISSUED FOR OPERATION"
+  },
+  "ga_drawing": {
+   "dwg_no": "TJC-LLD-GA-CT-7801",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  },
+  "interlock": {
+   "doc_no": "TJC-LLD-IL-CT-7801",
+   "logic_no": "SEQ-7801",
+   "rev": 3,
+   "sil": 1,
+   "work_no": "BA-0256"
+  },
+  "plot_plan": {
+   "dwg_no": "TJC-LLD-PP-CT-7801",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  }
+ },
+ "DC-3401A": {
+  "datasheet": {
+   "doc_no": "TJC-LLD-DS-DC-3401A",
+   "rev": 3,
+   "status": "ISSUED FOR OPERATION"
+  },
+  "ga_drawing": {
+   "dwg_no": "TJC-LLD-GA-DC-3401A",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  },
+  "interlock": {
+   "doc_no": "TJC-LLD-IL-DC-3401A",
+   "logic_no": "SEQ-3401",
+   "rev": 3,
+   "sil": 2,
+   "work_no": "BA-0256"
+  },
+  "plot_plan": {
+   "dwg_no": "TJC-LLD-PP-DC-3401A",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  }
+ },
+ "EA-5601": {
+  "datasheet": {
+   "doc_no": "TJC-LLD-DS-EA-5601",
+   "rev": 3,
+   "status": "ISSUED FOR OPERATION"
+  },
+  "ga_drawing": {
+   "dwg_no": "TJC-LLD-GA-EA-5601",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  },
+  "interlock": {
+   "doc_no": "TJC-LLD-IL-EA-5601",
+   "logic_no": null,
+   "rev": 3,
+   "sil": null,
+   "work_no": "BA-0256"
+  },
+  "plot_plan": {
+   "dwg_no": "TJC-LLD-PP-EA-5601",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  }
+ },
+ "FA-8901": {
+  "datasheet": {
+   "doc_no": "TJC-LLD-DS-FA-8901",
+   "rev": 3,
+   "status": "ISSUED FOR OPERATION"
+  },
+  "ga_drawing": {
+   "dwg_no": "TJC-LLD-GA-FA-8901",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  },
+  "interlock": {
+   "doc_no": "TJC-LLD-IL-FA-8901",
+   "logic_no": "SEQ-8901",
+   "rev": 3,
+   "sil": 1,
+   "work_no": "BA-0256"
+  },
+  "plot_plan": {
+   "dwg_no": "TJC-LLD-PP-FA-8901",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  }
+ },
+ "GA-1201A": {
+  "datasheet": {
+   "doc_no": "TJC-LLD-DS-GA-1201A",
+   "rev": 3,
+   "status": "ISSUED FOR OPERATION"
+  },
+  "ga_drawing": {
+   "dwg_no": "TJC-LLD-GA-GA-1201A",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  },
+  "interlock": {
+   "doc_no": "TJC-LLD-IL-GA-1201A",
+   "logic_no": "SEQ-1201",
+   "rev": 3,
+   "sil": 1,
+   "work_no": "BA-0256"
+  },
+  "plot_plan": {
+   "dwg_no": "TJC-LLD-PP-GA-1201A",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  }
+ },
+ "KC-4501": {
+  "datasheet": {
+   "doc_no": "TJC-LLD-DS-KC-4501",
+   "rev": 3,
+   "status": "ISSUED FOR OPERATION"
+  },
+  "ga_drawing": {
+   "dwg_no": "TJC-LLD-GA-KC-4501",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  },
+  "interlock": {
+   "doc_no": "TJC-LLD-IL-KC-4501",
+   "logic_no": "SEQ-4501",
+   "rev": 3,
+   "sil": 2,
+   "work_no": "BA-0256"
+  },
+  "plot_plan": {
+   "dwg_no": "TJC-LLD-PP-KC-4501",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  }
+ },
+ "LV-6701": {
+  "datasheet": {
+   "doc_no": "TJC-LLD-DS-LV-6701",
+   "rev": 3,
+   "status": "ISSUED FOR OPERATION"
+  },
+  "ga_drawing": {
+   "dwg_no": "TJC-LLD-GA-LV-6701",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  },
+  "interlock": {
+   "doc_no": "TJC-LLD-IL-LV-6701",
+   "logic_no": "SEQ-6701",
+   "rev": 3,
+   "sil": 1,
+   "work_no": "BA-0256"
+  },
+  "plot_plan": {
+   "dwg_no": "TJC-LLD-PP-LV-6701",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  }
+ },
+ "YD-2301": {
+  "datasheet": {
+   "doc_no": "TJC-LLD-DS-YD-2301",
+   "rev": 3,
+   "status": "ISSUED FOR OPERATION"
+  },
+  "ga_drawing": {
+   "dwg_no": "TJC-LLD-GA-YD-2301",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  },
+  "interlock": {
+   "doc_no": "TJC-LLD-IL-YD-2301",
+   "logic_no": "SEQ-5500",
+   "rev": 3,
+   "sil": 2,
+   "work_no": "BA-0256"
+  },
+  "plot_plan": {
+   "dwg_no": "TJC-LLD-PP-YD-2301",
+   "history": [
+    {
+     "by": "RS",
+     "date": "2026-05-15",
+     "description": "ISSUED FOR REVIEW",
+     "rev": "A"
+    },
+    {
+     "by": "RS",
+     "date": "2026-05-27",
+     "description": "ISSUED FOR APPROVAL",
+     "rev": "B"
+    },
+    {
+     "by": "RS",
+     "date": "2026-06-05",
+     "description": "ISSUED FOR CONSTRUCTION",
+     "rev": "0"
+    }
+   ],
+   "rev": "0",
+   "status": "ISSUED FOR CONSTRUCTION"
+  }
+ }
+}

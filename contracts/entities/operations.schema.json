@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/entities/operations.schema.json",
+  "title": "Operations and failure",
+  "description": "Blueprint section 9.4 operations and failure; the causal-link rule, frozen: A links to a later B of the same asset when B's root cause or problem description contains a mechanism noun from the published 45-term degradation lexicon that also appears in A's root cause, and B's report date is within 365 days of A's; the population is the 66 failure records; links are a package artefact, never computed at answer time; no probability is computed or displayed.",
+  "x-blueprint": "9.4",
+  "$defs": {
+    "WorkOrder": {
+      "title": "WorkOrder",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wo_number": { "type": "string", "description": "PK" },
+        "notification_no": { "type": "string" },
+        "report_date": { "type": "string" },
+        "start_date": { "type": "string" },
+        "completion_date": { "type": "string" },
+        "status": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "work_type": { "type": "string", "enum": ["Preventive", "Corrective", "Predictive", "Inspection", "Calibration", "Overhaul"] },
+        "discipline": { "type": "string", "enum": ["Mechanical", "Instrument", "Electrical", "Process"] },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Emergency"] },
+        "criticality": { "type": "string" },
+        "problem_description": { "type": "string" },
+        "root_cause": { "type": "string" },
+        "corrective_action": { "type": "string" },
+        "spare_parts_used": { "type": "string" },
+        "breakdown": { "type": "boolean" },
+        "downtime_hours": { "type": ["number", "null"] },
+        "labor_hours": { "type": ["number", "null"] },
+        "labor_cost_idr": { "type": ["integer", "null"] },
+        "material_cost_idr": { "type": ["integer", "null"] },
+        "total_cost_idr": { "type": ["integer", "null"] },
+        "reported_by_alias": { "type": "string" },
+        "executed_by_alias": { "type": "string" },
+        "approved_by_alias": { "type": "string" },
+        "related_interlock": { "type": ["string", "null"] },
+        "remarks": { "type": ["string", "null"] },
+        "closeout_complete": { "type": "boolean" },
+        "completeness_flags": {
+          "type": "object",
+          "additionalProperties": { "type": "boolean" },
+          "description": "the eleven outcome fields"
+        },
+        "breakdown_kind": { "type": "string", "enum": ["unplanned", "planned_flagged", "none"] },
+        "notification_lead_hours": { "type": "number" }
+      },
+      "required": [
+        "wo_number",
+        "notification_no",
+        "report_date",
+        "start_date",
+        "completion_date",
+        "status",
+        "equipment_tag",
+        "work_type",
+        "discipline",
+        "priority",
+        "criticality",
+        "problem_description",
+        "root_cause",
+        "corrective_action",
+        "spare_parts_used",
+        "breakdown",
+        "downtime_hours",
+        "labor_hours",
+        "labor_cost_idr",
+        "material_cost_idr",
+        "total_cost_idr",
+        "reported_by_alias",
+        "executed_by_alias",
+        "approved_by_alias",
+        "related_interlock",
+        "remarks",
+        "closeout_complete",
+        "completeness_flags",
+        "breakdown_kind",
+        "notification_lead_hours"
+      ]
+    },
+    "FailureEvent": {
+      "title": "FailureEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wo_number": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "report_date": { "type": "string" },
+        "downtime_hours": { "type": ["number", "null"] },
+        "maintenance_cost_idr": { "type": ["integer", "null"] },
+        "breakdown_kind": { "type": "string", "enum": ["unplanned", "planned_flagged"] }
+      },
+      "required": [
+        "wo_number",
+        "equipment_tag",
+        "report_date",
+        "downtime_hours",
+        "maintenance_cost_idr",
+        "breakdown_kind"
+      ]
+    },
+    "FailureFamily": {
+      "title": "FailureFamily",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "basis": { "type": "string", "enum": ["analyst_classification", "agent_classification"] },
+        "review_status": { "type": "string", "enum": ["reviewed", "pending"] },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "wo_number": { "type": "string" },
+              "recorded_root_cause": { "type": "string" }
+            },
+            "required": ["wo_number", "recorded_root_cause"]
+          }
+        }
+      },
+      "required": ["id", "label", "basis", "review_status", "members"]
+    },
+    "CausalLink": {
+      "title": "CausalLink",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "from_wo": { "type": "string" },
+        "to_wo": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "mechanism_noun": { "type": "string" },
+        "interval_days": { "type": "integer" },
+        "linking_sentence": { "type": "string" },
+        "linking_field": { "type": "string", "enum": ["root_cause", "problem_description"] },
+        "span_id": { "type": "string" }
+      },
+      "required": [
+        "id",
+        "from_wo",
+        "to_wo",
+        "equipment_tag",
+        "mechanism_noun",
+        "interval_days",
+        "linking_sentence",
+        "linking_field",
+        "span_id"
+      ]
+    },
+    "ProofTest": {
+      "title": "ProofTest",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wo_number": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "seq_id": { "type": ["string", "null"] },
+        "device_tag": { "type": ["string", "null"] },
+        "test_class": { "type": "string", "enum": ["sis_proof_test", "sil_logic_test", "calibration_proof_test", "statutory_relief_test"] },
+        "completion_date": { "type": "string" },
+        "result_text": { "type": "string" },
+        "as_found": { "type": ["string", "null"] },
+        "as_left": { "type": ["string", "null"] }
+      },
+      "required": [
+        "wo_number",
+        "equipment_tag",
+        "seq_id",
+        "device_tag",
+        "test_class",
+        "completion_date",
+        "result_text",
+        "as_found",
+        "as_left"
+      ]
+    },
+    "BomItem": {
+      "title": "BomItem",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "ga_drawing_doc_no": { "type": "string" },
+        "item_no": { "type": "integer" },
+        "description": { "type": "string" },
+        "material": { "type": ["string", "null"] },
+        "quantity": { "type": ["string", "null"] },
+        "span_id": { "type": "string" }
+      },
+      "required": [
+        "id",
+        "equipment_tag",
+        "ga_drawing_doc_no",
+        "item_no",
+        "description",
+        "material",
+        "quantity",
+        "span_id"
+      ]
+    },
+    "BomMatch": {
+      "title": "BomMatch",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wo_number": { "type": "string" },
+        "part_string": { "type": "string" },
+        "bom_item_id": { "type": ["string", "null"] },
+        "alternative_bom_item_id": { "type": ["string", "null"] },
+        "disambiguator_text": { "type": ["string", "null"] },
+        "status": { "type": "string", "enum": ["matched", "unmatched"] }
+      },
+      "required": [
+        "wo_number",
+        "part_string",
+        "bom_item_id",
+        "alternative_bom_item_id",
+        "disambiguator_text",
+        "status"
+      ]
+    }
+  }
+}

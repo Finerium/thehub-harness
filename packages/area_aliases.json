@@ -1,0 +1,50 @@
+{
+ "CT-7801": {
+  "datasheet": "7800 - COOLING WATER SYSTEM",
+  "opl": "7800 - COOLING TOWER SYSTEM",
+  "plot_plan_title": "7800-COOLINGTOWERSYSTEM",
+  "workbook": "COOLING WATER SYSTEM"
+ },
+ "DC-3401A": {
+  "datasheet": "3400 - CATALYST PREPARATION",
+  "opl": "3400 - CATALYST REDUCTION SYSTEM",
+  "plot_plan_title": "3400-CATALYSTREDUCTIONSYSTEM",
+  "workbook": "CATALYST PREPARATION"
+ },
+ "EA-5601": {
+  "datasheet": "5600 - SOLVENT RECOVERY SYSTEM",
+  "opl": "5600 - SOLVENT HEATING SYSTEM",
+  "plot_plan_title": "5600-SOLVENTHEATINGSYSTEM",
+  "workbook": "SOLVENT RECOVERY SYSTEM"
+ },
+ "FA-8901": {
+  "datasheet": "8900 - SOLVENT FRACTIONATION",
+  "opl": "8900 - HEXANE COLUMN OVERHEAD SYSTEM",
+  "plot_plan_title": "8900-HEXANECOLUMNOVERHEADSYSTEM",
+  "workbook": "SOLVENT FRACTIONATION"
+ },
+ "GA-1201A": {
+  "datasheet": "1200 - FEED PREPARATION & PURIFICATION",
+  "opl": "1200 - HEXANE FEED SYSTEM",
+  "plot_plan_title": "1200-HEXANEFEEDSYSTEM",
+  "workbook": "FEED PREPARATION & PURIFICATION"
+ },
+ "KC-4501": {
+  "datasheet": "4500 - GAS RECOVERY & COMPRESSION",
+  "opl": "4500 - RECYCLE GAS SYSTEM",
+  "plot_plan_title": "4500-RECYCLEGASSYSTEM",
+  "workbook": "GAS RECOVERY & COMPRESSION"
+ },
+ "LV-6701": {
+  "datasheet": "6700 - PRODUCT SEPARATION",
+  "opl": "6700 - LP SEPARATOR SYSTEM",
+  "plot_plan_title": "6700-LPSEPARATORSYSTEM",
+  "workbook": "PRODUCT SEPARATION"
+ },
+ "YD-2301": {
+  "datasheet": "2300 - POLYMER SEPARATION & DRYING",
+  "opl": "2300 - POWDER DRYING SYSTEM",
+  "plot_plan_title": "2300-POWDERDRYINGSYSTEM",
+  "workbook": "POLYMER SEPARATION & DRYING"
+ }
+}

@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/rulepack.schema.json",
+  "title": "The rule pack (data file, version 1)",
+  "description": "RulePack of blueprint section 9.10, the data file the safety intent matcher reads. The matcher is a pure function of the pack and the text; it runs before any provider call and again over every outbound artefact after approved-lesson spans are whitelisted; a suppression never downgrades a targeted defeat phrase that survives outside a named artefact, a negation or a record label; \"without a permit\" alone reports a missing permit and counts only when another defeat phrase survives; naming a proof test as the reason for a defeat does not move a request into the documented-bypass class. The fixture counts are pinned by a test so the surface cannot shrink unnoticed. Version 1 ships its four suppression vocabularies in the file rather than as matcher constants.",
+  "x-blueprint": "9.10",
+  "$defs": {
+    "RulePack": {
+      "title": "RulePack",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": { "type": "string", "const": "1" },
+        "lexicons": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "defeat": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "e.g. \"get past\", \"bypass\", \"inhibit\", \"force\", \"jumper\", \"override\", \"disable\"; \"matikan\", \"lewati\", \"akali\", \"jumper\", \"nonaktifkan\"",
+              "properties": {
+                "en": { "type": "array", "items": { "type": "string" } },
+                "id": { "type": "array", "items": { "type": "string" } }
+              },
+              "required": ["en", "id"]
+            },
+            "permanent_change": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "a change verb near setpoint | voting | logic | trip | re-range",
+              "properties": {
+                "verbs_en": { "type": "array", "items": { "type": "string" } },
+                "verbs_id": { "type": "array", "items": { "type": "string" } },
+                "nouns": { "type": "array", "items": { "type": "string" } }
+              },
+              "required": ["verbs_en", "verbs_id", "nouns"]
+            },
+            "procedure_phrases": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "\"how do I\", \"line up\", \"procedure\", \"steps\"; \"bagaimana cara\", \"prosedur\", \"syarat\"",
+              "properties": {
+                "en": { "type": "array", "items": { "type": "string" } },
+                "id": { "type": "array", "items": { "type": "string" } }
+              },
+              "required": ["en", "id"]
+            },
+            "suppressions": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "named_artefacts": { "type": "array", "items": { "type": "string" } },
+                "negation_prefixes": { "type": "array", "items": { "type": "string" } },
+                "record_labels": { "type": "array", "items": { "type": "string" } },
+                "passive_record_question_markers": { "type": "array", "items": { "type": "string" } },
+                "standalone_without_permit": { "type": "boolean", "const": true }
+              },
+              "required": ["named_artefacts", "negation_prefixes", "record_labels", "passive_record_question_markers", "standalone_without_permit"]
+            },
+            "window_tokens": { "type": "integer", "const": 8 }
+          },
+          "required": ["defeat", "permanent_change", "procedure_phrases", "suppressions", "window_tokens"]
+        },
+        "protective_vocabulary": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "seq_id": { "type": ["string", "null"] },
+              "equipment_tag": { "type": "string" },
+              "kind": { "type": "string", "enum": ["trip_logic", "control_loop_only"] },
+              "sil": { "type": ["integer", "null"] },
+              "ce_doc_no": { "type": "string" },
+              "initiators": { "type": "array", "items": { "type": "string" } },
+              "permissives": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "n": { "type": "integer" },
+                    "text": { "type": "string" }
+                  },
+                  "required": ["n", "text"]
+                }
+              },
+              "effects": { "type": "array", "items": { "type": "string" } },
+              "reset_note": { "type": ["string", "null"] },
+              "setpoint_qualifier": { "type": ["string", "null"] }
+            },
+            "required": ["seq_id", "equipment_tag", "kind", "sil", "ce_doc_no", "initiators", "permissives", "effects", "reset_note", "setpoint_qualifier"]
+          }
+        },
+        "generic_protective_tokens": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "interlock, trip, ESD, SIS, PSV, safety valve, interlok, pengaman, permisif"
+        },
+        "documented_bypass_entities": {
+          "type": "array",
+          "description": "e.g. HV-6701 -> OPL-LV-6701-05",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "entity": { "type": "string" },
+              "equipment_tag": { "type": "string" },
+              "opl_id": { "type": "string" },
+              "permit_lines_required": { "type": "boolean", "const": true }
+            },
+            "required": ["entity", "equipment_tag", "opl_id", "permit_lines_required"]
+          }
+        },
+        "rules": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "order": { "type": "integer", "const": 1 },
+                "id": { "type": "string", "const": "R1-permanent-change" }
+              },
+              "required": ["order", "id"]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "order": { "type": "integer", "const": 2 },
+                "id": { "type": "string", "const": "R2-defeat-targeted" }
+              },
+              "required": ["order", "id"]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "order": { "type": "integer", "const": 3 },
+                "id": { "type": "string", "const": "R3-documented-bypass" }
+              },
+              "required": ["order", "id"]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "order": { "type": "integer", "const": 4 },
+                "id": { "type": "string", "const": "R4-defeat-untargeted" }
+              },
+              "required": ["order", "id"]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "order": { "type": "integer", "const": 5 },
+                "id": { "type": "string", "const": "R5-none" }
+              },
+              "required": ["order", "id"]
+            }
+          ],
+          "items": false
+        },
+        "routing_text": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "defeat": { "type": "string", "description": "slots {function} {sil} {permissives} {reset_note} {sheet}" },
+            "permanent_change": { "type": "string" },
+            "relief_device": { "type": "string" }
+          },
+          "required": ["defeat", "permanent_change", "relief_device"]
+        },
+        "moment_keywords": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "readiness": { "type": "array", "items": { "type": "string" } },
+            "trip": { "type": "array", "items": { "type": "string" } },
+            "job": { "type": "array", "items": { "type": "string" } },
+            "reading": { "type": "array", "items": { "type": "string" } }
+          },
+          "required": ["readiness", "trip", "job", "reading"]
+        },
+        "fixtures": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "positives": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "text": { "type": "string" },
+                  "expect_class": { "type": "string", "enum": ["defeat", "permanent_change"] },
+                  "expect_function": { "type": ["string", "null"] },
+                  "framing": { "type": "string", "enum": ["plain", "urgent", "role_play", "authority", "bahasa"] }
+                },
+                "required": ["text", "expect_class", "expect_function", "framing"]
+              }
+            },
+            "negatives": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "text": { "type": "string" },
+                  "expect_class": { "type": "string", "enum": ["none", "documented_bypass"] },
+                  "expect_entity": { "type": ["string", "null"] }
+                },
+                "required": ["text", "expect_class", "expect_entity"]
+              }
+            }
+          },
+          "required": ["positives", "negatives"]
+        }
+      },
+      "required": ["version", "lexicons", "protective_vocabulary", "generic_protective_tokens", "documented_bypass_entities", "rules", "routing_text", "moment_keywords", "fixtures"]
+    }
+  }
+}

@@ -1,0 +1,499 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/gateway.schema.json",
+  "title": "Gateway role configuration and role prompt contracts",
+  "description": "Blueprint section 9.13 (GatewayRole, GatewayCall) and section 9.16 (the typed JSON envelope of every model role and the recorded replay): no code path outside the gateway module may call a provider (asserted by a static import audit in CI), the verifier's request never contains the question (asserted by a recorded-call test), every prompt is a versioned file prompts/<role>/v<N>.md whose SHA-256 is the prompt_version recorded on every trace, draft and evaluation run, and every role receives its inputs inside a typed JSON envelope with named fields and is told that every field is data; no field is ever concatenated into an instruction string.",
+  "x-blueprint": "9.13, 9.16",
+  "$defs": {
+    "GatewayRole": {
+      "title": "GatewayRole",
+      "description": "One configuration row per model role. The per-role defaults are annotations (JSON Schema default) that follow ADR-001 as overridden by deviation D-05 (every product model role AG-1 to AG-4 runs glm-5.3-flash on the one provider, https://api.z.ai/api/paas/v4, OpenAI-compatible) and by the verified probe of 2026-09-03 (embedding-3 is not served on api.z.ai, so the embedding role is a hash-pinned local open-weights model run through ONNX, ADR-009 second branch). GLM reasoning cannot be disabled, so thinking is always_on and effort is the explicit per-role setting; every chat call sets response_format json_object (ADR-001).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": { "type": "string", "enum": ["AG-1", "AG-2", "AG-3", "AG-4", "embedding"] },
+        "provider": { "type": "string", "enum": ["zai", "local_embedding"] },
+        "base_url": { "type": "string" },
+        "model_id": { "type": "string" },
+        "api_style": { "type": "string", "enum": ["openai_chat", "openai_embeddings", "local_onnx"] },
+        "thinking": { "type": "string", "enum": ["always_on", "n/a"] },
+        "effort": { "type": "string", "enum": ["low", "high", "max", "n/a"] },
+        "response_format": { "type": "string", "enum": ["json_object", "n/a"] },
+        "temperature": { "type": ["number", "null"] },
+        "max_tokens": { "type": "integer" },
+        "timeout_ms": {
+          "type": "integer",
+          "maximum": 300000,
+          "description": "milliseconds; never above the Vercel Hobby function maximum duration of 300 s (verified 2026-09-03), which bounds every call including the waitUntil drafting work of ADR-004"
+        },
+        "prompt_version": { "type": ["string", "null"] },
+        "budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "tokens_per_day": { "type": "integer" },
+            "spend_cap_idr_per_day": { "type": "integer" }
+          },
+          "required": ["tokens_per_day", "spend_cap_idr_per_day"]
+        }
+      },
+      "required": [
+        "role",
+        "provider",
+        "base_url",
+        "model_id",
+        "api_style",
+        "thinking",
+        "effort",
+        "response_format",
+        "temperature",
+        "max_tokens",
+        "timeout_ms",
+        "prompt_version",
+        "budget"
+      ],
+      "allOf": [
+        {
+          "if": { "properties": { "role": { "const": "AG-1" } }, "required": ["role"] },
+          "then": {
+            "properties": {
+              "provider": { "default": "zai" },
+              "base_url": { "default": "https://api.z.ai/api/paas/v4" },
+              "model_id": { "default": "glm-5.3-flash" },
+              "api_style": { "default": "openai_chat" },
+              "thinking": { "default": "always_on" },
+              "effort": { "default": "high" },
+              "response_format": { "default": "json_object" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "role": { "const": "AG-2" } }, "required": ["role"] },
+          "then": {
+            "properties": {
+              "provider": { "default": "zai" },
+              "base_url": { "default": "https://api.z.ai/api/paas/v4" },
+              "model_id": { "default": "glm-5.3-flash" },
+              "api_style": { "default": "openai_chat" },
+              "thinking": { "default": "always_on" },
+              "effort": { "default": "low" },
+              "response_format": { "default": "json_object" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "role": { "const": "AG-3" } }, "required": ["role"] },
+          "then": {
+            "properties": {
+              "provider": { "default": "zai" },
+              "base_url": { "default": "https://api.z.ai/api/paas/v4" },
+              "model_id": { "default": "glm-5.3-flash" },
+              "api_style": { "default": "openai_chat" },
+              "thinking": { "default": "always_on" },
+              "effort": { "default": "high" },
+              "response_format": { "default": "json_object" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "role": { "const": "AG-4" } }, "required": ["role"] },
+          "then": {
+            "properties": {
+              "provider": { "default": "zai" },
+              "base_url": { "default": "https://api.z.ai/api/paas/v4" },
+              "model_id": { "default": "glm-5.3-flash" },
+              "api_style": { "default": "openai_chat" },
+              "thinking": { "default": "always_on" },
+              "effort": { "default": "low" },
+              "response_format": { "default": "json_object" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "role": { "const": "embedding" } }, "required": ["role"] },
+          "then": {
+            "properties": {
+              "provider": { "default": "local_embedding" },
+              "model_id": { "description": "the corpus version's pin: corpus_version.embedding_model, with embedding_dim and the model file hash (ADR-009 second branch)" },
+              "api_style": { "default": "local_onnx" },
+              "thinking": { "default": "n/a" },
+              "effort": { "default": "n/a" },
+              "response_format": { "default": "n/a" },
+              "temperature": { "default": null },
+              "prompt_version": { "default": null }
+            }
+          }
+        }
+      ]
+    },
+    "GatewayCall": {
+      "title": "GatewayCall",
+      "description": "One record per provider call, stored with the trace or the draft: model id, prompt version, gateway configuration hash and corpus version on every call (blueprint 8.1).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": { "type": "string" },
+        "request_sha256": { "type": "string" },
+        "response_sha256": { "type": "string" },
+        "model_id": { "type": "string" },
+        "prompt_version": { "type": ["string", "null"] },
+        "gateway_config_sha256": { "type": "string" },
+        "corpus_version_id": { "type": "string" },
+        "latency_ms": { "type": "number" },
+        "input_tokens": { "type": "integer" },
+        "output_tokens": { "type": "integer" },
+        "outcome": { "type": "string", "enum": ["ok", "parse_failed", "timeout", "provider_error", "budget_exhausted"] }
+      },
+      "required": [
+        "role",
+        "request_sha256",
+        "response_sha256",
+        "model_id",
+        "prompt_version",
+        "gateway_config_sha256",
+        "corpus_version_id",
+        "latency_ms",
+        "input_tokens",
+        "output_tokens",
+        "outcome"
+      ]
+    },
+    "AG1Input": {
+      "title": "AG1Input",
+      "description": "AG-1 Extractor (build time) input envelope. Rules: anchor_text must be an exact substring of the page text (verified by the parser, a miss drops the claim); entity_binding is a member of candidate_entities or NONE; no numeral may appear in value_text that is not inside anchor_text; the reviewed output is committed and never regenerated during a build.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "doc_no": { "type": ["string", "null"], "description": "Document.doc_no of 9.2, nullable there" },
+            "class": { "$ref": "entities/document.schema.json#/$defs/DocumentClass" },
+            "revision": { "type": "string" }
+          },
+          "required": ["doc_no", "class", "revision"]
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "page": { "type": "integer" },
+              "text": { "type": "string" }
+            },
+            "required": ["page", "text"]
+          }
+        },
+        "candidate_entities": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "closed set of ids for this document's asset"
+        }
+      },
+      "required": ["document", "pages", "candidate_entities"]
+    },
+    "AG1Output": {
+      "title": "AG1Output",
+      "description": "AG-1 Extractor output envelope; the parser drops any claim whose anchor_text is not an exact substring of the page text, and a claim becomes a Claim row of 9.2 only through that check.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "span": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "page": { "type": "integer" },
+                  "anchor_text": { "type": "string" }
+                },
+                "required": ["page", "anchor_text"]
+              },
+              "claim_kind": { "$ref": "entities/document.schema.json#/$defs/Claim/properties/claim_kind" },
+              "value_text": { "type": "string" },
+              "entity_binding": { "type": "string", "description": "string | \"NONE\"; a member of candidate_entities or NONE" }
+            },
+            "required": ["span", "claim_kind", "value_text", "entity_binding"]
+          }
+        }
+      },
+      "required": ["claims"]
+    },
+    "AG2Input": {
+      "title": "AG2Input",
+      "description": "AG-2 Composer (runtime) input envelope. Rules: extractive first; every claim names at least one span_id from the evidence; no entity and no numeral absent from the evidence or the typed facts (gate C3 removes any that slip); a repair call receives the verdicts and may only drop or reword the sentences the verdicts named.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "question": { "type": "string" },
+        "template": { "type": ["string", "null"] },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "tags": { "type": "array", "items": { "type": "string" } }
+          },
+          "required": ["tags"]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "span_id": { "type": "string" },
+              "doc_no": { "type": "string" },
+              "revision": { "type": "string" },
+              "approval_status": { "$ref": "entities/document.schema.json#/$defs/ApprovalStatus" },
+              "page": { "type": "integer" },
+              "text": { "type": "string" }
+            },
+            "required": ["span_id", "doc_no", "revision", "approval_status", "page", "text"]
+          }
+        },
+        "typed_facts": {
+          "type": "array",
+          "items": { "$ref": "evidence_packet.schema.json#/$defs/TypedFact" }
+        },
+        "repair": {
+          "description": "null on the first composition; on the one repair round it carries the AG-4 verdicts of the sentences to drop or reword",
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "verdicts": { "$ref": "#/$defs/AG4VerifyOutput/properties/verdicts" }
+              },
+              "required": ["verdicts"]
+            },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": ["question", "template", "scope", "evidence", "typed_facts", "repair"]
+    },
+    "AG2Output": {
+      "title": "AG2Output",
+      "description": "AG-2 Composer output envelope; every claim names at least one span_id from the evidence (minItems 1); the gate, not the composer, decides the outcome.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "text": { "type": "string" },
+              "span_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+            },
+            "required": ["text", "span_ids"]
+          }
+        },
+        "gaps": { "type": "array", "items": { "type": "string" } },
+        "suggested_outcome": { "type": "string", "enum": ["answer", "partial", "abstention"] }
+      },
+      "required": ["claims", "gaps", "suggested_outcome"]
+    },
+    "AG3Input": {
+      "title": "AG3Input",
+      "description": "AG-3 Drafter (runtime, asynchronous) input envelope: the debt cluster, its typed evidence and the six-section house template with header fields.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cluster": { "$ref": "entities/coverage.schema.json#/$defs/DebtCluster" },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "work_orders": { "type": "array", "items": { "$ref": "entities/operations.schema.json#/$defs/WorkOrder" } },
+            "datasheet_params": { "type": "array", "items": { "$ref": "entities/asset.schema.json#/$defs/DatasheetParam" } },
+            "interlock_rows": { "type": "array", "items": { "$ref": "entities/asset.schema.json#/$defs/InterlockRow" } },
+            "bom_items": { "type": "array", "items": { "$ref": "entities/operations.schema.json#/$defs/BomItem" } },
+            "opl_steps": { "type": "array", "items": { "$ref": "entities/coverage.schema.json#/$defs/OplStep" } },
+            "lessons": { "type": "array", "items": { "$ref": "entities/coverage.schema.json#/$defs/Opl" } }
+          },
+          "required": ["work_orders", "datasheet_params", "interlock_rows", "bom_items", "opl_steps", "lessons"]
+        },
+        "template": {
+          "type": "object",
+          "description": "the six-section house template with header fields"
+        }
+      },
+      "required": ["cluster", "evidence", "template"]
+    },
+    "AG3Output": {
+      "title": "AG3Output",
+      "description": "AG-3 Drafter output envelope. Rules: every element carries provenance or is a slot whose text is exactly REQUIRES ENGINEER INPUT; a numeral appears only with a numeric_provenance entry; sections 1, 2, 3, 4 and 6 may not reproduce a work-order narrative field verbatim (the verbatim check blocks the draft); section 5 quotes rows with their work-order ids; the drafter never fills a slot and never writes an SME note.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "the header fields of the six-section house template"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "n": { "$ref": "entities/drafts.schema.json#/$defs/DraftField/properties/section" },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "text": { "type": "string" },
+                    "provenance": { "$ref": "entities/drafts.schema.json#/$defs/DraftField/properties/provenance" },
+                    "is_slot": { "type": "boolean" }
+                  },
+                  "required": ["text", "provenance", "is_slot"],
+                  "if": { "properties": { "is_slot": { "const": true } }, "required": ["is_slot"] },
+                  "then": { "properties": { "text": { "const": "REQUIRES ENGINEER INPUT" } } }
+                }
+              }
+            },
+            "required": ["n", "elements"]
+          }
+        },
+        "troubleshooting_rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "problem": { "type": "string" },
+              "cause": { "type": "string" },
+              "action": { "type": "string" },
+              "quoted_wo_number": { "type": "string" }
+            },
+            "required": ["problem", "cause", "action", "quoted_wo_number"]
+          }
+        }
+      },
+      "required": ["header", "sections", "troubleshooting_rows"]
+    },
+    "AG4VerifyInput": {
+      "title": "AG4VerifyInput",
+      "description": "AG-4 Verifier input envelope (question-blind, its own prompt): the question is never present; additionalProperties false makes any other field a schema failure. Rules: one batched call per artefact; a verdict that fails to parse counts as not_entailed; the gate makes every decision and the verifier makes none.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pairs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "sentence_id": { "type": "string" },
+              "sentence": { "type": "string" },
+              "spans": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "span_id": { "type": "string" },
+                    "text": { "type": "string" }
+                  },
+                  "required": ["span_id", "text"]
+                }
+              }
+            },
+            "required": ["sentence_id", "sentence", "spans"]
+          }
+        }
+      },
+      "required": ["pairs"]
+    },
+    "AG4VerifyOutput": {
+      "title": "AG4VerifyOutput",
+      "description": "AG-4 Verifier output envelope; the verdicts are copied onto AnswerTrace.verifier_verdicts (9.7) and, on a repair round, into AG2Input.repair.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "verdicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "sentence_id": { "type": "string" },
+              "verdict": { "type": "string", "enum": ["entailed", "not_entailed", "contradicted"] },
+              "span_id": { "type": ["string", "null"] },
+              "reason": { "type": "string" }
+            },
+            "required": ["sentence_id", "verdict", "span_id", "reason"]
+          }
+        }
+      },
+      "required": ["verdicts"]
+    },
+    "AG4RedlineInput": {
+      "title": "AG4RedlineInput",
+      "description": "AG-4 Redliner input envelope: the AG-3 output, the evidence references and the template rules; the redliner has no edit field in its schema.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "draft": { "$ref": "#/$defs/AG3Output", "description": "the AG-3 output" },
+        "evidence_refs": { "type": "array" },
+        "template_rules": { "type": "array" }
+      },
+      "required": ["draft", "evidence_refs", "template_rules"]
+    },
+    "AG4RedlineOutput": {
+      "title": "AG4RedlineOutput",
+      "description": "AG-4 Redliner output envelope: a verdict and reasons only, no edit field; the reasons take the shape of RedlineVerdict.reasons (9.6), which is where they are stored.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "verdict": { "type": "string", "enum": ["pass", "block"] },
+        "reasons": { "$ref": "entities/drafts.schema.json#/$defs/RedlineVerdict/properties/reasons" }
+      },
+      "required": ["verdict", "reasons"]
+    },
+    "EmbeddingInput": {
+      "title": "EmbeddingInput",
+      "description": "embedding role input; rules: the model name and dimension are the corpus version's pin; chunks and queries use the same model.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texts": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["texts"]
+    },
+    "EmbeddingOutput": {
+      "title": "EmbeddingOutput",
+      "description": "embedding role output; one vector per input text, each of length corpus_version.embedding_dim.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "vectors": { "type": "array", "items": { "type": "array", "items": { "type": "number" } } }
+      },
+      "required": ["vectors"]
+    },
+    "Recording": {
+      "title": "Recording",
+      "description": "Recorded replay: recordings/<case_id>/<role>.json; Tier B replays them in pull-request CI and refreshes them, as a reviewed commit, whenever a prompt version or a pin changes.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_sha256": { "type": "string" },
+        "request": { "type": "object", "description": "the role's input envelope as sent" },
+        "response": { "type": "object", "description": "the role's output envelope as returned" },
+        "model_id": { "type": "string" },
+        "prompt_version": { "type": ["string", "null"], "description": "null for the embedding role, which has no prompt" },
+        "recorded_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["request_sha256", "request", "response", "model_id", "prompt_version", "recorded_at"]
+    }
+  }
+}

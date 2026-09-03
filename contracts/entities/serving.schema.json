@@ -1,0 +1,305 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/entities/serving.schema.json",
+  "title": "Serving, evaluation, people and audit",
+  "description": "Blueprint 9.7 serving, evaluation, people and audit. Audit payload field rules, frozen: answer events carry trace id, route, role alias, corpus version, rule-pack class and version, gate outcome and confidence band, never the question text and never a retrieved span; draft events carry draft id, from-state, to-state, reason, never a draft body or note text; version and evaluation events carry the version or run id; the two safety events additionally carry the request text as typed, pseudonymised, with the matched rule and phrase, readable only by Admin, and reading them writes `audit.safety_events_read`. `UPDATE` and `DELETE` are revoked on `audit_log` at the grant level. Retention 30 days for all events except the two safety events, retained for the deployment's life.",
+  "x-blueprint": "9.7",
+  "$defs": {
+    "Role": {
+      "title": "Role",
+      "type": "string",
+      "enum": ["Engineer", "Reviewing Supervisor", "Manager", "Admin"]
+    },
+    "AppUser": {
+      "title": "AppUser",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "alias": { "type": "string" },
+        "role": { "$ref": "#/$defs/Role" },
+        "username": { "type": "string" },
+        "password_hash": { "type": "string" },
+        "is_demo": { "type": "boolean" },
+        "last_login": { "type": ["string", "null"], "format": "date-time" }
+      },
+      "required": ["id", "alias", "role", "username", "password_hash", "is_demo", "last_login"]
+    },
+    "Session": {
+      "title": "Session",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "expires_at": { "type": "string", "format": "date-time", "description": "8 h" },
+        "reviewer_link_id": { "type": ["string", "null"], "description": "null in this run: reviewer links are not built (D-07)" }
+      },
+      "required": ["id", "user_id", "created_at", "expires_at", "reviewer_link_id"]
+    },
+    "ReviewerLink": {
+      "title": "ReviewerLink",
+      "x-status": "not built in this run (D-07)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string", "enum": ["Engineer", "Reviewing Supervisor", "Manager"] },
+        "user_id": { "type": "string" },
+        "expires_at": { "type": "string", "format": "date-time" },
+        "revoked": { "type": "boolean" },
+        "signature_key_version": { "type": "integer" }
+      },
+      "required": ["id", "role", "user_id", "expires_at", "revoked", "signature_key_version"]
+    },
+    "CorpusVersion": {
+      "title": "CorpusVersion",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "is_active": { "type": "boolean", "description": "partial unique index: exactly one true" },
+        "manifest_sha256": { "type": "string" },
+        "corpus_sha256": { "type": "string" },
+        "extractor": { "type": "string" },
+        "embedding_model": { "type": "string" },
+        "embedding_dim": { "type": "integer" },
+        "model_pins": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "AG-1": { "$ref": "#/$defs/CorpusVersion/$defs/ModelPin" },
+            "AG-2": { "$ref": "#/$defs/CorpusVersion/$defs/ModelPin" },
+            "AG-3": { "$ref": "#/$defs/CorpusVersion/$defs/ModelPin" },
+            "AG-4": { "$ref": "#/$defs/CorpusVersion/$defs/ModelPin" },
+            "embedding": { "$ref": "#/$defs/CorpusVersion/$defs/ModelPin" }
+          },
+          "required": ["AG-1", "AG-2", "AG-3", "AG-4", "embedding"]
+        },
+        "created_by_alias": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "activated_by_alias": { "type": ["string", "null"] },
+        "activated_at": { "type": ["string", "null"], "format": "date-time" },
+        "parent_version_id": { "type": ["string", "null"] }
+      },
+      "required": [
+        "id", "label", "is_active", "manifest_sha256", "corpus_sha256", "extractor", "embedding_model", "embedding_dim",
+        "model_pins", "created_by_alias", "created_at", "activated_by_alias", "activated_at", "parent_version_id"
+      ],
+      "$defs": {
+        "ModelPin": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provider": { "type": "string" },
+            "model_id": { "type": "string" },
+            "prompt_version": { "type": ["string", "null"] }
+          },
+          "required": ["provider", "model_id", "prompt_version"]
+        }
+      }
+    },
+    "AnswerTrace": {
+      "title": "AnswerTrace",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "question": { "type": "string" },
+        "language_detected": { "type": "string", "enum": ["en", "id"] },
+        "template": { "type": ["string", "null"], "enum": ["readiness", "trip", "job", "reading", null] },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "tags": { "type": "array", "items": { "type": "string" } },
+            "basis": { "type": "string" }
+          },
+          "required": ["tags", "basis"]
+        },
+        "rulepack": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "version": { "type": "string" },
+            "class": { "type": "string", "enum": ["none", "defeat", "documented_bypass", "permanent_change"] },
+            "rule_id": { "type": ["string", "null"] },
+            "matched_phrase": { "type": ["string", "null"] },
+            "decided_at": { "type": "string", "format": "date-time" }
+          },
+          "required": ["version", "class", "rule_id", "matched_phrase", "decided_at"]
+        },
+        "retrieved_chunk_ids": { "type": "array", "items": { "type": "string" } },
+        "prompts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "role": { "type": "string" },
+              "version": { "type": "string" },
+              "sha256": { "type": "string" }
+            },
+            "required": ["role", "version", "sha256"]
+          }
+        },
+        "verifier_verdicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "sentence_id": { "type": "string" },
+              "verdict": { "type": "string", "enum": ["entailed", "not_entailed", "contradicted"] },
+              "span_id": { "type": ["string", "null"] },
+              "reason": { "type": "string" }
+            },
+            "required": ["sentence_id", "verdict", "span_id", "reason"]
+          }
+        },
+        "gate_results": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "C1": { "$ref": "#/$defs/AnswerTrace/$defs/GateResult" },
+            "C2": { "$ref": "#/$defs/AnswerTrace/$defs/GateResult" },
+            "C3": { "$ref": "#/$defs/AnswerTrace/$defs/GateResult" },
+            "C4": { "$ref": "#/$defs/AnswerTrace/$defs/GateResult" },
+            "C5": { "$ref": "#/$defs/AnswerTrace/$defs/GateResult" },
+            "C6": { "$ref": "#/$defs/AnswerTrace/$defs/GateResult" }
+          },
+          "required": ["C1", "C2", "C3", "C4", "C5", "C6"]
+        },
+        "repair_rounds": { "type": "integer", "enum": [0, 1] },
+        "confidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "band": { "type": "string", "enum": ["high", "medium", "low"] },
+            "inputs": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "question_coverage": { "type": "number" },
+                "source_count": { "type": "integer" },
+                "approval_share": { "type": "number" }
+              },
+              "required": ["question_coverage", "source_count", "approval_share"]
+            }
+          },
+          "required": ["band", "inputs"]
+        },
+        "outcome": { "type": "string", "enum": ["answer", "partial", "abstention", "refusal"] },
+        "packet": { "$ref": "../evidence_packet.schema.json#/$defs/EvidencePacket" },
+        "model_ids": { "type": "object", "additionalProperties": { "type": "string" } },
+        "corpus_version_id": { "type": "string" },
+        "user_alias": { "type": "string" },
+        "server_ts": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id", "question", "language_detected", "template", "scope", "rulepack", "retrieved_chunk_ids", "prompts",
+        "verifier_verdicts", "gate_results", "repair_rounds", "confidence", "outcome", "packet", "model_ids",
+        "corpus_version_id", "user_alias", "server_ts"
+      ],
+      "$defs": {
+        "GateResult": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "pass": { "type": "boolean" },
+            "detail": { "type": "string" }
+          },
+          "required": ["pass", "detail"]
+        }
+      }
+    },
+    "EvaluationRun": {
+      "title": "EvaluationRun",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "corpus_version_id": { "type": "string" },
+        "harness_commit": { "type": "string" },
+        "model_pins": { "type": "object", "additionalProperties": { "type": "string" } },
+        "prompt_versions": { "type": "object", "additionalProperties": { "type": "string" } },
+        "rulepack_version": { "type": "string" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "finished_at": { "type": "string", "format": "date-time" },
+        "tier": { "type": "string", "enum": ["A", "B", "full"] },
+        "ingested_by": { "const": "ci" }
+      },
+      "required": [
+        "id", "corpus_version_id", "harness_commit", "model_pins", "prompt_versions", "rulepack_version",
+        "started_at", "finished_at", "tier", "ingested_by"
+      ]
+    },
+    "EvaluationResult": {
+      "title": "EvaluationResult",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "run_id": { "type": "string" },
+        "case_id": { "type": "string" },
+        "category": { "type": "string" },
+        "hard_gate": { "type": "boolean" },
+        "verdict": { "type": "string", "enum": ["pass", "fail", "skipped"] },
+        "expected": { "type": "string" },
+        "failure_reason": { "type": ["string", "null"] }
+      },
+      "required": ["run_id", "case_id", "category", "hard_gate", "verdict", "expected", "failure_reason"]
+    },
+    "AuditEvent": {
+      "title": "AuditEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "actor_alias": { "type": "string" },
+        "actor_role": {
+          "type": "string",
+          "enum": ["Engineer", "Reviewing Supervisor", "Manager", "Admin", "system", "ci", "job"],
+          "description": "Role, or the literal \"system\", \"ci\" or \"job\""
+        },
+        "action": { "$ref": "#/$defs/AuditAction" },
+        "entity": { "type": "string" },
+        "entity_id": { "type": "string" },
+        "payload": { "type": "object", "description": "Record<string, unknown>; the audit payload field rules in the file description bind what each action may carry" },
+        "trace_id": { "type": ["string", "null"] },
+        "route": { "type": "string" },
+        "corpus_version_id": { "type": "string" },
+        "server_ts": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id", "actor_alias", "actor_role", "action", "entity", "entity_id", "payload", "trace_id", "route",
+        "corpus_version_id", "server_ts"
+      ]
+    },
+    "AuditAction": {
+      "title": "AuditAction",
+      "type": "string",
+      "enum": [
+        "answer.issued",
+        "answer.abstained",
+        "safety.request_refused",
+        "safety.request_served",
+        "draft.created",
+        "draft.redlined",
+        "draft.accepted",
+        "draft.rejected",
+        "draft.reproposed",
+        "sme_note.added",
+        "draft.published",
+        "publication.rejected",
+        "corpus.version_activated",
+        "evaluation.run_ingested",
+        "render.integrity_blocked",
+        "auth.reviewer_link_rejected",
+        "auth.role_violation",
+        "audit.safety_events_read"
+      ]
+    }
+  }
+}

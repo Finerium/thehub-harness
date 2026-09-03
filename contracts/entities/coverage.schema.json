@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/entities/coverage.schema.json",
+  "title": "Coverage, debt and lessons",
+  "description": "Blueprint section 9.5 (FROZEN), the coverage, debt and lesson entities. The coverage recipe, frozen: content-word tokenisation (lower-cased alphanumeric tokens, tag-like tokens such as VSHH-1201 kept whole, single-character tokens dropped, the fixed 65-word stop list removed and hashed as stop_list_sha256); each same-asset lesson scored as its own document in sorted lesson-id order; a field compared against every window of twice its content-word count advancing one token at a time; the field's score is the largest share of its distinct content words inside one window; a work order's score is the best over its three narrative fields and its asset's lessons; uncovered when the score is less than or equal to 0.62; a field under three content words is skipped; a work order with no scoreable field scores zero; the generous layer scores against the whole lesson text and the strict layer against text composed from the parsed header fields and sections 1, 2, 3, 4 and 6 each cut at the watermark. The debt score, frozen: debt_e = 0.4 D_e/D_max + 0.3 C_e/C_max + 0.2 k_e + 0.1 r_e over the asset's generous-uncovered unplanned-failure work orders, with k mapped HIGH CRITICAL 1.00, LOW CRITICAL 0.50, NON CRITICAL 0.25, r the share of the asset's unplanned-failure records in a family, and incomplete closeouts reported beside the score and never inside it.",
+  "x-blueprint": "9.5",
+  "$defs": {
+    "CoverageMethod": {
+      "title": "CoverageMethod",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "recipe_sha256": { "type": "string" },
+        "stop_list_sha256": { "type": "string" },
+        "threshold": { "const": 0.62 },
+        "window_multiplier": { "const": 2 },
+        "min_content_words": { "const": 3 },
+        "comparison": { "const": "uncovered when score <= threshold" },
+        "extractor": { "type": "string" },
+        "strict_sections": { "const": ["header", "1", "2", "3", "4", "6"] },
+        "strict_cut_marker": { "const": "This is sample data provided for CALIBER purposes only" },
+        "labels_status": { "type": "string", "enum": ["machine_drafted_pending_human", "human_adjudicated"] },
+        "unscoreable_ids": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": [
+        "recipe_sha256",
+        "stop_list_sha256",
+        "threshold",
+        "window_multiplier",
+        "min_content_words",
+        "comparison",
+        "extractor",
+        "strict_sections",
+        "strict_cut_marker",
+        "labels_status",
+        "unscoreable_ids"
+      ]
+    },
+    "CoverageAssessment": {
+      "title": "CoverageAssessment",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wo_number": { "type": "string" },
+        "layer": { "type": "string", "enum": ["generous", "strict"] },
+        "covered": { "type": "boolean" },
+        "best_ratio": { "type": "number" },
+        "threshold": { "type": "number" },
+        "matched_field": {
+          "type": ["string", "null"],
+          "enum": ["problem_description", "root_cause", "corrective_action", null]
+        },
+        "matched_lesson": { "type": ["string", "null"] },
+        "corpus_version_id": { "type": "string" }
+      },
+      "required": [
+        "wo_number",
+        "layer",
+        "covered",
+        "best_ratio",
+        "threshold",
+        "matched_field",
+        "matched_lesson",
+        "corpus_version_id"
+      ]
+    },
+    "CoverageSummary": {
+      "title": "CoverageSummary",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "corpus_version_id": { "type": "string" },
+        "population": {
+          "type": "string",
+          "enum": ["unplanned_failure", "failure", "unplanned_breakdowns", "planned_flagged", "all"]
+        },
+        "layer": { "type": "string", "enum": ["generous", "strict"] },
+        "threshold": { "type": "number" },
+        "uncovered_count": { "type": "integer" },
+        "population_count": { "type": "integer" },
+        "uncovered_breakdowns": { "type": "integer" },
+        "uncovered_downtime_hours": { "type": "number" },
+        "uncovered_cost_idr": { "type": "integer" },
+        "bands": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "no_lesson": { "type": "integer" },
+            "copied_row_only": { "type": "integer" },
+            "taught": { "type": "integer" }
+          },
+          "required": ["no_lesson", "copied_row_only", "taught"]
+        },
+        "sensitivity": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "t": { "type": "number" },
+              "uncovered_count": { "type": "integer" }
+            },
+            "required": ["t", "uncovered_count"]
+          }
+        }
+      },
+      "required": [
+        "corpus_version_id",
+        "population",
+        "layer",
+        "threshold",
+        "uncovered_count",
+        "population_count",
+        "uncovered_breakdowns",
+        "uncovered_downtime_hours",
+        "uncovered_cost_idr",
+        "bands",
+        "sensitivity"
+      ]
+    },
+    "DebtCluster": {
+      "title": "DebtCluster",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "corpus_version_id": { "type": "string" },
+        "uncovered_wo_numbers": { "type": "array", "items": { "type": "string" } },
+        "factors": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "D_hours": { "type": "number" },
+            "D_max": { "type": "number" },
+            "C_idr": { "type": "integer" },
+            "C_max": { "type": "integer" },
+            "k": { "type": "number" },
+            "r": { "type": "number" }
+          },
+          "required": ["D_hours", "D_max", "C_idr", "C_max", "k", "r"]
+        },
+        "coefficients": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "a": { "const": 0.4 },
+            "b": { "const": 0.3 },
+            "c": { "const": 0.2 },
+            "d": { "const": 0.1 },
+            "basis": { "const": "ASSUMPTION" }
+          },
+          "required": ["a", "b", "c", "d", "basis"]
+        },
+        "incomplete_uncovered": { "type": "integer" },
+        "score": { "type": "number" },
+        "rank": { "type": "integer" }
+      },
+      "required": [
+        "id",
+        "equipment_tag",
+        "corpus_version_id",
+        "uncovered_wo_numbers",
+        "factors",
+        "coefficients",
+        "incomplete_uncovered",
+        "score",
+        "rank"
+      ]
+    },
+    "Opl": {
+      "title": "Opl",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "document_revision_id": { "type": "string" },
+        "opl_id": { "type": "string", "description": "\"OPL-GA-1201A-03\"" },
+        "title": { "type": "string" },
+        "discipline": { "type": "string" },
+        "equipment_tag": { "type": "string" },
+        "area_unit": { "type": "string" },
+        "related_interlock_text": { "type": "string" },
+        "pid_ref": { "type": "string" },
+        "classification": { "type": "string", "enum": ["Basic Knowledge", "Improvement", "Trouble Case"] },
+        "aspect": { "type": "string" },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "n": { "type": "integer", "enum": [1, 2, 3, 4, 5, 6] },
+              "heading": { "type": "string" },
+              "body_text": { "type": "string" },
+              "body_hash": { "type": "string" }
+            },
+            "required": ["n", "heading", "body_text", "body_hash"]
+          }
+        },
+        "permit_lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "text": { "type": "string" },
+              "span_id": { "type": "string" },
+              "source_section": { "type": "integer", "enum": [2, 3, 4] }
+            },
+            "required": ["text", "span_id", "source_section"]
+          }
+        },
+        "footer": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "prepared_by": { "type": "string" },
+            "reviewed_by_alias": { "type": "string" },
+            "approved_by_alias": { "type": "string" },
+            "date_of_sharing": { "type": "string" }
+          },
+          "required": ["prepared_by", "reviewed_by_alias", "approved_by_alias", "date_of_sharing"]
+        },
+        "machine_drafted": { "type": "boolean" },
+        "approver_alias": { "type": ["string", "null"] }
+      },
+      "required": [
+        "document_revision_id",
+        "opl_id",
+        "title",
+        "discipline",
+        "equipment_tag",
+        "area_unit",
+        "related_interlock_text",
+        "pid_ref",
+        "classification",
+        "aspect",
+        "sections",
+        "permit_lines",
+        "footer",
+        "machine_drafted",
+        "approver_alias"
+      ]
+    },
+    "OplStep": {
+      "title": "OplStep",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "opl_id": { "type": "string" },
+        "n": { "type": "integer" },
+        "action_text": { "type": "string" },
+        "acceptance_criterion": { "type": ["string", "null"] },
+        "source_hash": { "type": "string", "description": "sha256(canonical(action_text))" },
+        "span_id": { "type": "string" }
+      },
+      "required": ["opl_id", "n", "action_text", "acceptance_criterion", "source_hash", "span_id"]
+    },
+    "TroubleshootingRow": {
+      "title": "TroubleshootingRow",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "opl_id": { "type": "string" },
+        "n": { "type": "integer" },
+        "problem": { "type": "string" },
+        "cause": { "type": "string" },
+        "action": { "type": "string" },
+        "quoted_wo_number": { "type": ["string", "null"] },
+        "truncated": { "type": "boolean" }
+      },
+      "required": ["opl_id", "n", "problem", "cause", "action", "quoted_wo_number", "truncated"]
+    }
+  }
+}

@@ -1,0 +1,1029 @@
+{
+ "EA-5601": {
+  "description": "SOLVENT HEATER EA-5601 - TEMPERATURE CONTROL (no dedicated ESD trip)",
+  "doc_no": "TJC-LLD-IL-EA-5601",
+  "effects": [
+   {
+    "final_element": "MODULATE STEAM VALVE TV-5602",
+    "id": "EFF-1"
+   },
+   {
+    "final_element": "ANNUNCIATE HIGH dP / FOULING ALARM",
+    "id": "EFF-2"
+   },
+   {
+    "final_element": "MECHANICAL RELIEF VIA PSV-5607",
+    "id": "EFF-3"
+   }
+  ],
+  "kind": "control_loop_only",
+  "notes": [
+   "1. Trip set points are DUMMY training values.",
+   "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS.",
+   "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy.",
+   "4. Refer to P&ID TJC-LLD-PID-5601 for instrument loops and the Datasheet for design limits of EA-5601."
+  ],
+  "permissives": [
+   {
+    "condition": "Solvent flow established (from GA-5610)",
+    "n": 1,
+    "signal": "FSL upstream"
+   },
+   {
+    "condition": "Condensate trap draining (TI-5604 < steam T)",
+    "n": 2,
+    "signal": "TI-5604"
+   }
+  ],
+  "rev": 3,
+  "rows": [
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-1"
+    ],
+    "id": "C1",
+    "initiator": "Outlet temperature control",
+    "setpoint_text": "SP 95 degC",
+    "setpoint_unit": "degC",
+    "setpoint_value": 95.0,
+    "tag": "TIC-5602",
+    "vote_cell_text": "control"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-2"
+    ],
+    "id": "A1",
+    "initiator": "Tube-side dP HIGH (fouling)",
+    "setpoint_text": "> 0.7 bar",
+    "setpoint_unit": "bar",
+    "setpoint_value": 0.7,
+    "tag": "PDAH-5605",
+    "vote_cell_text": "alarm"
+   },
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-3"
+    ],
+    "id": "R1",
+    "initiator": "Tube-side overpressure relief",
+    "setpoint_text": "set 16 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 16.0,
+    "tag": "PSV-5607",
+    "vote_cell_text": "mech"
+   }
+  ],
+  "sil": null,
+  "tag": "EA-5601",
+  "work_no": "BA-0256"
+ },
+ "SEQ-1201": {
+  "description": "HEXANE FEED PUMP (GA-1201A/B) SHUTDOWN LOGIC",
+  "doc_no": "TJC-LLD-IL-GA-1201A",
+  "effects": [
+   {
+    "final_element": "TRIP PUMP MOTOR GA-1201A",
+    "id": "EFF-1"
+   },
+   {
+    "final_element": "CLOSE DISCHARGE XV-1201",
+    "id": "EFF-2"
+   },
+   {
+    "final_element": "OPEN MIN-FLOW FV-1201",
+    "id": "EFF-3"
+   },
+   {
+    "final_element": "ANNUNCIATE ALARM ON DCS",
+    "id": "EFF-4"
+   },
+   {
+    "final_element": "START STANDBY PUMP GA-1201B (auto)",
+    "id": "EFF-5"
+   }
+  ],
+  "notes": [
+   "1. Trip set points are DUMMY training values.",
+   "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS.",
+   "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy.",
+   "4. Refer to P&ID; TJC-LLD-PID-1201 for instrument loops and the Datasheet for design limits of GA-1201A."
+  ],
+  "permissives": [
+   {
+    "condition": "Suction valve OPEN",
+    "n": 1,
+    "signal": "ZSO-1201"
+   },
+   {
+    "condition": "Seal flush established (dP > 1.5 bar)",
+    "n": 2,
+    "signal": "PDI-1201"
+   },
+   {
+    "condition": "Min-flow valve OPEN",
+    "n": 3,
+    "signal": "ZSO-1202"
+   },
+   {
+    "condition": "No active trip / reset done",
+    "n": 4,
+    "signal": "DCS reset"
+   }
+  ],
+  "rev": 3,
+  "rows": [
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-4",
+     "EFF-5"
+    ],
+    "id": "T1",
+    "initiator": "Suction pressure LOW-LOW",
+    "setpoint_text": "< 0.5 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 0.5,
+    "tag": "PSLL-1201",
+    "vote_cell_text": "2oo3"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-1",
+     "EFF-3",
+     "EFF-4",
+     "EFF-5"
+    ],
+    "id": "T2",
+    "initiator": "Discharge flow LOW-LOW (min flow)",
+    "setpoint_text": "< 9 m3/h for 30 s",
+    "setpoint_unit": "m3/h",
+    "setpoint_value": 9.0,
+    "tag": "FSLL-1201",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-4",
+     "EFF-5"
+    ],
+    "id": "T3",
+    "initiator": "Bearing vibration HIGH-HIGH",
+    "setpoint_text": "> 7.1 mm/s RMS",
+    "setpoint_unit": "mm/s",
+    "setpoint_value": 7.1,
+    "tag": "VSHH-1201",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-4"
+    ],
+    "id": "T4",
+    "initiator": "Bearing temperature HIGH-HIGH",
+    "setpoint_text": "> 95 degC",
+    "setpoint_unit": "degC",
+    "setpoint_value": 95.0,
+    "tag": "TSHH-1201",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-4",
+     "EFF-5"
+    ],
+    "id": "T5",
+    "initiator": "Motor overload / electrical fault",
+    "setpoint_text": "MPR relay pickup",
+    "setpoint_unit": null,
+    "setpoint_value": null,
+    "tag": "MPR-1201",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-4"
+    ],
+    "id": "T6",
+    "initiator": "Local/DCS emergency stop",
+    "setpoint_text": "Manual",
+    "setpoint_unit": null,
+    "setpoint_value": null,
+    "tag": "HS-1201",
+    "vote_cell_text": "1oo1"
+   }
+  ],
+  "sil": 1,
+  "tag": "GA-1201A",
+  "work_no": "BA-0256"
+ },
+ "SEQ-3401": {
+  "description": "CATALYST REDUCTION REACTOR (DC-3401A) + HEATER EA-3401 LOGIC",
+  "doc_no": "TJC-LLD-IL-DC-3401A",
+  "effects": [
+   {
+    "final_element": "TRIP HEATER EA-3401",
+    "id": "EFF-1"
+   },
+   {
+    "final_element": "CLOSE H2 INJECTION FV-3403",
+    "id": "EFF-2"
+   },
+   {
+    "final_element": "OPEN REACTOR VENT PV-3404",
+    "id": "EFF-3"
+   },
+   {
+    "final_element": "MAINTAIN / INCREASE N2 FV-17343",
+    "id": "EFF-4"
+   },
+   {
+    "final_element": "ANNUNCIATE ALARM ON DCS",
+    "id": "EFF-5"
+   }
+  ],
+  "notes": [
+   "1. Trip set points are DUMMY training values.",
+   "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS.",
+   "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy.",
+   "4. Refer to P&ID TJC-LLD-PID-3401 for instrument loops and the Datasheet for design limits of DC-3401A."
+  ],
+  "permissives": [
+   {
+    "condition": "O2 free / inerting done (AI-3401 < 100 ppm)",
+    "n": 1,
+    "signal": "AI-3401"
+   },
+   {
+    "condition": "N2 carrier flow established (> 150 kg/h)",
+    "n": 2,
+    "signal": "FT-17343"
+   },
+   {
+    "condition": "Bed homogeneous 120 degC (all TE within 15 degC)",
+    "n": 3,
+    "signal": "TE-3401"
+   },
+   {
+    "condition": "No active trip / reset done",
+    "n": 4,
+    "signal": "DCS reset"
+   }
+  ],
+  "rev": 3,
+  "rows": [
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-4",
+     "EFF-5"
+    ],
+    "id": "T1",
+    "initiator": "Bed temperature HIGH-HIGH",
+    "setpoint_text": "> 230 degC",
+    "setpoint_unit": "degC",
+    "setpoint_value": 230.0,
+    "tag": "TSHH-3401",
+    "vote_cell_text": "2oo3"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-2",
+     "EFF-3",
+     "EFF-5"
+    ],
+    "id": "T2",
+    "initiator": "Reactor pressure HIGH-HIGH",
+    "setpoint_text": "> 5 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 5.0,
+    "tag": "PSHH-3404",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-2",
+     "EFF-4",
+     "EFF-5"
+    ],
+    "id": "T3",
+    "initiator": "Outlet O2 HIGH during H2 (inerting fail)",
+    "setpoint_text": "> 100 ppm",
+    "setpoint_unit": "ppm",
+    "setpoint_value": 100.0,
+    "tag": "AI-3401",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-5"
+    ],
+    "id": "T4",
+    "initiator": "Nitrogen carrier flow LOW-LOW",
+    "setpoint_text": "< 150 kg/h",
+    "setpoint_unit": "kg/h",
+    "setpoint_value": 150.0,
+    "tag": "FSLL-17343",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-5"
+    ],
+    "id": "T5",
+    "initiator": "Heater element over-temperature",
+    "setpoint_text": "skin TC > 260 degC",
+    "setpoint_unit": "degC",
+    "setpoint_value": 260.0,
+    "tag": "EHT-3401",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-3",
+     "EFF-5"
+    ],
+    "id": "T6",
+    "initiator": "Emergency stop (manual)",
+    "setpoint_text": "Manual",
+    "setpoint_unit": null,
+    "setpoint_value": null,
+    "tag": "HS-3401",
+    "vote_cell_text": "1oo1"
+   }
+  ],
+  "sil": 2,
+  "tag": "DC-3401A",
+  "work_no": "BA-0256"
+ },
+ "SEQ-4501": {
+  "description": "RECYCLE GAS COMPRESSOR (KC-4501) SHUTDOWN LOGIC",
+  "doc_no": "TJC-LLD-IL-KC-4501",
+  "effects": [
+   {
+    "final_element": "TRIP COMPRESSOR MOTOR KC-4501",
+    "id": "EFF-1"
+   },
+   {
+    "final_element": "OPEN ANTI-SURGE RECYCLE FV-4502",
+    "id": "EFF-2"
+   },
+   {
+    "final_element": "CLOSE SUCTION XV-4501",
+    "id": "EFF-3"
+   },
+   {
+    "final_element": "MAINTAIN SEAL GAS N2",
+    "id": "EFF-4"
+   },
+   {
+    "final_element": "ANNUNCIATE ALARM ON DCS",
+    "id": "EFF-5"
+   }
+  ],
+  "notes": [
+   "1. Trip set points are DUMMY training values.",
+   "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS.",
+   "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy.",
+   "4. Refer to P&ID TJC-LLD-PID-4501 for instrument loops and the Datasheet for design limits of KC-4501."
+  ],
+  "permissives": [
+   {
+    "condition": "Lube oil pressure OK (> 2 barg)",
+    "n": 1,
+    "signal": "PSLL-4504"
+   },
+   {
+    "condition": "Seal gas established",
+    "n": 2,
+    "signal": "FT-4506"
+   },
+   {
+    "condition": "KO drum level normal (< 50%)",
+    "n": 3,
+    "signal": "LT-4510"
+   },
+   {
+    "condition": "Jacket water flow OK",
+    "n": 4,
+    "signal": "FSL-4508"
+   },
+   {
+    "condition": "No active trip / reset done",
+    "n": 5,
+    "signal": "DCS reset"
+   }
+  ],
+  "rev": 3,
+  "rows": [
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-3",
+     "EFF-5"
+    ],
+    "id": "T1",
+    "initiator": "Lube oil pressure LOW-LOW",
+    "setpoint_text": "< 1.5 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 1.5,
+    "tag": "PSLL-4504",
+    "vote_cell_text": "2oo3"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-5"
+    ],
+    "id": "T2",
+    "initiator": "Discharge temperature HIGH-HIGH",
+    "setpoint_text": "> 140 degC",
+    "setpoint_unit": "degC",
+    "setpoint_value": 140.0,
+    "tag": "TSHH-4503",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-5"
+    ],
+    "id": "T3",
+    "initiator": "Discharge pressure HIGH-HIGH",
+    "setpoint_text": "> 14 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 14.0,
+    "tag": "PSHH-4502",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-3",
+     "EFF-5"
+    ],
+    "id": "T4",
+    "initiator": "Crosshead vibration HIGH-HIGH",
+    "setpoint_text": "> 11 mm/s",
+    "setpoint_unit": "mm/s",
+    "setpoint_value": 11.0,
+    "tag": "VSHH-4505",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-3",
+     "EFF-5"
+    ],
+    "id": "T5",
+    "initiator": "Suction KO drum level HIGH-HIGH",
+    "setpoint_text": "> 80 %",
+    "setpoint_unit": "%",
+    "setpoint_value": 80.0,
+    "tag": "LSHH-4510",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-5"
+    ],
+    "id": "T6",
+    "initiator": "Suction pressure LOW-LOW",
+    "setpoint_text": "< 0.3 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 0.3,
+    "tag": "PSLL-4501",
+    "vote_cell_text": "1oo1"
+   }
+  ],
+  "sil": 2,
+  "tag": "KC-4501",
+  "work_no": "BA-0256"
+ },
+ "SEQ-5500": {
+  "description": "DRYER SYSTEM (YD-2301) SHUTDOWN LOGIC",
+  "doc_no": "TJC-LLD-IL-YD-2301",
+  "effects": [
+   {
+    "final_element": "TRIP DRUM DRIVE MOTOR",
+    "id": "EFF-1"
+   },
+   {
+    "final_element": "CLOSE STEAM INLET TV-2301",
+    "id": "EFF-2"
+   },
+   {
+    "final_element": "TRIP CENTRIFUGE FEED GF-2210",
+    "id": "EFF-3"
+   },
+   {
+    "final_element": "OPEN N2 PURGE FV-2302 (max inert)",
+    "id": "EFF-4"
+   },
+   {
+    "final_element": "ANNUNCIATE ALARM ON DCS",
+    "id": "EFF-5"
+   }
+  ],
+  "notes": [
+   "1. Trip set points are DUMMY training values.",
+   "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS.",
+   "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy.",
+   "4. Refer to P&ID; TJC-LLD-PID-2301 for instrument loops and the Datasheet for design limits of YD-2301."
+  ],
+  "permissives": [
+   {
+    "condition": "Nitrogen inerting established (O2 < 5%)",
+    "n": 1,
+    "signal": "AT-2307"
+   },
+   {
+    "condition": "Steam condensate drain open",
+    "n": 2,
+    "signal": "ZSO-2304"
+   },
+   {
+    "condition": "Lube oil to gearbox OK",
+    "n": 3,
+    "signal": "PSL-2306"
+   },
+   {
+    "condition": "No active trip / reset done",
+    "n": 4,
+    "signal": "DCS reset"
+   }
+  ],
+  "rev": 3,
+  "rows": [
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-5"
+    ],
+    "id": "T1",
+    "initiator": "Outlet temperature HIGH-HIGH",
+    "setpoint_text": "> 125 degC",
+    "setpoint_unit": "degC",
+    "setpoint_value": 125.0,
+    "tag": "TSHH-2301",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-4",
+     "EFF-5"
+    ],
+    "id": "T2",
+    "initiator": "Nitrogen purge flow LOW-LOW",
+    "setpoint_text": "< 200 kg/h",
+    "setpoint_unit": "kg/h",
+    "setpoint_value": 200.0,
+    "tag": "FSLL-2302",
+    "vote_cell_text": "2oo3"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-3",
+     "EFF-5"
+    ],
+    "id": "T3",
+    "initiator": "Inlet chute level HIGH-HIGH",
+    "setpoint_text": "> 90 %",
+    "setpoint_unit": "%",
+    "setpoint_value": 90.0,
+    "tag": "LSHH-2303",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-2",
+     "EFF-5"
+    ],
+    "id": "T4",
+    "initiator": "Drum speed LOW-LOW (chain slip)",
+    "setpoint_text": "< 1 rpm",
+    "setpoint_unit": "rpm",
+    "setpoint_value": 1.0,
+    "tag": "SSLL-2305",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-4",
+     "EFF-5"
+    ],
+    "id": "T5",
+    "initiator": "Vent O2 HIGH-HIGH",
+    "setpoint_text": "> 8 % O2",
+    "setpoint_unit": "%",
+    "setpoint_value": 8.0,
+    "tag": "ASHH-2307",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-5"
+    ],
+    "id": "T6",
+    "initiator": "Drive motor overload",
+    "setpoint_text": "MPR pickup",
+    "setpoint_unit": null,
+    "setpoint_value": null,
+    "tag": "MPR-2301",
+    "vote_cell_text": "1oo1"
+   }
+  ],
+  "sil": 2,
+  "tag": "YD-2301",
+  "work_no": "BA-0256"
+ },
+ "SEQ-6701": {
+  "description": "LP SEPARATOR LEVEL PROTECTION (FA-6710 / LV-6701) LOGIC",
+  "doc_no": "TJC-LLD-IL-LV-6701",
+  "effects": [
+   {
+    "final_element": "OPEN LV-6701 FULLY (relieve level)",
+    "id": "EFF-1"
+   },
+   {
+    "final_element": "CLOSE LV-6701 (prevent gas blow-by)",
+    "id": "EFF-2"
+   },
+   {
+    "final_element": "VENT ACTUATOR - LV-6701 FAILS CLOSED",
+    "id": "EFF-3"
+   },
+   {
+    "final_element": "ANNUNCIATE ALARM ON DCS",
+    "id": "EFF-4"
+   }
+  ],
+  "notes": [
+   "1. Trip set points are training values.",
+   "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS.",
+   "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy.",
+   "4. Refer to P&ID TJC-LLD-PID-6701 for instrument loops and the Datasheet for design limits of LV-6701."
+  ],
+  "permissives": [
+   {
+    "condition": "Instrument air available (> 1.2 barg)",
+    "n": 1,
+    "signal": "PI-6702"
+   },
+   {
+    "condition": "Positioner DVC6200 in AUTO/healthy",
+    "n": 2,
+    "signal": "DVC6200"
+   },
+   {
+    "condition": "Bypass HV-6701 closed (normal operation)",
+    "n": 3,
+    "signal": "HV-6701"
+   }
+  ],
+  "rev": 3,
+  "rows": [
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-4"
+    ],
+    "id": "T1",
+    "initiator": "Separator level HIGH-HIGH",
+    "setpoint_text": "> 85 %",
+    "setpoint_unit": "%",
+    "setpoint_value": 85.0,
+    "tag": "LSHH-6710",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-2",
+     "EFF-4"
+    ],
+    "id": "T2",
+    "initiator": "Separator level LOW-LOW",
+    "setpoint_text": "< 15 %",
+    "setpoint_unit": "%",
+    "setpoint_value": 15.0,
+    "tag": "LSLL-6710",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-3",
+     "EFF-4"
+    ],
+    "id": "T3",
+    "initiator": "ESD activation (manual)",
+    "setpoint_text": "ESD signal",
+    "setpoint_unit": null,
+    "setpoint_value": null,
+    "tag": "HS-6701",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-3",
+     "EFF-4"
+    ],
+    "id": "T4",
+    "initiator": "Instrument air pressure LOW",
+    "setpoint_text": "< 1.0 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 1.0,
+    "tag": "PSL-6702",
+    "vote_cell_text": "1oo1"
+   }
+  ],
+  "sil": 1,
+  "tag": "LV-6701",
+  "work_no": "BA-0256"
+ },
+ "SEQ-7801": {
+  "description": "COOLING TOWER FAN (CT-7801) SHUTDOWN LOGIC",
+  "doc_no": "TJC-LLD-IL-CT-7801",
+  "effects": [
+   {
+    "final_element": "TRIP FAN MOTOR CT-7801",
+    "id": "EFF-1"
+   },
+   {
+    "final_element": "ANNUNCIATE ALARM ON DCS",
+    "id": "EFF-2"
+   },
+   {
+    "final_element": "REQUEST START OF SPARE CELL CT-7802",
+    "id": "EFF-3"
+   }
+  ],
+  "notes": [
+   "1. Trip set points are DUMMY training values.",
+   "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS.",
+   "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy.",
+   "4. Refer to P&ID; TJC-LLD-PID-7801 for instrument loops and the Datasheet for design limits of CT-7801."
+  ],
+  "permissives": [
+   {
+    "condition": "Gearbox oil level OK",
+    "n": 1,
+    "signal": "LG gearbox"
+   },
+   {
+    "condition": "Basin level normal (> LSL-7804)",
+    "n": 2,
+    "signal": "LT-7804"
+   },
+   {
+    "condition": "No fan lockout / maintenance key released",
+    "n": 3,
+    "signal": "lockout"
+   }
+  ],
+  "rev": 3,
+  "rows": [
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-3"
+    ],
+    "id": "T1",
+    "initiator": "Fan/gearbox vibration HIGH-HIGH",
+    "setpoint_text": "> 9 mm/s",
+    "setpoint_unit": "mm/s",
+    "setpoint_value": 9.0,
+    "tag": "VSHH-7802",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-3"
+    ],
+    "id": "T2",
+    "initiator": "Gearbox oil temperature HIGH-HIGH",
+    "setpoint_text": "> 90 degC",
+    "setpoint_unit": "degC",
+    "setpoint_value": 90.0,
+    "tag": "TSHH-7803",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-1",
+     "EFF-2"
+    ],
+    "id": "T3",
+    "initiator": "Gearbox oil pressure LOW",
+    "setpoint_text": "< 0.8 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 0.8,
+    "tag": "PSL-7807",
+    "vote_cell_text": "1oo1"
+   },
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-3"
+    ],
+    "id": "T4",
+    "initiator": "Fan motor overload",
+    "setpoint_text": "MPR pickup",
+    "setpoint_unit": null,
+    "setpoint_value": null,
+    "tag": "MPR-7801",
+    "vote_cell_text": "1oo1"
+   }
+  ],
+  "sil": 1,
+  "tag": "CT-7801",
+  "work_no": "BA-0256"
+ },
+ "SEQ-8901": {
+  "description": "REFLUX ACCUMULATOR (FA-8901) OVERHEAD PROTECTION LOGIC",
+  "doc_no": "TJC-LLD-IL-FA-8901",
+  "effects": [
+   {
+    "final_element": "TRIP COLUMN FEED (prevent carryover)",
+    "id": "EFF-1"
+   },
+   {
+    "final_element": "TRIP REFLUX PUMP GA-8920 (protect)",
+    "id": "EFF-2"
+   },
+   {
+    "final_element": "OPEN VENT PCV-8905 (relieve pressure)",
+    "id": "EFF-3"
+   },
+   {
+    "final_element": "ANNUNCIATE ALARM ON DCS",
+    "id": "EFF-4"
+   }
+  ],
+  "notes": [
+   "1. Trip set points are DUMMY training values.",
+   "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS.",
+   "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy.",
+   "4. Refer to P&ID; TJC-LLD-PID-8901 for instrument loops and the Datasheet for design limits of FA-8901."
+  ],
+  "permissives": [
+   {
+    "condition": "Level in normal band (20-80%)",
+    "n": 1,
+    "signal": "LT-8901"
+   },
+   {
+    "condition": "N2 blanket healthy",
+    "n": 2,
+    "signal": "PT-8902"
+   },
+   {
+    "condition": "Boot not flooded",
+    "n": 3,
+    "signal": "LT-8903"
+   },
+   {
+    "condition": "No active trip / reset done",
+    "n": 4,
+    "signal": "DCS reset"
+   }
+  ],
+  "rev": 3,
+  "rows": [
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-1",
+     "EFF-4"
+    ],
+    "id": "T1",
+    "initiator": "Drum level HIGH-HIGH",
+    "setpoint_text": "> 85 %",
+    "setpoint_unit": "%",
+    "setpoint_value": 85.0,
+    "tag": "LSHH-8901",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": "<",
+    "effects": [
+     "EFF-2",
+     "EFF-4"
+    ],
+    "id": "T2",
+    "initiator": "Drum level LOW-LOW",
+    "setpoint_text": "< 15 %",
+    "setpoint_unit": "%",
+    "setpoint_value": 15.0,
+    "tag": "LSLL-8901",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": ">",
+    "effects": [
+     "EFF-3",
+     "EFF-4"
+    ],
+    "id": "T3",
+    "initiator": "Drum pressure HIGH-HIGH",
+    "setpoint_text": "> 8 barg",
+    "setpoint_unit": "barg",
+    "setpoint_value": 8.0,
+    "tag": "PSHH-8902",
+    "vote_cell_text": "1oo2"
+   },
+   {
+    "comparator": null,
+    "effects": [
+     "EFF-1",
+     "EFF-2",
+     "EFF-3",
+     "EFF-4"
+    ],
+    "id": "T4",
+    "initiator": "Emergency stop (manual)",
+    "setpoint_text": "Manual",
+    "setpoint_unit": null,
+    "setpoint_value": null,
+    "tag": "HS-8901",
+    "vote_cell_text": "1oo1"
+   }
+  ],
+  "sil": 1,
+  "tag": "FA-8901",
+  "work_no": "BA-0256"
+ },
+ "_provenance": {
+  "basis": "manual reading of the rendered C&E sheet images",
+  "by": "EXEC-1",
+  "date": "2026-08-30",
+  "extractor_note": "X-mark column positions are not recoverable from pdftotext -raw; the typed rows and effect ids ARE cross-checked against the -raw text"
+ }
+}

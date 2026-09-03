@@ -1,0 +1,1221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/fixtures.schema.json",
+  "title": "Fixture key registry",
+  "description": "The fixture key registry of blueprint section 10.5: fixtures.json is the one file every number in the product, the deck and the tests reads from; these keys are the contract between the harness, the copy audit, the deck build and the Console; the harness may add keys and may never rename one (so no object here closes additionalProperties unless the key set is a closed enum of section 9). Annotations: \"const\" carries a value frozen by section 1 or by G1's admission rule (corpus counts, recipe constants, stated literals); \"x-expected\" carries the value section 10.5 states in parentheses at freezing time, which may move after a rebuild and then moves here first and everywhere else by substitution. Notation of 10.5: <population>[t] is an array of rows selected by their t field (the fx selector [t=0.62]); [wo_number] is an object keyed by work-order number.",
+  "x-blueprint": "10.5",
+  "type": "object",
+  "required": [
+    "inventory",
+    "method",
+    "workbook",
+    "populations",
+    "coverage",
+    "coverage_scores",
+    "coverage_labels",
+    "verbatim",
+    "dates",
+    "latency",
+    "integrity",
+    "families",
+    "chains",
+    "debt",
+    "proof_tests",
+    "equipment_master",
+    "personnel",
+    "golden",
+    "legacy",
+    "demo"
+  ],
+  "properties": {
+    "inventory": {
+      "type": "object",
+      "required": [
+        "files_total",
+        "by_class",
+        "corpus_sha256",
+        "extractor",
+        "canonical_form_version"
+      ],
+      "properties": {
+        "files_total": {
+          "type": "integer",
+          "const": 98
+        },
+        "by_class": {
+          "type": "object",
+          "description": "file count per DocumentClass of section 9.2",
+          "propertyNames": {
+            "$ref": "entities/document.schema.json#/$defs/DocumentClass"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "corpus_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "extractor": {
+          "type": "string",
+          "description": "exact build string of the one extractor (pdftotext -raw, build 26.02.0 in this run, ADR-005 and D-11)"
+        },
+        "canonical_form_version": {
+          "type": "string",
+          "const": "1",
+          "description": "equals Manifest.canonical_form_version of section 9.1"
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "required": [
+        "recipe_sha256",
+        "stop_list_sha256",
+        "threshold",
+        "window_multiplier",
+        "min_content_words",
+        "strict_rule",
+        "strict_sections",
+        "strict_cut_marker",
+        "labels_status",
+        "unscoreable_ids"
+      ],
+      "properties": {
+        "recipe_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "stop_list_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "threshold": {
+          "type": "number",
+          "const": 0.62
+        },
+        "window_multiplier": {
+          "type": "integer",
+          "const": 2
+        },
+        "min_content_words": {
+          "type": "integer",
+          "const": 3
+        },
+        "strict_rule": {
+          "type": "string",
+          "description": "the strict-layer composition rule of section 9.5 in words"
+        },
+        "strict_sections": {
+          "$ref": "entities/coverage.schema.json#/$defs/CoverageMethod/properties/strict_sections"
+        },
+        "strict_cut_marker": {
+          "$ref": "entities/coverage.schema.json#/$defs/CoverageMethod/properties/strict_cut_marker"
+        },
+        "labels_status": {
+          "$ref": "entities/coverage.schema.json#/$defs/CoverageMethod/properties/labels_status"
+        },
+        "unscoreable_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "workbook": {
+      "type": "object",
+      "required": [
+        "rows",
+        "reported_first",
+        "reported_last",
+        "completed_last",
+        "work_types",
+        "breakdown_flagged",
+        "breakdown_kinds",
+        "all_cost_idr",
+        "all_labor_hours",
+        "incomplete",
+        "lead_time",
+        "discipline_counts"
+      ],
+      "properties": {
+        "rows": {
+          "type": "integer",
+          "const": 211
+        },
+        "reported_first": {
+          "type": "string",
+          "format": "date"
+        },
+        "reported_last": {
+          "type": "string",
+          "format": "date"
+        },
+        "completed_last": {
+          "type": "string",
+          "format": "date"
+        },
+        "work_types": {
+          "type": "object",
+          "description": "row count per work_type of section 9.4",
+          "propertyNames": {
+            "$ref": "entities/operations.schema.json#/$defs/WorkOrder/properties/work_type"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "breakdown_flagged": {
+          "$ref": "#/$defs/BreakdownTotals"
+        },
+        "breakdown_kinds": {
+          "type": "object",
+          "required": [
+            "unplanned",
+            "planned_flagged"
+          ],
+          "properties": {
+            "unplanned": {
+              "$ref": "#/$defs/BreakdownTotals"
+            },
+            "planned_flagged": {
+              "$ref": "#/$defs/BreakdownTotals"
+            }
+          }
+        },
+        "all_cost_idr": {
+          "type": "integer"
+        },
+        "all_labor_hours": {
+          "type": "number"
+        },
+        "incomplete": {
+          "type": "object",
+          "required": [
+            "rows",
+            "share",
+            "by_work_type",
+            "emergency_rows"
+          ],
+          "properties": {
+            "rows": {
+              "type": "integer"
+            },
+            "share": {
+              "type": "number"
+            },
+            "by_work_type": {
+              "type": "object",
+              "propertyNames": {
+                "$ref": "entities/operations.schema.json#/$defs/WorkOrder/properties/work_type"
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "emergency_rows": {
+              "type": "integer"
+            }
+          }
+        },
+        "lead_time": {
+          "type": "object",
+          "required": [
+            "median_h",
+            "at_least_24h",
+            "share",
+            "min_h",
+            "max_h"
+          ],
+          "properties": {
+            "median_h": {
+              "type": "number"
+            },
+            "at_least_24h": {
+              "type": "integer"
+            },
+            "share": {
+              "type": "number"
+            },
+            "min_h": {
+              "type": "number"
+            },
+            "max_h": {
+              "type": "number"
+            }
+          }
+        },
+        "discipline_counts": {
+          "type": "object",
+          "description": "row count per discipline of section 9.4",
+          "propertyNames": {
+            "$ref": "entities/operations.schema.json#/$defs/WorkOrder/properties/discipline"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "populations": {
+      "type": "object",
+      "description": "population sizes (record counts) of the five populations of section 9.5 CoverageSummary.population",
+      "required": [
+        "unplanned_failure",
+        "failure",
+        "unplanned_breakdowns",
+        "planned_flagged",
+        "all"
+      ],
+      "properties": {
+        "unplanned_failure": {
+          "type": "integer",
+          "x-expected": 57
+        },
+        "failure": {
+          "type": "integer",
+          "x-expected": 66
+        },
+        "unplanned_breakdowns": {
+          "type": "integer",
+          "x-expected": 23
+        },
+        "planned_flagged": {
+          "type": "integer",
+          "x-expected": 8
+        },
+        "all": {
+          "type": "integer",
+          "const": 211
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "generous",
+        "strict",
+        "bands"
+      ],
+      "properties": {
+        "generous": {
+          "$ref": "#/$defs/CoverageLayer"
+        },
+        "strict": {
+          "$ref": "#/$defs/CoverageLayer"
+        },
+        "bands": {
+          "type": "object",
+          "required": [
+            "unplanned_failure"
+          ],
+          "properties": {
+            "unplanned_failure": {
+              "type": "array",
+              "description": "the three bands at t = 0.62 over the unplanned-failure population, one row per threshold, selected by t",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "t",
+                  "no_lesson",
+                  "copied_row_only",
+                  "taught"
+                ],
+                "properties": {
+                  "t": {
+                    "type": "number"
+                  },
+                  "no_lesson": {
+                    "type": "integer"
+                  },
+                  "copied_row_only": {
+                    "type": "integer"
+                  },
+                  "taught": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "contains": {
+                "properties": {
+                  "t": {
+                    "const": 0.62
+                  }
+                },
+                "required": [
+                  "t"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "coverage_scores": {
+      "type": "object",
+      "description": "keyed by wo_number; one entry per work order of the workbook",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "generous",
+          "strict"
+        ],
+        "properties": {
+          "generous": {
+            "$ref": "#/$defs/CoverageScoreLayer"
+          },
+          "strict": {
+            "$ref": "#/$defs/CoverageScoreLayer"
+          }
+        }
+      }
+    },
+    "coverage_labels": {
+      "type": "object",
+      "required": [
+        "status",
+        "uncovered_ids",
+        "uncovered_count",
+        "share",
+        "breakdowns",
+        "downtime_h",
+        "cost_idr",
+        "kappa_covered",
+        "kappa_taught",
+        "proxy_agreement"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "entities/coverage.schema.json#/$defs/CoverageMethod/properties/labels_status"
+        },
+        "uncovered_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uncovered_count": {
+          "type": "integer"
+        },
+        "share": {
+          "type": "number"
+        },
+        "breakdowns": {
+          "type": "integer"
+        },
+        "downtime_h": {
+          "type": "number"
+        },
+        "cost_idr": {
+          "type": "integer"
+        },
+        "kappa_covered": {
+          "type": "number"
+        },
+        "kappa_taught": {
+          "type": "number"
+        },
+        "proxy_agreement": {
+          "type": "object",
+          "required": [
+            "generous",
+            "strict"
+          ],
+          "properties": {
+            "generous": {
+              "$ref": "#/$defs/ProxyAgreementLayer"
+            },
+            "strict": {
+              "$ref": "#/$defs/ProxyAgreementLayer"
+            }
+          }
+        }
+      }
+    },
+    "verbatim": {
+      "type": "object",
+      "description": "work orders whose narrative field is reused verbatim in a lesson, per field and over any field, generous layer; strict_any_field is the same count over the strict layer",
+      "required": [
+        "problem_description",
+        "root_cause",
+        "corrective_action",
+        "any_field",
+        "strict_any_field"
+      ],
+      "properties": {
+        "problem_description": {
+          "type": "integer"
+        },
+        "root_cause": {
+          "type": "integer"
+        },
+        "corrective_action": {
+          "type": "integer"
+        },
+        "any_field": {
+          "type": "integer"
+        },
+        "strict_any_field": {
+          "type": "integer",
+          "x-expected": 0
+        }
+      }
+    },
+    "dates": {
+      "type": "object",
+      "required": [
+        "parsed",
+        "first",
+        "last",
+        "window_days",
+        "median_gap_d",
+        "mode_gap_d",
+        "mode_count",
+        "within_set_gap_d",
+        "days_after_last_breakdown"
+      ],
+      "properties": {
+        "parsed": {
+          "type": "integer",
+          "x-expected": 56
+        },
+        "first": {
+          "type": "string",
+          "format": "date"
+        },
+        "last": {
+          "type": "string",
+          "format": "date"
+        },
+        "window_days": {
+          "type": "integer",
+          "x-expected": 101
+        },
+        "median_gap_d": {
+          "type": "number"
+        },
+        "mode_gap_d": {
+          "type": "integer"
+        },
+        "mode_count": {
+          "type": "integer"
+        },
+        "within_set_gap_d": {
+          "type": "integer",
+          "x-expected": 4
+        },
+        "days_after_last_breakdown": {
+          "type": "integer",
+          "x-expected": 114
+        }
+      }
+    },
+    "latency": {
+      "type": "object",
+      "required": [
+        "pairs",
+        "median_d"
+      ],
+      "properties": {
+        "pairs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "wo_number",
+              "tag",
+              "opl_id",
+              "report_date",
+              "date_of_sharing",
+              "days"
+            ],
+            "properties": {
+              "wo_number": {
+                "type": "string"
+              },
+              "tag": {
+                "type": "string"
+              },
+              "opl_id": {
+                "type": "string"
+              },
+              "report_date": {
+                "type": "string",
+                "format": "date"
+              },
+              "date_of_sharing": {
+                "type": "string",
+                "format": "date"
+              },
+              "days": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "median_d": {
+          "type": "number",
+          "x-expected": 472.5
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "required": [
+        "total",
+        "rules",
+        "observations"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "x-expected": 174,
+          "description": "the register total, the sum over rules; observations are reported outside it"
+        },
+        "rules": {
+          "type": "object",
+          "description": "finding count per rule, CD-1 to CD-18 without CD-3 (no CD-3 exists)",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^CD-(1|2|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18)$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "required": [
+            "CD-1",
+            "CD-2",
+            "CD-4",
+            "CD-5",
+            "CD-6",
+            "CD-7",
+            "CD-8",
+            "CD-9",
+            "CD-10",
+            "CD-11",
+            "CD-12",
+            "CD-13",
+            "CD-14",
+            "CD-17",
+            "CD-18"
+          ]
+        },
+        "observations": {
+          "type": "object",
+          "description": "observation counts reported outside the total",
+          "required": [
+            "CD-15",
+            "CD-16"
+          ],
+          "properties": {
+            "CD-15": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "CD-16": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "families": {
+      "type": "object",
+      "required": [
+        "list",
+        "r_by_tag",
+        "multi_family_wos"
+      ],
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "entities/operations.schema.json#/$defs/FailureFamily"
+          }
+        },
+        "r_by_tag": {
+          "type": "object",
+          "description": "keyed by equipment tag; r is the share of the asset's unplanned-failure records in a family (section 9.5)",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "multi_family_wos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-expected": []
+        }
+      }
+    },
+    "chains": {
+      "type": "object",
+      "required": [
+        "links",
+        "by_tag"
+      ],
+      "properties": {
+        "links": {
+          "type": "integer",
+          "x-expected": 18,
+          "description": "count of causal links; the links themselves are chains.json of the bundle"
+        },
+        "by_tag": {
+          "type": "object",
+          "description": "link count keyed by equipment tag",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "properties": {
+            "GA-1201A": {
+              "type": "integer",
+              "x-expected": 4
+            }
+          }
+        }
+      }
+    },
+    "debt": {
+      "type": "object",
+      "required": [
+        "coefficients",
+        "D_max",
+        "C_max",
+        "per_asset"
+      ],
+      "properties": {
+        "coefficients": {
+          "$ref": "entities/coverage.schema.json#/$defs/DebtCluster/properties/coefficients"
+        },
+        "D_max": {
+          "type": "number"
+        },
+        "C_max": {
+          "type": "integer"
+        },
+        "per_asset": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "tag",
+              "rank",
+              "uncovered_wo_numbers",
+              "D_h",
+              "C_idr",
+              "k",
+              "r",
+              "incomplete_uncovered",
+              "score"
+            ],
+            "properties": {
+              "tag": {
+                "type": "string"
+              },
+              "rank": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "uncovered_wo_numbers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "D_h": {
+                "type": "number"
+              },
+              "C_idr": {
+                "type": "integer"
+              },
+              "k": {
+                "type": "number"
+              },
+              "r": {
+                "type": "number"
+              },
+              "incomplete_uncovered": {
+                "type": "integer",
+                "description": "reported beside the score and never inside it (section 9.5)"
+              },
+              "score": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "proof_tests": {
+      "type": "object",
+      "required": [
+        "total",
+        "by_class"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "x-expected": 33
+        },
+        "by_class": {
+          "type": "object",
+          "description": "count per test_class of section 9.4 ProofTest",
+          "additionalProperties": false,
+          "required": [
+            "sis_proof_test",
+            "sil_logic_test",
+            "calibration_proof_test",
+            "statutory_relief_test"
+          ],
+          "properties": {
+            "sis_proof_test": {
+              "type": "integer",
+              "x-expected": 18
+            },
+            "sil_logic_test": {
+              "type": "integer",
+              "x-expected": 5
+            },
+            "calibration_proof_test": {
+              "type": "integer",
+              "x-expected": 7
+            },
+            "statutory_relief_test": {
+              "type": "integer",
+              "x-expected": 3
+            }
+          }
+        }
+      }
+    },
+    "equipment_master": {
+      "type": "array",
+      "description": "one row per asset",
+      "items": {
+        "type": "object",
+        "required": [
+          "tag",
+          "service",
+          "interlock_ref",
+          "sil_sheet",
+          "criticality",
+          "work_orders",
+          "failure_rows",
+          "breakdown_rows",
+          "planned_rows",
+          "unplanned_rows",
+          "unplanned_h",
+          "flagged_h",
+          "breakdown_cost_idr"
+        ],
+        "properties": {
+          "tag": {
+            "type": "string"
+          },
+          "service": {
+            "type": "string"
+          },
+          "interlock_ref": {
+            "type": "string",
+            "description": "verbatim LOGIC No text (section 9.3 Equipment.interlock_ref)"
+          },
+          "sil_sheet": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "criticality": {
+            "$ref": "entities/asset.schema.json#/$defs/Equipment/properties/criticality_datasheet"
+          },
+          "work_orders": {
+            "type": "integer"
+          },
+          "failure_rows": {
+            "type": "integer"
+          },
+          "breakdown_rows": {
+            "type": "integer"
+          },
+          "planned_rows": {
+            "type": "integer"
+          },
+          "unplanned_rows": {
+            "type": "integer"
+          },
+          "unplanned_h": {
+            "type": "number"
+          },
+          "flagged_h": {
+            "type": "number"
+          },
+          "breakdown_cost_idr": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "personnel": {
+      "type": "object",
+      "required": [
+        "people",
+        "classes",
+        "dual_role_supervisors",
+        "managers_not_in_workbook"
+      ],
+      "properties": {
+        "people": {
+          "type": "integer",
+          "x-expected": 23
+        },
+        "classes": {
+          "type": "object",
+          "description": "people count keyed by id class",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "dual_role_supervisors": {
+          "type": "integer",
+          "x-expected": 3
+        },
+        "managers_not_in_workbook": {
+          "type": "integer",
+          "x-expected": 2
+        }
+      }
+    },
+    "golden": {
+      "type": "object",
+      "required": [
+        "size",
+        "by_category",
+        "hard_gate_count"
+      ],
+      "properties": {
+        "size": {
+          "type": "integer",
+          "x-expected": 102
+        },
+        "by_category": {
+          "type": "object",
+          "description": "case count keyed by GoldenCase.category of section 9.11",
+          "propertyNames": {
+            "$ref": "golden_case.schema.json#/$defs/GoldenCase/properties/category"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "hard_gate_count": {
+          "type": "integer",
+          "x-expected": 16
+        }
+      }
+    },
+    "legacy": {
+      "type": "object",
+      "required": [
+        "headline_all",
+        "note"
+      ],
+      "properties": {
+        "headline_all": {
+          "type": "integer",
+          "x-expected": 158,
+          "description": "the legacy v1.0 scorer's all-order headline: uncovered count of the 211 work orders (158 of 211 at freezing)"
+        },
+        "note": {
+          "type": "string",
+          "const": "evidence only"
+        }
+      }
+    },
+    "demo": {
+      "type": "object",
+      "required": [
+        "primary_wo",
+        "backup_wo",
+        "contrast_wo"
+      ],
+      "properties": {
+        "primary_wo": {
+          "type": "string",
+          "const": "WO-240007"
+        },
+        "backup_wo": {
+          "type": "string",
+          "const": "WO-240039"
+        },
+        "contrast_wo": {
+          "type": "string",
+          "const": "WO-240060"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "CoverageLayer": {
+      "title": "coverage.<layer>",
+      "description": "one series per population of section 9.5 CoverageSummary.population",
+      "type": "object",
+      "required": [
+        "unplanned_failure",
+        "failure",
+        "unplanned_breakdowns",
+        "planned_flagged",
+        "all"
+      ],
+      "properties": {
+        "unplanned_failure": {
+          "$ref": "#/$defs/CoverageSeries"
+        },
+        "failure": {
+          "$ref": "#/$defs/CoverageSeries"
+        },
+        "unplanned_breakdowns": {
+          "$ref": "#/$defs/CoverageSeries"
+        },
+        "planned_flagged": {
+          "$ref": "#/$defs/CoverageSeries"
+        },
+        "all": {
+          "$ref": "#/$defs/CoverageSeries"
+        }
+      }
+    },
+    "CoverageSeries": {
+      "title": "coverage.<layer>.<population>",
+      "description": "one row per threshold t in 0.50, 0.55, 0.60, 0.62, 0.65, 0.70, 0.75, selected by t",
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "$ref": "#/$defs/CoverageCell"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "properties": {
+              "t": {
+                "const": 0.5
+              }
+            },
+            "required": [
+              "t"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "t": {
+                "const": 0.55
+              }
+            },
+            "required": [
+              "t"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "t": {
+                "const": 0.6
+              }
+            },
+            "required": [
+              "t"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "t": {
+                "const": 0.62
+              }
+            },
+            "required": [
+              "t"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "t": {
+                "const": 0.65
+              }
+            },
+            "required": [
+              "t"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "t": {
+                "const": 0.7
+              }
+            },
+            "required": [
+              "t"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "t": {
+                "const": 0.75
+              }
+            },
+            "required": [
+              "t"
+            ],
+            "type": "object"
+          }
+        }
+      ]
+    },
+    "CoverageCell": {
+      "title": "coverage.<layer>.<population>[t]",
+      "type": "object",
+      "required": [
+        "t",
+        "uncovered",
+        "share",
+        "breakdowns",
+        "downtime_h",
+        "cost_idr"
+      ],
+      "properties": {
+        "t": {
+          "type": "number",
+          "enum": [
+            0.5,
+            0.55,
+            0.6,
+            0.62,
+            0.65,
+            0.7,
+            0.75
+          ]
+        },
+        "uncovered": {
+          "type": "integer"
+        },
+        "share": {
+          "type": "number"
+        },
+        "breakdowns": {
+          "type": "integer"
+        },
+        "downtime_h": {
+          "type": "number"
+        },
+        "cost_idr": {
+          "type": "integer"
+        }
+      }
+    },
+    "BreakdownTotals": {
+      "title": "workbook.breakdown_flagged and workbook.breakdown_kinds.<kind>",
+      "type": "object",
+      "required": [
+        "rows",
+        "hours",
+        "cost_idr"
+      ],
+      "properties": {
+        "rows": {
+          "type": "integer"
+        },
+        "hours": {
+          "type": "number"
+        },
+        "cost_idr": {
+          "type": "integer"
+        }
+      }
+    },
+    "CoverageScoreLayer": {
+      "title": "coverage_scores[wo_number].<layer>",
+      "type": "object",
+      "required": [
+        "best_ratio",
+        "matched_field",
+        "matched_lesson"
+      ],
+      "properties": {
+        "best_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "matched_field": {
+          "$ref": "entities/coverage.schema.json#/$defs/CoverageAssessment/properties/matched_field"
+        },
+        "matched_lesson": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "ProxyAgreementLayer": {
+      "title": "coverage_labels.proxy_agreement.<layer>",
+      "type": "object",
+      "required": [
+        "precision",
+        "recall",
+        "fp",
+        "fn"
+      ],
+      "properties": {
+        "precision": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "recall": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "fp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fn": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

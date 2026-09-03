@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thehub.finerium.dev/contracts/entities/document.schema.json",
+  "title": "Corpus entities",
+  "description": "Blueprint 9.2 corpus entities. The canonical form, frozen: canonical(s) applies Unicode NFKC normalisation, joins soft hyphens so a word broken across a line becomes one token, collapses every run of whitespace to one space and trims; case and punctuation are kept; the identity of a quoted span is the SHA-256 of its canonical form encoded as UTF-8. Chunks never cross a unit boundary, never overlap and never exceed 512 tokens. Only chunks of published, current revisions exist in the retrieval index; superseded revisions are reachable only through the labelled history toggle.",
+  "x-blueprint": "9.2",
+  "$defs": {
+    "DocumentClass": {
+      "title": "DocumentClass",
+      "type": "string",
+      "enum": ["datasheet", "ga_drawing", "interlock", "plot_plan", "opl", "pid", "workbook", "organiser_note"]
+    },
+    "ApprovalStatus": {
+      "title": "ApprovalStatus",
+      "type": "string",
+      "enum": ["issued_for_operation", "issued_for_construction", "issued_for_approval", "issued_for_review", "approved", "unknown"]
+    },
+    "Document": {
+      "title": "Document",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "doc_no": { "type": ["string", "null"] },
+        "class": { "$ref": "#/$defs/DocumentClass" },
+        "subject_tag": { "type": ["string", "null"] },
+        "sha256": { "type": "string" },
+        "source_path": { "type": "string" },
+        "page_count": { "type": "integer" },
+        "file_marker": { "type": ["string", "null"] }
+      },
+      "required": ["id", "doc_no", "class", "subject_tag", "sha256", "source_path", "page_count", "file_marker"]
+    },
+    "DocumentRevision": {
+      "title": "DocumentRevision",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "document_id": { "type": "string" },
+        "revision": { "type": "string" },
+        "approval_status": { "$ref": "#/$defs/ApprovalStatus" },
+        "approval_status_text": { "type": "string" },
+        "revision_date": { "type": ["string", "null"] },
+        "prepared_by_alias": { "type": ["string", "null"] },
+        "reviewed_by_alias": { "type": ["string", "null"] },
+        "approved_by_alias": { "type": ["string", "null"] },
+        "date_of_sharing": { "type": ["string", "null"] },
+        "is_current": { "type": "boolean" },
+        "corpus_version_id": { "type": "string" }
+      },
+      "required": ["id", "document_id", "revision", "approval_status", "approval_status_text", "revision_date", "prepared_by_alias", "reviewed_by_alias", "approved_by_alias", "date_of_sharing", "is_current", "corpus_version_id"]
+    },
+    "DocumentEdge": {
+      "title": "DocumentEdge",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "from_document_id": { "type": "string" },
+        "to_document_id": { "type": "string" },
+        "edge_kind": { "type": "string", "enum": ["cross_reference", "assoc_docs", "note", "label"] },
+        "source_span_id": { "type": "string" }
+      },
+      "required": ["from_document_id", "to_document_id", "edge_kind", "source_span_id"]
+    },
+    "Span": {
+      "title": "Span",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "document_revision_id": { "type": "string" },
+        "page": { "type": "integer" },
+        "anchor_text": { "type": "string" },
+        "quote_hash": { "type": "string", "description": "sha256 over canonical(anchor_text)" },
+        "start_ordinal": { "type": "integer" },
+        "end_ordinal": { "type": "integer" }
+      },
+      "required": ["id", "document_revision_id", "page", "anchor_text", "quote_hash", "start_ordinal", "end_ordinal"]
+    },
+    "Claim": {
+      "title": "Claim",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "span_id": { "type": "string" },
+        "entity_binding": { "type": "string", "description": "string | \"NONE\"" },
+        "claim_kind": { "type": "string", "enum": ["parameter", "row", "note", "step", "footer", "title", "bom", "narrative"] },
+        "value_text": { "type": "string" },
+        "extracted_by": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "role": { "const": "AG-1" },
+                "model_id": { "type": "string" },
+                "prompt_version": { "type": "string" }
+              },
+              "required": ["role", "model_id", "prompt_version"]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "basis": { "const": "parser" }
+              },
+              "required": ["basis"]
+            }
+          ]
+        }
+      },
+      "required": ["id", "span_id", "entity_binding", "claim_kind", "value_text", "extracted_by"]
+    },
+    "Chunk": {
+      "title": "Chunk",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "document_revision_id": { "type": "string" },
+        "page": { "type": "integer" },
+        "ordinal": { "type": "integer" },
+        "unit_kind": { "type": "string", "enum": ["opl_step", "ce_row", "datasheet_group", "wo_field", "opl_section", "note"] },
+        "text": { "type": "string" },
+        "quote_hash": { "type": "string" },
+        "embedding": {
+          "type": "array",
+          "items": { "type": "number" },
+          "description": "vector(embedding_dim); the length equals corpus_version.embedding_dim (9.7, ADR-009)"
+        }
+      },
+      "required": ["id", "document_revision_id", "page", "ordinal", "unit_kind", "text", "quote_hash", "embedding"]
+    }
+  }
+}
