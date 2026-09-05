@@ -1,0 +1,663 @@
+{
+ "datasheet_cited_as_drawn": null,
+ "defects": [
+  {
+   "detail": "No title block, no reference box and no drawing number anywhere on the sheet; the datasheet, GA drawing and C&E cross-reference TJC-LLD-PID-3401.",
+   "kind": "missing_title_block"
+  },
+  {
+   "detail": "NOTES are plot-plan notes, garbled: 'COORDINATE IN PLANT DWG USING METRES.', 'ELEVATIONS RELATIVE TO CHASE EL V1-40', 'HAZARDOUS AREA CLASSIFICATION FOR mss MAT OLL.'; SEQ-3401 table rows 'T1-T6 | N2 FLOW > 150 kg/h | FLOW > 150 kg/h', 'EFF-1 | HIGH O2 OVER TEMPERATURE | TRIPS W', 'P1-P4 | PERMISSIVE TO | ENABLE STARTUP'; 'FIT-12am' under FT-17343; 'I2 (INERTING FAIL)' in the Interlock T3 box.",
+   "kind": "garbled_text"
+  },
+  {
+   "detail": "Interlock T4 box 'N2 FLOW > 150 kg/h' where C&E T4 is FSLL-17343 < 150 kg/h; the reactor vent valve under 'PV-3404' is tagged FV-3403 (the H2 injection valve); TSHH-3401 drawn at the bed and again at the heater outlet; an 'Interlock T1' box is routed to 'PERMISSIVE TO ENABLE STARTUP' although T1 is a trip; the Interlock T2 box describes the valve ('NORMALLY CLOSED, TRIPS ON HIGH PRESSURE') rather than the PSHH-3404 trip.",
+   "kind": "label_vs_ce_mismatch"
+  },
+  {
+   "detail": "No datasheet citation and no notes referring to the sequence beyond the table title 'SEQ-3401'; nozzle N3 is drawn as the reactor outlet where the GA schedule has N3 = PSV and N2 = OUTLET(BOTTOM).",
+   "kind": "other"
+  }
+ ],
+ "equipment_shown": [
+  "CATALYST REDUCTION REACTOR DC-3401A (vertical vessel: FIXED CATALYST, SAMPLE SHELL, Pd/Al2O3 CATALYST BED, SUPPORT AND HOLD-DOWN GRID, TOP MANWAY (M1), BOTTOM MANWAY (M2), MULTIPOINT THERMOCOUPLE TE-3401 (8 POINTS), INLET DISTRIBUTOR, TOP SUPPORT, SKIRT SUPPORT; nozzles N1, N3, M1, M2)",
+  "IN-LINE HEATER EA-3401 with SKIN THERMOCOUPLE and INSULATION CS",
+  "ANALYSIS (two off-sheet arrows), H2 INJECTION, TRIM GAS OR ANALYSIS, VENT, UNLOADING",
+  "Table 'SEQ-3401' (CAUSE / CAUSES / EFFECTS: 'T1-T6 | N2 FLOW > 150 kg/h | FLOW > 150 kg/h', 'EFF-1 | HIGH O2 OVER TEMPERATURE | TRIPS W', 'EFF-2 | | TRIP / MAINTAIN / INCREASE FLOW ON TRIP', 'EFF-3 | | FLOW ON TRIP', 'P1-P4 | PERMISSIVE TO | ENABLE STARTUP')"
+ ],
+ "file": "P&ID Set 3.png",
+ "image_px": [
+  1448,
+  1086
+ ],
+ "instruments": [
+  {
+   "as_drawn_text": "ANALYSIS",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "off-sheet arrow, left, after the SAMPLE CS valve",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.055,
+   "y": 0.237
+  },
+  {
+   "as_drawn_text": "SAMPLE CS",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "isolation",
+   "setpoint_as_drawn": null,
+   "x": 0.116,
+   "y": 0.237
+  },
+  {
+   "as_drawn_text": "DCS",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble above the FT/FI 17343 pair",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.212,
+   "y": 0.136
+  },
+  {
+   "as_drawn_text": "FT 17343",
+   "bound_tag": "FT-17343",
+   "foreign": false,
+   "note": "C&E start permissive 2 'N2 carrier flow established (> 150 kg/h) FT-17343'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.152,
+   "y": 0.189
+  },
+  {
+   "as_drawn_text": "FT-17343 FIT-12am",
+   "bound_tag": "FT-17343",
+   "foreign": false,
+   "note": "label between the bubbles; 'FIT-12am' garbled",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.207,
+   "y": 0.19
+  },
+  {
+   "as_drawn_text": "FI 17343",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.269,
+   "y": 0.189
+  },
+  {
+   "as_drawn_text": "FV-17343 FC/FO",
+   "bound_tag": "FV-17343",
+   "foreign": false,
+   "note": "C&E EFF-4 'MAINTAIN / INCREASE N2 FV-17343'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.207,
+   "y": 0.237
+  },
+  {
+   "as_drawn_text": "T4",
+   "bound_tag": "FSLL-17343",
+   "foreign": false,
+   "note": "bubble feeding the Interlock T4 box",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.197,
+   "y": 0.331
+  },
+  {
+   "as_drawn_text": "Interlock T4 N2 FLOW > 150 kg/h MAINTAIN / INCREASE FLOW ON TRIP",
+   "bound_tag": "FSLL-17343",
+   "foreign": false,
+   "note": "C&E T4 'Nitrogen carrier flow LOW-LOW FSLL-17343 < 150 kg/h' (sign reversed on the sheet)",
+   "role": "initiator",
+   "setpoint_as_drawn": "> 150 kg/h",
+   "x": 0.268,
+   "y": 0.331
+  },
+  {
+   "as_drawn_text": "CS BYPASS",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "pair of valves on the bypass around the N2 line",
+   "role": "isolation",
+   "setpoint_as_drawn": null,
+   "x": 0.321,
+   "y": 0.283
+  },
+  {
+   "as_drawn_text": "4\"-HC-3401-CS02-I",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "N2/H2 inlet line to N1",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.375,
+   "y": 0.228
+  },
+  {
+   "as_drawn_text": "N1",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "GA drawing N1 INLET(TOP) 4\"-150# RF",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.43,
+   "y": 0.216
+  },
+  {
+   "as_drawn_text": "TSHH-3401 High-High > 230 degC",
+   "bound_tag": "TSHH-3401",
+   "foreign": false,
+   "note": "C&E T1 'Bed temperature HIGH-HIGH TSHH-3401 > 230 degC 2oo3'",
+   "role": "initiator",
+   "setpoint_as_drawn": "> 230 degC",
+   "x": 0.39,
+   "y": 0.34
+  },
+  {
+   "as_drawn_text": "Interlock T1 2oo3 VOTING",
+   "bound_tag": "TSHH-3401",
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.39,
+   "y": 0.407
+  },
+  {
+   "as_drawn_text": "T1 2oo3 voting",
+   "bound_tag": "TSHH-3401",
+   "foreign": false,
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.39,
+   "y": 0.463
+  },
+  {
+   "as_drawn_text": "FT DCS",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble on the H2 injection line",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.148,
+   "y": 0.442
+  },
+  {
+   "as_drawn_text": "FT-3403",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "label between the FT/FI DCS bubbles; not in the C&E",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.207,
+   "y": 0.433
+  },
+  {
+   "as_drawn_text": "FI DCS",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.262,
+   "y": 0.442
+  },
+  {
+   "as_drawn_text": "H2",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble at the H2 INJECTION inlet",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.114,
+   "y": 0.467
+  },
+  {
+   "as_drawn_text": "H2 INJECTION",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.057,
+   "y": 0.49
+  },
+  {
+   "as_drawn_text": "FV-3403 FC/FO",
+   "bound_tag": "FV-3403",
+   "foreign": false,
+   "note": "C&E EFF-2 'CLOSE H2 INJECTION FV-3403'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.207,
+   "y": 0.49
+  },
+  {
+   "as_drawn_text": "EFF-2",
+   "bound_tag": "FV-3403",
+   "foreign": false,
+   "note": "bubble feeding the 'Interlock EFF / CLOSURE ON TRIP' box",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.199,
+   "y": 0.584
+  },
+  {
+   "as_drawn_text": "Interlock EFF CLOSURE ON TRIP",
+   "bound_tag": "FV-3403",
+   "foreign": false,
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.259,
+   "y": 0.577
+  },
+  {
+   "as_drawn_text": "4\"-HC-3401-CS02-I",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "vertical line to the heater inlet",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.312,
+   "y": 0.611
+  },
+  {
+   "as_drawn_text": "CATALYST REDUCTION REACTOR DC-3401A",
+   "bound_tag": "DC-3401A",
+   "foreign": false,
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.5,
+   "y": 0.104
+  },
+  {
+   "as_drawn_text": "M1",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "TOP MANWAY LOADING; GA M1 MANWAYTOP 24\" FLG",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.545,
+   "y": 0.15
+  },
+  {
+   "as_drawn_text": "N3",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "drawn as the reactor outlet; GA nozzle schedule N3 = PSV 3\"-150# RF, N2 = OUTLET(BOTTOM)",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.569,
+   "y": 0.216
+  },
+  {
+   "as_drawn_text": "PSV-3401 Set, 6 barg",
+   "bound_tag": "PSV-3401",
+   "foreign": false,
+   "note": "datasheet 'PSV PSV-3401 set 6 barg'; GA N3 PSV 'ToPSV-3401'",
+   "role": "relief",
+   "setpoint_as_drawn": "6 barg",
+   "x": 0.652,
+   "y": 0.184
+  },
+  {
+   "as_drawn_text": "4\"-HC-3401-CS02-I",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "outlet line to ANALYSIS",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.721,
+   "y": 0.228
+  },
+  {
+   "as_drawn_text": "ANALYSIS",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "off-sheet arrow, right",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.892,
+   "y": 0.239
+  },
+  {
+   "as_drawn_text": "O2 DCS",
+   "bound_tag": "AI-3401",
+   "foreign": false,
+   "note": "analyser bubble on the outlet line",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.769,
+   "y": 0.279
+  },
+  {
+   "as_drawn_text": "AI-3401",
+   "bound_tag": "AI-3401",
+   "foreign": false,
+   "note": "C&E T3 'Outlet O2 HIGH during H2 (inerting fail) AI-3401 > 100 ppm'; also start permissive 1 'O2 free / inerting done (AI-3401 < 100 ppm)'",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.82,
+   "y": 0.267
+  },
+  {
+   "as_drawn_text": "T3",
+   "bound_tag": "AI-3401",
+   "foreign": false,
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.769,
+   "y": 0.341
+  },
+  {
+   "as_drawn_text": "Interlock T3 HIGH O2 (> 100 ppm) I2 (INERTING FAIL)",
+   "bound_tag": "AI-3401",
+   "foreign": false,
+   "note": "'I2' where the C&E reads T3",
+   "role": "initiator",
+   "setpoint_as_drawn": "> 100 ppm",
+   "x": 0.871,
+   "y": 0.331
+  },
+  {
+   "as_drawn_text": "Interlock T1",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "box routed to 'PERMISSIVE TO ENABLE STARTUP'; C&E T1 is a trip, the permissives are AI-3401, FT-17343, TE-3401 and DCS reset",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.775,
+   "y": 0.382
+  },
+  {
+   "as_drawn_text": "PERMISSIVE TO ENABLE STARTUP",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.871,
+   "y": 0.382
+  },
+  {
+   "as_drawn_text": "MULTIPOINT THERMOCOUPLE TE-3401 (8 POINTS)",
+   "bound_tag": "TE-3401",
+   "foreign": false,
+   "note": "C&E start permissive 3 'Bed homogeneous 120 degC (all TE within 15 degC) TE-3401'; datasheet BED TC's TE-3401-1..8 multipoint",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.614,
+   "y": 0.38
+  },
+  {
+   "as_drawn_text": "VENT",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.433,
+   "y": 0.556
+  },
+  {
+   "as_drawn_text": "M2",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "BOTTOM MANWAY; GA M2 MANWAYBOTTOM 24\" FLG",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.533,
+   "y": 0.54
+  },
+  {
+   "as_drawn_text": "UNLOADING",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.585,
+   "y": 0.505
+  },
+  {
+   "as_drawn_text": "4\"-HC-3401-CS02-I SS CLADDING",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bottom outlet line",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.593,
+   "y": 0.558
+  },
+  {
+   "as_drawn_text": "PSHH-3404 High-High > 5 barg",
+   "bound_tag": "PSHH-3404",
+   "foreign": false,
+   "note": "C&E T2 'Reactor pressure HIGH-HIGH PSHH-3404 > 5 barg 1oo2'",
+   "role": "initiator",
+   "setpoint_as_drawn": "> 5 barg",
+   "x": 0.73,
+   "y": 0.48
+  },
+  {
+   "as_drawn_text": "PI 3404",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.794,
+   "y": 0.489
+  },
+  {
+   "as_drawn_text": "T2",
+   "bound_tag": "PSHH-3404",
+   "foreign": false,
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.73,
+   "y": 0.554
+  },
+  {
+   "as_drawn_text": "T2",
+   "bound_tag": "PSHH-3404",
+   "foreign": false,
+   "note": "second T2 bubble, feeding the Interlock T2 box and EFF-3",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.794,
+   "y": 0.54
+  },
+  {
+   "as_drawn_text": "Interlock T2 NORMALLY CLOSED, TRIPS ON HIGH PRESSURE",
+   "bound_tag": "PV-3404",
+   "foreign": false,
+   "note": "box text describes the vent valve action, not the PSHH-3404 trip",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.88,
+   "y": 0.519
+  },
+  {
+   "as_drawn_text": "EFF-3",
+   "bound_tag": "PV-3404",
+   "foreign": false,
+   "note": "C&E EFF-3 'OPEN REACTOR VENT PV-3404'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.794,
+   "y": 0.588
+  },
+  {
+   "as_drawn_text": "PV-3404 NORMALLY CLOSED TRIPS OPEN",
+   "bound_tag": "PV-3404",
+   "foreign": false,
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.754,
+   "y": 0.65
+  },
+  {
+   "as_drawn_text": "FV-3403 (FC/FO)",
+   "bound_tag": "PV-3404",
+   "foreign": false,
+   "note": "the vent valve under the PV-3404 label carries the H2 injection valve tag",
+   "role": "control_valve",
+   "setpoint_as_drawn": null,
+   "x": 0.747,
+   "y": 0.754
+  },
+  {
+   "as_drawn_text": "4\"-HC-3401-CS03-IE",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "vertical line to the vent/trim-gas valve",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.685,
+   "y": 0.653
+  },
+  {
+   "as_drawn_text": "TRIM GAS OR ANALYSIS",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.864,
+   "y": 0.722
+  },
+  {
+   "as_drawn_text": "INSULATION CS",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.479,
+   "y": 0.613
+  },
+  {
+   "as_drawn_text": "Local DCS",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.576,
+   "y": 0.611
+  },
+  {
+   "as_drawn_text": "TSHH-3401 (High >230 degC)",
+   "bound_tag": "TSHH-3401",
+   "foreign": false,
+   "note": "second TSHH-3401, at the heater outlet; C&E T1 is bed temperature",
+   "role": "initiator",
+   "setpoint_as_drawn": ">230 degC",
+   "x": 0.573,
+   "y": 0.655
+  },
+  {
+   "as_drawn_text": "TIC 17343",
+   "bound_tag": "TIC-17343",
+   "foreign": false,
+   "note": "controller; datasheet 'TIC CONTROL TIC-17343 (heater outlet)'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.63,
+   "y": 0.669
+  },
+  {
+   "as_drawn_text": "TIC 17343",
+   "bound_tag": "TIC-17343",
+   "foreign": false,
+   "note": "second TIC 17343 bubble, feeding T5",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.63,
+   "y": 0.763
+  },
+  {
+   "as_drawn_text": "SKIN THERMOCOUPLE",
+   "bound_tag": "EHT-3401",
+   "foreign": false,
+   "note": "C&E T5 'Heater element over-temperature EHT-3401 skin TC'",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.452,
+   "y": 0.664
+  },
+  {
+   "as_drawn_text": "4\"-HC-3401-CS02-I CS, SS Cladding",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "heater inlet line",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.387,
+   "y": 0.726
+  },
+  {
+   "as_drawn_text": "IN-LINE HEATER EA-3401",
+   "bound_tag": "EA-3401",
+   "foreign": false,
+   "note": "C&E EFF-1 'TRIP HEATER EA-3401'; datasheet HEATER EA-3401 ELECTRIC PRE-HEATER 180 kW",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.528,
+   "y": 0.777
+  },
+  {
+   "as_drawn_text": "HS-3401 EMERGENCY STOP",
+   "bound_tag": "HS-3401",
+   "foreign": false,
+   "note": "red dot symbol; C&E T6 'Emergency stop (manual) HS-3401'",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.428,
+   "y": 0.79
+  },
+  {
+   "as_drawn_text": "T5",
+   "bound_tag": "EHT-3401",
+   "foreign": false,
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.63,
+   "y": 0.837
+  },
+  {
+   "as_drawn_text": "INTERLOCK ELEMENT OVER-TEMPERATURE SKIN TC > 260 degC",
+   "bound_tag": "EHT-3401",
+   "foreign": false,
+   "note": "C&E T5 EHT-3401 skin TC > 260 degC 1oo1",
+   "role": "initiator",
+   "setpoint_as_drawn": "> 260 degC",
+   "x": 0.712,
+   "y": 0.83
+  },
+  {
+   "as_drawn_text": "SEQ-3401",
+   "bound_tag": "SEQ-3401",
+   "foreign": false,
+   "note": "table title; rows garbled (see equipment_shown)",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.138,
+   "y": 0.703
+  }
+ ],
+ "notes_as_drawn": [
+  "1. COORDINATE IN PLANT DWG USING METRES.",
+  "2. ELEVATIONS RELATIVE TO CHASE EL V1-40",
+  "3. EQUIPMENT SHOWN AT APPROX FOOTPRINT SCALE.",
+  "4. HAZARDOUS AREA CLASSIFICATION FOR mss MAT OLL."
+ ],
+ "provenance": {
+  "basis": "agent_transcription",
+  "by": "EXEC-1",
+  "date": "2026-08-27",
+  "review_status": "pending"
+ },
+ "ref_dwg_as_drawn": null,
+ "revision_block_as_drawn": null,
+ "seq_cited_as_drawn": "SEQ-3401",
+ "set": 3,
+ "tag": "DC-3401A",
+ "title_as_drawn": "CATALYST REDUCTION REACTOR DC-3401A"
+}

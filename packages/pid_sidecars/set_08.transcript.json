@@ -1,0 +1,661 @@
+{
+ "datasheet_cited_as_drawn": "TJC-LLD-GA-FA-8901",
+ "defects": [
+  {
+   "detail": "Bottom-right box reads 'Ref. Dwg. TJC-LLD-PID-XXXX'; datasheet, GA drawing and C&E cross-reference TJC-LLD-PID-8901.",
+   "kind": "placeholder_ref"
+  },
+  {
+   "detail": "Note 2 'Refer to Datasheet TJC-LLD-GA-FA-8901' cites the GA drawing number; FA-8901's datasheet is TJC-LLD-DS-FA-8901.",
+   "kind": "wrong_datasheet_citation"
+  },
+  {
+   "detail": "GA-1201A tags on a static drum: XV-1201A/B (both risers), PSLL 1201, PI 1201, TSHH-1201; Set 1 line numbers 4\"-HC-1002-CS02-I and 8\"-HC-1002-CS02-I; the 30 kW motor.",
+   "kind": "foreign_tag"
+  },
+  {
+   "detail": "'PSV-8901 Suction Pressure LOW-LOW Setpoint: 0.5 barg' on a pressure-switch symbol (datasheet PSV-8901 set 10 barg, the drum label itself reads 'PSV set. 10 barg'; 0.5 barg is GA-1201A's PSLL-1201 trip); 'HS-5901' for C&E T4 HS-8901; 'PT-8202' for permissive PT-8902; 'ZSO-4901 Suction OPEN' (SEQ-8901 has no valve-position permissive); 'FI 8012' under the FI-8912 line label; TT-8911 and PT-8913 tags on valve symbols; PCV-8905 (vent, EFF-3) drawn on the boot drain line; 'HV-8904' printed twice.",
+   "kind": "label_vs_ce_mismatch"
+  },
+  {
+   "detail": "Set 1's pump-suction train (FROM TANK, XV, 'Suction OPEN' permissive, PT/PI, pressure switch, 4\" reducer, MINIMUM FLOW BYPASS 'OPEN on Low Flow', XV-1201A/B with ZS, NRV) and motor 'M 30kW ... Foundation as per GA drawing' are reproduced on a static drum (datasheet DRIVER TYPE None (static)).",
+   "kind": "copy_paste_inset"
+  },
+  {
+   "detail": "'(Searing Temp Temp)', 'Auto-drain vaint', 'Passing/ Loaking fix', '(per CSE)', 'y2' nozzle label, 'PSV set.'.",
+   "kind": "garbled_text"
+  },
+  {
+   "detail": "No title block: the vessel label 'REFLUX ACCUMULATOR DRUM' and the Ref. Dwg. box only; 'from COLUMN DA-8910' is drawn as an arrow leaving the sheet; the C&E start permissives (LT-8901, PT-8902, LT-8903, DCS reset) appear only as the caption 'START PERMISSIVE (AND-gate)'.",
+   "kind": "other"
+  }
+ ],
+ "equipment_shown": [
+  "REFLUX ACCUMULATOR DRUM (horizontal drum with boot; label block 'SA-516 Gr.70 / Diameter: 1600 mm / PSV set. 10 barg / T-T Volume 9.6 m3 / PCV split-range'; 'C/L ELEVATION 4500 mm from GA drawing')",
+  "GA-8920 A (Standby) / GA-8920 B (Duty) reflux pumps",
+  "Motor M 30kW EQ1000089011- on 'Foundation as per GA drawing'",
+  "LOCAL CONTROL STATION with HS-5901",
+  "FROM TANK (4\" suction train copied from Set 1: XV-8901, PSV-8901 switch, PT-8202, PI 1201, 4\" reducer, MINIMUM FLOW BYPASS FY-8911, XV-1201A/B with ZS, NRV)",
+  "from COLUMN DA-8910 (8\" line, arrow leaving the sheet); REFLUX OUT FT-8912; PRODUCT OUT PT-8913; BOOT DRAIN (HV-8904)",
+  "OPL boxes: 'Testing & Car-Seal' and 'Safe drain collection vessel'; 'Vents and Drains details to safe vent header/Flare'",
+  "Inset 'SEQ-8901 (SIL 1)': LSHH-8901 >85%, LSLL-8901 15%, PSHH-8902 > 8 barg (each 1oo2 LatC), HS-8901 Manual E-stop, LOGIC, EFF-1 TRIP COLUMN FEED, EFF-2 TRIP REFLUX PUMP GA-8920 A/B, EFF-3 OPEN VENT PCV-8905, EFF-4 DCS ALARM, START PERMISSIVE (AND-gate)",
+  "Legend: LOGIC (e.g., AND-gate), START PERMISSIVE, TRIP, CAUSE-EFFECT"
+ ],
+ "file": "P&ID_Set 8.png",
+ "image_px": [
+  1536,
+  1024
+ ],
+ "instruments": [
+  {
+   "as_drawn_text": "FROM TANK",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "suction source copied from Set 1; the drum inlet is column overhead (GA N1 'Column overhead condensate')",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.047,
+   "y": 0.388
+  },
+  {
+   "as_drawn_text": "XV-8901",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "valve on the copied suction train with START PERMISSIVE and TRIP boxes; not in the datasheet or C&E",
+   "role": "isolation",
+   "setpoint_as_drawn": null,
+   "x": 0.216,
+   "y": 0.388
+  },
+  {
+   "as_drawn_text": "ZSO-4901 Suction OPEN",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "copied from Set 1's ZSO-1201 permissive; SEQ-8901 has no valve-position permissive and no 4901 asset exists",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.259,
+   "y": 0.313
+  },
+  {
+   "as_drawn_text": "PT-8202",
+   "bound_tag": "PT-8902",
+   "foreign": false,
+   "note": "C&E start permissive 2 'N2 blanket healthy PT-8902'; digit 2 for 9",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.322,
+   "y": 0.33
+  },
+  {
+   "as_drawn_text": "PI 1201",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A suction pressure indicator",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.358,
+   "y": 0.33
+  },
+  {
+   "as_drawn_text": "PSV-8901 Suction Pressure LOW-LOW Setpoint: 0.5 barg (per Cause/Effect)",
+   "bound_tag": "PSV-8901",
+   "foreign": false,
+   "note": "pressure-switch symbol on the suction line copied from Set 1's PSLL-1201; datasheet 'PSV PSV-8901 set 10 barg', GA N5 PSV 'ToPSV-8901'; no relief-valve symbol is drawn",
+   "role": "relief",
+   "setpoint_as_drawn": "0.5 barg",
+   "x": 0.282,
+   "y": 0.436
+  },
+  {
+   "as_drawn_text": "OPL Testing & Car-Seal",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "OPL box tied to the suction reducer",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.381,
+   "y": 0.445
+  },
+  {
+   "as_drawn_text": "MINIMUM FLOW BYPASS",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.233,
+   "y": 0.178
+  },
+  {
+   "as_drawn_text": "FY-8911 OPEN on Low Flow",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "copy of Set 1's FV-1201 minimum-flow valve; not in the datasheet or C&E",
+   "role": "control_valve",
+   "setpoint_as_drawn": null,
+   "x": 0.33,
+   "y": 0.193
+  },
+  {
+   "as_drawn_text": "4\"-HC-1002-CS02-I",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "Set 1 line number on the bypass; a line number, not a tag, so it is not a CD-9 foreign tag (see the foreign_tag defect)",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.402,
+   "y": 0.188
+  },
+  {
+   "as_drawn_text": "NRV",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.47,
+   "y": 0.156
+  },
+  {
+   "as_drawn_text": "ZS",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.412,
+   "y": 0.264
+  },
+  {
+   "as_drawn_text": "XV-1201A/B",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A discharge valve tag on the drum's left riser",
+   "role": "isolation",
+   "setpoint_as_drawn": null,
+   "x": 0.47,
+   "y": 0.264
+  },
+  {
+   "as_drawn_text": "PSLL 1201",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A suction pressure trip bubble at the drum",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.42,
+   "y": 0.325
+  },
+  {
+   "as_drawn_text": "8\"-HC-1002-CS02-I",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "Set 1 line number on the 8\" overhead line; a line number, not a tag, so it is not a CD-9 foreign tag (see the foreign_tag defect)",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.557,
+   "y": 0.098
+  },
+  {
+   "as_drawn_text": "TT-8911",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble above the overhead-line valve; not in the datasheet or C&E",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.719,
+   "y": 0.078
+  },
+  {
+   "as_drawn_text": "TT-8911",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "valve symbol in the overhead line carrying the transmitter tag",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.719,
+   "y": 0.13
+  },
+  {
+   "as_drawn_text": "Vents and Drains details to safe vent header/Flare",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.876,
+   "y": 0.039
+  },
+  {
+   "as_drawn_text": "OPL Safe drain collection vessel",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.792,
+   "y": 0.085
+  },
+  {
+   "as_drawn_text": "from COLUMN DA-8910",
+   "bound_tag": "DA-8910",
+   "foreign": false,
+   "note": "datasheet SERVICE 'Collect DA-8910 column overhead condensate'; the arrow is drawn leaving the sheet",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.941,
+   "y": 0.12
+  },
+  {
+   "as_drawn_text": "FI-8912",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "line label on the reflux pump suction",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.678,
+   "y": 0.173
+  },
+  {
+   "as_drawn_text": "FI 8012",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble under the FI-8912 label; 8012 for 8912",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.686,
+   "y": 0.225
+  },
+  {
+   "as_drawn_text": "XV-1201A/B",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A discharge valve tag on the drum's right riser, with ZS",
+   "role": "isolation",
+   "setpoint_as_drawn": null,
+   "x": 0.636,
+   "y": 0.264
+  },
+  {
+   "as_drawn_text": "ZS",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.693,
+   "y": 0.266
+  },
+  {
+   "as_drawn_text": "GA-8920 B (Duty)",
+   "bound_tag": "GA-8920",
+   "foreign": false,
+   "note": "C&E EFF-2 'TRIP REFLUX PUMP GA-8920 (protect)'; datasheet REFLUX PUMP GA-8920 A/B",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.837,
+   "y": 0.229
+  },
+  {
+   "as_drawn_text": "GA-8920 A (Standby)",
+   "bound_tag": "GA-8920",
+   "foreign": false,
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.779,
+   "y": 0.288
+  },
+  {
+   "as_drawn_text": "NRV",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.834,
+   "y": 0.181
+  },
+  {
+   "as_drawn_text": "REFLUX OUT FT-8912",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "off-sheet arrow; FT-8912 not in the datasheet or C&E",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.938,
+   "y": 0.186
+  },
+  {
+   "as_drawn_text": "TSHH-1201",
+   "bound_tag": null,
+   "foreign": true,
+   "note": "GA-1201A bearing temperature trip drawn at the drum product outlet",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.71,
+   "y": 0.308
+  },
+  {
+   "as_drawn_text": "TT-8901 (Searing Temp Temp)",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "garbled caption; not in the datasheet or C&E",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.71,
+   "y": 0.33
+  },
+  {
+   "as_drawn_text": "PT-8913",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "valve symbol in the product line carrying a transmitter tag",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.772,
+   "y": 0.337
+  },
+  {
+   "as_drawn_text": "PT-8913",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble on the product line",
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.876,
+   "y": 0.288
+  },
+  {
+   "as_drawn_text": "NRV",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.831,
+   "y": 0.337
+  },
+  {
+   "as_drawn_text": "PRODUCT OUT PT-8913",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "GA N3 PRODUCT OUT 4\"-150# RF",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.943,
+   "y": 0.337
+  },
+  {
+   "as_drawn_text": "REFLUX ACCUMULATOR DRUM",
+   "bound_tag": "FA-8901",
+   "foreign": false,
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.551,
+   "y": 0.364
+  },
+  {
+   "as_drawn_text": "SA-516 Gr.70",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet SHELL MATERIAL SA-516 Gr.70",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.551,
+   "y": 0.386
+  },
+  {
+   "as_drawn_text": "Diameter: 1600 mm",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet DIAMETER (ID) 1600 mm",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.507,
+   "y": 0.408
+  },
+  {
+   "as_drawn_text": "PSV set. 10 barg",
+   "bound_tag": "PSV-8901",
+   "foreign": false,
+   "note": "datasheet PSV-8901 set 10 barg; contradicts the 0.5 barg PSV-8901 label on the suction line",
+   "role": "relief",
+   "setpoint_as_drawn": "10 barg",
+   "x": 0.603,
+   "y": 0.408
+  },
+  {
+   "as_drawn_text": "T-T Volume 9.6 m3",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet VOLUME 9.6 m3, TANGENT-TANGENT 4800 mm",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.507,
+   "y": 0.427
+  },
+  {
+   "as_drawn_text": "PCV split-range",
+   "bound_tag": "PCV-8905",
+   "foreign": false,
+   "note": "datasheet N2 BLANKET 'PCV-8905 SPLIT-RANGE'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.601,
+   "y": 0.427
+  },
+  {
+   "as_drawn_text": "y2",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "garbled nozzle label at the boot",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.652,
+   "y": 0.471
+  },
+  {
+   "as_drawn_text": "C/L ELEVATION 4500 mm from GA drawing",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "GA drawing 'C/L ELEVATION 4500 mm'; plot plan ELEVATION EL+4.50",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.616,
+   "y": 0.498
+  },
+  {
+   "as_drawn_text": "HV-8904 HV-8904 Auto-drain vaint",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "tag printed twice; 'vaint' garbled; datasheet BOOT 'WATER DRAW-OFF BOOT DN300', GA N4 BOOT DRAIN 2\"",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.712,
+   "y": 0.447
+  },
+  {
+   "as_drawn_text": "PCV-8905 Split-range",
+   "bound_tag": "PCV-8905",
+   "foreign": false,
+   "note": "C&E EFF-3 'OPEN VENT PCV-8905 (relieve pressure)'; drawn on the boot drain line instead of the vent",
+   "role": "control_valve",
+   "setpoint_as_drawn": null,
+   "x": 0.776,
+   "y": 0.469
+  },
+  {
+   "as_drawn_text": "NRV",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.831,
+   "y": 0.469
+  },
+  {
+   "as_drawn_text": "FI 8914",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.876,
+   "y": 0.422
+  },
+  {
+   "as_drawn_text": "FI-8915",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "indicator",
+   "setpoint_as_drawn": null,
+   "x": 0.831,
+   "y": 0.525
+  },
+  {
+   "as_drawn_text": "BOOT DRAIN (HV-8904) Passing/ Loaking fix",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "garbled caption",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.94,
+   "y": 0.49
+  },
+  {
+   "as_drawn_text": "M 30kW EQ1000089011-",
+   "bound_tag": "EQ-1000089011",
+   "foreign": false,
+   "note": "datasheet EQUIPMENT ID EQ-1000089011 but DRIVER TYPE 'None (static)'; the 30 kW motor and foundation are GA-1201A's",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.551,
+   "y": 0.606
+  },
+  {
+   "as_drawn_text": "HS-5901 Hand Switch for Emergency Stop (per CSE)",
+   "bound_tag": "HS-8901",
+   "foreign": false,
+   "note": "C&E T4 'Emergency stop (manual) HS-8901'; digit 5 for 8; 'CSE' for C&E",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.793,
+   "y": 0.636
+  },
+  {
+   "as_drawn_text": "SEQ-8901 (SIL 1)",
+   "bound_tag": "SEQ-8901",
+   "foreign": false,
+   "note": "inset title; C&E LOGIC No SEQ-8901, SIL 1",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.208,
+   "y": 0.528
+  },
+  {
+   "as_drawn_text": "LSHH-8901 >85%",
+   "bound_tag": "LSHH-8901",
+   "foreign": false,
+   "note": "C&E T1 'Drum level HIGH-HIGH LSHH-8901 > 85 % 1oo2'; '1oo2 LatC' box",
+   "role": "initiator",
+   "setpoint_as_drawn": ">85%",
+   "x": 0.054,
+   "y": 0.57
+  },
+  {
+   "as_drawn_text": "LSLL-8901 15%",
+   "bound_tag": "LSLL-8901",
+   "foreign": false,
+   "note": "C&E T2 'Drum level LOW-LOW LSLL-8901 < 15 % 1oo2'",
+   "role": "initiator",
+   "setpoint_as_drawn": "15%",
+   "x": 0.054,
+   "y": 0.626
+  },
+  {
+   "as_drawn_text": "PSHH-8902 > 8 barg",
+   "bound_tag": "PSHH-8902",
+   "foreign": false,
+   "note": "C&E T3 'Drum pressure HIGH-HIGH PSHH-8902 > 8 barg 1oo2'",
+   "role": "initiator",
+   "setpoint_as_drawn": "> 8 barg",
+   "x": 0.054,
+   "y": 0.682
+  },
+  {
+   "as_drawn_text": "HS-8901 Manual E-stop",
+   "bound_tag": "HS-8901",
+   "foreign": false,
+   "note": "C&E T4",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.06,
+   "y": 0.745
+  },
+  {
+   "as_drawn_text": "LOGIC",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.192,
+   "y": 0.653
+  },
+  {
+   "as_drawn_text": "EFF-1 TRIP COLUMN FEED",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "C&E EFF-1 'TRIP COLUMN FEED (prevent carryover)'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.259,
+   "y": 0.584
+  },
+  {
+   "as_drawn_text": "EFF-2 TRIP REFLUX PUMP GA-8920 A/B",
+   "bound_tag": "GA-8920",
+   "foreign": false,
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.259,
+   "y": 0.638
+  },
+  {
+   "as_drawn_text": "EFF-3 OPEN VENT PCV-8905",
+   "bound_tag": "PCV-8905",
+   "foreign": false,
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.259,
+   "y": 0.692
+  },
+  {
+   "as_drawn_text": "EFF-4 DCS ALARM",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.259,
+   "y": 0.745
+  },
+  {
+   "as_drawn_text": "START PERMISSIVE (AND-gate)",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "caption only; C&E permissives LT-8901 (20-80%), PT-8902, LT-8903, DCS reset are not drawn",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.192,
+   "y": 0.789
+  }
+ ],
+ "notes_as_drawn": [
+  "1. This is sample data provided for CALIBER purpose only",
+  "2. Refer to Datasheet TJC-LLD-GA-FA-8901",
+  "3. See SEQ-8901 logic diagram"
+ ],
+ "provenance": {
+  "basis": "agent_transcription",
+  "by": "EXEC-1",
+  "date": "2026-08-27",
+  "review_status": "pending"
+ },
+ "ref_dwg_as_drawn": "Ref. Dwg. TJC-LLD-PID-XXXX",
+ "revision_block_as_drawn": null,
+ "seq_cited_as_drawn": "SEQ-8901",
+ "set": 8,
+ "tag": "FA-8901",
+ "title_as_drawn": null
+}

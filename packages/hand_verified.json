@@ -1,6 +1,9 @@
 {
- "basis": "manual reading of the eight P&ID PNGs (no text layer)",
+ "basis": "agent_transcription",
  "note": "`verified_by` / `verified_on` at the top level are the file-level default; each entry of `sets` carries its own pair so a later re-check of one sheet can be recorded without making the file-level date wrong for the other seven (plan Task 1.5, 'verifier role alias and date on every entry'). Mirrors the per-file `provenance` block in packages/pid_sidecars/set_0N.json.",
+ "review_status": "pending",
+ "reviewed_at": null,
+ "reviewed_by": null,
  "sets": [
   {
    "contradictions": [],

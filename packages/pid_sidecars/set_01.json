@@ -1,23 +1,23 @@
 {
- "datasheet_cited_as_drawn": "TJC-LLD-DS-GA-1201A",
  "defects": [
   {
    "detail": "Bottom-right box reads 'Ref. Dwg. TJC-LLD-PID-XXXX'; the datasheet, GA drawing and C&E cross-reference this sheet as TJC-LLD-PID-1201.",
-   "kind": "placeholder_ref"
+   "rule": "placeholder_ref"
   },
   {
    "detail": "Legend first row 'LOGIC' is followed by an illegible italic word; the inset repeats 'API PLAN 11 + PLAN 62' as 'API PLAN II + PLAN 62'; 'TT-1201 (Bearing Temp Temp)'; motor ID printed 'EQ1000012011-' with a trailing hyphen.",
-   "kind": "garbled_text"
+   "rule": "garbled_text"
   },
   {
    "detail": "FIT-1201 tags both a bubble and the valve symbol in the discharge header; both pump discharge valves are tagged XV-1201A/B while C&E EFF-2 names XV-1201 and the drawn suction valve is XV-1201; PSLL-1201 is drawn twice (suction line element and pump-A bubble).",
-   "kind": "label_vs_ce_mismatch"
+   "rule": "label_vs_ce_mismatch"
   },
   {
    "detail": "No title block: the sheet carries only the Ref. Dwg. box and the equipment label GA-1201A. C&E permissive 3 'Min-flow valve OPEN ZSO-1202', permissive 4 'DCS reset', initiator T5 MPR-1201 and effect EFF-5 'START STANDBY PUMP GA-1201B' are not drawn.",
-   "kind": "other"
+   "rule": "other"
   }
  ],
+ "document_id": "PID_Set_01.png",
  "equipment_shown": [
   "GA-1201A (two pump symbols side by side, one label between them)",
   "Motor M 30kW EQ1000012011- on 'Foundation as per GA drawing'",
@@ -26,349 +26,451 @@
   "LOCAL CONTROL STATION with HS-1201",
   "Inset 'API SEAL FLUSH PLANS (API PLAN 11 + PLAN 62 (per Datasheet and OPL)': Seal Flush from discharge / External Quench"
  ],
- "file": "PID_Set_01.png",
- "image_px": [
-  1184,
-  843
- ],
- "instruments": [
+ "hotspots": [
   {
    "as_drawn_text": "FROM STORAGE TANK 12-T-01",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "upstream source; not named in the datasheet or C&E",
+   "h_frac": 0.0,
+   "id": "set01-001",
    "role": "equipment",
-   "setpoint_as_drawn": null,
-   "x": 0.049,
-   "y": 0.44
+   "unbound_reason": "upstream source; not named in the datasheet or C&E",
+   "w_frac": 0.0,
+   "x_frac": 0.049,
+   "y_frac": 0.44
   },
   {
    "as_drawn_text": "XV-1201",
    "bound_tag": "XV-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "drawn as the suction valve with START PERMISSIVE and TRIP; C&E EFF-2 'CLOSE DISCHARGE XV-1201' names it as the discharge valve",
+   "h_frac": 0.0,
+   "id": "set01-002",
    "role": "isolation",
-   "setpoint_as_drawn": null,
-   "x": 0.228,
-   "y": 0.442
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.228,
+   "y_frac": 0.442
   },
   {
    "as_drawn_text": "ZSO-1201 Suction OPEN",
    "bound_tag": "ZSO-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E start permissive 1 'Suction valve OPEN ZSO-1201'",
+   "h_frac": 0.0,
+   "id": "set01-003",
    "role": "permissive",
-   "setpoint_as_drawn": null,
-   "x": 0.27,
-   "y": 0.365
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.27,
+   "y_frac": 0.365
   },
   {
    "as_drawn_text": "PSLL-1201 Suction Pressure LOW-LOW Setpoint: 0.5 barg (per Cause/Effect)",
    "bound_tag": "PSLL-1201",
+   "drawn_setpoint": "0.5 barg",
    "foreign": false,
-   "note": "C&E T1 PSLL-1201 < 0.5 barg 2oo3",
+   "h_frac": 0.0,
+   "id": "set01-004",
    "role": "initiator",
-   "setpoint_as_drawn": "0.5 barg",
-   "x": 0.291,
-   "y": 0.477
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.291,
+   "y_frac": 0.477
   },
   {
    "as_drawn_text": "PT-1201",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "feeds the START PERMISSIVE box; not in the C&E",
+   "h_frac": 0.0,
+   "id": "set01-005",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.332,
-   "y": 0.383
+   "unbound_reason": "feeds the START PERMISSIVE box; not in the C&E",
+   "w_frac": 0.0,
+   "x_frac": 0.332,
+   "y_frac": 0.383
   },
   {
    "as_drawn_text": "PI 1201",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set01-006",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.37,
-   "y": 0.383
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.37,
+   "y_frac": 0.383
   },
   {
    "as_drawn_text": "FV-1201 OPEN on Low Flow",
    "bound_tag": "FV-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E EFF-3 'OPEN MIN-FLOW FV-1201'; TRIP box above the actuator; MINIMUM FLOW BYPASS line",
+   "h_frac": 0.0,
+   "id": "set01-007",
    "role": "effect",
-   "setpoint_as_drawn": null,
-   "x": 0.338,
-   "y": 0.249
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.338,
+   "y_frac": 0.249
   },
   {
    "as_drawn_text": "4\"-HC-1002-CS02-I",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "line number on the minimum flow bypass",
+   "h_frac": 0.0,
+   "id": "set01-008",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.41,
-   "y": 0.24
+   "unbound_reason": "line number on the minimum flow bypass",
+   "w_frac": 0.0,
+   "x_frac": 0.41,
+   "y_frac": 0.24
   },
   {
    "as_drawn_text": "4\"-HC-1002-CS02-I",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "line number on the discharge header",
+   "h_frac": 0.0,
+   "id": "set01-009",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.57,
-   "y": 0.145
+   "unbound_reason": "line number on the discharge header",
+   "w_frac": 0.0,
+   "x_frac": 0.57,
+   "y_frac": 0.145
   },
   {
    "as_drawn_text": "NRV",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set01-010",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.49,
-   "y": 0.21
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.49,
+   "y_frac": 0.21
   },
   {
    "as_drawn_text": "NRV",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set01-011",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.65,
-   "y": 0.222
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.65,
+   "y_frac": 0.222
   },
   {
    "as_drawn_text": "XV-1201A/B",
    "bound_tag": "XV-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "pump A discharge valve with ZS; C&E EFF-2 names XV-1201 without A/B suffix",
+   "h_frac": 0.0,
+   "id": "set01-012",
    "role": "effect",
-   "setpoint_as_drawn": null,
-   "x": 0.49,
-   "y": 0.308
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.49,
+   "y_frac": 0.308
   },
   {
    "as_drawn_text": "ZS",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set01-013",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.427,
-   "y": 0.308
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.427,
+   "y_frac": 0.308
   },
   {
    "as_drawn_text": "PSLL 1201",
    "bound_tag": "PSLL-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "second PSLL-1201 symbol, bubble at the pump A discharge",
+   "h_frac": 0.0,
+   "id": "set01-014",
    "role": "initiator",
-   "setpoint_as_drawn": null,
-   "x": 0.437,
-   "y": 0.374
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.437,
+   "y_frac": 0.374
   },
   {
    "as_drawn_text": "GA-1201A",
    "bound_tag": "GA-1201A",
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set01-015",
    "role": "equipment",
-   "setpoint_as_drawn": null,
-   "x": 0.57,
-   "y": 0.35
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.57,
+   "y_frac": 0.35
   },
   {
    "as_drawn_text": "XV-1201A/B",
    "bound_tag": "XV-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "pump B discharge valve with ZS",
+   "h_frac": 0.0,
+   "id": "set01-016",
    "role": "effect",
-   "setpoint_as_drawn": null,
-   "x": 0.652,
-   "y": 0.308
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.652,
+   "y_frac": 0.308
   },
   {
    "as_drawn_text": "ZS",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set01-017",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.714,
-   "y": 0.308
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.714,
+   "y_frac": 0.308
   },
   {
    "as_drawn_text": "FI 1201",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set01-018",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.703,
-   "y": 0.264
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.703,
+   "y_frac": 0.264
   },
   {
    "as_drawn_text": "FIT-1201",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "bubble above the discharge header valve; TRIP box above it",
+   "h_frac": 0.0,
+   "id": "set01-019",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.737,
-   "y": 0.11
+   "unbound_reason": "bubble above the discharge header valve; TRIP box above it",
+   "w_frac": 0.0,
+   "x_frac": 0.737,
+   "y_frac": 0.11
   },
   {
    "as_drawn_text": "FIT-1201",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "valve symbol in the discharge header carrying the transmitter tag",
+   "h_frac": 0.0,
+   "id": "set01-020",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.737,
-   "y": 0.159
+   "unbound_reason": "valve symbol in the discharge header carrying the transmitter tag",
+   "w_frac": 0.0,
+   "x_frac": 0.737,
+   "y_frac": 0.159
   },
   {
    "as_drawn_text": "TRIP FSLL-1201 Discharge Flow LOW-LOW 9 m3/h per Cause/Effect",
    "bound_tag": "FSLL-1201",
+   "drawn_setpoint": "9 m3/h",
    "foreign": false,
-   "note": "C&E T2 FSLL-1201 < 9 m3/h for 30 s",
+   "h_frac": 0.0,
+   "id": "set01-021",
    "role": "initiator",
-   "setpoint_as_drawn": "9 m3/h",
-   "x": 0.843,
-   "y": 0.089
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.843,
+   "y_frac": 0.089
   },
   {
    "as_drawn_text": "TO REACTOR DC-4501",
    "bound_tag": "DC-4501",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "datasheet SERVICE 'Hexane feed transfer to 1st Polymerization Reactor DC-4501'",
+   "h_frac": 0.0,
+   "id": "set01-022",
    "role": "equipment",
-   "setpoint_as_drawn": null,
-   "x": 0.955,
-   "y": 0.157
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.955,
+   "y_frac": 0.157
   },
   {
    "as_drawn_text": "TSHH-1201 TT-1201 (Bearing Temp Temp)",
    "bound_tag": "TSHH-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E T4 TSHH-1201 > 95 degC; wired to a TRIP box -> 'TRIP per C&E'; 'Temp Temp' duplicated",
+   "h_frac": 0.0,
+   "id": "set01-023",
    "role": "initiator",
-   "setpoint_as_drawn": null,
-   "x": 0.727,
-   "y": 0.362
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.727,
+   "y_frac": 0.362
   },
   {
    "as_drawn_text": "VSHH-1201 VT-1201 (Bearing Vibration)",
    "bound_tag": "VSHH-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E T3 VSHH-1201 > 7.1 mm/s RMS 1oo2; wired to a TRIP box -> 'TRIP per C&E'",
+   "h_frac": 0.0,
+   "id": "set01-024",
    "role": "initiator",
-   "setpoint_as_drawn": null,
-   "x": 0.727,
-   "y": 0.486
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.727,
+   "y_frac": 0.486
   },
   {
    "as_drawn_text": "M 30kW EQ1000012011-",
    "bound_tag": "EQ-1000012011",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "datasheet EQUIPMENT ID EQ-1000012011, OUTPUT 30 kW; trailing hyphen as drawn",
+   "h_frac": 0.0,
+   "id": "set01-025",
    "role": "equipment",
-   "setpoint_as_drawn": null,
-   "x": 0.572,
-   "y": 0.643
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.572,
+   "y_frac": 0.643
   },
   {
    "as_drawn_text": "HS-1201 Hand Switch for Emergency Stop (per C&E)",
    "bound_tag": "HS-1201",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E T6 'Local/DCS emergency stop HS-1201'; the third digit prints smudged at 4x zoom",
+   "h_frac": 0.0,
+   "id": "set01-026",
    "role": "initiator",
-   "setpoint_as_drawn": null,
-   "x": 0.812,
-   "y": 0.672
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.812,
+   "y_frac": 0.672
   },
   {
    "as_drawn_text": "RO-1201",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "inset, Seal Flush from discharge: valve on the 2' flush line",
+   "h_frac": 0.0,
+   "id": "set01-027",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.128,
-   "y": 0.674
+   "unbound_reason": "inset, Seal Flush from discharge: valve on the 2' flush line",
+   "w_frac": 0.0,
+   "x_frac": 0.128,
+   "y_frac": 0.674
   },
   {
    "as_drawn_text": "RO-1201",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "inset: restriction orifice in the flush branch",
+   "h_frac": 0.0,
+   "id": "set01-028",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.062,
-   "y": 0.729
+   "unbound_reason": "inset: restriction orifice in the flush branch",
+   "w_frac": 0.0,
+   "x_frac": 0.062,
+   "y_frac": 0.729
   },
   {
    "as_drawn_text": "PDI-1201 > 1.5 bar",
    "bound_tag": "PDI-1201",
+   "drawn_setpoint": "> 1.5 bar",
    "foreign": false,
-   "note": "C&E start permissive 2 'Seal flush established (dP > 1.5 bar) PDI-1201'; 'Confirm dP > 1.5 bar' beneath",
+   "h_frac": 0.0,
+   "id": "set01-029",
    "role": "permissive",
-   "setpoint_as_drawn": "> 1.5 bar",
-   "x": 0.182,
-   "y": 0.678
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.182,
+   "y_frac": 0.678
   },
   {
    "as_drawn_text": "PDI-1201 PERMISSIVE",
    "bound_tag": "PDI-1201",
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set01-030",
    "role": "permissive",
-   "setpoint_as_drawn": null,
-   "x": 0.18,
-   "y": 0.785
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.18,
+   "y_frac": 0.785
   },
   {
    "as_drawn_text": "PDI-1201 > 1.5 bar",
    "bound_tag": "PDI-1201",
+   "drawn_setpoint": "> 1.5 bar",
    "foreign": false,
-   "note": "inset, External Quench half (N2 / Steam / LINED UP)",
+   "h_frac": 0.0,
+   "id": "set01-031",
    "role": "permissive",
-   "setpoint_as_drawn": "> 1.5 bar",
-   "x": 0.372,
-   "y": 0.785
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.372,
+   "y_frac": 0.785
   },
   {
    "as_drawn_text": "API PLAN 11 + PLAN 62 (per Datasheet and OPL)",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "datasheet SEAL FLUSH PLAN 'API PLAN 11 + PLAN 62 QUENCH'",
+   "h_frac": 0.0,
+   "id": "set01-032",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.118,
-   "y": 0.847
+   "unbound_reason": "datasheet SEAL FLUSH PLAN 'API PLAN 11 + PLAN 62 QUENCH'",
+   "w_frac": 0.0,
+   "x_frac": 0.118,
+   "y_frac": 0.847
   },
   {
    "as_drawn_text": "API PLAN II + PLAN 62 (per Datasheet and OPL)",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "Roman 'II' where the left caption reads '11'",
+   "h_frac": 0.0,
+   "id": "set01-033",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.319,
-   "y": 0.847
+   "unbound_reason": "Roman 'II' where the left caption reads '11'",
+   "w_frac": 0.0,
+   "x_frac": 0.319,
+   "y_frac": 0.847
   }
  ],
- "notes_as_drawn": [
+ "notes": [
   "NOTE 1: This is sample data provided for CALIBER purposes only;",
   "NOTE 2: Refer to Datasheet TJC-LLD-DS-GA-1201A for design parameters;",
   "NOTE 3: See SEQ-1201 logic diagram."
  ],
  "provenance": {
-  "basis": "manual transcription of the image",
-  "by": "EXEC-1",
-  "date": "2026-08-27"
+  "alias": "EXEC-1",
+  "basis": "agent_transcription",
+  "date": "2026-08-27",
+  "review_status": "pending",
+  "reviewed_at": null,
+  "reviewed_by": null
  },
- "ref_dwg_as_drawn": "Ref. Dwg. TJC-LLD-PID-XXXX",
- "revision_block_as_drawn": null,
- "seq_cited_as_drawn": "SEQ-1201",
+ "reference_box": "Ref. Dwg. TJC-LLD-PID-XXXX",
  "set": 1,
- "tag": "GA-1201A",
- "title_as_drawn": null
+ "title_box": ""
 }

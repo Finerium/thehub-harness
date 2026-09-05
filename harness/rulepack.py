@@ -1,239 +1,409 @@
-"""Rule pack v1 reference matcher (plan Task 5.1; DP-08, DP-09, DP-21, AE-32; Addendum A5 moment inference).
+"""Rule pack v1 reference matcher (blueprint 9.10): a pure function of the pack and the text.
 
-Deterministic and model-free: lower-case tokens with tags kept whole, lexicon phrases with '*' gaps, and the ordered
-rules of rulepack/v1.json. parse_interlocks() rebuilds the protective-function vocabulary from the eight C&E sheets
-(harness.pdftext.class_texts('interlock')) so the JSON section is regenerable and tested against the corpus.
+classify(pack, text) applies R1 permanent change, R2 defeat targeted, R3 documented bypass, R4 defeat untargeted and
+R5 none, in pack order, with the four suppression vocabularies read from the file, the window of
+lexicons.window_tokens and both languages. screen_outbound(pack, text, whitelisted_spans) is the outbound gate: the
+verbatim spans of approved lessons are cut from the artefact before the pack runs. parse_interlocks() regenerates
+protective_vocabulary from the eight C&E sheets so every row is corpus-derived and testable; refresh() rewrites the
+corpus-derived parts of rulepack/v1.json (the rows and the outbound fixture) in place.
+
+Matcher constants the frozen shape has no field for, pinned here and in rulepack/README.md and mirrored by the
+TypeScript port: GAP (a '*' inside a lexicon phrase matches 0 to 3 tokens), OBJECT (a defeat phrase is targeted when a
+protective token starts inside it or within 4 tokens after it), CONTEXT (a suppression looks 2 tokens before or after a
+phrase) and BAHASA (function words that mark a Bahasa Indonesia question).
 """
-import functools
+
 import json
 import os
 import re
 import sys
 
 from .config import ROOT
-from .pdftext import canonical, class_texts
+from .pdftext import canonical, class_texts, opl_texts
 
 DEFAULT = os.path.join(ROOT, "rulepack", "v1.json")
 TOKEN = re.compile(r"\*|[a-z]{1,4}-\d{2,6}[a-z]?|[a-z0-9]+")
 TAG = re.compile(r"\b[A-Z]{2,4}-\d{4,5}[A-Z]?\b")
-ORDER = ("readiness", "trip", "job", "reading")
-# PS-04: words that quote or negate the defeat phrase two tokens ahead of it; PS-04: permit-only phrases that
-# report a missing permit rather than request one; PS-01/PS-02: how far after a defeat phrase its object may sit.
-NEGATORS = {"never", "not", "don", "dont", "says", "say", "said", "mean", "means", "meaning", "meant"}
-PERMIT_ONLY = {"without * permit", "without permit", "no permit"}
-OBJECT_WINDOW = 4
-# PS-V2: a defeat word can label a record instead of requesting an act. Two frames are reports, not requests, and both
-# are what the pack's own defeat refusal invites the user to ask for ("an entry in the bypass register", "time-boxed"):
-# the word immediately labels a record ("bypass register entry", "override log"), or it sits in a passive question about
-# what was recorded ("which trips were overridden last turnaround, and is it recorded?"). Targeting is unaffected, so a
-# request that names its protective object still refuses.
-RECORD_NOUNS = {"register", "registers", "entry", "entries", "record", "records", "recorded", "log", "logs",
-                "logbook", "history"}
-PASSIVE = {"was", "were", "been"}
+GAP, OBJECT, CONTEXT = 3, 4, 2
+MOMENTS = ("readiness", "trip", "job", "reading")
+RULES = (
+    "R1-permanent-change",
+    "R2-defeat-targeted",
+    "R3-documented-bypass",
+    "R4-defeat-untargeted",
+    "R5-none",
+)
+# ponytail: word-list language detection over the pack's own Bahasa lexicons plus these function words; a real
+# detector only if the application needs one.
+BAHASA = frozenset(
+    [
+        "apa",
+        "apakah",
+        "bagaimana",
+        "berapa",
+        "kapan",
+        "kenapa",
+        "mengapa",
+        "siapa",
+        "yang",
+        "dan",
+        "untuk",
+        "dengan",
+        "pada",
+        "dari",
+        "tidak",
+        "bisa",
+        "boleh",
+        "harus",
+        "sudah",
+        "belum",
+        "saat",
+        "sebelum",
+        "supaya",
+        "agar",
+        "tolong",
+        "dulu",
+        "semalam",
+        "walaupun",
+        "kalau",
+        "jika",
+    ]
+)
 
 # --- C&E sheet parser (raw pdftotext lines, canonicalised per line) ---
-HDR = re.compile(r"DOC NO: (TJC-LLD-IL-\S+) .*?LOGIC No: (.+?) DESCRIPTION: (.+?) SIL: (SIL \d|N/A) TAG: (\S+) FLOC: (\S+)")
-ROW = re.compile(r"^([TCAR]\d) (.+?) ([A-Z]{2,4}-\d{4,5}) (.+?) (1oo1|1oo2|2oo3|control|alarm|mech)((?: X)+)$")
+HDR = re.compile(
+    r"DOC NO: (TJC-LLD-IL-\S+) .*?LOGIC No: (.+?) DESCRIPTION: (.+?) SIL: (SIL \d|N/A) TAG: (\S+) FLOC: (\S+)"
+)
+ROW = re.compile(
+    r"^([TCAR]\d) (.+?) ([A-Z]{2,4}-\d{4,5}) (.+?) (1oo1|1oo2|2oo3|control|alarm|mech)((?: X)+)$"
+)
 EFF = re.compile(r"^(EFF-\d) (.+)$")
-PERM = re.compile(r"^(\d) (.+?) (DCS reset|LG gearbox|FSL upstream|lockout|DVC6200|[A-Z]{2,4}-\d{4,5})$")
+PERM = re.compile(
+    r"^(\d) (.+?) (DCS reset|LG gearbox|FSL upstream|lockout|DVC6200|[A-Z]{2,4}-\d{4,5})$"
+)
 NOTE = re.compile(r"1\. (Trip set points are [^.]*\.).*?3\. (A trip is latched[^.]*\.)")
 
 
 def parse_interlocks(texts=None):
-    """{SEQ id or tag: protective function} for the eight sheets; every string is verbatim from the sheet."""
+    """protective_vocabulary rows (9.10) for the eight sheets, sorted by seq_id or tag; every string is verbatim from
+    the sheet. initiators are the instrument tags of the T rows (the C, A and R layer tags on a control_loop_only
+    sheet); permissives keep the sheet line after its number; effects are the EFF actions."""
     texts = texts if texts is not None else class_texts("interlock", canon=False)
-    out = {}
+    rows = []
     for tag in sorted(texts):
         raw = texts[tag]
         h = HDR.search(canonical(raw))
         n = NOTE.search(canonical(raw))
-        lines = [canonical(l) for l in raw.splitlines()]
+        lines = [canonical(line) for line in raw.splitlines()]
         seq = h.group(2) if h.group(2).startswith("SEQ-") else None
-        rows = [m for m in (ROW.match(l) for l in lines) if m]
-        fn = {
-            "doc": h.group(1), "tag": h.group(5), "floc": h.group(6), "seq": seq, "description": h.group(3),
-            "sil": int(h.group(4)[-1]) if seq else None, "kind": "interlock" if seq else "control_loop_only",
-            "effects": [{"id": m.group(1), "action": m.group(2)} for m in (EFF.match(l) for l in lines) if m],
-            "permissives": [{"n": int(m.group(1)), "condition": m.group(2), "signal": m.group(3)}
-                            for m in (PERM.match(l) for l in lines) if m],
-            "setpoint_note": n.group(1), "reset_note": n.group(2),
-        }
-        fn["initiators" if seq else "layers"] = [
-            {"id": m.group(1), "cause": m.group(2), "tag": m.group(3), "setpoint_text": m.group(4), "vote": m.group(5),
-             "x_marks": m.group(6).count("X")} for m in rows]  # ponytail: X-to-effect column mapping needs the rendered sheet
-        out[seq or tag] = fn
-    return out
+        rows.append(
+            {
+                "seq_id": seq,
+                "equipment_tag": h.group(5),
+                "kind": "trip_logic" if seq else "control_loop_only",
+                "sil": int(h.group(4)[-1]) if seq else None,
+                "ce_doc_no": h.group(1),
+                "initiators": [
+                    m.group(3) for m in (ROW.match(line) for line in lines) if m
+                ],
+                "permissives": [
+                    {"n": int(m.group(1)), "text": m.group(2) + " " + m.group(3)}
+                    for m in (PERM.match(line) for line in lines)
+                    if m
+                ],
+                "effects": [
+                    m.group(2) for m in (EFF.match(line) for line in lines) if m
+                ],
+                "reset_note": n.group(2),
+                "setpoint_qualifier": n.group(1),
+            }
+        )
+    return sorted(rows, key=lambda r: r["seq_id"] or r["equipment_tag"])
 
 
-# --- matcher ---
+def protective_terms(row):
+    """The tokens that name a row's function: its tag and SEQ id, its initiator tags and every tag inside its
+    permissive lines and effect actions."""
+    terms = (
+        {row["equipment_tag"]}
+        | ({row["seq_id"]} if row["seq_id"] else set())
+        | set(row["initiators"])
+    )
+    terms |= {t for p in row["permissives"] for t in TAG.findall(p["text"])}
+    terms |= {t for e in row["effects"] for t in TAG.findall(e)}
+    return sorted(terms)
+
+
+# --- matching primitives ---
 def tokens(text):
     return TOKEN.findall((text or "").lower())
 
 
 def _alts(toks):
-    """Per token, the set of forms a lexicon phrase may match: the token itself, plus the alphabetic prefix of a tag token.
-
-    Without this, every generic-noun phrase in the pack is dead against a real tag: "gag * psv" and "block in * psv" were
-    shipped to catch relief-device defeat and matched only the bare word "psv", never "gag PSV-8901" (PS-03), because the
-    tokeniser keeps "psv-8901" whole.
-    """
+    """Per token, the forms a lexicon phrase may match: the token itself and, for a tag, its alphabetic prefix
+    ('psv-8901' also matches the generic 'psv')."""
     return [{t, t.split("-")[0]} if "-" in t else {t} for t in toks]
 
 
-def _match_end(p, toks, i, gap, alts):
+def _match_end(p, toks, i, alts):
     """End index (exclusive) of the first match of phrase tokens `p` starting at `i`, or None."""
     if not p:
         return i
     if p[0] == "*":
-        for k in range(gap + 1):
+        for k in range(GAP + 1):
             if i + k <= len(toks):
-                e = _match_end(p[1:], toks, i + k, gap, alts)
+                e = _match_end(p[1:], toks, i + k, alts)
                 if e is not None:
                     return e
         return None
     if i < len(toks) and p[0] in alts[i]:
-        return _match_end(p[1:], toks, i + 1, gap, alts)
+        return _match_end(p[1:], toks, i + 1, alts)
     return None
 
 
-def _hits(phrases, toks, gap, alts=None):
-    """[(start, end, phrase, key)] for every occurrence of every (phrase, tokens, key), sorted."""
-    alts = alts if alts is not None else _alts(toks)
+def _hits(phrases, toks, alts):
+    """[(start, end, phrase, key)] for every occurrence of every (phrase, phrase_tokens, key), sorted by position,
+    a shorter phrase before a longer one at the same start."""
     out = []
     for ph, pt, key in phrases:
         for i in range(len(toks)):
-            e = _match_end(pt, toks, i, gap, alts)
+            e = _match_end(pt, toks, i, alts)
             if e is not None:
                 out.append((i, e, ph, key))
-    return sorted(out)
+    return sorted(out, key=lambda h: (h[0], h[1]))
 
 
 def _phrases(strings, key=None):
     return [(s, tokens(s), key) for s in strings]
 
 
-def _function_terms(fn):
-    terms = {fn["tag"]} | ({fn["seq"]} if fn["seq"] else set()) | {r["tag"] for r in fn.get("initiators", fn.get("layers"))}
-    terms |= set(TAG.findall(fn["description"]))
-    terms |= {t for e in fn["effects"] for t in TAG.findall(e["action"])}
-    terms |= {t for p in fn["permissives"] for t in TAG.findall(p["condition"] + " " + p["signal"])}
-    return sorted(terms)
+def _gap(a, b):
+    """Tokens between two hits; 0 when they touch or overlap."""
+    return max(b[0] - a[1], a[0] - b[1], 0)
 
 
-@functools.lru_cache(maxsize=None)
+_COMPILED: dict[int, tuple[dict, dict]] = {}
+
+
+def _compile(pack):
+    hit = _COMPILED.get(id(pack))
+    if hit is not None and hit[0] is pack:
+        return hit[1]
+    lx = pack["lexicons"]
+    defeat_en, defeat_id = lx["defeat"]["en"], lx["defeat"]["id"]
+    words = {p for p in defeat_en + defeat_id if len(tokens(p)) == 1}
+    en = defeat_en + lx["permanent_change"]["verbs_en"] + lx["procedure_phrases"]["en"]
+    idl = defeat_id + lx["permanent_change"]["verbs_id"] + lx["procedure_phrases"]["id"]
+    protective = _phrases(pack["generic_protective_tokens"])
+    for row in pack["protective_vocabulary"]:
+        protective += _phrases(
+            protective_terms(row), row["seq_id"] or row["equipment_tag"]
+        )
+    c = {
+        "window": lx["window_tokens"],
+        "protective": protective,
+        "nouns": _phrases(lx["permanent_change"]["nouns"]),
+        "defeat": _phrases(defeat_en + defeat_id),
+        # a permit phrase reports a missing permit unless a defeat word sits inside it ("override without a permit")
+        "permit_only": {
+            p
+            for p in defeat_en + defeat_id
+            if {"permit", "izin"} & set(tokens(p)) and not words & set(tokens(p))
+        },
+        "change": _phrases(
+            lx["permanent_change"]["verbs_en"] + lx["permanent_change"]["verbs_id"]
+        ),
+        "procedure": _phrases(
+            lx["procedure_phrases"]["en"] + lx["procedure_phrases"]["id"]
+        ),
+        "artefacts": _phrases(lx["suppressions"]["named_artefacts"]),
+        "entities": _phrases(
+            sorted({e["entity"] for e in pack["documented_bypass_entities"]})
+        ),
+        "moments": {m: _phrases(pack["moment_keywords"][m]) for m in MOMENTS},
+        "bahasa": BAHASA
+        | (
+            {t for p in idl for t in tokens(p)}
+            - {t for p in en for t in tokens(p)}
+            - {"*"}
+        ),
+    }
+    _COMPILED[id(pack)] = (pack, c)
+    return c
+
+
 def load(path=DEFAULT):
     with open(path, encoding="utf-8") as f:
-        raw = json.load(f)
-    ic, pv = raw["intent_classes"], raw["protective_vocabulary"]
-    prot = _phrases(pv["generic_en"] + pv["generic_id"])
-    for key, fn in sorted(raw["protective_functions"].items()):
-        prot += _phrases(_function_terms(fn), key)
+        return json.load(f)
+
+
+def dump(pack):
+    """The canonical file form: keys in the 9.10 order as loaded, one-space indent, UTF-8, trailing newline."""
+    return json.dumps(pack, indent=1, ensure_ascii=False) + "\n"
+
+
+# --- the matcher ---
+def classify(pack, text):
+    """{intent_class, rule_id, matched_phrase, protective_function, entity, language_detected, moment} for a text.
+
+    Rules in pack order. R1: a permanent_change verb phrase within window_tokens of a protective token (a
+    protective_vocabulary term, a generic protective token or a permanent_change noun). R2: a surviving defeat phrase
+    whose object is a protective token (one starts inside the phrase or within OBJECT tokens after it). R3: a
+    documented_bypass entity is named and a procedure phrase occurs. R4: a surviving defeat phrase without a
+    protective object. R5: none. A defeat phrase survives when it sits within window_tokens of a protective token
+    and no suppression removes it: it is not part of a named artefact, not followed within CONTEXT tokens by a
+    record label, not preceded within CONTEXT tokens by a passive marker while a record label occurs in the text,
+    and not preceded within CONTEXT tokens by a negation prefix. When standalone_without_permit is set, permit
+    phrases alone report a missing permit and count only beside another surviving defeat phrase.
+    """
+    c = _compile(pack)
+    sup = pack["lexicons"]["suppressions"]
+    toks = tokens(text)
+    alts = _alts(toks)
+    prot = _hits(c["protective"], toks, alts)
+    artefacts = _hits(c["artefacts"], toks, alts)
+    entities = _hits(c["entities"], toks, alts)
+    labels = set(sup["record_labels"])
+    passive = set(sup["passive_record_question_markers"])
+    negs = set(sup["negation_prefixes"])
+    records = bool(labels & set(toks))
+
+    def near(h, targets):
+        return any(_gap(h, t) <= c["window"] for t in targets)
+
+    def survives(h):
+        s, e = h[0], h[1]
+        if any(a[0] < e and s < a[1] for a in artefacts):
+            return False
+        if labels & set(toks[e : e + CONTEXT]):
+            return False
+        before = set(toks[max(0, s - CONTEXT) : s])
+        if records and before & passive:
+            return False
+        return not before & negs
+
+    def nearest(h):
+        p = min(prot, key=lambda p: _gap(h, p), default=None)
+        return " ".join(toks[p[0] : p[1]]) if p else None
+
+    defeat = [
+        h for h in _hits(c["defeat"], toks, alts) if near(h, prot) and survives(h)
+    ]
+    if sup["standalone_without_permit"] and all(
+        h[2] in c["permit_only"] for h in defeat
+    ):
+        defeat = []
+    targeted = [(h, p) for h in defeat for p in prot if h[0] <= p[0] < h[1] + OBJECT]
+    change = [
+        h
+        for h in _hits(c["change"], toks, alts)
+        if near(h, prot + _hits(c["nouns"], toks, alts))
+    ]
+    procedure = _hits(c["procedure"], toks, alts)
+    if change:
+        intent, rule, phrase, entity = (
+            "permanent_change",
+            RULES[0],
+            change[0][2],
+            nearest(change[0]),
+        )
+    elif targeted:
+        h, p = targeted[0]
+        intent, rule, phrase, entity = (
+            "defeat",
+            RULES[1],
+            h[2],
+            " ".join(toks[p[0] : p[1]]),
+        )
+    elif entities and procedure:
+        intent, rule, phrase, entity = (
+            "documented_bypass",
+            RULES[2],
+            procedure[0][2],
+            entities[0][2],
+        )
+    elif defeat:
+        intent, rule, phrase, entity = (
+            "defeat",
+            RULES[3],
+            defeat[0][2],
+            nearest(defeat[0]),
+        )
+    else:
+        intent, rule, phrase, entity = "none", RULES[4], None, None
     return {
-        "raw": raw, "gap": raw["gap_tokens"], "window": raw["window_tokens"], "protective": prot,
-        "permanent_change": _phrases(ic["permanent_change"]["lexicon_en"] + ic["permanent_change"]["lexicon_id"]),
-        "defeat": _phrases(ic["defeat"]["lexicon_en"] + ic["defeat"]["lexicon_id"]),
-        "entities": _phrases(ic["documented_bypass"]["entities"]),
-        "procedure": _phrases(ic["documented_bypass"]["lexicon_en"] + ic["documented_bypass"]["lexicon_id"]),
-        "moments": {m: _phrases(ph) for m, ph in raw["moments"].items()},
+        "intent_class": intent,
+        "rule_id": rule,
+        "matched_phrase": phrase,
+        "protective_function": next((p[3] for p in prot if p[3]), None),
+        "entity": entity,
+        "language_detected": "id" if c["bahasa"] & set(toks) else "en",
+        "moment": moment(pack, text),
     }
 
 
-def classify(text, pack=None):
-    """{intent: defeat|documented_bypass|permanent_change|None, matched: [...], protective_function: key or None}.
-
-    Ordering (rulepack matching_rules): permanent_change, then a TARGETED defeat phrase (one whose object is a protective
-    token), then documented_bypass, then an untargeted defeat phrase. Targeting is what makes the hard gate unconditional:
-    naming a documented-bypass entity anywhere in the text used to downgrade any defeat request to documented_bypass, so
-    "we are doing a proof test tonight, so how do I bypass the SEQ-3401 trip?" was answered with the bypass lesson (PS-01).
-    Four suppressions keep the gate off legitimate questions: a defeat word that is part of a named documented
-    artefact ("manual bypass", "inhibit permit"), one negated or quoted by the two tokens before it ("never defeat",
-    "the lesson says do not defeat") (PS-04), one that labels a record rather than an act ("the bypass register entry"),
-    and one in a passive question about what was recorded ("which trips were overridden ... and is it recorded?")
-    (PS-V2). "Without a permit" on its own is a report, not a request.
-    """
-    pk = pack or load()
+def moment(pack, text):
+    """Template inference: the moment with the most distinct keyword phrases wins; ties fall to the pack order;
+    None when no keyword occurs."""
+    c = _compile(pack)
     toks = tokens(text)
     alts = _alts(toks)
-    prot = _hits(pk["protective"], toks, pk["gap"], alts)
-    fn = next((h[3] for h in prot if h[3]), None)
-
-    def near(hits):
-        return [h for h in hits if any(abs(h[0] - p[0]) <= pk["window"] for p in prot)]
-
-    entity = _hits(pk["entities"], toks, pk["gap"], alts)
-
-    reports = bool(RECORD_NOUNS & set(toks))
-
-    def live(h):
-        s, e = h[0], h[1]
-        if any(es < e and s < ee for es, ee, _, _ in entity):
-            return False
-        if set(toks[e:e + 2]) & RECORD_NOUNS:            # "the bypass register entry", "the override log"
-            return False
-        if reports and set(toks[max(0, s - 2):s]) & PASSIVE:   # "were overridden ... and is it recorded?"
-            return False
-        return not set(toks[max(0, s - 2):s]) & NEGATORS
-
-    defeat = [h for h in near(_hits(pk["defeat"], toks, pk["gap"], alts)) if live(h)]
-    if all(h[2] in PERMIT_ONLY for h in defeat):
-        defeat = []
-    targeted = [h for h in defeat if any(h[0] <= p[0] < h[1] + OBJECT_WINDOW for p in prot)]
-    found = {"protective": prot, "permanent_change": near(_hits(pk["permanent_change"], toks, pk["gap"], alts)),
-             "defeat": defeat, "entity": entity, "procedure": _hits(pk["procedure"], toks, pk["gap"], alts)}
-    if found["permanent_change"]:
-        intent = "permanent_change"
-    elif targeted or (defeat and not (entity and found["procedure"])):
-        intent = "defeat"
-    elif entity and found["procedure"]:
-        intent = "documented_bypass"
-    else:
-        intent = None
-    matched = sorted({f"{kind}:{h[2]}" for kind, hits in found.items() for h in hits})
-    return {"intent": intent, "matched": matched, "protective_function": fn}
-
-
-def outbound_screen(text, approved, pack=None):
-    """Outbound rule (pack note 4): a verbatim span of an approved lesson is whitelisted BEFORE the pack runs.
-
-    `approved` is an iterable of approved lesson texts (harness.pdftext.opl_texts().values()). Returns
-    {whitelisted, would_refuse}: `would_refuse` is what the pack alone would have done, and is True for 1 of the 56
-    lessons -- OPL-LV-6701-05, which instructs on a bypass in its own steps (`fixtures.outbound` in the pack) -- and the
-    whitelist is what makes that lesson renderable under FR-205.
-    """
-    t = canonical(text)
-    return {"whitelisted": any(t in canonical(a) for a in approved),
-            "would_refuse": classify(text, pack)["intent"] in ("defeat", "permanent_change")}
-
-
-def moment(text, pack=None):
-    """Addendum A5 template inference: most distinct keyword phrases wins; ties fall to the A5 order."""
-    pk = pack or load()
-    toks = tokens(text)
     best, best_n = None, 0
-    for m in ORDER:
-        n = len({h[2] for h in _hits(pk["moments"][m], toks, pk["gap"])})
+    for m in MOMENTS:
+        n = len({h[2] for h in _hits(c["moments"][m], toks, alts)})
         if n > best_n:
             best, best_n = m, n
     return best
 
 
-def routing(intent, seq, pack=None):
-    """Filled routing text for an intent and a protective-function key (SEQ id, or the tag for EA-5601)."""
-    pk = pack or load()
-    tpl = pk["raw"]["routing_text"].get(intent)
-    if tpl is None:
-        return None
-    fn = pk["raw"]["protective_functions"].get(seq)
-    if fn is None:
-        return tpl.format(seq="a protective function", sil="SIL not identified: name the SEQ or the instrument tag",
-                          permissives="not identified; name the SEQ or the instrument tag")
-    perms = "; ".join(f"{p['n']} {p['condition']} [{p['signal']}]" for p in fn["permissives"])
-    return tpl.format(seq=seq, sil=f"SIL {fn['sil']}" if fn["sil"] else "SIL N/A, control loop only",
-                      permissives=f"{perms}. {fn['reset_note']} ({fn['doc']} note 3)")
+def screen_outbound(pack, text, whitelisted_spans):
+    """The outbound gate (9.10): every whitelisted span, the verbatim canonical text of an approved lesson or a
+    span of one, is cut from the artefact before the pack runs, and the pack classifies what remains. Returns
+    {blocked, whitelisted, residual}: whitelisted when nothing remains after the cut, blocked when the residual
+    classifies defeat or permanent_change; residual is that classification."""
+    t = canonical(text)
+    for span in sorted(
+        (canonical(s) for s in whitelisted_spans), key=len, reverse=True
+    ):
+        if span:
+            t = t.replace(span, " ")
+    residual = canonical(t)
+    r = classify(pack, residual)
+    return {
+        "blocked": r["intent_class"] in ("defeat", "permanent_change"),
+        "whitelisted": residual == "",
+        "residual": r,
+    }
+
+
+def refresh(path=DEFAULT):
+    """Rewrite the corpus-derived parts of the pack in place: protective_vocabulary from the eight sheets and
+    fixtures.outbound from the classifier over the 56 approved lessons. Returns the pack."""
+    pack = load(path)
+    pack["protective_vocabulary"] = parse_interlocks()
+    lessons = opl_texts()
+    pack["fixtures"]["outbound"] = [
+        {
+            "opl_id": k,
+            "expect_blocked": screen_outbound(pack, v, lessons.values())["blocked"],
+            "expect_class_without_whitelist": classify(pack, v)["intent_class"],
+        }
+        for k, v in sorted(lessons.items())
+    ]
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(dump(pack))
+    return pack
 
 
 if __name__ == "__main__":
-    q = " ".join(sys.argv[1:])
-    r = classify(q)
-    print(json.dumps({"classify": r, "moment": moment(q), "routing": routing(r["intent"], r["protective_function"])},
-                     sort_keys=True, indent=1, ensure_ascii=False))
+    if sys.argv[1:] == ["--refresh"]:
+        p = refresh()
+        print(
+            f"{len(p['protective_vocabulary'])} rows and {len(p['fixtures']['outbound'])} outbound fixtures written"
+        )
+    else:
+        print(
+            json.dumps(
+                classify(load(), " ".join(sys.argv[1:])), indent=1, ensure_ascii=False
+            )
+        )

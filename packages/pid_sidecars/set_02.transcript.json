@@ -1,39 +1,39 @@
 {
+ "datasheet_cited_as_drawn": "TJC-LLD-DS-GA-1201A",
  "defects": [
   {
    "detail": "Bottom-right box reads 'Ref. Dwg. TJC-LLD-PID-XXXX'; datasheet, GA drawing and C&E cross-reference TJC-LLD-PID-2301, which the sheet itself prints only as the inset header.",
-   "rule": "placeholder_ref"
+   "kind": "placeholder_ref"
   },
   {
    "detail": "NOTE 2 cites 'Datasheet TJC-LLD-DS-GA-1201A' (the GA-1201A pump datasheet); YD-2301's datasheet is TJC-LLD-DS-YD-2301.",
-   "rule": "wrong_datasheet_citation"
+   "kind": "wrong_datasheet_citation"
   },
   {
    "detail": "NOTE 3 reads 'See SEQ-1201 logic diagram' (GA-1201A's sequence); YD-2301's C&E is LOGIC No SEQ-5500.",
-   "rule": "wrong_seq_citation"
+   "kind": "wrong_seq_citation"
   },
   {
    "detail": "GA-1201A tags on a dryer sheet: HS-1201 (local control station), RO-1201 and PDI-1201 (seal-flush inset), motor 'M 30kW EQ1000012011-' (GA-1201A equipment ID and 30 kW rating; YD-2301 datasheet EQ-1000023011, 22 kW).",
-   "rule": "foreign_tag"
+   "kind": "foreign_tag"
   },
   {
    "detail": "'PSLL-2303' where C&E T3 is LSHH-2303; 'S5LL 2305' for SSLL-2305 (also 'EFF-3 -> S5LL-2305' and 'EFF-2 -> F5LL-2302'); 'Z50-2304' for permissive ZSO-2304; TSHH-2301 boxed as 'Discharge Flow LOW-LOW 9 m/0h' where C&E T1 is > 125 degC; 'TSHH-2301 (as permissive)' wired to a TRIP box; the EFF-1..EFF-5 boxes point at initiator tags TSHH-2301/F5LL-2302/S5LL-2305/ASHH-2307/MPR-2301; the 'DCS RESET / EFF-3' box labels permissive P3 'Lube oil to gearbox OK' (PSL-2306) as EFF-3; PSL-2306 is also drawn as the output of the MPR-2301 trip; FV-2302 drawn twice ('Trips OPEN' on the N2 purge, 'trips CLOSED' on the outlet riser); TV-2301 (steam inlet per C&E EFF-2) drawn on the powder outlet riser.",
-   "rule": "label_vs_ce_mismatch"
+   "kind": "label_vs_ce_mismatch"
   },
   {
    "detail": "Sheet prints '4.0 x 8.5 m EL +6.00'; plot plan TJC-LLD-PP-YD-2301 prints FOOTPRINT 4.0x9.5m(approx) at ELEVATION EL+6.00 (elevation agrees, length does not); GA drawing DRUM LENGTH 9000 mm.",
-   "rule": "footprint_vs_plot_plan"
+   "kind": "footprint_vs_plot_plan"
   },
   {
    "detail": "The Set 1 API seal-flush inset (API PLAN 11 + PLAN 62, RO/PDI orifices, External Quench N2/Steam) is reproduced on a rotary steam-tube dryer whose datasheet lists GLAND PACKING PTFE (PILLER 4526L) and no seal flush plan; the inset header carries the drawing title 'P&ID; TJC-LLD-PID-2301 - DRYER SYSTEM (YD-2301)'.",
-   "rule": "copy_paste_inset"
+   "kind": "copy_paste_inset"
   },
   {
    "detail": "'Matel of construction: SM400B' overlay; '9 m/0h'; 'LAGEND'; 'API PLAN II + PLAN 62'; 'F5LL-2302', 'S5LL 2305', 'Z50-2304'; NOTE 3 lacks a terminal period.",
-   "rule": "garbled_text"
+   "kind": "garbled_text"
   }
  ],
- "document_id": "P&ID_Set_02.png",
  "equipment_shown": [
   "YD-2301 POLYMER FLUID BED DRYER (rotary tube drum, '4.0 x 8.5 m EL +6.00')",
   "CENTRIFUGE GF-2210 (upstream)",
@@ -45,672 +45,519 @@
   "Inset headed 'P&ID; TJC-LLD-PID-2301 - DRYER SYSTEM (YD-2301)' containing the Set 1 API seal-flush plans (Seal Flush from discharge / External Quench)",
   "Vent to fine dust collector; Dry powder to downstream"
  ],
- "hotspots": [
+ "file": "P&ID_Set_02.png",
+ "image_px": [
+  1190,
+  860
+ ],
+ "instruments": [
   {
    "as_drawn_text": "PSL-2306 Lube oil to gearbox OK",
    "bound_tag": "PSL-2306",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-001",
+   "note": "C&E start permissive 3 'Lube oil to gearbox OK PSL-2306'; drawn on the nitrogen supply, fed from the NITROGEN box",
    "role": "permissive",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.257,
-   "y_frac": 0.183
+   "setpoint_as_drawn": null,
+   "x": 0.257,
+   "y": 0.183
   },
   {
    "as_drawn_text": "FSLL-2302",
    "bound_tag": "FSLL-2302",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-002",
+   "note": "C&E T2 'Nitrogen purge flow LOW-LOW FSLL-2302 < 200 kg/h 2oo3'",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.307,
-   "y_frac": 0.183
+   "setpoint_as_drawn": null,
+   "x": 0.307,
+   "y": 0.183
   },
   {
    "as_drawn_text": "FV-2302 Trips OPEN",
    "bound_tag": "FV-2302",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-003",
+   "note": "C&E EFF-4 'OPEN N2 PURGE FV-2302 (max inert)'; N2 PURGE (1\") joins the POWDER INLET (4\") here",
    "role": "effect",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.307,
-   "y_frac": 0.259
+   "setpoint_as_drawn": null,
+   "x": 0.307,
+   "y": 0.259
   },
   {
    "as_drawn_text": "EFF-1 / EFF-2 / EFF-3 / EFF-4 / EFF-5",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-004",
+   "note": "stack of five effect boxes beside the N2 purge, no tags",
    "role": "effect",
-   "unbound_reason": "stack of five effect boxes beside the N2 purge, no tags",
-   "w_frac": 0.0,
-   "x_frac": 0.376,
-   "y_frac": 0.169
+   "setpoint_as_drawn": null,
+   "x": 0.376,
+   "y": 0.169
   },
   {
    "as_drawn_text": "POWDER INLET (4\")",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-005",
    "role": "other",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.218,
-   "y_frac": 0.247
+   "setpoint_as_drawn": null,
+   "x": 0.218,
+   "y": 0.247
   },
   {
    "as_drawn_text": "N2 PURGE (1\")",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-006",
    "role": "other",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.386,
-   "y_frac": 0.247
+   "setpoint_as_drawn": null,
+   "x": 0.386,
+   "y": 0.247
   },
   {
    "as_drawn_text": "NRV",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-007",
    "role": "other",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.445,
-   "y_frac": 0.218
+   "setpoint_as_drawn": null,
+   "x": 0.445,
+   "y": 0.218
   },
   {
    "as_drawn_text": "NRV",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-008",
    "role": "other",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.652,
-   "y_frac": 0.233
+   "setpoint_as_drawn": null,
+   "x": 0.652,
+   "y": 0.233
   },
   {
    "as_drawn_text": "FV-2302 trips CLOSED",
    "bound_tag": "FV-2302",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-009",
+   "note": "second FV-2302, on the drum outlet riser with ZS; opposite trip action to the N2 purge FV-2302",
    "role": "effect",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.445,
-   "y_frac": 0.317
+   "setpoint_as_drawn": null,
+   "x": 0.445,
+   "y": 0.317
   },
   {
    "as_drawn_text": "ZS",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-010",
    "role": "indicator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.388,
-   "y_frac": 0.317
+   "setpoint_as_drawn": null,
+   "x": 0.388,
+   "y": 0.317
   },
   {
    "as_drawn_text": "S5LL 2305",
    "bound_tag": "SSLL-2305",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-011",
+   "note": "C&E T4 'Drum speed LOW-LOW (chain slip) SSLL-2305 < 1 rpm'; digit 5 printed for the second S",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.397,
-   "y_frac": 0.381
+   "setpoint_as_drawn": null,
+   "x": 0.397,
+   "y": 0.381
   },
   {
    "as_drawn_text": "XV-2210",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-012",
+   "note": "inlet valve with START PERMISSIVE and TRIP boxes; 2210 follows the centrifuge GF-2210; not in the C&E",
    "role": "isolation",
-   "unbound_reason": "inlet valve with START PERMISSIVE and TRIP boxes; 2210 follows the centrifuge GF-2210; not in the C&E",
-   "w_frac": 0.0,
-   "x_frac": 0.206,
-   "y_frac": 0.448
+   "setpoint_as_drawn": null,
+   "x": 0.206,
+   "y": 0.448
   },
   {
    "as_drawn_text": "LSHH-2303",
    "bound_tag": "LSHH-2303",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-013",
+   "note": "C&E T3 'Inlet chute level HIGH-HIGH LSHH-2303 > 90 %'; bubble above the inlet line",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.302,
-   "y_frac": 0.39
+   "setpoint_as_drawn": null,
+   "x": 0.302,
+   "y": 0.39
   },
   {
    "as_drawn_text": "PSLL-2303 Kadant rotary joint (per Cause/Effect)",
    "bound_tag": "LSHH-2303",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-014",
+   "note": "pressure-switch symbol copied from Set 1's PSLL-1201; the C&E 2303 tag is LSHH-2303; 'Kadant rotary joint' is the datasheet ROTARY JOINT vendor; overlaid bold text 'Matel of construction: SM400B'",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.265,
-   "y_frac": 0.482
+   "setpoint_as_drawn": null,
+   "x": 0.265,
+   "y": 0.482
   },
   {
    "as_drawn_text": "Matel of construction: SM400B",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-015",
+   "note": "bold overlay text; datasheet BODY MATERIAL SM400B",
    "role": "other",
-   "unbound_reason": "bold overlay text; datasheet BODY MATERIAL SM400B",
-   "w_frac": 0.0,
-   "x_frac": 0.271,
-   "y_frac": 0.496
+   "setpoint_as_drawn": null,
+   "x": 0.271,
+   "y": 0.496
   },
   {
    "as_drawn_text": "Chain and Sprocket SCM440 drive (per the OPL)",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-016",
+   "note": "datasheet DRIVE 'CHAIN & SPROCKET SCM440'",
    "role": "equipment",
-   "unbound_reason": "datasheet DRIVE 'CHAIN & SPROCKET SCM440'",
-   "w_frac": 0.0,
-   "x_frac": 0.37,
-   "y_frac": 0.506
+   "setpoint_as_drawn": null,
+   "x": 0.37,
+   "y": 0.506
   },
   {
    "as_drawn_text": "CENTRIFUGE GF-2210",
    "bound_tag": "GF-2210",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-017",
+   "note": "C&E EFF-3 'TRIP CENTRIFUGE FEED GF-2210'",
    "role": "equipment",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.046,
-   "y_frac": 0.46
+   "setpoint_as_drawn": null,
+   "x": 0.046,
+   "y": 0.46
   },
   {
    "as_drawn_text": "YD-2301 POLYMER FLUID BED DRYER",
    "bound_tag": "YD-2301",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-018",
    "role": "equipment",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.572,
-   "y_frac": 0.36
+   "setpoint_as_drawn": null,
+   "x": 0.572,
+   "y": 0.36
   },
   {
    "as_drawn_text": "TV-2301 trips CLOSED",
    "bound_tag": "TV-2301",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-019",
+   "note": "C&E EFF-2 'CLOSE STEAM INLET TV-2301'; drawn on the powder outlet riser with ZS, not on a steam line",
    "role": "effect",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.652,
-   "y_frac": 0.317
+   "setpoint_as_drawn": null,
+   "x": 0.652,
+   "y": 0.317
   },
   {
    "as_drawn_text": "ZS",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-020",
    "role": "indicator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.713,
-   "y_frac": 0.317
+   "setpoint_as_drawn": null,
+   "x": 0.713,
+   "y": 0.317
   },
   {
    "as_drawn_text": "TSHH-2301",
    "bound_tag": "TSHH-2301",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-021",
+   "note": "bubble on the outlet riser; C&E T1 'Outlet temperature HIGH-HIGH TSHH-2301 > 125 degC'",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.702,
-   "y_frac": 0.273
+   "setpoint_as_drawn": null,
+   "x": 0.702,
+   "y": 0.273
   },
   {
    "as_drawn_text": "POWDER OUTLET (4\")",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-022",
    "role": "other",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.572,
-   "y_frac": 0.156
+   "setpoint_as_drawn": null,
+   "x": 0.572,
+   "y": 0.156
   },
   {
    "as_drawn_text": "FIT-2301",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-023",
+   "note": "bubble above the outlet header valve; TRIP box above it",
    "role": "indicator",
-   "unbound_reason": "bubble above the outlet header valve; TRIP box above it",
-   "w_frac": 0.0,
-   "x_frac": 0.737,
-   "y_frac": 0.119
+   "setpoint_as_drawn": null,
+   "x": 0.737,
+   "y": 0.119
   },
   {
    "as_drawn_text": "FIT-2301",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-024",
+   "note": "valve symbol in the powder outlet carrying the transmitter tag",
    "role": "other",
-   "unbound_reason": "valve symbol in the powder outlet carrying the transmitter tag",
-   "w_frac": 0.0,
-   "x_frac": 0.737,
-   "y_frac": 0.169
+   "setpoint_as_drawn": null,
+   "x": 0.737,
+   "y": 0.169
   },
   {
    "as_drawn_text": "TRIP TSHH-2301 Discharge Flow LOW-LOW 9 m/0h per Cause/Effect",
    "bound_tag": "TSHH-2301",
-   "drawn_setpoint": "9 m/0h",
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-025",
+   "note": "box text copied from Set 1's FSLL-1201 trip; C&E T1 TSHH-2301 is outlet temperature > 125 degC; unit glyphs garbled (slashed 0 or D), Set 1 reads 9 m3/h",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.839,
-   "y_frac": 0.102
+   "setpoint_as_drawn": "9 m/0h",
+   "x": 0.839,
+   "y": 0.102
   },
   {
    "as_drawn_text": "EFF-1 -> TSHH-2301",
    "bound_tag": "TSHH-2301",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-026",
+   "note": "effect box pointing at an initiator tag",
    "role": "effect",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.847,
-   "y_frac": 0.253
+   "setpoint_as_drawn": null,
+   "x": 0.847,
+   "y": 0.253
   },
   {
    "as_drawn_text": "EFF-2 -> F5LL-2302",
    "bound_tag": "FSLL-2302",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-027",
+   "note": "effect box pointing at an initiator tag; digit 5 for S",
    "role": "effect",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.847,
-   "y_frac": 0.274
+   "setpoint_as_drawn": null,
+   "x": 0.847,
+   "y": 0.274
   },
   {
    "as_drawn_text": "EFF-3 -> S5LL-2305",
    "bound_tag": "SSLL-2305",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-028",
+   "note": "effect box pointing at an initiator tag; digit 5 for S",
    "role": "effect",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.847,
-   "y_frac": 0.296
+   "setpoint_as_drawn": null,
+   "x": 0.847,
+   "y": 0.296
   },
   {
    "as_drawn_text": "EFF-4 -> ASHH-2307",
    "bound_tag": "ASHH-2307",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-029",
+   "note": "effect box pointing at an initiator tag",
    "role": "effect",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.847,
-   "y_frac": 0.317
+   "setpoint_as_drawn": null,
+   "x": 0.847,
+   "y": 0.317
   },
   {
    "as_drawn_text": "EFF-5 -> MPR-2301",
    "bound_tag": "MPR-2301",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-030",
+   "note": "effect box pointing at an initiator tag",
    "role": "effect",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.847,
-   "y_frac": 0.339
+   "setpoint_as_drawn": null,
+   "x": 0.847,
+   "y": 0.339
   },
   {
    "as_drawn_text": "TSHH-2301 (as permissive)",
    "bound_tag": "TSHH-2301",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-031",
+   "note": "labelled 'as permissive' but wired to a TRIP box -> 'TRIP per C&E'; C&E T1 is a trip",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.727,
-   "y_frac": 0.384
+   "setpoint_as_drawn": null,
+   "x": 0.727,
+   "y": 0.384
   },
   {
    "as_drawn_text": "ASHH-2307",
    "bound_tag": "ASHH-2307",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-032",
+   "note": "C&E T5 'Vent O2 HIGH-HIGH ASHH-2307 > 8 % O2 1oo2'; wired to a TRIP box",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.727,
-   "y_frac": 0.482
+   "setpoint_as_drawn": null,
+   "x": 0.727,
+   "y": 0.482
   },
   {
    "as_drawn_text": "Z50-2304",
    "bound_tag": "ZSO-2304",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-033",
+   "note": "C&E start permissive 2 'Steam condensate drain open ZSO-2304'; printed with digits 5 and 0",
    "role": "permissive",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.727,
-   "y_frac": 0.494
+   "setpoint_as_drawn": null,
+   "x": 0.727,
+   "y": 0.494
   },
   {
    "as_drawn_text": "4.0 x 8.5 m EL +6.00",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-034",
+   "note": "plot plan TJC-LLD-PP-YD-2301: FOOTPRINT 4.0x9.5m(approx), ELEVATION EL+6.00; GA drawing DRUM LENGTH 9000 mm",
    "role": "other",
-   "unbound_reason": "plot plan TJC-LLD-PP-YD-2301: FOOTPRINT 4.0x9.5m(approx), ELEVATION EL+6.00; GA drawing DRUM LENGTH 9000 mm",
-   "w_frac": 0.0,
-   "x_frac": 0.572,
-   "y_frac": 0.529
+   "setpoint_as_drawn": null,
+   "x": 0.572,
+   "y": 0.529
   },
   {
    "as_drawn_text": "MPR-2301",
    "bound_tag": "MPR-2301",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-035",
+   "note": "boxed relay on its own foundation; C&E T6 'Drive motor overload MPR-2301 MPR pickup'",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.681,
-   "y_frac": 0.563
+   "setpoint_as_drawn": null,
+   "x": 0.681,
+   "y": 0.563
   },
   {
    "as_drawn_text": "MPR-2301",
    "bound_tag": "MPR-2301",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-036",
+   "note": "bubble beside the boxed relay, wired to a TRIP box",
    "role": "initiator",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.732,
-   "y_frac": 0.563
+   "setpoint_as_drawn": null,
+   "x": 0.732,
+   "y": 0.563
   },
   {
    "as_drawn_text": "PSL-2306",
    "bound_tag": "PSL-2306",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-037",
+   "note": "box drawn as the output of the MPR-2301 TRIP, feeding an EFF-1..EFF-5 stack; C&E PSL-2306 is start permissive 3",
    "role": "permissive",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.849,
-   "y_frac": 0.563
+   "setpoint_as_drawn": null,
+   "x": 0.849,
+   "y": 0.563
   },
   {
    "as_drawn_text": "EFF-1 / EFF-2 / EFF-3 / EFF-4 / EFF-5",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-038",
+   "note": "right-hand stack of five effect boxes fed from the PSL-2306 box",
    "role": "effect",
-   "unbound_reason": "right-hand stack of five effect boxes fed from the PSL-2306 box",
-   "w_frac": 0.0,
-   "x_frac": 0.923,
-   "y_frac": 0.6
+   "setpoint_as_drawn": null,
+   "x": 0.923,
+   "y": 0.6
   },
   {
    "as_drawn_text": "M 30kW EQ1000012011-",
    "bound_tag": "EQ-1000023011",
-   "drawn_setpoint": null,
    "foreign": true,
-   "h_frac": 0.0,
-   "id": "set02-039",
+   "note": "GA-1201A's equipment ID and 30 kW motor; YD-2301 datasheet EQUIPMENT ID EQ-1000023011, OUTPUT 22 kW",
    "role": "equipment",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.572,
-   "y_frac": 0.645
+   "setpoint_as_drawn": null,
+   "x": 0.572,
+   "y": 0.645
   },
   {
    "as_drawn_text": "HS-1201 Hand Switch for Emergency Stop (per C&E)",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": true,
-   "h_frac": 0.0,
-   "id": "set02-040",
+   "note": "GA-1201A's HS-1201 (SEQ-1201 T6); SEQ-5500 has no hand switch",
    "role": "initiator",
-   "unbound_reason": "GA-1201A's HS-1201 (SEQ-1201 T6); SEQ-5500 has no hand switch",
-   "w_frac": 0.0,
-   "x_frac": 0.81,
-   "y_frac": 0.674
+   "setpoint_as_drawn": null,
+   "x": 0.81,
+   "y": 0.674
   },
   {
    "as_drawn_text": "DCS RESET / EFF-3 Other permissives Lube oil to gearbox OK",
    "bound_tag": "PSL-2306",
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-041",
+   "note": "box labels C&E start permissive 3 ('Lube oil to gearbox OK PSL-2306') as EFF-3; C&E EFF-3 is 'TRIP CENTRIFUGE FEED GF-2210'; 'DCS reset' is start permissive 4",
    "role": "permissive",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.732,
-   "y_frac": 0.752
+   "setpoint_as_drawn": null,
+   "x": 0.732,
+   "y": 0.752
   },
   {
    "as_drawn_text": "P&ID; TJC-LLD-PID-2301 - DRYER SYSTEM (YD-2301)",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-042",
+   "note": "header of the seal-flush inset; the only place the real drawing number appears",
    "role": "other",
-   "unbound_reason": "header of the seal-flush inset; the only place the real drawing number appears",
-   "w_frac": 0.0,
-   "x_frac": 0.21,
-   "y_frac": 0.579
+   "setpoint_as_drawn": null,
+   "x": 0.21,
+   "y": 0.579
   },
   {
    "as_drawn_text": "RO-1201",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": true,
-   "h_frac": 0.0,
-   "id": "set02-043",
+   "note": "inset valve copied from Set 1",
    "role": "other",
-   "unbound_reason": "inset valve copied from Set 1",
-   "w_frac": 0.0,
-   "x_frac": 0.128,
-   "y_frac": 0.674
+   "setpoint_as_drawn": null,
+   "x": 0.128,
+   "y": 0.674
   },
   {
    "as_drawn_text": "RO-2201",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-044",
+   "note": "inset orifice; 2201 not in any YD-2301 document",
    "role": "other",
-   "unbound_reason": "inset orifice; 2201 not in any YD-2301 document",
-   "w_frac": 0.0,
-   "x_frac": 0.062,
-   "y_frac": 0.728
+   "setpoint_as_drawn": null,
+   "x": 0.062,
+   "y": 0.728
   },
   {
    "as_drawn_text": "PDI-1201 > 1.5 bar",
    "bound_tag": null,
-   "drawn_setpoint": "> 1.5 bar",
    "foreign": true,
-   "h_frac": 0.0,
-   "id": "set02-045",
+   "note": "GA-1201A's seal-flush permissive PDI-1201; 'Confirm dP > 1.5 bar' beneath",
    "role": "permissive",
-   "unbound_reason": "GA-1201A's seal-flush permissive PDI-1201; 'Confirm dP > 1.5 bar' beneath",
-   "w_frac": 0.0,
-   "x_frac": 0.182,
-   "y_frac": 0.678
+   "setpoint_as_drawn": "> 1.5 bar",
+   "x": 0.182,
+   "y": 0.678
   },
   {
    "as_drawn_text": "PDI-2301 PERMISSIVE",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-046",
+   "note": "renumbered copy of Set 1's PDI-1201 PERMISSIVE; not in the YD-2301 C&E",
    "role": "permissive",
-   "unbound_reason": "renumbered copy of Set 1's PDI-1201 PERMISSIVE; not in the YD-2301 C&E",
-   "w_frac": 0.0,
-   "x_frac": 0.178,
-   "y_frac": 0.786
+   "setpoint_as_drawn": null,
+   "x": 0.178,
+   "y": 0.786
   },
   {
    "as_drawn_text": "PDI-2301 > 1.5 bar",
    "bound_tag": null,
-   "drawn_setpoint": "> 1.5 bar",
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-047",
+   "note": "inset, External Quench half (N2 / Steam / LINED UP)",
    "role": "permissive",
-   "unbound_reason": "inset, External Quench half (N2 / Steam / LINED UP)",
-   "w_frac": 0.0,
-   "x_frac": 0.37,
-   "y_frac": 0.786
+   "setpoint_as_drawn": "> 1.5 bar",
+   "x": 0.37,
+   "y": 0.786
   },
   {
    "as_drawn_text": "API PLAN 11 + PLAN 62 (per Datasheet and OPL)",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-048",
+   "note": "datasheet YD-2301 has GLAND PACKING PTFE (PILLER 4526L), no seal flush plan",
    "role": "other",
-   "unbound_reason": "datasheet YD-2301 has GLAND PACKING PTFE (PILLER 4526L), no seal flush plan",
-   "w_frac": 0.0,
-   "x_frac": 0.119,
-   "y_frac": 0.851
+   "setpoint_as_drawn": null,
+   "x": 0.119,
+   "y": 0.851
   },
   {
    "as_drawn_text": "API PLAN II + PLAN 62 (per Datasheet and OPL)",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-049",
    "role": "other",
-   "unbound_reason": null,
-   "w_frac": 0.0,
-   "x_frac": 0.318,
-   "y_frac": 0.851
+   "setpoint_as_drawn": null,
+   "x": 0.318,
+   "y": 0.851
   },
   {
    "as_drawn_text": "LAGEND",
    "bound_tag": null,
-   "drawn_setpoint": null,
    "foreign": false,
-   "h_frac": 0.0,
-   "id": "set02-050",
+   "note": "legend heading misspelt; rows LOGIC / START PERMISSIVE / TRIP / Cause/Effect",
    "role": "other",
-   "unbound_reason": "legend heading misspelt; rows LOGIC / START PERMISSIVE / TRIP / Cause/Effect",
-   "w_frac": 0.0,
-   "x_frac": 0.9,
-   "y_frac": 0.749
+   "setpoint_as_drawn": null,
+   "x": 0.9,
+   "y": 0.749
   }
  ],
- "notes": [
+ "notes_as_drawn": [
   "NOTE 1: This is sample data provided for CALIBER purposes only.",
   "NOTE 2: Refer to Datasheet TJC-LLD-DS-GA-1201A for design parameters.",
   "NOTE 3: See SEQ-1201 logic diagram"
  ],
  "provenance": {
-  "alias": "EXEC-1",
   "basis": "agent_transcription",
+  "by": "EXEC-1",
   "date": "2026-08-27",
-  "review_status": "pending",
-  "reviewed_at": null,
-  "reviewed_by": null
+  "review_status": "pending"
  },
- "reference_box": "Ref. Dwg. TJC-LLD-PID-XXXX",
+ "ref_dwg_as_drawn": "Ref. Dwg. TJC-LLD-PID-XXXX",
+ "revision_block_as_drawn": null,
+ "seq_cited_as_drawn": "SEQ-1201",
  "set": 2,
- "title_box": "P&ID; TJC-LLD-PID-2301 - DRYER SYSTEM (YD-2301)"
+ "tag": "YD-2301",
+ "title_as_drawn": "P&ID; TJC-LLD-PID-2301 - DRYER SYSTEM (YD-2301)"
 }

@@ -1,0 +1,440 @@
+{
+ "datasheet_cited_as_drawn": null,
+ "defects": [
+  {
+   "detail": "Bottom-right box reads 'Ref. Drg. TJC-LLD-PID-XXXX'; datasheet, GA drawing and C&E cross-reference TJC-LLD-PID-6701.",
+   "kind": "placeholder_ref"
+  },
+  {
+   "detail": "'OPL- OPL-LV-6701-07' (doubled prefix on two lines); 'SEPARATIOR LEVEL CONTROL VALVE'; 'Ref. Drg.'; '3\"-IA-6702-WĈC-I' (accented C); 'AUTOMATED LOGIC PANEL PANEL FOR INTERLOCK'; 'RCAL'.",
+   "kind": "garbled_text"
+  },
+  {
+   "detail": "'DVC6701 ACTUATOR' overlay where the positioner is DVC6200 and the actuator Fisher 667 (datasheet); LSLL-6710 routed to EFF-4 only (C&E T2 also EFF-2 CLOSE LV-6701); HS-6701 routed to EFF-3 only (C&E T3 also EFF-4); PI-6702 (instrument-air permissive) drawn on the process bottoms line.",
+   "kind": "label_vs_ce_mismatch"
+  },
+  {
+   "detail": "No notes block and no datasheet citation; FIC-6702, TIC-6702 and TB-6702 have no counterpart in the datasheet or C&E; the valve sketch carries the advisory sentence 'periodic inspection prevents failures'.",
+   "kind": "other"
+  }
+ ],
+ "equipment_shown": [
+  "LP SEPARATOR FA-6710 (vertical vessel with 'Demister mat' and an inset box 'AUTOMATED LOGIC PANEL PANEL FOR INTERLOCK SEQ-6701')",
+  "LV-6701 control valve sketch: FISHER 667 diaphragm actuator, DVC6200 positioner, HART communicator; 'FISHER 667 Diaphragm periodic inspection prevents failures'",
+  "DETAILS box: 'Globe Control Valve with Diaphragm Actuator (Fisher 667) TJC-LLD-6700-01 Body: WCC R: ASME 300# Length: 300 mm'",
+  "PERMISSIVE table: Permissive 1 PI-6702 > 1.2 barg; Permissive 2 DVC6200 healthy; Permissive 3 HV-6701 bypass closed",
+  "Lines 6\"-HC-6710-WCC-I 'Bottom hexane+polymer bottoms' (two) and 3\"-IA-6702-WCC-I instrument air (two)",
+  "Legend: LOGIC DIAGRAM, START PERMISSIVE, TRIP, CAUSE EFFECT, Line Spec."
+ ],
+ "file": "P&ID SET 6.png",
+ "image_px": [
+  1448,
+  1086
+ ],
+ "instruments": [
+  {
+   "as_drawn_text": "PI-6702",
+   "bound_tag": "PI-6702",
+   "foreign": false,
+   "note": "C&E start permissive 1 'Instrument air available (> 1.2 barg) PI-6702'; drawn on the process bottoms line, not on the instrument air",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.167,
+   "y": 0.205
+  },
+  {
+   "as_drawn_text": "FIC-6702",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "controller bubble over the FC valve; not in the datasheet or C&E",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.247,
+   "y": 0.166
+  },
+  {
+   "as_drawn_text": "FC",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "control valve with positioner on the upper 6\"-HC-6710-WCC-I line",
+   "role": "control_valve",
+   "setpoint_as_drawn": null,
+   "x": 0.212,
+   "y": 0.269
+  },
+  {
+   "as_drawn_text": "6\"-HC-6710-WCC-I Bottom hexane+polymer bottoms",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet SERVICE FLUID HEXANE + POLYMER BOTTOMS",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.062,
+   "y": 0.276
+  },
+  {
+   "as_drawn_text": "LP SEPARATOR FA-6710",
+   "bound_tag": "FA-6710",
+   "foreign": false,
+   "note": "C&E DESCRIPTION 'LP SEPARATOR LEVEL PROTECTION (FA-6710 / LV-6701)'; datasheet SERVICE 'Level control of LP Separator FA-6710 bottoms'",
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.304,
+   "y": 0.249
+  },
+  {
+   "as_drawn_text": "3\"-IA-6702-WCC-I FO",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "instrument air line over the top of the vessel",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.433,
+   "y": 0.125
+  },
+  {
+   "as_drawn_text": "RCAL",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "label at the vessel side nozzle; garbled",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.38,
+   "y": 0.228
+  },
+  {
+   "as_drawn_text": "FO",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.376,
+   "y": 0.285
+  },
+  {
+   "as_drawn_text": "Instrument",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "actuated valve on the line to the LV-6701 sketch, labelled 'FO' and 'Instrument'",
+   "role": "control_valve",
+   "setpoint_as_drawn": null,
+   "x": 0.445,
+   "y": 0.269
+  },
+  {
+   "as_drawn_text": "TIC-6702",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "not in the datasheet or C&E",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.523,
+   "y": 0.207
+  },
+  {
+   "as_drawn_text": "LIC-6701",
+   "bound_tag": "LIC-6701",
+   "foreign": false,
+   "note": "datasheet 'CONTROLLER LIC-6701 (on FA-6710 level)'",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.666,
+   "y": 0.193
+  },
+  {
+   "as_drawn_text": "FISHER 667 Diaphragm periodic inspection prevents failures",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet ACTUATOR FISHER 667 SIZE 45; advisory text on the drawing",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.899,
+   "y": 0.166
+  },
+  {
+   "as_drawn_text": "HART communicator",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "datasheet POSITIONER DVC6200 HART, 4-20 mA",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.88,
+   "y": 0.267
+  },
+  {
+   "as_drawn_text": "LV-6701",
+   "bound_tag": "LV-6701",
+   "foreign": false,
+   "note": "valve body under the actuator sketch; datasheet GLOBE, CAGE-GUIDED, FAIL CLOSED",
+   "role": "control_valve",
+   "setpoint_as_drawn": null,
+   "x": 0.75,
+   "y": 0.327
+  },
+  {
+   "as_drawn_text": "DVC6200 positioner",
+   "bound_tag": "DVC6200",
+   "foreign": false,
+   "note": "C&E start permissive 2 'Positioner DVC6200 in AUTO/healthy'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.871,
+   "y": 0.322
+  },
+  {
+   "as_drawn_text": "SEPARATIOR LEVEL CONTROL VALVE (LV-6701)",
+   "bound_tag": "LV-6701",
+   "foreign": false,
+   "role": "equipment",
+   "setpoint_as_drawn": null,
+   "x": 0.581,
+   "y": 0.345
+  },
+  {
+   "as_drawn_text": "DVC6701 ACTUATOR",
+   "bound_tag": "DVC6200",
+   "foreign": false,
+   "note": "bold overlay; the positioner is DVC6200 and the actuator Fisher 667 (datasheet)",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.499,
+   "y": 0.388
+  },
+  {
+   "as_drawn_text": "Demister mat",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.204,
+   "y": 0.366
+  },
+  {
+   "as_drawn_text": "AUTOMATED LOGIC PANEL PANEL FOR INTERLOCK SEQ-6701",
+   "bound_tag": "SEQ-6701",
+   "foreign": false,
+   "note": "box drawn inside the vessel",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.306,
+   "y": 0.45
+  },
+  {
+   "as_drawn_text": "TB-6702",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "bubble over the lower BLOCK valve; not in the datasheet or C&E",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.181,
+   "y": 0.469
+  },
+  {
+   "as_drawn_text": "BLOCK",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "lower 6\"-HC-6710-WCC-I line",
+   "role": "isolation",
+   "setpoint_as_drawn": null,
+   "x": 0.181,
+   "y": 0.526
+  },
+  {
+   "as_drawn_text": "LSHH-6710 >85%",
+   "bound_tag": "LSHH-6710",
+   "foreign": false,
+   "note": "C&E T1 'Separator level HIGH-HIGH LSHH-6710 > 85 % 1oo2'",
+   "role": "initiator",
+   "setpoint_as_drawn": ">85%",
+   "x": 0.496,
+   "y": 0.414
+  },
+  {
+   "as_drawn_text": "VOTE: 1oo2",
+   "bound_tag": "LSHH-6710",
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.628,
+   "y": 0.417
+  },
+  {
+   "as_drawn_text": "EFF-1 OPEN LV-6701 fully",
+   "bound_tag": "LV-6701",
+   "foreign": false,
+   "note": "C&E EFF-1 'OPEN LV-6701 FULLY (relieve level)'; arrow up to the valve sketch",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.738,
+   "y": 0.417
+  },
+  {
+   "as_drawn_text": "LSLL-6710 15%",
+   "bound_tag": "LSLL-6710",
+   "foreign": false,
+   "note": "C&E T2 'Separator level LOW-LOW LSLL-6710 < 15 % 1oo2'",
+   "role": "initiator",
+   "setpoint_as_drawn": "15%",
+   "x": 0.496,
+   "y": 0.477
+  },
+  {
+   "as_drawn_text": "VOTE: 1oo2",
+   "bound_tag": "LSLL-6710",
+   "foreign": false,
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.628,
+   "y": 0.479
+  },
+  {
+   "as_drawn_text": "EFF-4 DCS Alarm",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "only effect drawn for LSLL-6710; C&E T2 also actuates EFF-2 'CLOSE LV-6701 (prevent gas blow-by)'",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.738,
+   "y": 0.479
+  },
+  {
+   "as_drawn_text": "HS-6701 ESD manual",
+   "bound_tag": "HS-6701",
+   "foreign": false,
+   "note": "C&E T3 'ESD activation (manual) HS-6701'",
+   "role": "initiator",
+   "setpoint_as_drawn": null,
+   "x": 0.497,
+   "y": 0.54
+  },
+  {
+   "as_drawn_text": "1oo1",
+   "bound_tag": "XV-6701",
+   "foreign": false,
+   "note": "solenoid symbol between HS-6701 and EFF-3; datasheet SOLENOID XV-6701 (ESD)",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.638,
+   "y": 0.544
+  },
+  {
+   "as_drawn_text": "EFF-3 VENT actuator",
+   "bound_tag": "LV-6701",
+   "foreign": false,
+   "note": "C&E EFF-3 'VENT ACTUATOR - LV-6701 FAILS CLOSED'; C&E T3 also actuates EFF-4, not drawn",
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.738,
+   "y": 0.544
+  },
+  {
+   "as_drawn_text": "3\"-IA-6702-WĈC-I Instrument Air < 1.0 barg",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "instrument air line from the vessel bottom to PSL-6702; accented C as printed",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.402,
+   "y": 0.63
+  },
+  {
+   "as_drawn_text": "PSL-6702 < 1.0 barg",
+   "bound_tag": "PSL-6702",
+   "foreign": false,
+   "note": "C&E T4 'Instrument air pressure LOW PSL-6702 < 1.0 barg'",
+   "role": "initiator",
+   "setpoint_as_drawn": "< 1.0 barg",
+   "x": 0.562,
+   "y": 0.613
+  },
+  {
+   "as_drawn_text": "FO",
+   "bound_tag": null,
+   "foreign": false,
+   "note": "actuated valve fed by PSL-6702, output to EFF-3 and EFF-4",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.65,
+   "y": 0.625
+  },
+  {
+   "as_drawn_text": "EFF-3 VENT actuator",
+   "bound_tag": "LV-6701",
+   "foreign": false,
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.738,
+   "y": 0.625
+  },
+  {
+   "as_drawn_text": "EFF-4 DCS Alarm",
+   "bound_tag": null,
+   "foreign": false,
+   "role": "effect",
+   "setpoint_as_drawn": null,
+   "x": 0.738,
+   "y": 0.671
+  },
+  {
+   "as_drawn_text": "OPL- OPL-LV-6701-07",
+   "bound_tag": "OPL-LV-6701-07",
+   "foreign": false,
+   "note": "two-line label under the PSL-6702 valve; doubled prefix",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.649,
+   "y": 0.685
+  },
+  {
+   "as_drawn_text": "Permissive 1 | PI-6702 > 1.2 barg",
+   "bound_tag": "PI-6702",
+   "foreign": false,
+   "role": "permissive",
+   "setpoint_as_drawn": "> 1.2 barg",
+   "x": 0.724,
+   "y": 0.8
+  },
+  {
+   "as_drawn_text": "Permissive 2 | DVC6200 healthy",
+   "bound_tag": "DVC6200",
+   "foreign": false,
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.724,
+   "y": 0.825
+  },
+  {
+   "as_drawn_text": "Permissive 3 | HV-6701 bypass closed",
+   "bound_tag": "HV-6701",
+   "foreign": false,
+   "note": "C&E start permissive 3 'Bypass HV-6701 closed (normal operation)'",
+   "role": "permissive",
+   "setpoint_as_drawn": null,
+   "x": 0.724,
+   "y": 0.848
+  },
+  {
+   "as_drawn_text": "DETAILS: Globe Control Valve with Diaphragm Actuator (Fisher 667) TJC-LLD-6700-01 Body: WCC R: ASME 300# Length: 300 mm",
+   "bound_tag": "TJC-LLD-6700-01",
+   "foreign": false,
+   "note": "TJC-LLD-6700-01 is the functional location; datasheet BODY MATERIAL WCC, BODY RATING ASME 300#; GA OVERALL LENGTH 300 mm (face-face)",
+   "role": "other",
+   "setpoint_as_drawn": null,
+   "x": 0.937,
+   "y": 0.497
+  }
+ ],
+ "notes_as_drawn": [],
+ "provenance": {
+  "basis": "agent_transcription",
+  "by": "EXEC-1",
+  "date": "2026-08-27",
+  "review_status": "pending"
+ },
+ "ref_dwg_as_drawn": "Ref. Drg. TJC-LLD-PID-XXXX",
+ "revision_block_as_drawn": null,
+ "seq_cited_as_drawn": "SEQ-6701",
+ "set": 6,
+ "tag": "LV-6701",
+ "title_as_drawn": "SEPARATIOR LEVEL CONTROL VALVE (LV-6701)"
+}

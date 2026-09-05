@@ -55,7 +55,7 @@
    "wear",
    "worn"
   ],
-  "links": [
+  "link_list": [
    {
     "days": 157,
     "field": "Root_Cause",
@@ -219,14 +219,26 @@
     "to_wo": "WO-240032"
    }
   ],
+  "links": 18,
   "population": "failure (66)",
   "total": 18,
   "window_days": 365
  },
  "coverage": {
+  "bands": {
+   "unplanned_failure": [
+    {
+     "copied_row_only": 27,
+     "no_lesson": 14,
+     "t": 0.62,
+     "taught": 16
+    }
+   ]
+  },
   "generous": {
    "all": [
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 19,
       "DC-3401A": 20,
@@ -241,6 +253,7 @@
      "downtime_h": 74.5,
      "n": 211,
      "pct": 66.8,
+     "share": 0.668,
      "t": 0.5,
      "uncovered": 141,
      "uncovered_ids": [
@@ -389,6 +402,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 19,
       "DC-3401A": 20,
@@ -403,6 +417,7 @@
      "downtime_h": 74.5,
      "n": 211,
      "pct": 66.8,
+     "share": 0.668,
      "t": 0.55,
      "uncovered": 141,
      "uncovered_ids": [
@@ -551,6 +566,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 19,
       "DC-3401A": 20,
@@ -565,6 +581,7 @@
      "downtime_h": 74.5,
      "n": 211,
      "pct": 67.8,
+     "share": 0.678,
      "t": 0.6,
      "uncovered": 143,
      "uncovered_ids": [
@@ -715,6 +732,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 19,
       "DC-3401A": 20,
@@ -729,6 +747,7 @@
      "downtime_h": 74.5,
      "n": 211,
      "pct": 67.8,
+     "share": 0.678,
      "t": 0.62,
      "uncovered": 143,
      "uncovered_ids": [
@@ -879,6 +898,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 19,
       "DC-3401A": 20,
@@ -893,6 +913,7 @@
      "downtime_h": 74.5,
      "n": 211,
      "pct": 67.8,
+     "share": 0.678,
      "t": 0.65,
      "uncovered": 143,
      "uncovered_ids": [
@@ -1043,6 +1064,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 19,
       "DC-3401A": 20,
@@ -1057,6 +1079,7 @@
      "downtime_h": 74.5,
      "n": 211,
      "pct": 71.6,
+     "share": 0.716,
      "t": 0.7,
      "uncovered": 151,
      "uncovered_ids": [
@@ -1215,6 +1238,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 8,
      "by_tag": {
       "CT-7801": 20,
       "DC-3401A": 20,
@@ -1229,6 +1253,7 @@
      "downtime_h": 94.5,
      "n": 211,
      "pct": 75.8,
+     "share": 0.758,
      "t": 0.75,
      "uncovered": 160,
      "uncovered_ids": [
@@ -1398,6 +1423,7 @@
    ],
    "failure": [
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 3,
@@ -1411,6 +1437,7 @@
      "downtime_h": 74.5,
      "n": 66,
      "pct": 27.3,
+     "share": 0.273,
      "t": 0.5,
      "uncovered": 18,
      "uncovered_ids": [
@@ -1436,6 +1463,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 3,
@@ -1449,6 +1477,7 @@
      "downtime_h": 74.5,
      "n": 66,
      "pct": 27.3,
+     "share": 0.273,
      "t": 0.55,
      "uncovered": 18,
      "uncovered_ids": [
@@ -1474,6 +1503,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 3,
@@ -1487,6 +1517,7 @@
      "downtime_h": 74.5,
      "n": 66,
      "pct": 28.8,
+     "share": 0.288,
      "t": 0.6,
      "uncovered": 19,
      "uncovered_ids": [
@@ -1513,6 +1544,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 3,
@@ -1526,6 +1558,7 @@
      "downtime_h": 74.5,
      "n": 66,
      "pct": 28.8,
+     "share": 0.288,
      "t": 0.62,
      "uncovered": 19,
      "uncovered_ids": [
@@ -1552,6 +1585,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 3,
@@ -1565,6 +1599,7 @@
      "downtime_h": 74.5,
      "n": 66,
      "pct": 28.8,
+     "share": 0.288,
      "t": 0.65,
      "uncovered": 19,
      "uncovered_ids": [
@@ -1591,6 +1626,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 3,
@@ -1604,6 +1640,7 @@
      "downtime_h": 74.5,
      "n": 66,
      "pct": 30.3,
+     "share": 0.303,
      "t": 0.7,
      "uncovered": 20,
      "uncovered_ids": [
@@ -1631,6 +1668,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 8,
      "by_tag": {
       "CT-7801": 3,
       "DC-3401A": 3,
@@ -1645,6 +1683,7 @@
      "downtime_h": 94.5,
      "n": 66,
      "pct": 39.4,
+     "share": 0.394,
      "t": 0.75,
      "uncovered": 26,
      "uncovered_ids": [
@@ -1680,6 +1719,7 @@
    ],
    "planned_flagged": [
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 1,
       "EA-5601": 3
@@ -1688,6 +1728,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 50.0,
+     "share": 0.5,
      "t": 0.5,
      "uncovered": 4,
      "uncovered_ids": [
@@ -1699,6 +1740,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 1,
       "EA-5601": 3
@@ -1707,6 +1749,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 50.0,
+     "share": 0.5,
      "t": 0.55,
      "uncovered": 4,
      "uncovered_ids": [
@@ -1718,6 +1761,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 1,
       "EA-5601": 3
@@ -1726,6 +1770,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 50.0,
+     "share": 0.5,
      "t": 0.6,
      "uncovered": 4,
      "uncovered_ids": [
@@ -1737,6 +1782,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 1,
       "EA-5601": 3
@@ -1745,6 +1791,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 50.0,
+     "share": 0.5,
      "t": 0.62,
      "uncovered": 4,
      "uncovered_ids": [
@@ -1756,6 +1803,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 1,
       "EA-5601": 3
@@ -1764,6 +1812,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 50.0,
+     "share": 0.5,
      "t": 0.65,
      "uncovered": 4,
      "uncovered_ids": [
@@ -1775,6 +1824,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 1,
       "EA-5601": 3,
@@ -1784,6 +1834,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 62.5,
+     "share": 0.625,
      "t": 0.7,
      "uncovered": 5,
      "uncovered_ids": [
@@ -1796,6 +1847,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 1,
       "EA-5601": 3,
@@ -1805,6 +1857,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 62.5,
+     "share": 0.625,
      "t": 0.75,
      "uncovered": 5,
      "uncovered_ids": [
@@ -1819,6 +1872,7 @@
    ],
    "unplanned_breakdowns": [
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 1,
       "GA-1201A": 1,
@@ -1829,6 +1883,7 @@
      "downtime_h": 74.5,
      "n": 23,
      "pct": 21.7,
+     "share": 0.217,
      "t": 0.5,
      "uncovered": 5,
      "uncovered_ids": [
@@ -1841,6 +1896,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 1,
       "GA-1201A": 1,
@@ -1851,6 +1907,7 @@
      "downtime_h": 74.5,
      "n": 23,
      "pct": 21.7,
+     "share": 0.217,
      "t": 0.55,
      "uncovered": 5,
      "uncovered_ids": [
@@ -1863,6 +1920,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 1,
       "GA-1201A": 1,
@@ -1873,6 +1931,7 @@
      "downtime_h": 74.5,
      "n": 23,
      "pct": 21.7,
+     "share": 0.217,
      "t": 0.6,
      "uncovered": 5,
      "uncovered_ids": [
@@ -1885,6 +1944,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 1,
       "GA-1201A": 1,
@@ -1895,6 +1955,7 @@
      "downtime_h": 74.5,
      "n": 23,
      "pct": 21.7,
+     "share": 0.217,
      "t": 0.62,
      "uncovered": 5,
      "uncovered_ids": [
@@ -1907,6 +1968,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 1,
       "GA-1201A": 1,
@@ -1917,6 +1979,7 @@
      "downtime_h": 74.5,
      "n": 23,
      "pct": 21.7,
+     "share": 0.217,
      "t": 0.65,
      "uncovered": 5,
      "uncovered_ids": [
@@ -1929,6 +1992,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 1,
       "GA-1201A": 1,
@@ -1939,6 +2003,7 @@
      "downtime_h": 74.5,
      "n": 23,
      "pct": 21.7,
+     "share": 0.217,
      "t": 0.7,
      "uncovered": 5,
      "uncovered_ids": [
@@ -1951,6 +2016,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 8,
      "by_tag": {
       "CT-7801": 1,
       "FA-8901": 2,
@@ -1963,6 +2029,7 @@
      "downtime_h": 94.5,
      "n": 23,
      "pct": 34.8,
+     "share": 0.348,
      "t": 0.75,
      "uncovered": 8,
      "uncovered_ids": [
@@ -1980,6 +2047,7 @@
    ],
    "unplanned_failure": [
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 2,
@@ -1993,6 +2061,7 @@
      "downtime_h": 74.5,
      "n": 57,
      "pct": 22.8,
+     "share": 0.228,
      "t": 0.5,
      "uncovered": 13,
      "uncovered_ids": [
@@ -2013,6 +2082,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 2,
@@ -2026,6 +2096,7 @@
      "downtime_h": 74.5,
      "n": 57,
      "pct": 22.8,
+     "share": 0.228,
      "t": 0.55,
      "uncovered": 13,
      "uncovered_ids": [
@@ -2046,6 +2117,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 2,
@@ -2059,6 +2131,7 @@
      "downtime_h": 74.5,
      "n": 57,
      "pct": 24.6,
+     "share": 0.246,
      "t": 0.6,
      "uncovered": 14,
      "uncovered_ids": [
@@ -2080,6 +2153,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 2,
@@ -2093,6 +2167,7 @@
      "downtime_h": 74.5,
      "n": 57,
      "pct": 24.6,
+     "share": 0.246,
      "t": 0.62,
      "uncovered": 14,
      "uncovered_ids": [
@@ -2114,6 +2189,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 2,
@@ -2127,6 +2203,7 @@
      "downtime_h": 74.5,
      "n": 57,
      "pct": 24.6,
+     "share": 0.246,
      "t": 0.65,
      "uncovered": 14,
      "uncovered_ids": [
@@ -2148,6 +2225,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 5,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 2,
@@ -2161,6 +2239,7 @@
      "downtime_h": 74.5,
      "n": 57,
      "pct": 24.6,
+     "share": 0.246,
      "t": 0.7,
      "uncovered": 14,
      "uncovered_ids": [
@@ -2182,6 +2261,7 @@
      "unplanned_bd": 5
     },
     {
+     "breakdowns": 8,
      "by_tag": {
       "CT-7801": 3,
       "DC-3401A": 2,
@@ -2196,6 +2276,7 @@
      "downtime_h": 94.5,
      "n": 57,
      "pct": 35.1,
+     "share": 0.351,
      "t": 0.75,
      "uncovered": 20,
      "uncovered_ids": [
@@ -2227,6 +2308,7 @@
   "strict": {
    "all": [
     {
+     "breakdowns": 12,
      "by_tag": {
       "CT-7801": 21,
       "DC-3401A": 26,
@@ -2241,6 +2323,7 @@
      "downtime_h": 132.0,
      "n": 211,
      "pct": 84.8,
+     "share": 0.848,
      "t": 0.5,
      "uncovered": 179,
      "uncovered_ids": [
@@ -2427,6 +2510,7 @@
      "unplanned_bd": 12
     },
     {
+     "breakdowns": 12,
      "by_tag": {
       "CT-7801": 21,
       "DC-3401A": 26,
@@ -2441,6 +2525,7 @@
      "downtime_h": 132.0,
      "n": 211,
      "pct": 84.8,
+     "share": 0.848,
      "t": 0.55,
      "uncovered": 179,
      "uncovered_ids": [
@@ -2627,6 +2712,7 @@
      "unplanned_bd": 12
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 24,
       "DC-3401A": 27,
@@ -2641,6 +2727,7 @@
      "downtime_h": 146.0,
      "n": 211,
      "pct": 90.0,
+     "share": 0.9,
      "t": 0.6,
      "uncovered": 190,
      "uncovered_ids": [
@@ -2838,6 +2925,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 24,
       "DC-3401A": 27,
@@ -2852,6 +2940,7 @@
      "downtime_h": 146.0,
      "n": 211,
      "pct": 90.0,
+     "share": 0.9,
      "t": 0.62,
      "uncovered": 190,
      "uncovered_ids": [
@@ -3049,6 +3138,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 24,
       "DC-3401A": 27,
@@ -3063,6 +3153,7 @@
      "downtime_h": 146.0,
      "n": 211,
      "pct": 90.0,
+     "share": 0.9,
      "t": 0.65,
      "uncovered": 190,
      "uncovered_ids": [
@@ -3260,6 +3351,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 15,
      "by_tag": {
       "CT-7801": 24,
       "DC-3401A": 27,
@@ -3274,6 +3366,7 @@
      "downtime_h": 158.0,
      "n": 211,
      "pct": 91.9,
+     "share": 0.919,
      "t": 0.7,
      "uncovered": 194,
      "uncovered_ids": [
@@ -3475,6 +3568,7 @@
      "unplanned_bd": 15
     },
     {
+     "breakdowns": 19,
      "by_tag": {
       "CT-7801": 25,
       "DC-3401A": 27,
@@ -3489,6 +3583,7 @@
      "downtime_h": 182.0,
      "n": 211,
      "pct": 97.2,
+     "share": 0.972,
      "t": 0.75,
      "uncovered": 205,
      "uncovered_ids": [
@@ -3703,6 +3798,7 @@
    ],
    "failure": [
     {
+     "breakdowns": 12,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 8,
@@ -3717,6 +3813,7 @@
      "downtime_h": 132.0,
      "n": 66,
      "pct": 60.6,
+     "share": 0.606,
      "t": 0.5,
      "uncovered": 40,
      "uncovered_ids": [
@@ -3764,6 +3861,7 @@
      "unplanned_bd": 12
     },
     {
+     "breakdowns": 12,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 8,
@@ -3778,6 +3876,7 @@
      "downtime_h": 132.0,
      "n": 66,
      "pct": 60.6,
+     "share": 0.606,
      "t": 0.55,
      "uncovered": 40,
      "uncovered_ids": [
@@ -3825,6 +3924,7 @@
      "unplanned_bd": 12
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 4,
       "DC-3401A": 9,
@@ -3839,6 +3939,7 @@
      "downtime_h": 146.0,
      "n": 66,
      "pct": 74.2,
+     "share": 0.742,
      "t": 0.6,
      "uncovered": 49,
      "uncovered_ids": [
@@ -3895,6 +3996,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 4,
       "DC-3401A": 9,
@@ -3909,6 +4011,7 @@
      "downtime_h": 146.0,
      "n": 66,
      "pct": 74.2,
+     "share": 0.742,
      "t": 0.62,
      "uncovered": 49,
      "uncovered_ids": [
@@ -3965,6 +4068,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 4,
       "DC-3401A": 9,
@@ -3979,6 +4083,7 @@
      "downtime_h": 146.0,
      "n": 66,
      "pct": 74.2,
+     "share": 0.742,
      "t": 0.65,
      "uncovered": 49,
      "uncovered_ids": [
@@ -4035,6 +4140,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 15,
      "by_tag": {
       "CT-7801": 4,
       "DC-3401A": 9,
@@ -4049,6 +4155,7 @@
      "downtime_h": 158.0,
      "n": 66,
      "pct": 78.8,
+     "share": 0.788,
      "t": 0.7,
      "uncovered": 52,
      "uncovered_ids": [
@@ -4108,6 +4215,7 @@
      "unplanned_bd": 15
     },
     {
+     "breakdowns": 19,
      "by_tag": {
       "CT-7801": 5,
       "DC-3401A": 9,
@@ -4122,6 +4230,7 @@
      "downtime_h": 182.0,
      "n": 66,
      "pct": 92.4,
+     "share": 0.924,
      "t": 0.75,
      "uncovered": 61,
      "uncovered_ids": [
@@ -4192,6 +4301,7 @@
    ],
    "planned_flagged": [
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 2,
       "EA-5601": 3,
@@ -4201,6 +4311,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 87.5,
+     "share": 0.875,
      "t": 0.5,
      "uncovered": 7,
      "uncovered_ids": [
@@ -4215,6 +4326,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 2,
       "EA-5601": 3,
@@ -4224,6 +4336,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 87.5,
+     "share": 0.875,
      "t": 0.55,
      "uncovered": 7,
      "uncovered_ids": [
@@ -4238,6 +4351,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 2,
       "EA-5601": 3,
@@ -4247,6 +4361,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 87.5,
+     "share": 0.875,
      "t": 0.6,
      "uncovered": 7,
      "uncovered_ids": [
@@ -4261,6 +4376,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 2,
       "EA-5601": 3,
@@ -4270,6 +4386,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 87.5,
+     "share": 0.875,
      "t": 0.62,
      "uncovered": 7,
      "uncovered_ids": [
@@ -4284,6 +4401,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 2,
       "EA-5601": 3,
@@ -4293,6 +4411,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 87.5,
+     "share": 0.875,
      "t": 0.65,
      "uncovered": 7,
      "uncovered_ids": [
@@ -4307,6 +4426,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 2,
       "EA-5601": 3,
@@ -4316,6 +4436,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 100.0,
+     "share": 1.0,
      "t": 0.7,
      "uncovered": 8,
      "uncovered_ids": [
@@ -4331,6 +4452,7 @@
      "unplanned_bd": 0
     },
     {
+     "breakdowns": 0,
      "by_tag": {
       "DC-3401A": 2,
       "EA-5601": 3,
@@ -4340,6 +4462,7 @@
      "downtime_h": 0,
      "n": 8,
      "pct": 100.0,
+     "share": 1.0,
      "t": 0.75,
      "uncovered": 8,
      "uncovered_ids": [
@@ -4357,6 +4480,7 @@
    ],
    "unplanned_breakdowns": [
     {
+     "breakdowns": 12,
      "by_tag": {
       "CT-7801": 1,
       "DC-3401A": 2,
@@ -4370,6 +4494,7 @@
      "downtime_h": 132.0,
      "n": 23,
      "pct": 52.2,
+     "share": 0.522,
      "t": 0.5,
      "uncovered": 12,
      "uncovered_ids": [
@@ -4389,6 +4514,7 @@
      "unplanned_bd": 12
     },
     {
+     "breakdowns": 12,
      "by_tag": {
       "CT-7801": 1,
       "DC-3401A": 2,
@@ -4402,6 +4528,7 @@
      "downtime_h": 132.0,
      "n": 23,
      "pct": 52.2,
+     "share": 0.522,
      "t": 0.55,
      "uncovered": 12,
      "uncovered_ids": [
@@ -4421,6 +4548,7 @@
      "unplanned_bd": 12
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 1,
       "DC-3401A": 3,
@@ -4434,6 +4562,7 @@
      "downtime_h": 146.0,
      "n": 23,
      "pct": 60.9,
+     "share": 0.609,
      "t": 0.6,
      "uncovered": 14,
      "uncovered_ids": [
@@ -4455,6 +4584,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 1,
       "DC-3401A": 3,
@@ -4468,6 +4598,7 @@
      "downtime_h": 146.0,
      "n": 23,
      "pct": 60.9,
+     "share": 0.609,
      "t": 0.62,
      "uncovered": 14,
      "uncovered_ids": [
@@ -4489,6 +4620,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 1,
       "DC-3401A": 3,
@@ -4502,6 +4634,7 @@
      "downtime_h": 146.0,
      "n": 23,
      "pct": 60.9,
+     "share": 0.609,
      "t": 0.65,
      "uncovered": 14,
      "uncovered_ids": [
@@ -4523,6 +4656,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 15,
      "by_tag": {
       "CT-7801": 1,
       "DC-3401A": 3,
@@ -4536,6 +4670,7 @@
      "downtime_h": 158.0,
      "n": 23,
      "pct": 65.2,
+     "share": 0.652,
      "t": 0.7,
      "uncovered": 15,
      "uncovered_ids": [
@@ -4558,6 +4693,7 @@
      "unplanned_bd": 15
     },
     {
+     "breakdowns": 19,
      "by_tag": {
       "CT-7801": 1,
       "DC-3401A": 3,
@@ -4572,6 +4708,7 @@
      "downtime_h": 182.0,
      "n": 23,
      "pct": 82.6,
+     "share": 0.826,
      "t": 0.75,
      "uncovered": 19,
      "uncovered_ids": [
@@ -4600,6 +4737,7 @@
    ],
    "unplanned_failure": [
     {
+     "breakdowns": 12,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 6,
@@ -4614,6 +4752,7 @@
      "downtime_h": 132.0,
      "n": 57,
      "pct": 56.1,
+     "share": 0.561,
      "t": 0.5,
      "uncovered": 32,
      "uncovered_ids": [
@@ -4653,6 +4792,7 @@
      "unplanned_bd": 12
     },
     {
+     "breakdowns": 12,
      "by_tag": {
       "CT-7801": 2,
       "DC-3401A": 6,
@@ -4667,6 +4807,7 @@
      "downtime_h": 132.0,
      "n": 57,
      "pct": 56.1,
+     "share": 0.561,
      "t": 0.55,
      "uncovered": 32,
      "uncovered_ids": [
@@ -4706,6 +4847,7 @@
      "unplanned_bd": 12
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 4,
       "DC-3401A": 7,
@@ -4720,6 +4862,7 @@
      "downtime_h": 146.0,
      "n": 57,
      "pct": 71.9,
+     "share": 0.719,
      "t": 0.6,
      "uncovered": 41,
      "uncovered_ids": [
@@ -4768,6 +4911,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 4,
       "DC-3401A": 7,
@@ -4782,6 +4926,7 @@
      "downtime_h": 146.0,
      "n": 57,
      "pct": 71.9,
+     "share": 0.719,
      "t": 0.62,
      "uncovered": 41,
      "uncovered_ids": [
@@ -4830,6 +4975,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 14,
      "by_tag": {
       "CT-7801": 4,
       "DC-3401A": 7,
@@ -4844,6 +4990,7 @@
      "downtime_h": 146.0,
      "n": 57,
      "pct": 71.9,
+     "share": 0.719,
      "t": 0.65,
      "uncovered": 41,
      "uncovered_ids": [
@@ -4892,6 +5039,7 @@
      "unplanned_bd": 14
     },
     {
+     "breakdowns": 15,
      "by_tag": {
       "CT-7801": 4,
       "DC-3401A": 7,
@@ -4906,6 +5054,7 @@
      "downtime_h": 158.0,
      "n": 57,
      "pct": 75.4,
+     "share": 0.754,
      "t": 0.7,
      "uncovered": 43,
      "uncovered_ids": [
@@ -4956,6 +5105,7 @@
      "unplanned_bd": 15
     },
     {
+     "breakdowns": 19,
      "by_tag": {
       "CT-7801": 5,
       "DC-3401A": 7,
@@ -4970,6 +5120,7 @@
      "downtime_h": 182.0,
      "n": 57,
      "pct": 91.2,
+     "share": 0.912,
      "t": 0.75,
      "uncovered": 52,
      "uncovered_ids": [
@@ -5186,9 +5337,48 @@
    }
   }
  },
+ "coverage_labels": {
+  "breakdowns": 3,
+  "cost_idr": 44256000,
+  "downtime_h": 34.5,
+  "kappa_covered": 1.0,
+  "kappa_taught": 0.9647,
+  "proxy_agreement": {
+   "generous": {
+    "fn": 5,
+    "fp": 1,
+    "precision": 0.9767,
+    "recall": 0.8936
+   },
+   "strict": {
+    "fn": 32,
+    "fp": 1,
+    "precision": 0.9375,
+    "recall": 0.3191
+   }
+  },
+  "share": 0.175,
+  "status": "machine_drafted_pending_human",
+  "uncovered_count": 10,
+  "uncovered_ids": [
+   "WO-240007",
+   "WO-240013",
+   "WO-240033",
+   "WO-240039",
+   "WO-240063",
+   "WO-240064",
+   "WO-240091",
+   "WO-240094",
+   "WO-240120",
+   "WO-240196"
+  ]
+ },
  "coverage_scores": {
   "WO-240002": {
    "generous": {
+    "best_ratio": 0.7857,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.7857,
     "unit": [
      "Root_Cause",
@@ -5196,6 +5386,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5556,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.5556,
     "unit": [
      "Problem_Description",
@@ -5205,6 +5398,9 @@
   },
   "WO-240003": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5212,6 +5408,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4286,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.4286,
     "unit": [
      "Problem_Description",
@@ -5221,6 +5420,9 @@
   },
   "WO-240004": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5228,6 +5430,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4286,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.4286,
     "unit": [
      "Problem_Description",
@@ -5237,6 +5442,9 @@
   },
   "WO-240005": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-GA-1201A-02",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -5244,6 +5452,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5556,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-02",
     "score": 0.5556,
     "unit": [
      "Problem_Description",
@@ -5253,6 +5464,9 @@
   },
   "WO-240006": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5260,6 +5474,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -5269,6 +5486,9 @@
   },
   "WO-240007": {
    "generous": {
+    "best_ratio": 0.4286,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-GA-1201A-03",
     "score": 0.4286,
     "unit": [
      "Corrective_Action",
@@ -5276,6 +5496,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4286,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-GA-1201A-03",
     "score": 0.4286,
     "unit": [
      "Corrective_Action",
@@ -5285,6 +5508,9 @@
   },
   "WO-240008": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5292,6 +5518,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.1667,
     "unit": [
      "Root_Cause",
@@ -5301,6 +5530,9 @@
   },
   "WO-240009": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5308,6 +5540,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-04",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5317,6 +5552,9 @@
   },
   "WO-240010": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -5324,6 +5562,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-03",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -5333,6 +5574,9 @@
   },
   "WO-240011": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5340,6 +5584,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5349,6 +5596,9 @@
   },
   "WO-240012": {
    "generous": {
+    "best_ratio": 0.5714,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.5714,
     "unit": [
      "Problem_Description",
@@ -5356,6 +5606,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-04",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -5365,6 +5618,9 @@
   },
   "WO-240013": {
    "generous": {
+    "best_ratio": 0.2,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.2,
     "unit": [
      "Root_Cause",
@@ -5372,6 +5628,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.2,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.2,
     "unit": [
      "Root_Cause",
@@ -5381,6 +5640,9 @@
   },
   "WO-240014": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5388,6 +5650,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -5397,6 +5662,9 @@
   },
   "WO-240015": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5404,6 +5672,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -5413,6 +5684,9 @@
   },
   "WO-240016": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5420,6 +5694,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5429,6 +5706,9 @@
   },
   "WO-240017": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5436,6 +5716,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5445,6 +5728,9 @@
   },
   "WO-240018": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5452,6 +5738,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5461,6 +5750,9 @@
   },
   "WO-240019": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-04",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5468,6 +5760,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-04",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5477,6 +5772,9 @@
   },
   "WO-240020": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-04",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5484,6 +5782,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-04",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5493,6 +5794,9 @@
   },
   "WO-240021": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-GA-1201A-03",
     "score": 0.3333,
     "unit": [
      "Corrective_Action",
@@ -5500,6 +5804,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-GA-1201A-03",
     "score": 0.3333,
     "unit": [
      "Corrective_Action",
@@ -5509,6 +5816,9 @@
   },
   "WO-240022": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-GA-1201A-03",
     "score": 0.3333,
     "unit": [
      "Corrective_Action",
@@ -5516,6 +5826,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-GA-1201A-03",
     "score": 0.3333,
     "unit": [
      "Corrective_Action",
@@ -5525,6 +5838,9 @@
   },
   "WO-240023": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5532,6 +5848,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5541,6 +5860,9 @@
   },
   "WO-240024": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5548,6 +5870,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5557,6 +5882,9 @@
   },
   "WO-240025": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -5564,6 +5892,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5573,6 +5904,9 @@
   },
   "WO-240026": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -5580,6 +5914,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5589,6 +5926,9 @@
   },
   "WO-240027": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-GA-1201A-07",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -5596,6 +5936,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-GA-1201A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -5605,6 +5948,9 @@
   },
   "WO-240028": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5612,6 +5958,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6667,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-02",
     "score": 0.6667,
     "unit": [
      "Problem_Description",
@@ -5621,6 +5970,9 @@
   },
   "WO-240029": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5628,6 +5980,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-YD-2301-02",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -5637,6 +5992,9 @@
   },
   "WO-240030": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5644,6 +6002,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4286,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.4286,
     "unit": [
      "Corrective_Action",
@@ -5653,6 +6014,9 @@
   },
   "WO-240031": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-02",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -5660,6 +6024,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5714,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-03",
     "score": 0.5714,
     "unit": [
      "Problem_Description",
@@ -5669,6 +6036,9 @@
   },
   "WO-240032": {
    "generous": {
+    "best_ratio": 0.7143,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-05",
     "score": 0.7143,
     "unit": [
      "Problem_Description",
@@ -5676,6 +6046,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.7143,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-05",
     "score": 0.7143,
     "unit": [
      "Problem_Description",
@@ -5685,6 +6058,9 @@
   },
   "WO-240033": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -5692,6 +6068,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -5701,6 +6080,9 @@
   },
   "WO-240034": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -5708,6 +6090,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -5717,6 +6102,9 @@
   },
   "WO-240035": {
    "generous": {
+    "best_ratio": 0.4286,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-06",
     "score": 0.4286,
     "unit": [
      "Problem_Description",
@@ -5724,6 +6112,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4286,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-06",
     "score": 0.4286,
     "unit": [
      "Problem_Description",
@@ -5733,6 +6124,9 @@
   },
   "WO-240036": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-03",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -5740,6 +6134,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-03",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -5749,6 +6146,9 @@
   },
   "WO-240037": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-02",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5756,6 +6156,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-02",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5765,6 +6168,9 @@
   },
   "WO-240038": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -5772,6 +6178,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5781,6 +6190,9 @@
   },
   "WO-240039": {
    "generous": {
+    "best_ratio": 0.2857,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.2857,
     "unit": [
      "Problem_Description",
@@ -5788,6 +6200,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.2857,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.2857,
     "unit": [
      "Problem_Description",
@@ -5797,6 +6212,9 @@
   },
   "WO-240040": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -5804,6 +6222,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -5813,6 +6234,9 @@
   },
   "WO-240041": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -5820,6 +6244,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -5829,6 +6256,9 @@
   },
   "WO-240042": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5836,6 +6266,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5845,6 +6278,9 @@
   },
   "WO-240043": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5852,6 +6288,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5861,6 +6300,9 @@
   },
   "WO-240044": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5868,6 +6310,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5877,6 +6322,9 @@
   },
   "WO-240045": {
    "generous": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -5884,6 +6332,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -5893,6 +6344,9 @@
   },
   "WO-240046": {
    "generous": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -5900,6 +6354,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -5909,6 +6366,9 @@
   },
   "WO-240047": {
    "generous": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -5916,6 +6376,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -5925,6 +6388,9 @@
   },
   "WO-240048": {
    "generous": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -5932,6 +6398,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -5941,6 +6410,9 @@
   },
   "WO-240049": {
    "generous": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -5948,6 +6420,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -5957,6 +6432,9 @@
   },
   "WO-240050": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5964,6 +6442,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5973,6 +6454,9 @@
   },
   "WO-240051": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5980,6 +6464,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5989,6 +6476,9 @@
   },
   "WO-240052": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -5996,6 +6486,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-07",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6005,6 +6498,9 @@
   },
   "WO-240053": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -6012,6 +6508,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6021,6 +6520,9 @@
   },
   "WO-240054": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -6028,6 +6530,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6037,6 +6542,9 @@
   },
   "WO-240055": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -6044,6 +6552,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-YD-2301-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6053,6 +6564,9 @@
   },
   "WO-240056": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6060,6 +6574,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.4,
     "unit": [
      "Root_Cause",
@@ -6069,6 +6586,9 @@
   },
   "WO-240057": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6076,6 +6596,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.375,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.375,
     "unit": [
      "Corrective_Action",
@@ -6085,6 +6608,9 @@
   },
   "WO-240058": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6092,6 +6618,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.2857,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.2857,
     "unit": [
      "Problem_Description",
@@ -6101,6 +6630,9 @@
   },
   "WO-240059": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6108,6 +6640,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4286,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.4286,
     "unit": [
      "Problem_Description",
@@ -6117,6 +6652,9 @@
   },
   "WO-240060": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-07",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6124,6 +6662,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.2,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.2,
     "unit": [
      "Problem_Description",
@@ -6133,6 +6674,9 @@
   },
   "WO-240061": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-07",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6140,6 +6684,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4444,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-07",
     "score": 0.4444,
     "unit": [
      "Corrective_Action",
@@ -6149,6 +6696,9 @@
   },
   "WO-240062": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-07",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6156,6 +6706,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-07",
     "score": 0.6,
     "unit": [
      "Problem_Description",
@@ -6165,6 +6718,9 @@
   },
   "WO-240063": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -6172,6 +6728,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -6181,6 +6740,9 @@
   },
   "WO-240064": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -6188,6 +6750,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -6197,6 +6762,9 @@
   },
   "WO-240065": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-05",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -6204,6 +6772,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-05",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -6213,6 +6784,9 @@
   },
   "WO-240066": {
    "generous": {
+    "best_ratio": 0.375,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.375,
     "unit": [
      "Corrective_Action",
@@ -6220,6 +6794,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.375,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.375,
     "unit": [
      "Corrective_Action",
@@ -6229,6 +6806,9 @@
   },
   "WO-240067": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-03",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6236,6 +6816,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-03",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6245,6 +6828,9 @@
   },
   "WO-240068": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-07",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6252,6 +6838,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -6261,6 +6850,9 @@
   },
   "WO-240069": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-07",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6268,6 +6860,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -6277,6 +6872,9 @@
   },
   "WO-240070": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-07",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6284,6 +6882,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -6293,6 +6894,9 @@
   },
   "WO-240071": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6300,6 +6904,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6309,6 +6916,9 @@
   },
   "WO-240072": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6316,6 +6926,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6325,6 +6938,9 @@
   },
   "WO-240073": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6332,6 +6948,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6341,6 +6960,9 @@
   },
   "WO-240074": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6348,6 +6970,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6357,6 +6982,9 @@
   },
   "WO-240075": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6364,6 +6992,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-DC-3401A-06",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6373,26 +7004,41 @@
   },
   "WO-240076": {
    "generous": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240077": {
    "generous": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240078": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-03",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -6400,6 +7046,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-03",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -6409,6 +7058,9 @@
   },
   "WO-240079": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-03",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -6416,6 +7068,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-03",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -6425,6 +7080,9 @@
   },
   "WO-240080": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-03",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -6432,6 +7090,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-03",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -6441,6 +7102,9 @@
   },
   "WO-240081": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6448,6 +7112,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6457,6 +7124,9 @@
   },
   "WO-240082": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6464,6 +7134,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-DC-3401A-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6473,6 +7146,9 @@
   },
   "WO-240083": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6480,6 +7156,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.7143,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-02",
     "score": 0.7143,
     "unit": [
      "Problem_Description",
@@ -6489,6 +7168,9 @@
   },
   "WO-240084": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6496,6 +7178,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5714,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.5714,
     "unit": [
      "Problem_Description",
@@ -6505,6 +7190,9 @@
   },
   "WO-240085": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6512,6 +7200,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.1667,
     "unit": [
      "Problem_Description",
@@ -6521,6 +7212,9 @@
   },
   "WO-240086": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6528,6 +7222,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -6537,6 +7234,9 @@
   },
   "WO-240087": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6544,6 +7244,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-03",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -6553,6 +7256,9 @@
   },
   "WO-240088": {
    "generous": {
+    "best_ratio": 0.75,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.75,
     "unit": [
      "Root_Cause",
@@ -6560,6 +7266,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.75,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.75,
     "unit": [
      "Root_Cause",
@@ -6569,6 +7278,9 @@
   },
   "WO-240089": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-07",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -6576,6 +7288,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-07",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -6585,6 +7300,9 @@
   },
   "WO-240090": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6592,6 +7310,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.7143,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-06",
     "score": 0.7143,
     "unit": [
      "Problem_Description",
@@ -6601,6 +7322,9 @@
   },
   "WO-240091": {
    "generous": {
+    "best_ratio": 0.8,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.8,
     "unit": [
      "Problem_Description",
@@ -6608,6 +7332,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.8,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.8,
     "unit": [
      "Problem_Description",
@@ -6617,6 +7344,9 @@
   },
   "WO-240092": {
    "generous": {
+    "best_ratio": 0.2857,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.2857,
     "unit": [
      "Corrective_Action",
@@ -6624,6 +7354,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.2857,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.2857,
     "unit": [
      "Corrective_Action",
@@ -6633,6 +7366,9 @@
   },
   "WO-240093": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6640,6 +7376,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.25,
     "unit": [
      "Corrective_Action",
@@ -6649,6 +7388,9 @@
   },
   "WO-240094": {
    "generous": {
+    "best_ratio": 0.6,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-03",
     "score": 0.6,
     "unit": [
      "Problem_Description",
@@ -6656,6 +7398,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-03",
     "score": 0.6,
     "unit": [
      "Problem_Description",
@@ -6665,6 +7410,9 @@
   },
   "WO-240095": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-02",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -6672,6 +7420,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-02",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -6681,6 +7432,9 @@
   },
   "WO-240096": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-02",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -6688,6 +7442,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-02",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -6697,6 +7454,9 @@
   },
   "WO-240097": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6704,6 +7464,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6713,6 +7476,9 @@
   },
   "WO-240098": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6720,6 +7486,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6729,6 +7498,9 @@
   },
   "WO-240099": {
    "generous": {
+    "best_ratio": 0.4,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.4,
     "unit": [
      "Corrective_Action",
@@ -6736,6 +7508,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6745,6 +7520,9 @@
   },
   "WO-240100": {
    "generous": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -6752,6 +7530,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-03",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6761,6 +7542,9 @@
   },
   "WO-240101": {
    "generous": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -6768,6 +7552,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-03",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6777,6 +7564,9 @@
   },
   "WO-240102": {
    "generous": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -6784,6 +7574,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -6793,6 +7586,9 @@
   },
   "WO-240103": {
    "generous": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -6800,6 +7596,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -6809,6 +7608,9 @@
   },
   "WO-240104": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6816,6 +7618,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6825,6 +7630,9 @@
   },
   "WO-240105": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6832,6 +7640,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6841,6 +7652,9 @@
   },
   "WO-240106": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6848,6 +7662,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -6857,6 +7674,9 @@
   },
   "WO-240107": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -6864,6 +7684,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6873,6 +7696,9 @@
   },
   "WO-240108": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -6880,6 +7706,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6889,6 +7718,9 @@
   },
   "WO-240109": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-KC-4501-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -6896,6 +7728,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-KC-4501-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -6905,6 +7740,9 @@
   },
   "WO-240110": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6912,6 +7750,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -6921,6 +7762,9 @@
   },
   "WO-240111": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6928,6 +7772,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-02",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -6937,6 +7784,9 @@
   },
   "WO-240112": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6944,6 +7794,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.8,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-03",
     "score": 0.8,
     "unit": [
      "Root_Cause",
@@ -6953,6 +7806,9 @@
   },
   "WO-240113": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-05",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6960,6 +7816,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-05",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6969,6 +7828,9 @@
   },
   "WO-240114": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6976,6 +7838,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-04",
     "score": 0.6,
     "unit": [
      "Problem_Description",
@@ -6985,6 +7850,9 @@
   },
   "WO-240115": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -6992,6 +7860,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7001,6 +7872,9 @@
   },
   "WO-240116": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-07",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7008,6 +7882,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-07",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7017,6 +7894,9 @@
   },
   "WO-240117": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7024,6 +7904,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7033,6 +7916,9 @@
   },
   "WO-240118": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7040,6 +7926,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-03",
     "score": 0.6,
     "unit": [
      "Problem_Description",
@@ -7049,6 +7938,9 @@
   },
   "WO-240119": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7056,6 +7948,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-03",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7065,6 +7960,9 @@
   },
   "WO-240120": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-02",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7072,6 +7970,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-02",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7081,6 +7982,9 @@
   },
   "WO-240121": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-05",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7088,6 +7992,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-05",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7097,6 +8004,9 @@
   },
   "WO-240122": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-05",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7104,6 +8014,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-05",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7113,6 +8026,9 @@
   },
   "WO-240123": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7120,6 +8036,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7129,6 +8048,9 @@
   },
   "WO-240124": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7136,6 +8058,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7145,6 +8070,9 @@
   },
   "WO-240125": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7152,6 +8080,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7161,6 +8092,9 @@
   },
   "WO-240126": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7168,6 +8102,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7177,6 +8114,9 @@
   },
   "WO-240127": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7184,6 +8124,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7193,6 +8136,9 @@
   },
   "WO-240128": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7200,6 +8146,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7209,36 +8158,57 @@
   },
   "WO-240129": {
    "generous": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240130": {
    "generous": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240131": {
    "generous": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240132": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7246,6 +8216,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-03",
     "score": 0.25,
     "unit": [
      "Root_Cause",
@@ -7255,6 +8228,9 @@
   },
   "WO-240133": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7262,6 +8238,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-03",
     "score": 0.25,
     "unit": [
      "Root_Cause",
@@ -7271,6 +8250,9 @@
   },
   "WO-240134": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-EA-5601-06",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7278,6 +8260,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-EA-5601-03",
     "score": 0.25,
     "unit": [
      "Root_Cause",
@@ -7287,6 +8272,9 @@
   },
   "WO-240135": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7294,6 +8282,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7303,6 +8294,9 @@
   },
   "WO-240136": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-03",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7310,6 +8304,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-05",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -7319,6 +8316,9 @@
   },
   "WO-240137": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7326,6 +8326,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-04",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -7335,6 +8338,9 @@
   },
   "WO-240138": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7342,6 +8348,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.75,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-03",
     "score": 0.75,
     "unit": [
      "Root_Cause",
@@ -7351,6 +8360,9 @@
   },
   "WO-240139": {
    "generous": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-02",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -7358,6 +8370,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-02",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -7367,6 +8382,9 @@
   },
   "WO-240140": {
    "generous": {
+    "best_ratio": 0.75,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-07",
     "score": 0.75,
     "unit": [
      "Root_Cause",
@@ -7374,6 +8392,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.75,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-07",
     "score": 0.75,
     "unit": [
      "Root_Cause",
@@ -7383,6 +8404,9 @@
   },
   "WO-240141": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -7390,6 +8414,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -7399,6 +8426,9 @@
   },
   "WO-240142": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-05",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7406,6 +8436,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.7143,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-LV-6701-05",
     "score": 0.7143,
     "unit": [
      "Corrective_Action",
@@ -7415,6 +8448,9 @@
   },
   "WO-240143": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-03",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7422,6 +8458,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.5,
     "unit": [
      "Root_Cause",
@@ -7431,6 +8470,9 @@
   },
   "WO-240144": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7438,6 +8480,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-03",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7447,6 +8492,9 @@
   },
   "WO-240145": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-03",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7454,12 +8502,18 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240146": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7467,6 +8521,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7476,6 +8533,9 @@
   },
   "WO-240147": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7483,6 +8543,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7492,6 +8555,9 @@
   },
   "WO-240148": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7499,6 +8565,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-07",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7508,6 +8577,9 @@
   },
   "WO-240149": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7515,6 +8587,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7524,6 +8599,9 @@
   },
   "WO-240150": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7531,6 +8609,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7540,6 +8621,9 @@
   },
   "WO-240151": {
    "generous": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-04",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -7547,6 +8631,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7556,6 +8643,9 @@
   },
   "WO-240152": {
    "generous": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-04",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -7563,6 +8653,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7572,6 +8665,9 @@
   },
   "WO-240153": {
    "generous": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-04",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -7579,6 +8675,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7588,36 +8687,57 @@
   },
   "WO-240154": {
    "generous": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240155": {
    "generous": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240156": {
    "generous": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    },
    "strict": {
+    "best_ratio": 0.0,
+    "matched_field": null,
+    "matched_lesson": null,
     "score": 0.0,
     "unit": null
    }
   },
   "WO-240157": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.25,
     "unit": [
      "Root_Cause",
@@ -7625,6 +8745,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.25,
     "unit": [
      "Root_Cause",
@@ -7634,6 +8757,9 @@
   },
   "WO-240158": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.25,
     "unit": [
      "Root_Cause",
@@ -7641,6 +8767,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-LV-6701-01",
     "score": 0.25,
     "unit": [
      "Root_Cause",
@@ -7650,6 +8779,9 @@
   },
   "WO-240159": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-LV-6701-06",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -7657,6 +8789,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-LV-6701-06",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -7666,6 +8801,9 @@
   },
   "WO-240160": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-LV-6701-06",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -7673,6 +8811,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-LV-6701-06",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -7682,6 +8823,9 @@
   },
   "WO-240161": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7689,6 +8833,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.4,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.4,
     "unit": [
      "Problem_Description",
@@ -7698,6 +8845,9 @@
   },
   "WO-240162": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7705,6 +8855,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-02",
     "score": 0.6,
     "unit": [
      "Problem_Description",
@@ -7714,6 +8867,9 @@
   },
   "WO-240163": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7721,6 +8877,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.8,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 0.8,
     "unit": [
      "Problem_Description",
@@ -7730,6 +8889,9 @@
   },
   "WO-240164": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-02",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7737,6 +8899,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-02",
     "score": 0.6,
     "unit": [
      "Problem_Description",
@@ -7746,6 +8911,9 @@
   },
   "WO-240165": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7753,6 +8921,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-04",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7762,6 +8933,9 @@
   },
   "WO-240166": {
    "generous": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -7769,6 +8943,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -7778,6 +8955,9 @@
   },
   "WO-240167": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-05",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -7785,6 +8965,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-05",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -7794,6 +8977,9 @@
   },
   "WO-240168": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -7801,6 +8987,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-07",
     "score": 0.6,
     "unit": [
      "Corrective_Action",
@@ -7810,6 +8999,9 @@
   },
   "WO-240169": {
    "generous": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7817,6 +9009,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-03",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7826,6 +9021,9 @@
   },
   "WO-240170": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7833,6 +9031,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.1667,
     "unit": [
      "Problem_Description",
@@ -7842,6 +9043,9 @@
   },
   "WO-240171": {
    "generous": {
+    "best_ratio": 0.8,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-05",
     "score": 0.8,
     "unit": [
      "Problem_Description",
@@ -7849,6 +9053,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.8,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-05",
     "score": 0.8,
     "unit": [
      "Problem_Description",
@@ -7858,6 +9065,9 @@
   },
   "WO-240172": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7865,6 +9075,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-03",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7874,6 +9087,9 @@
   },
   "WO-240173": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7881,6 +9097,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-03",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7890,6 +9109,9 @@
   },
   "WO-240174": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -7897,6 +9119,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-03",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -7906,6 +9131,9 @@
   },
   "WO-240175": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7913,6 +9141,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7922,6 +9153,9 @@
   },
   "WO-240176": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7929,6 +9163,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7938,6 +9175,9 @@
   },
   "WO-240177": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7945,6 +9185,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -7954,6 +9197,9 @@
   },
   "WO-240178": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7961,6 +9207,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7970,6 +9219,9 @@
   },
   "WO-240179": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7977,6 +9229,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-06",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -7986,6 +9241,9 @@
   },
   "WO-240180": {
    "generous": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -7993,6 +9251,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -8002,6 +9263,9 @@
   },
   "WO-240181": {
    "generous": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -8009,6 +9273,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -8018,6 +9285,9 @@
   },
   "WO-240182": {
    "generous": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -8025,6 +9295,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -8034,6 +9307,9 @@
   },
   "WO-240183": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8041,6 +9317,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-03",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8050,6 +9329,9 @@
   },
   "WO-240184": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8057,6 +9339,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-03",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8066,6 +9351,9 @@
   },
   "WO-240185": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8073,6 +9361,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-CT-7801-03",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8082,6 +9373,9 @@
   },
   "WO-240186": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -8089,6 +9383,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -8098,6 +9395,9 @@
   },
   "WO-240187": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -8105,6 +9405,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-CT-7801-01",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -8114,6 +9417,9 @@
   },
   "WO-240188": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -8121,6 +9427,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.8,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.8,
     "unit": [
      "Corrective_Action",
@@ -8130,6 +9439,9 @@
   },
   "WO-240189": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-02",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -8137,6 +9449,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-02",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8146,6 +9461,9 @@
   },
   "WO-240190": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-02",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -8153,6 +9471,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-03",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8162,6 +9483,9 @@
   },
   "WO-240191": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -8169,6 +9493,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-FA-8901-04",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -8178,6 +9505,9 @@
   },
   "WO-240192": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -8185,6 +9515,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8194,6 +9527,9 @@
   },
   "WO-240193": {
    "generous": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -8201,6 +9537,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -8210,6 +9549,9 @@
   },
   "WO-240194": {
    "generous": {
+    "best_ratio": 1.0,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-02",
     "score": 1.0,
     "unit": [
      "Problem_Description",
@@ -8217,6 +9559,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-FA-8901-06",
     "score": 0.5,
     "unit": [
      "Corrective_Action",
@@ -8226,6 +9571,9 @@
   },
   "WO-240195": {
    "generous": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-07",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -8233,6 +9581,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.75,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-07",
     "score": 0.75,
     "unit": [
      "Problem_Description",
@@ -8242,6 +9593,9 @@
   },
   "WO-240196": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8249,6 +9603,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8258,6 +9615,9 @@
   },
   "WO-240197": {
    "generous": {
+    "best_ratio": 0.6667,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-07",
     "score": 0.6667,
     "unit": [
      "Problem_Description",
@@ -8265,6 +9625,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.6667,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-07",
     "score": 0.6667,
     "unit": [
      "Problem_Description",
@@ -8274,6 +9637,9 @@
   },
   "WO-240198": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8281,6 +9647,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-05",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8290,6 +9659,9 @@
   },
   "WO-240199": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-FA-8901-02",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -8297,6 +9669,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-06",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -8306,6 +9681,9 @@
   },
   "WO-240200": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-FA-8901-02",
     "score": 0.3333,
     "unit": [
      "Root_Cause",
@@ -8313,6 +9691,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.25,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-06",
     "score": 0.25,
     "unit": [
      "Problem_Description",
@@ -8322,6 +9703,9 @@
   },
   "WO-240201": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8329,6 +9713,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8338,6 +9725,9 @@
   },
   "WO-240202": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8345,6 +9735,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8354,6 +9747,9 @@
   },
   "WO-240203": {
    "generous": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -8361,6 +9757,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8370,6 +9769,9 @@
   },
   "WO-240204": {
    "generous": {
+    "best_ratio": 0.6667,
+    "matched_field": "root_cause",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.6667,
     "unit": [
      "Root_Cause",
@@ -8377,6 +9779,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8386,6 +9791,9 @@
   },
   "WO-240205": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-02",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8393,6 +9801,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-FA-8901-03",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -8402,6 +9813,9 @@
   },
   "WO-240206": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-02",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8409,6 +9823,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.1667,
+    "matched_field": "corrective_action",
+    "matched_lesson": "OPL-FA-8901-03",
     "score": 0.1667,
     "unit": [
      "Corrective_Action",
@@ -8418,6 +9835,9 @@
   },
   "WO-240207": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8425,6 +9845,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8434,6 +9857,9 @@
   },
   "WO-240208": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8441,6 +9867,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8450,6 +9879,9 @@
   },
   "WO-240209": {
    "generous": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8457,6 +9889,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.3333,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.3333,
     "unit": [
      "Problem_Description",
@@ -8466,6 +9901,9 @@
   },
   "WO-240210": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8473,6 +9911,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8482,6 +9923,9 @@
   },
   "WO-240211": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8489,6 +9933,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8498,6 +9945,9 @@
   },
   "WO-240212": {
    "generous": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-01",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8505,6 +9955,9 @@
     ]
    },
    "strict": {
+    "best_ratio": 0.5,
+    "matched_field": "problem_description",
+    "matched_lesson": "OPL-FA-8901-05",
     "score": 0.5,
     "unit": [
      "Problem_Description",
@@ -8815,6 +10268,7 @@
   },
   "cadence_days": 4,
   "dated": 56,
+  "days_after_last_breakdown": 114,
   "first": "2026-03-22",
   "gap_to_first_lesson_days": 114,
   "gaps": {
@@ -8830,6 +10284,10 @@
   },
   "last": "2026-07-01",
   "last_breakdown_report": "2025-11-28",
+  "median_gap_d": 1,
+  "mode_count": 28,
+  "mode_gap_d": 1,
+  "parsed": 56,
   "set_start": {
    "CT-7801": "2026-05-27",
    "DC-3401A": "2026-04-13",
@@ -8900,6 +10358,8 @@
   ],
   "span_days": 101,
   "undated": [],
+  "window_days": 101,
+  "within_set_gap_d": 4,
   "workbook_window": {
    "completion_last": "2025-12-10",
    "report_first": "2024-06-04",
@@ -8910,6 +10370,13 @@
   "C_max": 44902000,
   "D_max": 42.0,
   "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "coefficients_by_factor": {
    "C": 0.3,
    "D": 0.4,
    "basis": "product decision, ASSUMPTION",
@@ -8924,99 +10391,152 @@
   "per_asset": [
    {
     "C": 16538000,
+    "C_idr": 16538000,
     "D": 10.0,
+    "D_h": 10.0,
     "incomplete_uncovered": 1,
     "k": 0.25,
     "r": 0.4286,
+    "rank": 5,
     "score": 0.2986,
     "tag": "CT-7801",
     "uncovered_ids": [
+     "WO-240167",
+     "WO-240169"
+    ],
+    "uncovered_wo_numbers": [
      "WO-240167",
      "WO-240169"
     ]
    },
    {
     "C": 13443000,
+    "C_idr": 13443000,
     "D": 0.0,
+    "D_h": 0.0,
     "incomplete_uncovered": 0,
     "k": 1.0,
     "r": 0.1429,
+    "rank": 4,
     "score": 0.3041,
     "tag": "DC-3401A",
     "uncovered_ids": [
+     "WO-240063",
+     "WO-240064"
+    ],
+    "uncovered_wo_numbers": [
      "WO-240063",
      "WO-240064"
     ]
    },
    {
     "C": 0,
+    "C_idr": 0,
     "D": 0.0,
+    "D_h": 0.0,
     "incomplete_uncovered": 1,
     "k": 0.5,
     "r": 0.25,
+    "rank": 8,
     "score": 0.125,
     "tag": "EA-5601",
     "uncovered_ids": [
+     "WO-240120"
+    ],
+    "uncovered_wo_numbers": [
      "WO-240120"
     ]
    },
    {
     "C": 252000,
+    "C_idr": 252000,
     "D": 0.0,
+    "D_h": 0.0,
     "incomplete_uncovered": 0,
     "k": 1.0,
     "r": 0.2,
+    "rank": 6,
     "score": 0.2217,
     "tag": "FA-8901",
     "uncovered_ids": [
+     "WO-240196"
+    ],
+    "uncovered_wo_numbers": [
      "WO-240196"
     ]
    },
    {
     "C": 12630000,
+    "C_idr": 12630000,
     "D": 6.5,
+    "D_h": 6.5,
     "incomplete_uncovered": 1,
     "k": 1.0,
     "r": 0.4286,
+    "rank": 3,
     "score": 0.3891,
     "tag": "GA-1201A",
     "uncovered_ids": [
+     "WO-240007",
+     "WO-240013"
+    ],
+    "uncovered_wo_numbers": [
      "WO-240007",
      "WO-240013"
     ]
    },
    {
     "C": 20176000,
+    "C_idr": 20176000,
     "D": 16.0,
+    "D_h": 16.0,
     "incomplete_uncovered": 1,
     "k": 1.0,
     "r": 0.625,
+    "rank": 2,
     "score": 0.5497,
     "tag": "KC-4501",
     "uncovered_ids": [
+     "WO-240089",
+     "WO-240094"
+    ],
+    "uncovered_wo_numbers": [
      "WO-240089",
      "WO-240094"
     ]
    },
    {
     "C": 0,
+    "C_idr": 0,
     "D": 0.0,
+    "D_h": 0.0,
     "incomplete_uncovered": 0,
     "k": 0.5,
     "r": 0.4286,
+    "rank": 7,
     "score": 0.1429,
     "tag": "LV-6701",
-    "uncovered_ids": []
+    "uncovered_ids": [],
+    "uncovered_wo_numbers": []
    },
    {
     "C": 44902000,
+    "C_idr": 44902000,
     "D": 42.0,
+    "D_h": 42.0,
     "incomplete_uncovered": 1,
     "k": 1.0,
     "r": 0.375,
+    "rank": 1,
     "score": 0.9375,
     "tag": "YD-2301",
     "uncovered_ids": [
+     "WO-240033",
+     "WO-240034",
+     "WO-240037",
+     "WO-240039"
+    ],
+    "uncovered_wo_numbers": [
      "WO-240033",
      "WO-240034",
      "WO-240037",
@@ -9069,6 +10589,11 @@
   ],
   "t": 0.62
  },
+ "demo": {
+  "backup_wo": "WO-240039",
+  "contrast_wo": "WO-240060",
+  "primary_wo": "WO-240007"
+ },
  "demo_wo": {
   "WO-240007": {
    "cost_idr": 12630000,
@@ -9082,21 +10607,32 @@
    "area_datasheet": "7800 - COOLING WATER SYSTEM",
    "area_workbook": "7800 - COOLING WATER SYSTEM",
    "breakdown_cost_flagged_idr": 41874000,
+   "breakdown_cost_idr": 41874000,
    "breakdown_h_flagged": 46.0,
+   "breakdown_rows": 3,
    "breakdowns_flagged": 3,
+   "criticality": "NON CRITICAL",
    "criticality_datasheet": "NON CRITICAL",
    "criticality_workbook": "NON CRITICAL",
+   "failure_rows": 7,
+   "flagged_h": 46.0,
    "functional_location": "TJC-LLD-7800-01",
    "incomplete_rows": 5,
+   "interlock_ref": "SEQ-7801",
    "interlock_sheet": "SEQ-7801",
    "interlock_workbook": "SEQ-7801",
    "name": "COOLING TOWER CELL FAN",
    "planned_flagged_rows": 0,
+   "planned_rows": 0,
+   "service": "Induced draft cooling of circulating water for LLDPE unit",
    "sil_sheet": 1,
    "tag": "CT-7801",
    "unplanned_breakdown_h": 46.0,
    "unplanned_breakdowns": 3,
    "unplanned_failure_rows": 7,
+   "unplanned_h": 46.0,
+   "unplanned_rows": 3,
+   "work_orders": 27,
    "work_types": {
     "Calibration": 1,
     "Corrective": 7,
@@ -9111,21 +10647,32 @@
    "area_datasheet": "3400 - CATALYST PREPARATION",
    "area_workbook": "3400 - CATALYST PREPARATION",
    "breakdown_cost_flagged_idr": 46118000,
+   "breakdown_cost_idr": 46118000,
    "breakdown_h_flagged": 60.0,
+   "breakdown_rows": 5,
    "breakdowns_flagged": 5,
+   "criticality": "HIGH CRITICAL",
    "criticality_datasheet": "HIGH CRITICAL",
    "criticality_workbook": "HIGH CRITICAL",
+   "failure_rows": 9,
+   "flagged_h": 60.0,
    "functional_location": "TJC-LLD-3400-01",
    "incomplete_rows": 2,
+   "interlock_ref": "SEQ-3401",
    "interlock_sheet": "SEQ-3401",
    "interlock_workbook": "SEQ-3401",
    "name": "CATALYST REDUCTION REACTOR",
    "planned_flagged_rows": 2,
+   "planned_rows": 2,
+   "service": "Reduction of PdO catalyst to Pd using H2 (PdO + H2 -> Pd)",
    "sil_sheet": 2,
    "tag": "DC-3401A",
    "unplanned_breakdown_h": 24.0,
    "unplanned_breakdowns": 3,
    "unplanned_failure_rows": 7,
+   "unplanned_h": 24.0,
+   "unplanned_rows": 3,
+   "work_orders": 27,
    "work_types": {
     "Calibration": 2,
     "Corrective": 6,
@@ -9141,21 +10688,32 @@
    "area_datasheet": "5600 - SOLVENT RECOVERY SYSTEM",
    "area_workbook": "5600 - SOLVENT RECOVERY SYSTEM",
    "breakdown_cost_flagged_idr": 104167000,
+   "breakdown_cost_idr": 104167000,
    "breakdown_h_flagged": 124.0,
+   "breakdown_rows": 6,
    "breakdowns_flagged": 6,
+   "criticality": "LOW CRITICAL",
    "criticality_datasheet": "LOW CRITICAL",
    "criticality_workbook": "LOW CRITICAL",
+   "failure_rows": 11,
+   "flagged_h": 124.0,
    "functional_location": "TJC-LLD-5600-01",
    "incomplete_rows": 2,
+   "interlock_ref": "N/A (control loop only)",
    "interlock_sheet": null,
    "interlock_workbook": null,
    "name": "SOLVENT HEATER",
    "planned_flagged_rows": 3,
+   "planned_rows": 3,
+   "service": "Heat recovered hexane solvent using MP steam before recycle",
    "sil_sheet": null,
    "tag": "EA-5601",
    "unplanned_breakdown_h": 54.0,
    "unplanned_breakdowns": 3,
    "unplanned_failure_rows": 8,
+   "unplanned_h": 54.0,
+   "unplanned_rows": 3,
+   "work_orders": 25,
    "work_types": {
     "Corrective": 7,
     "Inspection": 2,
@@ -9170,21 +10728,32 @@
    "area_datasheet": "8900 - SOLVENT FRACTIONATION",
    "area_workbook": "8900 - SOLVENT FRACTIONATION",
    "breakdown_cost_flagged_idr": 30577000,
+   "breakdown_cost_idr": 30577000,
    "breakdown_h_flagged": 70.0,
+   "breakdown_rows": 5,
    "breakdowns_flagged": 5,
+   "criticality": "HIGH CRITICAL",
    "criticality_datasheet": "HIGH CRITICAL",
    "criticality_workbook": "HIGH CRITICAL",
+   "failure_rows": 8,
+   "flagged_h": 70.0,
    "functional_location": "TJC-LLD-8900-01",
    "incomplete_rows": 1,
+   "interlock_ref": "SEQ-8901",
    "interlock_sheet": "SEQ-8901",
    "interlock_workbook": "SEQ-8901",
    "name": "REFLUX ACCUMULATOR DRUM",
    "planned_flagged_rows": 3,
+   "planned_rows": 3,
+   "service": "Collect DA-8910 column overhead condensate; supply reflux & product",
    "sil_sheet": 1,
    "tag": "FA-8901",
    "unplanned_breakdown_h": 12.0,
    "unplanned_breakdowns": 2,
    "unplanned_failure_rows": 5,
+   "unplanned_h": 12.0,
+   "unplanned_rows": 2,
+   "work_orders": 25,
    "work_types": {
     "Calibration": 2,
     "Corrective": 5,
@@ -9199,21 +10768,32 @@
    "area_datasheet": "1200 - FEED PREPARATION & PURIFICATION",
    "area_workbook": "1200 - FEED PREPARATION & PURIFICATION",
    "breakdown_cost_flagged_idr": 12630000,
+   "breakdown_cost_idr": 12630000,
    "breakdown_h_flagged": 6.5,
+   "breakdown_rows": 1,
    "breakdowns_flagged": 1,
+   "criticality": "HIGH CRITICAL",
    "criticality_datasheet": "HIGH CRITICAL",
    "criticality_workbook": "HIGH CRITICAL",
+   "failure_rows": 8,
+   "flagged_h": 6.5,
    "functional_location": "TJC-LLD-1200-01",
    "incomplete_rows": 5,
+   "interlock_ref": "SEQ-1201",
    "interlock_sheet": "SEQ-1201",
    "interlock_workbook": "SEQ-1201",
    "name": "HEXANE FEED PUMP",
    "planned_flagged_rows": 0,
+   "planned_rows": 0,
+   "service": "Hexane feed transfer to 1st Polymerization Reactor DC-4501",
    "sil_sheet": 1,
    "tag": "GA-1201A",
    "unplanned_breakdown_h": 6.5,
    "unplanned_breakdowns": 1,
    "unplanned_failure_rows": 7,
+   "unplanned_h": 6.5,
+   "unplanned_rows": 1,
+   "work_orders": 26,
    "work_types": {
     "Calibration": 1,
     "Corrective": 7,
@@ -9229,21 +10809,32 @@
    "area_datasheet": "4500 - GAS RECOVERY & COMPRESSION",
    "area_workbook": "4500 - GAS RECOVERY & COMPRESSION",
    "breakdown_cost_flagged_idr": 37673000,
+   "breakdown_cost_idr": 37673000,
    "breakdown_h_flagged": 38.0,
+   "breakdown_rows": 2,
    "breakdowns_flagged": 2,
+   "criticality": "HIGH CRITICAL",
    "criticality_datasheet": "HIGH CRITICAL",
    "criticality_workbook": "HIGH CRITICAL",
+   "failure_rows": 8,
+   "flagged_h": 38.0,
    "functional_location": "TJC-LLD-4500-01",
    "incomplete_rows": 6,
+   "interlock_ref": "SEQ-4501",
    "interlock_sheet": "SEQ-4501",
    "interlock_workbook": "SEQ-4501",
    "name": "RECYCLE GAS COMPRESSOR",
    "planned_flagged_rows": 0,
+   "planned_rows": 0,
+   "service": "Compress recycle ethylene/hexane vapour back to reactor loop",
    "sil_sheet": 2,
    "tag": "KC-4501",
    "unplanned_breakdown_h": 38.0,
    "unplanned_breakdowns": 2,
    "unplanned_failure_rows": 8,
+   "unplanned_h": 38.0,
+   "unplanned_rows": 2,
+   "work_orders": 27,
    "work_types": {
     "Calibration": 2,
     "Corrective": 7,
@@ -9259,21 +10850,32 @@
    "area_datasheet": "6700 - PRODUCT SEPARATION",
    "area_workbook": "6700 - PRODUCT SEPARATION",
    "breakdown_cost_flagged_idr": 59257000,
+   "breakdown_cost_idr": 59257000,
    "breakdown_h_flagged": 21.0,
+   "breakdown_rows": 4,
    "breakdowns_flagged": 4,
+   "criticality": "LOW CRITICAL",
    "criticality_datasheet": "LOW CRITICAL",
    "criticality_workbook": "LOW CRITICAL",
+   "failure_rows": 7,
+   "flagged_h": 21.0,
    "functional_location": "TJC-LLD-6700-01",
    "incomplete_rows": 2,
+   "interlock_ref": "SEQ-6701",
    "interlock_sheet": "SEQ-6701",
    "interlock_workbook": "SEQ-6701",
    "name": "SEPARATOR LEVEL CONTROL VALVE",
    "planned_flagged_rows": 0,
+   "planned_rows": 0,
+   "service": "Level control of LP Separator FA-6710 bottoms to downstream",
    "sil_sheet": 1,
    "tag": "LV-6701",
    "unplanned_breakdown_h": 21.0,
    "unplanned_breakdowns": 4,
    "unplanned_failure_rows": 7,
+   "unplanned_h": 21.0,
+   "unplanned_rows": 4,
+   "work_orders": 26,
    "work_types": {
     "Calibration": 2,
     "Corrective": 7,
@@ -9288,21 +10890,32 @@
    "area_datasheet": "2300 - POLYMER SEPARATION & DRYING",
    "area_workbook": "2300 - POLYMER SEPARATION & DRYING",
    "breakdown_cost_flagged_idr": 81049000,
+   "breakdown_cost_idr": 81049000,
    "breakdown_h_flagged": 68.5,
+   "breakdown_rows": 5,
    "breakdowns_flagged": 5,
+   "criticality": "HIGH CRITICAL",
    "criticality_datasheet": "HIGH CRITICAL",
    "criticality_workbook": "HIGH CRITICAL",
+   "failure_rows": 8,
+   "flagged_h": 68.5,
    "functional_location": "TJC-LLD-2300-01",
    "incomplete_rows": 3,
+   "interlock_ref": "SEQ-5500",
    "interlock_sheet": "SEQ-5500",
    "interlock_workbook": "SEQ-5500",
    "name": "POLYMER FLUID BED DRYER",
    "planned_flagged_rows": 0,
+   "planned_rows": 0,
+   "service": "Drying of LLDPE polymer powder from centrifuge to < 300 ppm moisture",
    "sil_sheet": 2,
    "tag": "YD-2301",
    "unplanned_breakdown_h": 68.5,
    "unplanned_breakdowns": 5,
    "unplanned_failure_rows": 8,
+   "unplanned_h": 68.5,
+   "unplanned_rows": 5,
+   "work_orders": 28,
    "work_types": {
     "Calibration": 2,
     "Corrective": 7,
@@ -9433,8 +11046,148 @@
     ]
    }
   ],
+  "list": [
+   {
+    "basis": "agent_classification",
+    "id": "FF-01",
+    "label": "PTFE packing and stem friction",
+    "members": [
+     {
+      "recorded_root_cause": "PTFE 4526L gland packing worn beyond service limit",
+      "wo_number": "WO-240028"
+     },
+     {
+      "recorded_root_cause": "PTFE 4505L packing hardened and worn",
+      "wo_number": "WO-240029"
+     },
+     {
+      "recorded_root_cause": "PTFE pressure packing rings worn",
+      "wo_number": "WO-240094"
+     },
+     {
+      "recorded_root_cause": "Stem seized in PTFE packing (over-tightened + fines)",
+      "wo_number": "WO-240135"
+     },
+     {
+      "recorded_root_cause": "PTFE V-ring packing worn",
+      "wo_number": "WO-240138"
+     }
+    ],
+    "review_status": "pending"
+   },
+   {
+    "basis": "agent_classification",
+    "id": "FF-02",
+    "label": "alignment and bearing degradation",
+    "members": [
+     {
+      "recorded_root_cause": "Angular misalignment 0.12 mm/100mm after foundation settlement",
+      "wo_number": "WO-240003"
+     },
+     {
+      "recorded_root_cause": "Outer race spalling on DE bearing due to prolonged misalignment",
+      "wo_number": "WO-240004"
+     },
+     {
+      "recorded_root_cause": "Rexnord coupling element cracked from repeated misalignment cycles",
+      "wo_number": "WO-240007"
+     },
+     {
+      "recorded_root_cause": "NDE trunnion support roller bearing worn/spalled",
+      "wo_number": "WO-240034"
+     },
+     {
+      "recorded_root_cause": "Crosshead pin clearance excessive",
+      "wo_number": "WO-240088"
+     },
+     {
+      "recorded_root_cause": "Spherical roller fan bearing worn",
+      "wo_number": "WO-240166"
+     },
+     {
+      "recorded_root_cause": "Composite floating-shaft coupling worn",
+      "wo_number": "WO-240169"
+     }
+    ],
+    "review_status": "pending"
+   },
+   {
+    "basis": "agent_classification",
+    "id": "FF-03",
+    "label": "exchanger fouling and thermal performance",
+    "members": [
+     {
+      "recorded_root_cause": "Waterside fouling of intercooler tubes",
+      "wo_number": "WO-240089"
+     },
+     {
+      "recorded_root_cause": "Hexane fouling / polymer fines deposit on tube bores",
+      "wo_number": "WO-240110"
+     },
+     {
+      "recorded_root_cause": "General fouling, tubes within wall-loss limit",
+      "wo_number": "WO-240119"
+     },
+     {
+      "recorded_root_cause": "Degraded oil and fouled oil cooler",
+      "wo_number": "WO-240164"
+     }
+    ],
+    "review_status": "pending"
+   },
+   {
+    "basis": "agent_classification",
+    "id": "FF-04",
+    "label": "gasket seating and manway leaks",
+    "members": [
+     {
+      "recorded_root_cause": "Spiral-wound gasket unevenly seated",
+      "wo_number": "WO-240062"
+     },
+     {
+      "recorded_root_cause": "Spiral-wound channel gasket relaxed / damaged",
+      "wo_number": "WO-240111"
+     },
+     {
+      "recorded_root_cause": "Spiral-wound body gasket relaxed",
+      "wo_number": "WO-240145"
+     },
+     {
+      "recorded_root_cause": "SW gasket unevenly seated",
+      "wo_number": "WO-240195"
+     }
+    ],
+    "review_status": "pending"
+   },
+   {
+    "basis": "agent_classification",
+    "id": "FF-05",
+    "label": "lubrication supply and oil-system degradation",
+    "members": [
+     {
+      "recorded_root_cause": "Lube oil pump gears worn, relief valve set low",
+      "wo_number": "WO-240084"
+     },
+     {
+      "recorded_root_cause": "Restricted oil supply groove to No.2 main bearing",
+      "wo_number": "WO-240091"
+     }
+    ],
+    "review_status": "pending"
+   }
+  ],
   "multi_family_wos": [],
   "r_by_tag": {
+   "CT-7801": 0.4286,
+   "DC-3401A": 0.1429,
+   "EA-5601": 0.25,
+   "FA-8901": 0.2,
+   "GA-1201A": 0.4286,
+   "KC-4501": 0.625,
+   "LV-6701": 0.4286,
+   "YD-2301": 0.375
+  },
+  "r_detail": {
    "CT-7801": {
     "in_family": 3,
     "member_wos": [
@@ -9529,6 +11282,8 @@
    "Traceability": 8,
    "Trap integrity": 19
   },
+  "hard_gate_count": 16,
+  "size": 102,
   "total": 102
  },
  "integrity": {
@@ -12117,6 +13872,27 @@
    "source": "TJC-LLD-IL-EA-5601 LOGIC No: N/A (control loop only); datasheet note 1",
    "tag": "EA-5601"
   },
+  "observations": {
+   "CD-15": 123,
+   "CD-16": 8
+  },
+  "rules": {
+   "CD-1": 28,
+   "CD-10": 2,
+   "CD-11": 2,
+   "CD-12": 38,
+   "CD-13": 35,
+   "CD-14": 11,
+   "CD-17": 1,
+   "CD-18": 3,
+   "CD-2": 6,
+   "CD-4": 26,
+   "CD-5": 5,
+   "CD-6": 8,
+   "CD-7": 4,
+   "CD-8": 1,
+   "CD-9": 4
+  },
   "total": 174
  },
  "interlock_rows": {
@@ -13468,9 +15244,11 @@
    ".pptx": 1,
    ".xlsx": 1
   },
+  "canonical_form_version": "1",
   "corpus_sha256": "918706e41dad6323819db1dca5b568e71a2f827a0cdc4d37b5e5ad735ffa61de",
   "extractor": "pdftotext -raw (pdftotext version 26.02.0)",
   "files": 98,
+  "files_total": 98,
   "opl_count": 56
  },
  "labelled": null,
@@ -13544,6 +15322,7 @@
    528,
    730
   ],
+  "median_d": 472.5,
   "median_days": 472.5,
   "pairing_basis": "These pairs are matched by recorded mechanism, not by the lexical score of Chapter 19; WO-240037 is lexically uncovered because the lesson paraphrases, and WO-240062, WO-240135 and WO-240110 are covered only through the lesson's troubleshooting table; the labels file records the adjudicated status of every unplanned-failure record.",
   "pairs": [
@@ -13552,48 +15331,66 @@
     "days": 210,
     "failure_date": "2025-09-16",
     "opl": "OPL-YD-2301-04",
+    "opl_id": "OPL-YD-2301-04",
+    "report_date": "2025-09-16",
     "tag": "YD-2301",
-    "wo": "WO-240037"
+    "wo": "WO-240037",
+    "wo_number": "WO-240037"
    },
    {
     "date_of_sharing": "2026-05-07",
     "days": 220,
     "failure_date": "2025-09-29",
     "opl": "OPL-DC-3401A-07",
+    "opl_id": "OPL-DC-3401A-07",
+    "report_date": "2025-09-29",
     "tag": "DC-3401A",
-    "wo": "WO-240062"
+    "wo": "WO-240062",
+    "wo_number": "WO-240062"
    },
    {
     "date_of_sharing": "2026-05-21",
     "days": 442,
     "failure_date": "2025-03-05",
     "opl": "OPL-EA-5601-05",
+    "opl_id": "OPL-EA-5601-05",
+    "report_date": "2025-03-05",
     "tag": "EA-5601",
-    "wo": "WO-240113"
+    "wo": "WO-240113",
+    "wo_number": "WO-240113"
    },
    {
     "date_of_sharing": "2026-05-24",
     "days": 503,
     "failure_date": "2025-01-06",
     "opl": "OPL-LV-6701-03",
+    "opl_id": "OPL-LV-6701-03",
+    "report_date": "2025-01-06",
     "tag": "LV-6701",
-    "wo": "WO-240135"
+    "wo": "WO-240135",
+    "wo_number": "WO-240135"
    },
    {
     "date_of_sharing": "2026-05-25",
     "days": 528,
     "failure_date": "2024-12-13",
     "opl": "OPL-EA-5601-06",
+    "opl_id": "OPL-EA-5601-06",
+    "report_date": "2024-12-13",
     "tag": "EA-5601",
-    "wo": "WO-240110"
+    "wo": "WO-240110",
+    "wo_number": "WO-240110"
    },
    {
     "date_of_sharing": "2026-07-01",
     "days": 730,
     "failure_date": "2024-07-01",
     "opl": "OPL-FA-8901-07",
+    "opl_id": "OPL-FA-8901-07",
+    "report_date": "2024-07-01",
     "tag": "FA-8901",
-    "wo": "WO-240195"
+    "wo": "WO-240195",
+    "wo_number": "WO-240195"
    }
   ]
  },
@@ -14823,6 +16620,8 @@
   ],
   "all_breakdown_columns": "breakdowns_all / downtime_h_all / cost_idr_all count every Breakdown = Yes row as v1.0 did",
   "evidence_only": true,
+  "headline_all": 158,
+  "note": "evidence only",
   "order_dependent": true,
   "scorer": "legacy/validate_fix.py::best_ratio (window L+step, SequenceMatcher) on lessons concatenated in sorted opl_id order"
  },
@@ -15890,9 +17689,14 @@
  },
  "method": {
   "canonical": "NFKC, soft hyphens joined, whitespace collapsed",
+  "comparison": "uncovered when score <= threshold",
   "extractor": "pdftotext -raw",
-  "labels_status": "machine-drafted labels present (packages/coverage_labels.draft.json); human adjudication pending (OQ-6); deck numbers remain the proxy",
+  "labels_note": "machine-drafted labels present (packages/coverage_labels.draft.json); human adjudication pending (OQ-6); deck numbers remain the proxy",
+  "labels_status": "machine_drafted_pending_human",
+  "min_content_words": 3,
   "recipe": "A work-order narrative field is reduced to content words (lower-cased alphanumeric tokens, tag-like tokens such as VSHH-1201 kept whole, a fixed stop list removed, single-character tokens dropped, fields with fewer than three content words skipped). The same tokeniser is applied to the lesson text. Each same-asset lesson document is scanned separately with a window of twice the field's word count, one word at a time; the field's score is the largest share of its distinct words found inside one window; the work order's score is the best of its three fields; it is uncovered when that share does not exceed t = 0.62. Generous layer: the full lesson text. Strict layer: seven header fields rebuilt from the parsed lesson (lesson id, title, equipment name, area / unit, related interlock, P&ID reference, classification) plus sections 1 PURPOSE, 2 SAFETY PRECAUTIONS, 3 TOOLS & MATERIALS, 4 DETAILED PROCEDURE and 6 KEY LEARNING POINTS, composed from the parsed lesson, so that section 5 COMMON PROBLEMS & TROUBLESHOOTING, the page watermark and anything after it, and anything after the 'Prepared by' footer are excluded wherever the extractor places them.",
+  "recipe_sha256": "a16e70cf22ae9ca1699c95555842580d8e6a6ea844486d9b797d8d018c9c7680",
+  "recipe_sha256_of": "sha256 over the bytes of harness/coverage.py and harness/opl.py, in that order",
   "skip_rule": "fields with fewer than 3 content tokens skipped; work order with no scoreable field scores 0",
   "stop_list": [
    "a",
@@ -15964,8 +17768,9 @@
   "stop_list_sha256": "8262d5122704987d0f503b4f3289c8081d31c0469415ec442099bba4185b3ea5",
   "stop_list_sha256_of": "sorted stop words joined by newline, UTF-8",
   "stop_list_size": 65,
+  "strict_cut_marker": "This is sample data provided for CALIBER purposes only",
   "strict_rule": "the strict layer is COMPOSED from the parsed lesson (harness.opl.strict_text): the seven header fields REBUILT from the parse (lesson id, title, equipment name, area / unit, related interlock, P&ID reference, classification) - not the header text as the extractor emits it - followed by sections 1, 2, 3, 4, 6, joined in that order. It is not stripped from the whole text, because stripping removes only what the extractor happens to place between the two section headings (P10). Each section body ends at the page watermark 'This is sample data provided for CALIBER purposes only', because the extractor emits out-of-flow table cells after it (P10b).",
-  "strict_sections": [
+  "strict_section_headings": [
    "rebuilt header fields: lesson id, title, equipment name, area / unit, related interlock, P&ID reference, classification",
    "1. PURPOSE / OBJECTIVE",
    "2. SAFETY PRECAUTIONS",
@@ -15973,7 +17778,16 @@
    "4. DETAILED PROCEDURE / STEPS",
    "6. KEY LEARNING POINTS"
   ],
+  "strict_sections": [
+   "header",
+   "1",
+   "2",
+   "3",
+   "4",
+   "6"
+  ],
   "t": 0.62,
+  "threshold": 0.62,
   "thresholds": [
    0.5,
    0.55,
@@ -16013,6 +17827,14 @@
     "wo": "WO-240161"
    }
   ],
+  "classes": {
+   "executor": 14,
+   "manager": 2,
+   "reporter": 4,
+   "supervisor": 3
+  },
+  "dual_role_supervisors": 3,
+  "managers_not_in_workbook": 2,
   "opl_managers_absent_from_workbook": [
    "EMP-0901",
    "EMP-0912"
@@ -16022,7 +17844,11 @@
    "EMP-1113",
    "EMP-1124"
   ],
-  "people": {
+  "people": 23,
+  "prepared_by_is_role": [
+   "Panel Operator / Technician"
+  ],
+  "roster": {
    "EMP-0901": {
     "name": "Zulkarnain Hasan",
     "role_class": "manager",
@@ -16261,12 +18087,9 @@
      "workbook"
     ]
    }
-  },
-  "prepared_by_is_role": [
-   "Panel Operator / Technician"
-  ]
+  }
  },
- "populations": {
+ "population_ids": {
   "all": [
    "WO-240002",
    "WO-240003",
@@ -16643,7 +18466,20 @@
    "WO-240196"
   ]
  },
+ "populations": {
+  "all": 211,
+  "failure": 66,
+  "planned_flagged": 8,
+  "unplanned_breakdowns": 23,
+  "unplanned_failure": 57
+ },
  "proof_tests": {
+  "by_class": {
+   "calibration_proof_test": 7,
+   "sil_logic_test": 5,
+   "sis_proof_test": 18,
+   "statutory_relief_test": 3
+  },
   "classes": {
    "calibration_proof_test": {
     "count": 7,
@@ -17530,6 +19366,8 @@
   }
  },
  "verbatim": {
+  "any_field": 47,
+  "corrective_action": 42,
   "generous": {
    "any": 47,
    "any_ids": [
@@ -17587,6 +19425,8 @@
     "Root_Cause": 45
    }
   },
+  "problem_description": 47,
+  "root_cause": 45,
   "rule": "canonical field of >= 20 chars is an exact substring of the same-asset lessons",
   "strict": {
    "any": 0,
@@ -17596,28 +19436,46 @@
     "Problem_Description": 0,
     "Root_Cause": 0
    }
-  }
+  },
+  "strict_any_field": 0
  },
  "workbook": {
   "all_cost_idr": 537770000,
+  "all_labor_hours": 520.5,
   "breakdown_cost_idr": 413345000,
+  "breakdown_flagged": {
+   "cost_idr": 413345000,
+   "hours": 434.0,
+   "rows": 31
+  },
   "breakdown_kinds": {
    "planned_flagged": {
     "cost_idr": 69270000,
     "count": 8,
-    "downtime_h": 164.0
+    "downtime_h": 164.0,
+    "hours": 164.0,
+    "rows": 8
    },
    "unplanned": {
     "cost_idr": 344075000,
     "count": 23,
-    "downtime_h": 270.0
+    "downtime_h": 270.0,
+    "hours": 270.0,
+    "rows": 23
    }
   },
   "breakdowns": 31,
+  "completed_last": "2025-12-10",
   "criticality_counts": {
    "HIGH CRITICAL": 133,
    "LOW CRITICAL": 51,
    "NON CRITICAL": 27
+  },
+  "discipline_counts": {
+   "Electrical": 24,
+   "Instrument": 75,
+   "Mechanical": 110,
+   "Process": 2
   },
   "disciplines": {
    "Electrical": 24,
@@ -17634,6 +19492,7 @@
     "Preventive": 2
    },
    "count": 26,
+   "emergency_rows": 3,
    "ids": [
     "WO-240002",
     "WO-240003",
@@ -17662,15 +19521,26 @@
     "WO-240167",
     "WO-240190"
    ],
-   "pct": 12.3
+   "pct": 12.3,
+   "rows": 26,
+   "share": 0.123
   },
   "labor_h": 520.5,
+  "lead_time": {
+   "at_least_24h": 136,
+   "max_h": 72.0,
+   "median_h": 34.0,
+   "min_h": 1.0,
+   "share": 0.645
+  },
   "priorities": {
    "Emergency": 3,
    "High": 33,
    "Low": 118,
    "Medium": 57
   },
+  "reported_first": "2024-06-04",
+  "reported_last": "2025-12-06",
   "rows": 211,
   "status": {
    "Completed": 211

@@ -3,12 +3,16 @@ name = "thehub-harness"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "huggingface-hub>=1.30.0",
     "jsonschema>=4.26.0",
     "matplotlib>=3.11.1",
+    "numpy>=2.5.2",
+    "onnxruntime>=1.29.0",
     "openpyxl>=3.1.5",
     "pillow>=12.3.0",
     "pymupdf>=1.28.2",
     "pyyaml>=6.0.3",
+    "tokenizers>=0.23.2",
 ]
 
 [dependency-groups]

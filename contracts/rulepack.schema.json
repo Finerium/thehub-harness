@@ -217,6 +217,34 @@
                 },
                 "required": ["text", "expect_class", "expect_entity"]
               }
+            },
+            "outbound": {
+              "type": "array",
+              "x-optional": "one entry per approved lesson: the whitelist renders every lesson, and the class the pack alone would give the lesson text pins which lessons the whitelist is what makes renderable",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "opl_id": { "type": "string" },
+                  "expect_blocked": { "type": "boolean", "const": false },
+                  "expect_class_without_whitelist": { "type": "string", "enum": ["none", "defeat", "documented_bypass", "permanent_change"] }
+                },
+                "required": ["opl_id", "expect_blocked", "expect_class_without_whitelist"]
+              }
+            },
+            "moments": {
+              "type": "array",
+              "x-optional": "one question per moment template, with the golden case it comes from",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "text": { "type": "string" },
+                  "expect_moment": { "type": "string", "enum": ["readiness", "trip", "job", "reading"] },
+                  "golden_id": { "type": "string" }
+                },
+                "required": ["text", "expect_moment", "golden_id"]
+              }
             }
           },
           "required": ["positives", "negatives"]

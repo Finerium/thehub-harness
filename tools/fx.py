@@ -3,17 +3,22 @@
 
 Syntax in HTML:   <!-- fx:KEY -->NUMBER      or      <!-- fx:KEY|FMT -->NUMBER
 KEY is a dotted path into packages/fixtures.json; list selectors: [3], [t=0.62], [tag=GA-1201A], [rule=CD-1].
-FMT (optional): int | comma | d1 | d2 | M1 (divide by 1e6, 1 decimal) | k (divide by 1e3, 1 decimal) | pct1 | len | first | last.
+FMT (optional): int | comma | d1 | d2 | M1 (divide by 1e6, 1 decimal) | k (divide by 1e3, 1 decimal) | pct1 | len | first | last |
+share1 / share0 (a `share` fraction of the 10.5 registry rendered as a percentage, 1 or 0 decimals, half up).
 The assembler REPLACES NUMBER with the formatted fixture value (so a stale number cannot survive a build); copy_audit.py then
 checks that every unit-bearing number in the assembled HTML carries a directive and equals its formatted value.
 """
+
 import json
 import os
 import re
+from decimal import ROUND_HALF_UP, Decimal
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FIXTURES = os.path.join(ROOT, "packages", "fixtures.json")
-DIRECTIVE = re.compile(r"<!--\s*fx:([A-Za-z0-9_.\[\]=\-|+/]+)\s*-->\s*(\d(?:[\d,]*\d)?(?:\.\d+)?)")  # no trailing comma
+DIRECTIVE = re.compile(
+    r"<!--\s*fx:([A-Za-z0-9_.\[\]=\-|+/]+)\s*-->\s*(\d(?:[\d,]*\d)?(?:\.\d+)?)"
+)  # no trailing comma
 SEL = re.compile(r"\[([^\]]+)\]")
 
 
@@ -29,7 +34,9 @@ def _select(node, sel):
     for item in node:
         if isinstance(item, dict) and k in item:
             iv = item[k]
-            if str(iv) == v or (isinstance(iv, (int, float)) and abs(float(iv) - float(v)) < 1e-9):
+            if str(iv) == v or (
+                isinstance(iv, (int, float)) and abs(float(iv) - float(v)) < 1e-9
+            ):
                 return item
     raise KeyError(f"no element with {k}={v}")
 
@@ -55,18 +62,25 @@ def fmt(value, f=None):
     if f == "len":
         return str(len(value))
     if f in ("first", "last"):
-        value, f = (value[0] if f == "first" else value[-1]), None  # then fall through to the auto branch
+        value, f = (
+            (value[0] if f == "first" else value[-1]),
+            None,
+        )  # then fall through to the auto branch
     if isinstance(value, bool):
         return str(value).lower()
+    if isinstance(
+        value, str
+    ):  # an identifier key (demo.primary_wo, matched_lesson); never a number, passed through
+        return value
     if f in (None, "", "auto"):
         if isinstance(value, float) and not float(value).is_integer():
             return f"{value:.1f}"
-        v = int(round(float(value)))
+        v = round(float(value))
         return f"{v:,}" if abs(v) >= 10000 else str(v)
     if f == "int":
-        return str(int(round(float(value))))
+        return str(round(float(value)))
     if f == "comma":
-        return f"{int(round(float(value))):,}"
+        return f"{round(float(value)):,}"
     if f == "d1":
         return f"{float(value):.1f}"
     if f == "d2":
@@ -79,6 +93,11 @@ def fmt(value, f=None):
         return f"{float(value) / 1e6:.0f}"
     if f == "k":
         return f"{float(value) / 1e3:.1f}"
+    if f in ("share1", "share0"):
+        # a share is stored as the 1-decimal percentage divided by 100 (harness/analyze_corpus.py `share`), so decimal
+        # arithmetic returns exactly that percentage; float multiplication could land a hair under the half point
+        q = Decimal("0.1") if f == "share1" else Decimal(1)
+        return str((Decimal(str(value)) * 100).quantize(q, rounding=ROUND_HALF_UP))
     raise ValueError(f"unknown fx format {f}")
 
 
@@ -99,6 +118,7 @@ def render(html, fx):
 
 if __name__ == "__main__":
     import sys
+
     fx = load()
     for key in sys.argv[1:]:
         k, _, f = key.partition("|")

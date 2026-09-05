@@ -32,3 +32,6 @@ bundle/chunks.jsonl
 bundle/text/
 bundle/pages/
 .cache/
+
+# the built bundle (blueprint 9.1) is a release artefact, produced by `make bundle` where the corpus exists (D-17)
+bundle/

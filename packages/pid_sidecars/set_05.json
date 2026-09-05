@@ -1,15 +1,15 @@
 {
- "datasheet_cited_as_drawn": null,
  "defects": [
   {
    "detail": "The 'START PERMISSIVE FROM CAUSE AND EFFECT' table lists 'PDT-5605 | Condensate trap fouling alarm' as a permissive; the C&E permissives are 'Solvent flow established (from GA-5610) FSL upstream' and 'Condensate trap draining (TI-5604 < steam T)', and PDAH-5605 is alarm row A1; the controller bubble is tagged TCV-5602 where the C&E has TIC-5602 (C1) driving TV-5602; the fouling alarm is drawn on the transmitter tag PDT-5605 while the C&E row is PDAH-5605.",
-   "kind": "label_vs_ce_mismatch"
+   "rule": "label_vs_ce_mismatch"
   },
   {
    "detail": "No title block: the sheet carries a Ref. Dwg. box with the real number TJC-LLD-PID-5601 but no datasheet citation (NOTE 2 cites the interlock sheet IL-EA-5601, NOTE 3 the lesson OPL-EA-5601-04, NOTE 1 the plot plan PP-EA-5601); two legends, the right one reading 'LOGIC hmi' and 'CAUSE EFFECT'; FI-5601, FT-5603, FI-5603, PT-5605, TT-5602, TT-5604 have no counterpart in the datasheet or C&E.",
-   "kind": "other"
+   "rule": "other"
   }
  ],
+ "document_id": "P&ID SET 5.png",
  "equipment_shown": [
   "EA-5601 - SOLVENT HEATER (horizontal shell-and-tube exchanger, 'Shell' label; nozzles N1 6\", N2 6\", N3 4\", N4 3\")",
   "GA-5610 (upstream pump, 'Cold hexane in from upstream fictional pump')",
@@ -18,496 +18,659 @@
   "Tables 'INTERLOCK/CONTROL LOOP FROM CAUSE AND EFFECT' (PDT-5605 | Differential > 0.7 bar fouling alarm) and 'START PERMISSIVE FROM CAUSE AND EFFECT' (PDT-5605 | Condensate trap fouling alarm; TI-5604 | Condensate trap check)",
   "Two legends: left (INSTRUMENT BUBBLE (DCS), CONTROLLER BUBBLE (DCS), FAILURE POSITION / FAILURE POSITION (FC/O), Gate, Globe, Ball, Non-return, Line Spec.) and right (LOGIC hmi, START PERMISSIVE, TRIP, CAUSE EFFECT)"
  ],
- "file": "P&ID SET 5.png",
- "image_px": [
-  1471,
-  1069
- ],
- "instruments": [
+ "hotspots": [
   {
    "as_drawn_text": "Cold hexane in from upstream fictional pump",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-001",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.068,
-   "y": 0.219
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.068,
+   "y_frac": 0.219
   },
   {
    "as_drawn_text": "GA-5610",
    "bound_tag": "GA-5610",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E start permissive 1 'Solvent flow established (from GA-5610) FSL upstream'",
+   "h_frac": 0.0,
+   "id": "set05-002",
    "role": "equipment",
-   "setpoint_as_drawn": null,
-   "x": 0.199,
-   "y": 0.221
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.199,
+   "y_frac": 0.221
   },
   {
    "as_drawn_text": "BLOCK VALVE",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "tube-side inlet",
+   "h_frac": 0.0,
+   "id": "set05-003",
    "role": "isolation",
-   "setpoint_as_drawn": null,
-   "x": 0.274,
-   "y": 0.2
+   "unbound_reason": "tube-side inlet",
+   "w_frac": 0.0,
+   "x_frac": 0.274,
+   "y_frac": 0.2
   },
   {
    "as_drawn_text": "NRV",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-004",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.333,
-   "y": 0.2
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.333,
+   "y_frac": 0.2
   },
   {
    "as_drawn_text": "FI-5601",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "not in the C&E",
+   "h_frac": 0.0,
+   "id": "set05-005",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.391,
-   "y": 0.136
+   "unbound_reason": "not in the C&E",
+   "w_frac": 0.0,
+   "x_frac": 0.391,
+   "y_frac": 0.136
   },
   {
    "as_drawn_text": "N1 6\"",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "GA N1 TUBE IN (SOLVENT) 6\"-300# RF",
+   "h_frac": 0.0,
+   "id": "set05-006",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.438,
-   "y": 0.236
+   "unbound_reason": "GA N1 TUBE IN (SOLVENT) 6\"-300# RF",
+   "w_frac": 0.0,
+   "x_frac": 0.438,
+   "y_frac": 0.236
   },
   {
    "as_drawn_text": "EA-5601 - SOLVENT HEATER",
    "bound_tag": "EA-5601",
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-007",
    "role": "equipment",
-   "setpoint_as_drawn": null,
-   "x": 0.533,
-   "y": 0.274
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.533,
+   "y_frac": 0.274
   },
   {
    "as_drawn_text": "Shell",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-008",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.537,
-   "y": 0.351
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.537,
+   "y_frac": 0.351
   },
   {
    "as_drawn_text": "TCV-5602",
    "bound_tag": "TIC-5602",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "controller bubble; C&E C1 'Outlet temperature control TIC-5602 SP 95 degC' driving TV-5602",
+   "h_frac": 0.0,
+   "id": "set05-009",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.296,
-   "y": 0.325
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.296,
+   "y_frac": 0.325
   },
   {
    "as_drawn_text": "C1",
    "bound_tag": "TIC-5602",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E row id",
+   "h_frac": 0.0,
+   "id": "set05-010",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.342,
-   "y": 0.317
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.342,
+   "y_frac": 0.317
   },
   {
    "as_drawn_text": "EFF-1",
    "bound_tag": "TV-5602",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E EFF-1 'MODULATE STEAM VALVE TV-5602'",
+   "h_frac": 0.0,
+   "id": "set05-011",
    "role": "effect",
-   "setpoint_as_drawn": null,
-   "x": 0.342,
-   "y": 0.346
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.342,
+   "y_frac": 0.346
   },
   {
    "as_drawn_text": "MP steam in from steam header",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "datasheet SHELL SIDE FLUID MP STEAM 10 barg",
+   "h_frac": 0.0,
+   "id": "set05-012",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.056,
-   "y": 0.446
+   "unbound_reason": "datasheet SHELL SIDE FLUID MP STEAM 10 barg",
+   "w_frac": 0.0,
+   "x_frac": 0.056,
+   "y_frac": 0.446
   },
   {
    "as_drawn_text": "FT-5603",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-013",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.172,
-   "y": 0.408
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.172,
+   "y_frac": 0.408
   },
   {
    "as_drawn_text": "FI-5603",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-014",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.226,
-   "y": 0.408
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.226,
+   "y_frac": 0.408
   },
   {
    "as_drawn_text": "BLOCK",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "steam inlet block valve",
+   "h_frac": 0.0,
+   "id": "set05-015",
    "role": "isolation",
-   "setpoint_as_drawn": null,
-   "x": 0.172,
-   "y": 0.469
+   "unbound_reason": "steam inlet block valve",
+   "w_frac": 0.0,
+   "x_frac": 0.172,
+   "y_frac": 0.469
   },
   {
    "as_drawn_text": "TV-5602 Air-actuated, fails safe in a specific position",
    "bound_tag": "TV-5602",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E EFF-1 TV-5602; positioner symbol above",
+   "h_frac": 0.0,
+   "id": "set05-016",
    "role": "control_valve",
-   "setpoint_as_drawn": null,
-   "x": 0.296,
-   "y": 0.446
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.296,
+   "y_frac": 0.446
   },
   {
    "as_drawn_text": "NRV VALVE",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-017",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.367,
-   "y": 0.446
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.367,
+   "y_frac": 0.446
   },
   {
    "as_drawn_text": "N3 4\"",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "GA N3 SHELL IN (STEAM) 4\"-150# RF",
+   "h_frac": 0.0,
+   "id": "set05-018",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.438,
-   "y": 0.389
+   "unbound_reason": "GA N3 SHELL IN (STEAM) 4\"-150# RF",
+   "w_frac": 0.0,
+   "x_frac": 0.438,
+   "y_frac": 0.389
   },
   {
    "as_drawn_text": "C1",
    "bound_tag": "TIC-5602",
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-019",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.367,
-   "y": 0.56
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.367,
+   "y_frac": 0.56
   },
   {
    "as_drawn_text": "C1",
    "bound_tag": "TIC-5602",
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-020",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.402,
-   "y": 0.548
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.402,
+   "y_frac": 0.548
   },
   {
    "as_drawn_text": "EFF-1",
    "bound_tag": "TV-5602",
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-021",
    "role": "effect",
-   "setpoint_as_drawn": null,
-   "x": 0.404,
-   "y": 0.579
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.404,
+   "y_frac": 0.579
   },
   {
    "as_drawn_text": "N2 6\"",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "GA N2 TUBE OUT (SOLVENT) 6\"-300# RF",
+   "h_frac": 0.0,
+   "id": "set05-022",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.639,
-   "y": 0.26
+   "unbound_reason": "GA N2 TUBE OUT (SOLVENT) 6\"-300# RF",
+   "w_frac": 0.0,
+   "x_frac": 0.639,
+   "y_frac": 0.26
   },
   {
    "as_drawn_text": "TT-5602",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "outlet temperature transmitter feeding TIC-5602",
+   "h_frac": 0.0,
+   "id": "set05-023",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.705,
-   "y": 0.18
+   "unbound_reason": "outlet temperature transmitter feeding TIC-5602",
+   "w_frac": 0.0,
+   "x_frac": 0.705,
+   "y_frac": 0.18
   },
   {
    "as_drawn_text": "TIC-5602",
    "bound_tag": "TIC-5602",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E C1 TIC-5602 SP 95 degC; datasheet SOLVENT OUTLET T 95 degC",
+   "h_frac": 0.0,
+   "id": "set05-024",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.759,
-   "y": 0.18
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.759,
+   "y_frac": 0.18
   },
   {
    "as_drawn_text": "BLOCK VALVE",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "tube-side outlet",
+   "h_frac": 0.0,
+   "id": "set05-025",
    "role": "isolation",
-   "setpoint_as_drawn": null,
-   "x": 0.71,
-   "y": 0.227
+   "unbound_reason": "tube-side outlet",
+   "w_frac": 0.0,
+   "x_frac": 0.71,
+   "y_frac": 0.227
   },
   {
    "as_drawn_text": "PSV-5607",
    "bound_tag": "PSV-5607",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E R1 'Tube-side overpressure relief PSV-5607 set 16 barg'; datasheet TUBE DESIGN P/T 16 barg / 200 degC",
+   "h_frac": 0.0,
+   "id": "set05-026",
    "role": "relief",
-   "setpoint_as_drawn": null,
-   "x": 0.797,
-   "y": 0.117
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.797,
+   "y_frac": 0.117
   },
   {
    "as_drawn_text": "Set 16 barg",
    "bound_tag": "PSV-5607",
+   "drawn_setpoint": "16 barg",
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-027",
    "role": "relief",
-   "setpoint_as_drawn": "16 barg",
-   "x": 0.856,
-   "y": 0.124
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.856,
+   "y_frac": 0.124
   },
   {
    "as_drawn_text": "R1",
    "bound_tag": "PSV-5607",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E row id",
+   "h_frac": 0.0,
+   "id": "set05-028",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.899,
-   "y": 0.124
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.899,
+   "y_frac": 0.124
   },
   {
    "as_drawn_text": "EFF-3",
    "bound_tag": "PSV-5607",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E EFF-3 'MECHANICAL RELIEF VIA PSV-5607'",
+   "h_frac": 0.0,
+   "id": "set05-029",
    "role": "effect",
-   "setpoint_as_drawn": null,
-   "x": 0.902,
-   "y": 0.164
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.902,
+   "y_frac": 0.164
   },
   {
    "as_drawn_text": "BLOCK",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "outlet block valve before 'Hot hexane out to recycle system'",
+   "h_frac": 0.0,
+   "id": "set05-030",
    "role": "isolation",
-   "setpoint_as_drawn": null,
-   "x": 0.844,
-   "y": 0.227
+   "unbound_reason": "outlet block valve before 'Hot hexane out to recycle system'",
+   "w_frac": 0.0,
+   "x_frac": 0.844,
+   "y_frac": 0.227
   },
   {
    "as_drawn_text": "Hot hexane out to recycle system",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-031",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.936,
-   "y": 0.232
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.936,
+   "y_frac": 0.232
   },
   {
    "as_drawn_text": "PT-5605",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-032",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.771,
-   "y": 0.264
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.771,
+   "y_frac": 0.264
   },
   {
    "as_drawn_text": "PDT-5605",
    "bound_tag": "PDAH-5605",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "differential-pressure transmitter feeding the PDAH-5605 box",
+   "h_frac": 0.0,
+   "id": "set05-033",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.771,
-   "y": 0.358
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.771,
+   "y_frac": 0.358
   },
   {
    "as_drawn_text": "PDAH-5605 > 0.7 bar fouling alarm",
    "bound_tag": "PDAH-5605",
+   "drawn_setpoint": "> 0.7 bar",
    "foreign": false,
-   "note": "C&E A1 'Tube-side dP HIGH (fouling) PDAH-5605 > 0.7 bar alarm'",
+   "h_frac": 0.0,
+   "id": "set05-034",
    "role": "initiator",
-   "setpoint_as_drawn": "> 0.7 bar",
-   "x": 0.86,
-   "y": 0.334
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.86,
+   "y_frac": 0.334
   },
   {
    "as_drawn_text": "A1",
    "bound_tag": "PDAH-5605",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E row id",
+   "h_frac": 0.0,
+   "id": "set05-035",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.945,
-   "y": 0.311
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.945,
+   "y_frac": 0.311
   },
   {
    "as_drawn_text": "EFF-2",
    "bound_tag": "PDAH-5605",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E EFF-2 'ANNUNCIATE HIGH dP / FOULING ALARM'",
+   "h_frac": 0.0,
+   "id": "set05-036",
    "role": "effect",
-   "setpoint_as_drawn": null,
-   "x": 0.945,
-   "y": 0.348
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.945,
+   "y_frac": 0.348
   },
   {
    "as_drawn_text": "N4 3\"",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "GA N4 CONDENSATE OUT 3\"-150# RF",
+   "h_frac": 0.0,
+   "id": "set05-037",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.639,
-   "y": 0.428
+   "unbound_reason": "GA N4 CONDENSATE OUT 3\"-150# RF",
+   "w_frac": 0.0,
+   "x_frac": 0.639,
+   "y_frac": 0.428
   },
   {
    "as_drawn_text": "ST-5604",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "steam trap symbol on the condensate line; GA BOM item 12 STEAM TRAP ASSY",
+   "h_frac": 0.0,
+   "id": "set05-038",
    "role": "equipment",
-   "setpoint_as_drawn": null,
-   "x": 0.715,
-   "y": 0.534
+   "unbound_reason": "steam trap symbol on the condensate line; GA BOM item 12 STEAM TRAP ASSY",
+   "w_frac": 0.0,
+   "x_frac": 0.715,
+   "y_frac": 0.534
   },
   {
    "as_drawn_text": "ST-5604 Steam Trap Assembly",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "second ST-5604 label on the bypass valve",
+   "h_frac": 0.0,
+   "id": "set05-039",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.717,
-   "y": 0.593
+   "unbound_reason": "second ST-5604 label on the bypass valve",
+   "w_frac": 0.0,
+   "x_frac": 0.717,
+   "y_frac": 0.593
   },
   {
    "as_drawn_text": "TT-5604",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-040",
    "role": "indicator",
-   "setpoint_as_drawn": null,
-   "x": 0.754,
-   "y": 0.475
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.754,
+   "y_frac": 0.475
   },
   {
    "as_drawn_text": "TI-5604",
    "bound_tag": "TI-5604",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "C&E start permissive 2 'Condensate trap draining (TI-5604 < steam T) TI-5604'",
+   "h_frac": 0.0,
+   "id": "set05-041",
    "role": "permissive",
-   "setpoint_as_drawn": null,
-   "x": 0.809,
-   "y": 0.475
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.809,
+   "y_frac": 0.475
   },
   {
    "as_drawn_text": "Vents to fine vent header/safe location",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-042",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.933,
-   "y": 0.423
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.933,
+   "y_frac": 0.423
   },
   {
    "as_drawn_text": "Condensate Out To condensate system",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-043",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.926,
-   "y": 0.526
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.926,
+   "y_frac": 0.526
   },
   {
    "as_drawn_text": "BLOCK",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "drain line, upper",
+   "h_frac": 0.0,
+   "id": "set05-044",
    "role": "isolation",
-   "setpoint_as_drawn": null,
-   "x": 0.854,
-   "y": 0.567
+   "unbound_reason": "drain line, upper",
+   "w_frac": 0.0,
+   "x_frac": 0.854,
+   "y_frac": 0.567
   },
   {
    "as_drawn_text": "BLOCK",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "drain line, lower (unlabelled)",
+   "h_frac": 0.0,
+   "id": "set05-045",
    "role": "isolation",
-   "setpoint_as_drawn": null,
-   "x": 0.854,
-   "y": 0.618
+   "unbound_reason": "drain line, lower (unlabelled)",
+   "w_frac": 0.0,
+   "x_frac": 0.854,
+   "y_frac": 0.618
   },
   {
    "as_drawn_text": "Drains to collection vessel/safe drain",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-046",
    "role": "other",
-   "setpoint_as_drawn": null,
-   "x": 0.929,
-   "y": 0.67
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.929,
+   "y_frac": 0.67
   },
   {
    "as_drawn_text": "SAFE DRAIN",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
+   "h_frac": 0.0,
+   "id": "set05-047",
    "role": "equipment",
-   "setpoint_as_drawn": null,
-   "x": 0.853,
-   "y": 0.703
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.853,
+   "y_frac": 0.703
   },
   {
    "as_drawn_text": "PDT-5605 | Differential > 0.7 bar fouling alarm",
    "bound_tag": "PDAH-5605",
+   "drawn_setpoint": "> 0.7 bar",
    "foreign": false,
-   "note": "row of the INTERLOCK/CONTROL LOOP table",
+   "h_frac": 0.0,
+   "id": "set05-048",
    "role": "other",
-   "setpoint_as_drawn": "> 0.7 bar",
-   "x": 0.328,
-   "y": 0.742
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.328,
+   "y_frac": 0.742
   },
   {
    "as_drawn_text": "PDT-5605 | Condensate trap fouling alarm",
    "bound_tag": null,
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "row of the START PERMISSIVE table; the C&E has no such permissive (PDAH-5605 is alarm row A1)",
+   "h_frac": 0.0,
+   "id": "set05-049",
    "role": "permissive",
-   "setpoint_as_drawn": null,
-   "x": 0.328,
-   "y": 0.878
+   "unbound_reason": "row of the START PERMISSIVE table; the C&E has no such permissive (PDAH-5605 is alarm row A1)",
+   "w_frac": 0.0,
+   "x_frac": 0.328,
+   "y_frac": 0.878
   },
   {
    "as_drawn_text": "TI-5604 | Condensate trap check",
    "bound_tag": "TI-5604",
+   "drawn_setpoint": null,
    "foreign": false,
-   "note": "row of the START PERMISSIVE table",
+   "h_frac": 0.0,
+   "id": "set05-050",
    "role": "permissive",
-   "setpoint_as_drawn": null,
-   "x": 0.328,
-   "y": 0.908
+   "unbound_reason": null,
+   "w_frac": 0.0,
+   "x_frac": 0.328,
+   "y_frac": 0.908
   }
  ],
- "notes_as_drawn": [
+ "notes": [
   "NOTE 1. Plot Plan PP-EA-5601",
   "NOTE 2. Interlock Logic IL-EA-5601",
   "NOTE 3. OPL OPL-EA-5601-04",
@@ -515,14 +678,14 @@
   "NOTE 5. Fictional diagram for training purposes"
  ],
  "provenance": {
-  "basis": "manual transcription of the image",
-  "by": "EXEC-1",
-  "date": "2026-08-27"
+  "alias": "EXEC-1",
+  "basis": "agent_transcription",
+  "date": "2026-08-27",
+  "review_status": "pending",
+  "reviewed_at": null,
+  "reviewed_by": null
  },
- "ref_dwg_as_drawn": "Ref. Dwg. TJC-LLD-PID-5601",
- "revision_block_as_drawn": null,
- "seq_cited_as_drawn": "IL-EA-5601",
+ "reference_box": "Ref. Dwg. TJC-LLD-PID-5601",
  "set": 5,
- "tag": "EA-5601",
- "title_as_drawn": null
+ "title_box": ""
 }
