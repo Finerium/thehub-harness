@@ -463,24 +463,23 @@ def typed_tags(equipment_tags, interlocks_parsed, datasheet_texts):
     permissive signals, effect final elements, and every tag token of its datasheet. The asset's own tag is excluded."""
     out = {}
     for eq in sorted(equipment_tags):
-        roles = {}
-
-        def see(tag, role):
-            if tag in equipment_tags or tag == eq:
-                return
-            roles.setdefault(tag, role)
-
         il = interlocks_parsed[eq]
-        for r in il["rows"]:
-            see(r["tag"], ROLE_KIND[r["row_kind"]])
-        for p in il["start_permissives"]:
-            if is_signal_tag(p["signal"]):
-                see(p["signal"], "permissive")
-        for e in il["effects"]:
-            for t in sorted(tag_tokens(e["final_element"])):
-                see(t, "final_element")
-        for t in sorted(tag_tokens(datasheet_texts[eq])):
-            see(t, "unknown")
+        seen = [(r["tag"], ROLE_KIND[r["row_kind"]]) for r in il["rows"]]
+        seen += [
+            (p["signal"], "permissive")
+            for p in il["start_permissives"]
+            if is_signal_tag(p["signal"])
+        ]
+        seen += [
+            (t, "final_element")
+            for e in il["effects"]
+            for t in sorted(tag_tokens(e["final_element"]))
+        ]
+        seen += [(t, "unknown") for t in sorted(tag_tokens(datasheet_texts[eq]))]
+        roles = {}
+        for tag, role in seen:  # the first document that types a tag names its role
+            if tag not in equipment_tags and tag != eq:
+                roles.setdefault(tag, role)
         out[eq] = roles
     return out
 

@@ -20,11 +20,10 @@ it (the part after the watermark is out-of-flow table text, the same rule as har
 precedes it (Sets 7 and 8 print the watermark first). Marker-derived fragments under MIN_CHARS (a stray project name) are
 dropped and counted; a step or a row is never dropped.
 
-Identifiers are the ones harness.documents gives the same file, so chunks.jsonl joins revisions.json under G1: a lesson
-is document OPL-XX-NNNN-NN at revision "-", a typed document is its document number at the revision its title block
-prints (the DOC NO, DWG No. and C&E header fields the adopted harness.master parsers read); document_revision_id is
-documents.rev_id(document id, revision) and a chunk id is that revision id + "/c" + a three-digit ordinal, the 0-based
-position of the chunk in its document. The "embedding" field of 9.2 is added by harness.embed --chunks; this module
+Identifiers are the ones harness.documents gives the same file, so chunks.jsonl joins revisions.json under G1: a
+document is "doc-" + sha256[:12] of the file and its one current revision "rev-" + sha256[:12]; document_revision_id
+is that revision id and a chunk id is the revision id + "/c" + a three-digit ordinal, the 0-based position of the
+chunk in its document. The "embedding" field of 9.2 is added by harness.embed --chunks; this module
 writes the seven other fields.
 """
 
@@ -37,10 +36,10 @@ from collections import Counter
 from itertools import pairwise
 
 from .config import CORPUS
-from .documents import NO_REVISION, rev_id
-from .master import IL_HDR, IL_ROW, parse_datasheet, parse_drawing
+from .documents import document_id, revision_id
+from .master import IL_ROW
 from .opl import PAGE_FOOTER
-from .pdftext import canonical, corpus_files, doc_class, opl_id, pdf_text
+from .pdftext import canonical, corpus_files, doc_class, file_sha256, pdf_text
 
 MIN_CHARS = 40
 OPL_HEADINGS = (
@@ -85,23 +84,10 @@ INTERLOCK_TAIL = [
 
 
 def identity(path, text=None):
-    """(document id, current revision id) of one PDF, as harness.documents names it (text: its canonical text)."""
-    cls = doc_class(path)
-    if cls == "opl":
-        return opl_id(path), rev_id(opl_id(path), NO_REVISION)
-    text = canonical(pdf_text(path)) if text is None else text
-    if cls == "datasheet":
-        ds = parse_datasheet(text)
-        did, rev = ds["doc_no"], str(ds["rev"])
-    elif cls in ("ga_drawing", "plot_plan"):
-        dw = parse_drawing(text)
-        did, rev = dw["dwg_no"], dw["rev"]
-    elif cls == "interlock":
-        h = IL_HDR.search(text).groupdict()
-        did, rev = h["doc_no"], str(int(h["rev"]))
-    else:
-        raise ValueError(f"no document identity for class {cls}: {path}")
-    return did, rev_id(did, rev)
+    """(document id, current revision id) of one PDF, as harness.documents names every file: "doc-" and "rev-" +
+    sha256[:12] (the scheme the application's seed uses); `text` is accepted for the callers that already hold it."""
+    digest = file_sha256(path)
+    return document_id(digest), revision_id(digest)
 
 
 def _segments(text, markers, base=0):

@@ -1,0 +1,287 @@
+{
+ "description": "Cases of the canonical text form of blueprint 9.2 (harness/canonical.py, ported by the application as src/lib/canonical.ts): strings of the team's own wording, no corpus text, each with the canonical string and its sha256 identity. Every case was derived by hand from the rule and then confirmed against harness.canonical; a port must reproduce every expected string and hash exactly.",
+ "rule": "canonical(s): Unicode NFKC normalisation, soft hyphens (U+00AD) removed so a word they break becomes one token, every run of whitespace (Python str.isspace: the ASCII controls U+0009 to U+000D and U+001C to U+001F, U+0020, U+0085, U+00A0, U+1680, U+2000 to U+200A, U+2028, U+2029, U+202F, U+205F, U+3000; not U+200B, not U+FEFF) collapsed to one space, then trimmed; case and punctuation kept. sha256 is over the canonical string encoded as UTF-8.",
+ "canonical_form_version": "1",
+ "cases": [
+  {
+   "id": "CC-01",
+   "note": "ASCII text is its own canonical form",
+   "input": "Hexane feed pump",
+   "expected": "Hexane feed pump",
+   "sha256": "cc9b1b07a1b2c06025ef884d1cc26e494964b0764dd1ad8d67785e417f58f8c1"
+  },
+  {
+   "id": "CC-02",
+   "note": "leading and trailing spaces are trimmed",
+   "input": "  trip setpoint  ",
+   "expected": "trip setpoint",
+   "sha256": "d99ba4ace67fcf21e719362db08fe40288dbf33b46cf73923a6a5d1c8af35220"
+  },
+  {
+   "id": "CC-03",
+   "note": "a run of spaces collapses to one space",
+   "input": "high   vibration    trip",
+   "expected": "high vibration trip",
+   "sha256": "e391daf33b7a6fdd0640cf0d95026b468fa30fa38a732db447ebee99b91ba2c0"
+  },
+  {
+   "id": "CC-04",
+   "note": "tab, newline and CRLF are whitespace runs",
+   "input": "Step 1\tCheck\nthe\r\nvalve",
+   "expected": "Step 1 Check the valve",
+   "sha256": "6e2d7e218917a08506f3d9b080241f033bf07ad16f650c8a1ecacab2f81b35ed"
+  },
+  {
+   "id": "CC-05",
+   "note": "a soft hyphen (U+00AD) inside a word is removed",
+   "input": "inter\u00adlock",
+   "expected": "interlock",
+   "sha256": "6e749f0d99c77cfcaceb6a549932a3cab6e591b1909485fcd8a2649209c8fac9"
+  },
+  {
+   "id": "CC-06",
+   "note": "a soft hyphen followed by a line break: the hyphen goes and the break is one space (what harness.canonical does; the halves stay two tokens)",
+   "input": "permis\u00ad\nsive",
+   "expected": "permis sive",
+   "sha256": "705d9130731cb9976e240979c8968ca58adbab99ac54f9d9553447d495b41bad"
+  },
+  {
+   "id": "CC-07",
+   "note": "several soft hyphens, at the edges too",
+   "input": "\u00ad\u00adby\u00adpass\u00ad",
+   "expected": "bypass",
+   "sha256": "f271a122bf4230c7c217b4cb8a66f8b4325b9c1821627dca16924fff32d6aa71"
+  },
+  {
+   "id": "CC-08",
+   "note": "NFKC: the ligatures fi, fl and ff (U+FB01, U+FB02, U+FB00) expand",
+   "input": "\ufb01lter \ufb02ow o\ufb00set",
+   "expected": "filter flow offset",
+   "sha256": "b3fd11691f96ad317d3a92dc32bd4ca1cb4561487cbf703dd85c6eb24cd063af"
+  },
+  {
+   "id": "CC-09",
+   "note": "NFKC: fullwidth letters, digits and hyphen-minus (U+FF21 to U+FF5A, U+FF10 to U+FF19, U+FF0D) become ASCII",
+   "input": "\uff27\uff21\uff0d\uff11\uff12\uff10\uff11\uff21",
+   "expected": "GA-1201A",
+   "sha256": "c6b39a668413f1582343833158629f59e4161f2086e6e9eb7b23297e35a4aca0"
+  },
+  {
+   "id": "CC-10",
+   "note": "NFKC: fullwidth parentheses and colon become ASCII",
+   "input": "\uff08\uff11\uff09\uff1a",
+   "expected": "(1):",
+   "sha256": "06c1bd8e92747c6285002e630879715ba4d51c81ff983db21ff83f43479d1991"
+  },
+  {
+   "id": "CC-11",
+   "note": "NFKC: a no-break space (U+00A0) becomes a space",
+   "input": "7.1\u00a0mm/s",
+   "expected": "7.1 mm/s",
+   "sha256": "0a52656cab93575c2c5f3f04359d3eeff76b2c90356069cbc5cd7dd364a58f44"
+  },
+  {
+   "id": "CC-12",
+   "note": "NFKC: narrow no-break space (U+202F) and thin space (U+2009) become spaces",
+   "input": "1\u202f000\u2009kg",
+   "expected": "1 000 kg",
+   "sha256": "9a646a6d88f30493a99b55b71f504a75105f75141a34efbaa15b11cb727fc15f"
+  },
+  {
+   "id": "CC-13",
+   "note": "NFKC: an ideographic space (U+3000) becomes a space",
+   "input": "pompa\u3000heksana",
+   "expected": "pompa heksana",
+   "sha256": "fb6e4cb76be719eceaf2bec18ada3f5b8e8b465488424c80f2c41d28904b1489"
+  },
+  {
+   "id": "CC-14",
+   "note": "a zero width space (U+200B) is not whitespace and is kept",
+   "input": "GA\u200b1201A",
+   "expected": "GA\u200b1201A",
+   "sha256": "c27495fb33f857ae871b8992a2e659e43be6ef85e3d242939cc6e98e375b94cd"
+  },
+  {
+   "id": "CC-15",
+   "note": "a byte order mark (U+FEFF) is not whitespace and is kept, even at the start",
+   "input": "\ufeffVSHH-1201",
+   "expected": "\ufeffVSHH-1201",
+   "sha256": "c4221ef620baed0f8747bea9b0ea2d59cd4f60e38298988a6dff4a39d96eb528"
+  },
+  {
+   "id": "CC-16",
+   "note": "next line (U+0085) is whitespace",
+   "input": "a\u0085b",
+   "expected": "a b",
+   "sha256": "c8687a08aa5d6ed2044328fa6a697ab8e96dc34291e8c2034ae8c38e6fcc6d65"
+  },
+  {
+   "id": "CC-17",
+   "note": "unit separator (U+001F) is whitespace",
+   "input": "a\u001fb",
+   "expected": "a b",
+   "sha256": "c8687a08aa5d6ed2044328fa6a697ab8e96dc34291e8c2034ae8c38e6fcc6d65"
+  },
+  {
+   "id": "CC-18",
+   "note": "line separator (U+2028) and paragraph separator (U+2029) are whitespace",
+   "input": "a\u2028b\u2029c",
+   "expected": "a b c",
+   "sha256": "0e9f64031fcb2bc708b531c2a20441580425d151a38503f38592a7dd36019d3b"
+  },
+  {
+   "id": "CC-19",
+   "note": "form feed (U+000C) and vertical tab (U+000B) are whitespace",
+   "input": "page one\fpage two\u000bend",
+   "expected": "page one page two end",
+   "sha256": "ab0172688430786e60fc281fa10f960cf0656fef80592d311a50b4fb34d19239"
+  },
+  {
+   "id": "CC-20",
+   "note": "NFKC: superscript two and three (U+00B2, U+00B3) become digits",
+   "input": "m\u00b2 10\u00b3",
+   "expected": "m2 103",
+   "sha256": "b6868bc5458b58b23a6065a10455d9a612aeee475e576cec9cc20193f0476ac1"
+  },
+  {
+   "id": "CC-21",
+   "note": "NFKC: superscript minus (U+207B) becomes MINUS SIGN (U+2212), not hyphen-minus",
+   "input": "10\u207b\u00b3",
+   "expected": "10\u22123",
+   "sha256": "6f7529daa496f639b70732dabdadf0c5bd4413a18c5f09825cb28307e8d27994"
+  },
+  {
+   "id": "CC-22",
+   "note": "NFKC: the degree Celsius sign (U+2103) becomes degree sign plus C",
+   "input": "125\u2103",
+   "expected": "125\u00b0C",
+   "sha256": "0f4a6aa6eaa78bb0ca04dcc425670ffdab6e89abf135391cd9b024ce129375b0"
+  },
+  {
+   "id": "CC-23",
+   "note": "NFKC: the micro sign (U+00B5) becomes Greek small mu (U+03BC)",
+   "input": "5 \u00b5m",
+   "expected": "5 \u03bcm",
+   "sha256": "05757e73ef518d94125b0996f63b07e27beb29861357d3eb03b2293ba513a669"
+  },
+  {
+   "id": "CC-24",
+   "note": "NFKC: the square kg symbol (U+338F) becomes kg",
+   "input": "50 \u338f",
+   "expected": "50 kg",
+   "sha256": "6f9bd56cda30944f76b55990e550270f0d29092a43ff58d6d2b78613ffe5386f"
+  },
+  {
+   "id": "CC-25",
+   "note": "NFKC composes a base letter with a combining acute (U+0301) into the precomposed letter",
+   "input": "re\u0301sume\u0301",
+   "expected": "r\u00e9sum\u00e9",
+   "sha256": "e9f7b5b696661e938834cbc285688cfa43371150ee5261b47b7d60f6ed73a6f5"
+  },
+  {
+   "id": "CC-26",
+   "note": "NFKC: the Angstrom sign (U+212B) becomes A with ring (U+00C5); a composed o with diaeresis is kept",
+   "input": "\u212bngstr\u00f6m",
+   "expected": "\u00c5ngstr\u00f6m",
+   "sha256": "5c510cb3cd9cd6edd4f18456572fb13dac038f92d6f816b2e28415d1f6309c39"
+  },
+  {
+   "id": "CC-27",
+   "note": "NFKC: a Roman numeral (U+216B) and a circled digit (U+2460) expand",
+   "input": "\u216b \u2460",
+   "expected": "XII 1",
+   "sha256": "3457c57f1ac52818ceb48296ae0e013ee17659a207fe2688f033a0e002eeb23c"
+  },
+  {
+   "id": "CC-28",
+   "note": "NFKC: a vulgar fraction (U+00BD) expands with FRACTION SLASH (U+2044)",
+   "input": "\u00bd inch",
+   "expected": "1\u20442 inch",
+   "sha256": "94cab4fbb034691c29372239ade945b696255cde6130764efdd40547a08f113b"
+  },
+  {
+   "id": "CC-29",
+   "note": "NFKC: the trade mark sign (U+2122) becomes TM",
+   "input": "COMOS\u2122",
+   "expected": "COMOSTM",
+   "sha256": "f375a2476083d4df81a764f152db91fec708796db06a26e7e49521d37ee970bc"
+  },
+  {
+   "id": "CC-30",
+   "note": "NFKC: long s (U+017F) becomes s",
+   "input": "Pre\u017f\u017fure",
+   "expected": "Pressure",
+   "sha256": "1f8407f9eeb1129b580ecfe2324bed03c2e7d84f741908d072383c30251e6a12"
+  },
+  {
+   "id": "CC-31",
+   "note": "NFKC: a non-breaking hyphen (U+2011) becomes HYPHEN (U+2010), not hyphen-minus",
+   "input": "GA\u20111201A",
+   "expected": "GA\u20101201A",
+   "sha256": "973694e8ed584d33c9978c0df5a5f5728d12926e378ffe9ae9735e5de7652df6"
+  },
+  {
+   "id": "CC-32",
+   "note": "an en dash (U+2013) has no compatibility mapping and is kept",
+   "input": "2024\u20132025",
+   "expected": "2024\u20132025",
+   "sha256": "b88c433d1b59bc872bb4981d65a812084b6aec581a7f0e0eab27e37707b82a25"
+  },
+  {
+   "id": "CC-33",
+   "note": "case is kept",
+   "input": "HIGH CRITICAL / low critical",
+   "expected": "HIGH CRITICAL / low critical",
+   "sha256": "8795a30b8002e98e6780ea51c891fcf610cfc6cf80a59f7d2ff78ee81a8b0de5"
+  },
+  {
+   "id": "CC-34",
+   "note": "punctuation is kept",
+   "input": "T3: VSHH-1201 > 7.1 mm/s (1oo2), trip!",
+   "expected": "T3: VSHH-1201 > 7.1 mm/s (1oo2), trip!",
+   "sha256": "a59ddff8e31aff00731ccfd3a56a6164b87cc19a46bef9ce01067a01f5e1af32"
+  },
+  {
+   "id": "CC-35",
+   "note": "Bahasa Indonesia with a tab and a run of spaces",
+   "input": "Prosedur\tpengoperasian   pompa umpan heksana",
+   "expected": "Prosedur pengoperasian pompa umpan heksana",
+   "sha256": "be248074897f78d192caba714644a683a004989b6f168cc01638492ff615c7a8"
+  },
+  {
+   "id": "CC-36",
+   "note": "Bahasa Indonesia question across a line break",
+   "input": "Bagaimana cara\nmematikan interlock?",
+   "expected": "Bagaimana cara mematikan interlock?",
+   "sha256": "f1c37e9bf16fb97b6b645eaf23817f2d58e197dd47be8faac83d942b5dec2403"
+  },
+  {
+   "id": "CC-37",
+   "note": "Bahasa Indonesia with a no-break space and a soft hyphen",
+   "input": "Syarat\u00a0start pom\u00adpa",
+   "expected": "Syarat start pompa",
+   "sha256": "013a6dd11f63982fa7262649929edacab148fafb13d47c79cf89917b82792dc6"
+  },
+  {
+   "id": "CC-38",
+   "note": "the empty string",
+   "input": "",
+   "expected": "",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "id": "CC-39",
+   "note": "whitespace only trims to the empty string",
+   "input": " \t\n ",
+   "expected": "",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "id": "CC-40",
+   "note": "everything at once: spaces, a soft hyphen, a ligature, no-break spaces, a tab and a newline",
+   "input": "  \u00ad\ufb01re\u00a0\u00a0pump\t\n",
+   "expected": "fire pump",
+   "sha256": "9af934f54f6994e2aaa71da29f4a508cee0c8bb173643262b9abe92b39622bdb"
+  }
+ ]
+}

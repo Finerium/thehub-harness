@@ -40,11 +40,7 @@ def build(bundle, out):
     mtime = (
         int(epoch)
         if epoch
-        else int(
-            datetime.datetime.fromisoformat(
-                manifest["created_at"].replace("Z", "+00:00")
-            ).timestamp()
-        )
+        else int(datetime.datetime.fromisoformat(manifest["created_at"]).timestamp())
     )
     name = f"thehub-bundle-{version}"
     os.makedirs(out, exist_ok=True)
@@ -63,7 +59,8 @@ def build(bundle, out):
         gzip.GzipFile(filename="", mode="wb", fileobj=f, mtime=0) as gz,
     ):
         gz.write(raw.getvalue())
-    digest = hashlib.sha256(open(archive, "rb").read()).hexdigest()
+    with open(archive, "rb") as f:
+        digest = hashlib.sha256(f.read()).hexdigest()
     with open(os.path.join(out, "SHA256SUMS"), "w", encoding="utf-8") as f:
         f.write(f"{digest}  {name}.tar.gz\n")
     return {

@@ -1,9 +1,11 @@
 """Documents, revisions, spans, parser claims and document edges of blueprint 9.2 for the bundle (T1).
 
 Every document is one of the 98 corpus files (harness.pdftext.corpus_files, classed by harness.pdftext.doc_class).
-Identifiers follow harness.chunks so every lane names a document the same way: id "doc-" + sha256[:12] and, for the
-one current revision of corpus version 1, "rev-" + sha256[:12]; a superseded revision a drawing's history table records
-(A, B before 0) is "rev-" + sha256[:12] + "-" + revision.
+Identifiers are the ones the application's seed uses (scripts/db/seed-m0.ts), so every lane names a document the same
+way: id "doc-" + sha256[:12] and, for the one current revision of corpus version 1, "rev-" + sha256[:12]; a superseded
+revision a drawing's history table records (A, B before 0) is "rev-" + sha256[:12] + "-" + revision. harness.chunks and
+harness.pages must name files by the same two functions (document_id, revision_id) for chunks.jsonl and pages/ to pass
+G1's referential closure.
 
 Text comes only from harness.pdftext (`pdftotext -raw`, the canonical form): a PDF page's text is the form-feed
 separated page of the extractor output, canonicalised; the workbook's "pages" are its rows (the Excel row number) and a
