@@ -362,14 +362,13 @@ def registry(fx, ctx, root):
         tag: DS_SERVICE.search(text).group(1)
         for tag, text in class_texts("datasheet").items()
     }
-    failure_rows = Counter(w["Equipment_Tag"] for w in ctx["pops"]["failure"])
     for e in fx["equipment_master"]:
         e.update(
             service=service[e["tag"]],
             interlock_ref=fx["interlock_rows"][e["tag"]]["header"]["logic_no_text"],
             criticality=e["criticality_datasheet"],
             work_orders=e["wos"],
-            failure_rows=failure_rows[e["tag"]],
+            failure_rows=e["unplanned_failure_rows"],  # C.1 "Unplanned-failure rows" (sums to 57), the 10.4 item 1 target
             breakdown_rows=e["breakdowns_flagged"],
             planned_rows=e["planned_flagged_rows"],
             unplanned_rows=e["unplanned_breakdowns"],
