@@ -195,6 +195,9 @@ DS_LABELS = sorted(
     },
     key=lambda s: (-len(s.split()), s),
 )
+# The value cells of the eight sheets that carry a label word, read once and pinned like the labels: the split keeps
+# each whole, so BOOT inside FA-8901's VESSEL TYPE and FRAME inside KC-4501's LUBE SYSTEM stay value text.
+DS_LABEL_WORD_VALUES = ("HORIZONTAL DRUM WITH BOOT", "FORCED FEED + FRAME SPLASH")
 DS_HEADER = re.compile(
     r"DOC NO: (?P<doc_no>\S+) REV: (?P<rev>\d+) .*?ITEM / TAG NO\. (?P<tag>\S+) EQUIPMENT ID (?P<equipment_id>\S+) "
     r"EQUIPMENT NAME (?P<equipment_name>.+?) TYPE (?P<type>.+?) PLANT / UNIT (?P<plant>.+?) AREA (?P<area>.+?) "
@@ -232,9 +235,34 @@ def value_num_unit(value):
     return float(m.group("num").replace(",", "")), m.group("unit")
 
 
+def ds_pairs(block):
+    """[[label, value], ...] of one table block: longest label first, whole tokens, a label used once per block, the
+    pinned value cells of DS_LABEL_WORD_VALUES kept whole; tokens before the first label are dropped."""
+    for phrase in DS_LABEL_WORD_VALUES:
+        block = block.replace(phrase, phrase.replace(" ", "\x00"))
+    toks = block.split()
+    used, pairs, i = set(), [], 0
+    while i < len(toks):
+        hit = None
+        for label in DS_LABELS:
+            lt = label.split()
+            if label not in used and toks[i : i + len(lt)] == lt:
+                hit = label
+                break
+        if hit:
+            used.add(hit)
+            pairs.append([hit, []])
+            i += len(hit.split())
+        else:
+            if pairs:
+                pairs[-1][1].append(toks[i])
+            i += 1
+    return [[label, " ".join(value).replace("\x00", " ")] for label, value in pairs]
+
+
 def datasheet_params(tag, text, rev_id, page_text, spans, claims):
     """DatasheetParam rows of one datasheet from its canonical text: the header block by DS_HEADER, the table blocks by
-    the label vocabulary (longest label first, whole tokens, a label used once per sheet), values cut at the watermark."""
+    ds_pairs over the label vocabulary, values cut at the watermark."""
     out = []
 
     def emit(group, label, field, value):
@@ -270,25 +298,8 @@ def datasheet_params(tag, text, rev_id, page_text, spans, claims):
             k = block.find(cut)
             if k >= 0:
                 block = block[:k]
-        toks = block.split()
-        used, pairs, i = set(), [], 0
-        while i < len(toks):
-            hit = None
-            for label in DS_LABELS:
-                lt = label.split()
-                if label not in used and toks[i : i + len(lt)] == lt:
-                    hit = label
-                    break
-            if hit:
-                used.add(hit)
-                pairs.append([hit, []])
-                i += len(hit.split())
-            else:
-                if pairs:
-                    pairs[-1][1].append(toks[i])
-                i += 1
-        for label, value in pairs:
-            emit(group, label, label, " ".join(value))
+        for label, value in ds_pairs(block):
+            emit(group, label, label, value)
     return out
 
 
@@ -1232,6 +1243,20 @@ if __name__ == "__main__":
     assert value_num_unit("1,150,000 m3/h") == (1150000.0, "m3/h") and value_num_unit(
         "246"
     ) == (246.0, None)
+    assert ds_pairs(
+        "VESSEL TYPE HORIZONTAL DRUM WITH BOOT SHELL MATERIAL SA-516 Gr.70 "
+        "TANGENT-TANGENT 4800 mm BOOT WATER DRAW-OFF BOOT DN300 PWHT YES"
+    ) == [
+        ["VESSEL TYPE", "HORIZONTAL DRUM WITH BOOT"],
+        ["SHELL MATERIAL", "SA-516 Gr.70"],
+        ["TANGENT-TANGENT", "4800 mm"],
+        ["BOOT", "WATER DRAW-OFF BOOT DN300"],
+        ["PWHT", "YES"],
+    ]
+    assert ds_pairs("LUBE SYSTEM FORCED FEED + FRAME SPLASH SUCTION TEMP. 40 degC") == [
+        ["LUBE SYSTEM", "FORCED FEED + FRAME SPLASH"],
+        ["SUCTION TEMP.", "40 degC"],
+    ]
     text, breaks = canonical_lines(
         "Hexane leak observed at GA-1201A\nseal gland during operation, seal dr.\nNext cell"
     )
