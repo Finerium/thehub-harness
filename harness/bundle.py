@@ -28,7 +28,7 @@ from . import pdftext as P
 from . import workbook as W
 from .config import PACKAGES, ROOT
 
-BUNDLE_VERSION = "1.0.0"
+BUNDLE_VERSION = "1.0.1"
 CLASSES = ("datasheet", "ga_drawing", "interlock", "plot_plan")
 SPOT_CLASSES = ("datasheet", "ga_drawing", "plot_plan", "interlock", "pid")
 # (bundle path, repository path): byte copies
