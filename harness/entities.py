@@ -460,7 +460,9 @@ def tag_tokens(text):
 
 def typed_tags(equipment_tags, interlocks_parsed, datasheet_texts):
     """{equipment_tag: {tag: role}} of the tags each asset's own documents type: its C&E rows (role by row kind),
-    permissive signals, effect final elements, and every tag token of its datasheet. The asset's own tag is excluded."""
+    permissive signals and the tags typed inside a permissive condition (Set 7 types LSL-7804 in the condition of a
+    permissive whose signal is LT-7804), effect final elements, and every tag token of its datasheet. The asset's own
+    tag is excluded."""
     out = {}
     for eq in sorted(equipment_tags):
         il = interlocks_parsed[eq]
@@ -469,6 +471,11 @@ def typed_tags(equipment_tags, interlocks_parsed, datasheet_texts):
             (p["signal"], "permissive")
             for p in il["start_permissives"]
             if is_signal_tag(p["signal"])
+        ]
+        seen += [
+            (t, "permissive")
+            for p in il["start_permissives"]
+            for t in sorted(tag_tokens(p["condition"]))
         ]
         seen += [
             (t, "final_element")
@@ -1262,6 +1269,23 @@ if __name__ == "__main__":
     assert m and m.group(0)[: m.end("qty")] == "12 STEAMTUBEBUNDLE SS304 1"
     assert is_signal_tag("DVC6200") and is_signal_tag("PSL-2306")
     assert not is_signal_tag("DCS reset")
+    assert typed_tags(
+        {"CT-7801"},
+        {
+            "CT-7801": {
+                "rows": [],
+                "effects": [],
+                "start_permissives": [
+                    {
+                        "n": 2,
+                        "condition": "Basin level normal (> LSL-7804)",
+                        "signal": "LT-7804",
+                    }
+                ],
+            }
+        },
+        {"CT-7801": ""},
+    ) == {"CT-7801": {"LT-7804": "permissive", "LSL-7804": "permissive"}}
     assert tag_tokens(
         "TJC-LLD-DS-GA-1201A PSV PSV-3401 set 6 barg TE-3401-1..8 SEQ-3401 EMP-1113"
     ) == {
