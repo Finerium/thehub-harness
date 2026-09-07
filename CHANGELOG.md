@@ -8,6 +8,27 @@ never what changed in the corpus itself, which belongs to the organiser and is n
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and every entry carries the tag it was
 released under. `git log --oneline` is the authority: nothing is listed here that is not in the history.
 
+## [1.0.5] - 2026-09-08
+
+### Changed
+- The sources are formatted, so the format half of the lint gate is enforced rather than merely available:
+  `ruff format --check` runs in CI and in `make check` beside `ruff check` and `mypy`.
+- The recipe seal moves with the formatting, because it is a digest over the bytes of the two recipe sources. A
+  key-by-key diff of the regenerated fixture shows exactly one changed key, `method.recipe_sha256`; every measured
+  value is identical.
+
+## [1.0.4] - 2026-09-08
+
+### Added
+- The integrity register carries the routing recommendation on the two findings that name a protective function.
+- The reference implementation has continuous integration of its own: ruff, mypy, the Makefile documentation check
+  and the corpus-reading suite, on every push and every pull request.
+
+### Changed
+- mypy runs with a real configuration (check_untyped_defs on, which first raised 64 errors, all fixed in the code
+  and none silenced), and ruff pins 21 rule families beyond the defaults.
+- The recipe seal is re-taken over the linted sources, with every measured value proved unchanged.
+
 ## [1.0.3] - 2026-09-07
 
 ### Changed
