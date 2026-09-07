@@ -469,11 +469,39 @@ def tag_tokens(text):
     return {t for t in INSTR.findall(text) if not NOT_A_TAG.match(t)}
 
 
-def typed_tags(equipment_tags, interlocks_parsed, datasheet_texts):
+def family_prefix(tag):
+    """The family prefix of a tag: the letters before the first hyphen ("GA-1201B" -> "GA")."""
+    return tag.split("-", 1)[0]
+
+
+def equipment_family_prefixes(equipment_tags, sidecars):
+    """The tag families this corpus uses for plant items rather than instruments: the prefix of every equipment-master
+    tag, and the prefix of every tag a P&ID sidecar hotspot types with role "equipment" (the two places the corpus
+    itself says "this identifier is a plant item"). Both sources are read, never typed here."""
+    out = {family_prefix(t) for t in equipment_tags}
+    out |= {
+        family_prefix(h["bound_tag"])
+        for s in sidecars
+        for h in s["hotspots"]
+        if h["bound_tag"] and h["role"] == "equipment"
+    }
+    return out
+
+
+def typed_tags(
+    equipment_tags, interlocks_parsed, datasheet_texts, equipment_prefixes=frozenset()
+):
     """{equipment_tag: {tag: role}} of the tags each asset's own documents type: its C&E rows (role by row kind),
     permissive signals and the tags typed inside a permissive condition (Set 7 types LSL-7804 in the condition of a
     permissive whose signal is LT-7804), effect final elements, and every tag token of its datasheet. The asset's own
-    tag is excluded."""
+    tag is excluded.
+
+    A candidate whose family prefix is in `equipment_prefixes` is rejected here, at the candidate, not downstream: an
+    effect sentence names the plant item it acts on ("START STANDBY PUMP GA-1201B (auto)") and a datasheet names the
+    vessels it is piped to ("Collect DA-8910 column overhead condensate"), and typing those as instruments made an
+    unknown asset resolve as known, so a question about GA-1201B answered instead of abstaining. Nothing downstream of
+    this function may hold such a tag either: an identifier the bundle carries no entity for is a dangling binding, so
+    a P&ID hotspot that reads one is nulled with its reason (see `sidecar`)."""
     out = {}
     for eq in sorted(equipment_tags):
         il = interlocks_parsed[eq]
@@ -496,7 +524,11 @@ def typed_tags(equipment_tags, interlocks_parsed, datasheet_texts):
         seen += [(t, "unknown") for t in sorted(tag_tokens(datasheet_texts[eq]))]
         roles = {}
         for tag, role in seen:  # the first document that types a tag names its role
-            if tag not in equipment_tags and tag != eq:
+            if (
+                tag not in equipment_tags
+                and tag != eq
+                and family_prefix(tag) not in equipment_prefixes
+            ):
                 roles.setdefault(tag, role)
         out[eq] = roles
     return out
@@ -520,7 +552,10 @@ def binding_targets(typed, interlocks_parsed, datasheet_params_rows):
 
 def instrument_tags(typed, texts_by_class, opl_texts, sidecars, resolver):
     """InstrumentTag rows: every tag an asset's C&E sheet or datasheet types, with the role its sheet types (first by
-    ROLE_ORDER) and the documents it occurs in (typed documents, lessons and P&ID sidecars, by document id)."""
+    ROLE_ORDER) and the documents it occurs in (typed documents, lessons and P&ID sidecars, by document id).
+
+    `typed` has already rejected the equipment families (see `typed_tags`), so this table holds instruments only and a
+    plant item the corpus does not describe never resolves an asset for a question that names it."""
     rows = {}
     for eq in sorted(typed):
         for tag, role in typed[eq].items():
@@ -674,6 +709,14 @@ HEADING_LINE = {n: f"{n}. {h}" for n, h, _ in SECTIONS}
 ACCEPTANCE_MIN_LESSONS = 8
 BULLET = re.compile(r"^[■●]\s*")
 MIN_PREFIX = 15  # the CD-12 rule: a copied cell is a prefix of at least 15 characters
+# The permit block of a lesson is section 2's SAFETY PRECAUTIONS bullets, taken whole, plus the section-3 bullets that
+# state a permit, lock-out, tag-out or car-seal requirement (section 3 is a tools and materials list, so only those of
+# its lines are a permit condition). Matching the word "permit" anywhere instead dropped every precaution that does not
+# use the word ("Apply LOTO (Lock-Out Tag-Out) and prove zero energy before starting work.") and pulled in procedure
+# steps, whose acceptance cell reads "Permit valid & briefed": a step is served as a step, never as a permit line.
+PERMIT_REQUIREMENT = re.compile(
+    r"permit|lock-?out|tag-?out|loto|car[- ]?seal", re.IGNORECASE
+)
 
 
 def _section_lines(raw, n):
@@ -844,16 +887,21 @@ def opl_entities(oid, lp, raw, pages, rev_id, vocabulary, wos, spans, claims):
         }
         for n, heading, key in SECTIONS
     ]
-    permit_lines = []
-    for n in (2, 3, 4):
+    claimed = {canonical(x) for x in step_lines(raw)}
+    permit_lines, seen = [], set()
+    for n, requirement in ((2, None), (3, PERMIT_REQUIREMENT)):
         for line in _section_lines(raw, n):
-            if re.search(r"permit", line, re.IGNORECASE) and not line.startswith(
-                "Step Action"
-            ):
-                t = canonical(BULLET.sub("", line))
-                sid = spans.locate(rev_id, pages, t)
-                claims.add(sid, oid, "note", t)
-                permit_lines.append({"text": t, "span_id": sid, "source_section": n})
+            if not BULLET.match(line):
+                continue
+            t = canonical(BULLET.sub("", line))
+            if not t or t in seen or t in claimed:
+                continue
+            if requirement is not None and not requirement.search(t):
+                continue
+            seen.add(t)
+            sid = spans.locate(rev_id, pages, t)
+            claims.add(sid, oid, "note", t)
+            permit_lines.append({"text": t, "span_id": sid, "source_section": n})
     steps = []
     for line in step_lines(raw):
         n, action, acceptance = split_step(canonical(line), vocabulary)
@@ -1014,6 +1062,27 @@ def proof_tests(fixture_block, rows):
                 }
             )
     return sorted(out, key=lambda t: t["wo_number"])
+
+
+def workbook_row_claims(rows, tests, row_of, row_texts, wb_rev_id, spans, claims):
+    """One Span and one Claim per work-order row and per proof-test row, so a maintenance fact carries provenance.
+
+    Without this the workbook was anchored only where a causal link happened to fall (13 claims, 12 work orders), and
+    "provenance or nothing" deleted 199 work orders and all 33 proof tests from every answer they belonged in. The
+    anchor is the row's own text at citation length on the workbook page the row sits on (a page is the Excel row
+    number, harness.documents.workbook_row_texts), the quote hash is the hash of its canonical form, and the claim
+    binds the work-order number under claim kind "row" with the deterministic parser as its basis.
+
+    A proof test is one of the 211 rows, so the two populations are walked as one sorted union: the row a proof test
+    sits on gets its span and claim whether or not the work-order loop would have reached it. Ids stay reproducible
+    because a span id is (revision, page, offsets) and the claim rows are numbered in sorted order.
+    """
+    numbers = sorted({w["WO_Number"] for w in rows} | {t["wo_number"] for t in tests})
+    for wo in numbers:
+        page = row_of[wo]
+        sid = spans.add(wb_rev_id, page, row_texts[page], row_texts[page])
+        claims.add(sid, wo, "row", spans.by_id[sid]["anchor_text"])
+    return len(numbers)
 
 
 def causal_links(link_list, row_of, row_texts, wb_rev_id, spans, claims):
@@ -1210,12 +1279,15 @@ UNBOUND_DEFAULT = (
 )
 
 
-def sidecar(adopted, document_id, known):
+def sidecar(adopted, document_id, known, equipment_prefixes=frozenset()):
     """The bundle's PidSidecar from the adopted packages/pid_sidecars/set_0n.json: the PNG file name becomes the document
     id; a null binding without a reason gets the default reason; a binding outside `known` (binding_targets: what a
     cause-and-effect sheet or datasheet types, the sidecar's own rule for bound_tag, AC-ING-12) is nulled with the
     reason stated; a foreign hotspot binds through the foreign asset's typed set. Returns the sidecar and the count of
-    bindings nulled."""
+    bindings nulled.
+
+    A tag of an equipment family (`equipment_prefixes`) gets its own reason: the drawing does name it, so saying no
+    document types it would be false; what is true is that the item is outside the assets this corpus describes."""
     out = dict(adopted, document_id=document_id, hotspots=[])
     nulled = 0
     for h in adopted["hotspots"]:
@@ -1223,9 +1295,13 @@ def sidecar(adopted, document_id, known):
         if h["bound_tag"] is None:
             h["unbound_reason"] = h["unbound_reason"] or UNBOUND_DEFAULT
         elif h["bound_tag"] not in known:
+            why = (
+                "an equipment item outside the assets this corpus describes"
+                if family_prefix(h["bound_tag"]) in equipment_prefixes
+                else "which no cause-and-effect sheet or datasheet types"
+            )
             h["unbound_reason"] = (
-                f"drawn '{h['as_drawn_text']}' was read as {h['bound_tag']}, which no cause-and-effect sheet or "
-                "datasheet types"
+                f"drawn '{h['as_drawn_text']}' was read as {h['bound_tag']}, {why}"
             )
             h["bound_tag"] = None
             nulled += 1
@@ -1317,4 +1393,28 @@ if __name__ == "__main__":
         "PSV-3401",
         "TE-3401",
     }
+    # rank 19: the equipment families of the master and of the sidecars' own equipment hotspots reject a plant item
+    # harvested from an effect sentence; an instrument of the same asset survives.
+    prefixes = equipment_family_prefixes(
+        {"GA-1201A", "FA-8901"},
+        [{"hotspots": [{"bound_tag": "GF-2210", "role": "equipment"}]}],
+    )
+    assert prefixes == {"GA", "FA", "GF"}
+    il = {
+        "GA-1201A": {
+            "rows": [],
+            "start_permissives": [],
+            "effects": [
+                {"final_element": "START STANDBY PUMP GA-1201B (auto); CLOSE XV-1201"}
+            ],
+        }
+    }
+    assert typed_tags({"GA-1201A"}, il, {"GA-1201A": ""}, prefixes) == {
+        "GA-1201A": {"XV-1201": "final_element"}
+    }
+    assert typed_tags({"GA-1201A"}, il, {"GA-1201A": ""})["GA-1201A"].get("GA-1201B")
+    # rank 13: a precaution is a permit line whatever words it uses; a step's acceptance cell is not one.
+    assert PERMIT_REQUIREMENT.search("LOTO padlocks and permit")
+    assert PERMIT_REQUIREMENT.search("Certified test/inhibit permit")
+    assert not PERMIT_REQUIREMENT.search("Correct PPE for the fluid handled")
     print("entities: ok")

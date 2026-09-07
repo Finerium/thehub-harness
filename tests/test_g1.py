@@ -11,7 +11,9 @@ import shutil
 import pytest
 
 from harness import bundle as B
+from harness import documents as D
 from harness import g1
+from harness.canonical import quote_hash
 from harness.pdftext import file_sha256
 
 # the session fixture bundle_dir (bundle/ on disk, else a fresh `make bundle` into a temporary directory)
@@ -129,6 +131,39 @@ def test_altered_anchor_text_names_the_quote_hash_violation(mutant, clean):
     assert hits and "1 mismatched" in hits[0] and span["id"] in hits[0], gate.violations
     assert not named(clean, "hashes.spans")
     assert not named(gate, "hashes.citation_length")
+
+
+def test_a_workbook_row_anchored_past_citation_length_names_its_violation(
+    mutant, clean
+):
+    """The 211 work-order rows are the largest span population and the one whose page text is longest, so the rule of
+    blueprint 8.3 (a span is citation length and nothing longer) is checked on that population: one anchor is stretched
+    to its whole workbook row, with the ordinals and the hash kept consistent, and only the length check fires."""
+    cl = load(mutant, "claims.json")
+    rows = D.workbook_row_texts()
+    spans = {s["id"]: s for s in cl["spans"]}
+    claim = next(
+        c
+        for c in cl["claims"]
+        if c["claim_kind"] == "row"
+        and spans[c["span_id"]]["page"] in rows
+        and len(rows[spans[c["span_id"]]["page"]]) > D.CITATION_MAX_CHARS
+        and rows[spans[c["span_id"]]["page"]].startswith(c["entity_binding"])
+    )
+    span = spans[claim["span_id"]]
+    full = rows[span["page"]]
+    span.update(
+        anchor_text=full,
+        start_ordinal=0,
+        end_ordinal=len(full),
+        quote_hash=quote_hash(full),
+    )
+    rewrite(mutant, "claims.json", cl)
+    gate = run(mutant)
+    hits = named(gate, "hashes.citation_length")
+    assert hits and f"1 spans over {D.CITATION_MAX_CHARS}" in hits[0], gate.violations
+    assert not named(gate, "hashes.spans")  # the anchor is still a run of the row
+    assert not named(clean, "hashes.citation_length")
 
 
 def test_cli_rejects_a_mutant_with_exit_1(mutant, capsys):

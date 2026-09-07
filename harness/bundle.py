@@ -210,11 +210,14 @@ def build(out):
         fx["equipment_master"], datasheets, drawings, plots, interlocks, resolver
     )
     eq_tags = {e["tag"] for e in equipment}
-    typed = E.typed_tags(eq_tags, interlocks, texts["datasheet"])
+    eq_prefixes = E.equipment_family_prefixes(
+        eq_tags, [packs[n][0] for n in sorted(packs)]
+    )
+    typed = E.typed_tags(eq_tags, interlocks, texts["datasheet"], eq_prefixes)
     known = E.binding_targets(typed, interlocks, ds_params)
     sidecars, nulled = [], 0
     for n in sorted(packs):
-        sc, k = E.sidecar(packs[n][0], resolver.pid_by_set[n], known)
+        sc, k = E.sidecar(packs[n][0], resolver.pid_by_set[n], known, eq_prefixes)
         sidecars.append(sc)
         nulled += k
     instruments = E.instrument_tags(typed, texts, opl_c, sidecars, resolver)
@@ -236,6 +239,9 @@ def build(out):
     wos = E.work_orders(rows)
     events = E.failure_events(rows)
     tests = E.proof_tests(fx["proof_tests"], rows)
+    bound_rows = E.workbook_row_claims(
+        rows, tests, row_of, row_texts, cur[resolver.workbook], spans, claims
+    )
     families = fx["families"]["list"]
     chains = E.causal_links(
         fx["chains"]["link_list"],
@@ -440,6 +446,8 @@ def build(out):
         "bom_items": len(bom),
         "bom_matches": len(matches),
         "work_orders": len(wos),
+        "workbook_rows_bound": bound_rows,
+        "proof_tests": len(tests),
         "lessons": len(lessons),
         "steps": len(steps),
         "troubleshooting_rows": len(trows),

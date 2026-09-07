@@ -19,7 +19,9 @@ import pytest
 
 from harness import bundle as B
 from harness import release as R
+from harness.canonical import canonical, quote_hash
 from harness.config import ROOT
+from harness.documents import CITATION_MAX_CHARS, workbook_row_texts
 from harness.pdftext import file_sha256
 from harness.validate import validate_bundle
 
@@ -34,6 +36,8 @@ NOT_AT_1_0_0 = {
     "simulated/ga-1201a.json",
 }
 SEED_TIME = ("chunks.jsonl", "opls.json", "pages/", "text/")
+# the workbook populations of 9.4, observed: every row is a work order and 33 of them are proof tests
+WORK_ORDERS, PROOF_TESTS = 211, 33
 
 
 def read_json(path):
@@ -147,6 +151,56 @@ def test_manifest_binds_to_the_fixture_and_the_pins(manifest):
     assert manifest["created_at"].endswith("Z")
 
 
+def test_every_work_order_and_proof_test_row_carries_one_claim(bundle_dir):
+    """Rank 2 of the diagnosis: a maintenance fact with no span is deleted from every answer by "provenance or
+    nothing", and the bundle bound 13 of the 211 work orders. Every row now carries one span on its own workbook page
+    and one claim of kind "row" bound to its number, and every proof test is one of those rows. The page text is read
+    again here through openpyxl (harness.documents.workbook_row_texts), not taken from the bundle, so the anchor, the
+    ordinals and the quote hash are checked against the workbook itself under the canonical form.
+    """
+    wos = read_json(os.path.join(bundle_dir, "work_orders.json"))
+    tests = read_json(os.path.join(bundle_dir, "proof_tests.json"))
+    cl = read_json(os.path.join(bundle_dir, "claims.json"))
+    docs = read_json(os.path.join(bundle_dir, "documents.json"))
+    revs = read_json(os.path.join(bundle_dir, "revisions.json"))
+    wb = next(d for d in docs if d["class"] == "workbook")
+    wb_rev = next(
+        r["id"] for r in revs if r["document_id"] == wb["id"] and r["is_current"]
+    )
+    numbers = [w["wo_number"] for w in wos]
+    assert len(numbers) == len(set(numbers)) == WORK_ORDERS
+    assert len(tests) == len({t["wo_number"] for t in tests}) == PROOF_TESTS
+    assert {t["wo_number"] for t in tests} <= set(numbers)
+
+    spans = {s["id"]: s for s in cl["spans"]}
+    bound = {}
+    for c in cl["claims"]:
+        if c["claim_kind"] == "row" and c["entity_binding"] in set(numbers):
+            bound.setdefault(c["entity_binding"], []).append(c)
+    assert sorted(bound) == sorted(numbers)
+    assert not [n for n, cs in bound.items() if len(cs) != 1], "a row bound twice"
+
+    texts = workbook_row_texts()
+    pages = set()
+    for n in numbers:
+        c = bound[n][0]
+        s = spans[c["span_id"]]
+        assert s["document_revision_id"] == wb_rev
+        assert (
+            s["page"] not in pages
+        )  # one row per work order, the Excel row is the page
+        pages.add(s["page"])
+        row = texts[s["page"]]
+        assert row.startswith(n)
+        assert row[s["start_ordinal"] : s["end_ordinal"]] == s["anchor_text"]
+        assert c["value_text"] == s["anchor_text"] == canonical(s["anchor_text"])
+        assert s["quote_hash"] == quote_hash(s["anchor_text"])
+        assert (
+            len(s["anchor_text"]) <= CITATION_MAX_CHARS
+        )  # blueprint 8.3: citation length
+    assert len(pages) == WORK_ORDERS
+
+
 def test_release_tarball_carries_no_seed_time_file(bundle_dir, manifest, tmp_path):
     out = R.build(bundle_dir, str(tmp_path))
     with tarfile.open(out["archive"]) as tar:
@@ -176,8 +230,15 @@ def test_two_bundle_runs_are_byte_identical(tmp_path):
     """Two runs of the writer on the same corpus at the same commit give the same manifest; the manifest hashes every
     other file, so equal manifests are equal trees."""
     a, b = str(tmp_path / "a"), str(tmp_path / "b")
-    B.build(a)
-    B.build(b)
+    ra, rb = B.build(a), B.build(b)
+    assert {k: v for k, v in ra.items() if k != "out"} == {
+        k: v for k, v in rb.items() if k != "out"
+    }
+    assert (ra["work_orders"], ra["workbook_rows_bound"], ra["proof_tests"]) == (
+        WORK_ORDERS,
+        WORK_ORDERS,
+        PROOF_TESTS,
+    )  # every row bound, not only the rows a causal link happened to anchor
     with open(os.path.join(a, "manifest.json"), "rb") as f:
         ma = f.read()
     with open(os.path.join(b, "manifest.json"), "rb") as f:
