@@ -4,6 +4,7 @@ Populations (frozen): failure = Work_Type in {Corrective, Overhaul} or Breakdown
 rows whose Problem_Description starts with Scheduled|Statutory|Turnaround|Grid inspection; planned_flagged = Breakdown == Yes
 and planned; unplanned_breakdowns = Breakdown == Yes and not planned.
 """
+
 import re
 
 import openpyxl
@@ -12,10 +13,21 @@ from .config import WORKBOOK
 
 NARR = ("Problem_Description", "Root_Cause", "Corrective_Action")
 OUTCOME_FIELDS = (
-    "Breakdown", "Downtime_Hours", "Labor_Hours", "Labor_Cost_IDR", "Material_Cost_IDR", "Total_Cost_IDR",
-    "Reported_By", "Executed_By", "Approved_By", "Related_Interlock", "Remarks",
+    "Breakdown",
+    "Downtime_Hours",
+    "Labor_Hours",
+    "Labor_Cost_IDR",
+    "Material_Cost_IDR",
+    "Total_Cost_IDR",
+    "Reported_By",
+    "Executed_By",
+    "Approved_By",
+    "Related_Interlock",
+    "Remarks",
 )
-PLANNED = re.compile(r"^(Scheduled|Statutory|Turnaround|Grid inspection)", re.IGNORECASE)
+PLANNED = re.compile(
+    r"^(Scheduled|Statutory|Turnaround|Grid inspection)", re.IGNORECASE
+)
 
 
 def _num(v):
@@ -41,7 +53,10 @@ def load(path=WORKBOOK):
             d[c] = int(v) if v is not None else None
         d["closeout_complete"] = all(d.get(c) not in (None, "") for c in OUTCOME_FIELDS)
         d["is_planned"] = bool(PLANNED.match(str(d.get("Problem_Description") or "")))
-        d["is_failure"] = d.get("Work_Type") in ("Corrective", "Overhaul") or d.get("Breakdown") == "Yes"
+        d["is_failure"] = (
+            d.get("Work_Type") in ("Corrective", "Overhaul")
+            or d.get("Breakdown") == "Yes"
+        )
         if d.get("Breakdown") == "Yes":
             d["breakdown_kind"] = "planned_flagged" if d["is_planned"] else "unplanned"
         else:
@@ -62,7 +77,9 @@ def populations(rows):
         "all": rows,
         "failure": fail,
         "unplanned_failure": [w for w in fail if not w["is_planned"]],
-        "planned_flagged": [w for w in rows if w["breakdown_kind"] == "planned_flagged"],
+        "planned_flagged": [
+            w for w in rows if w["breakdown_kind"] == "planned_flagged"
+        ],
         "unplanned_breakdowns": [w for w in rows if w["breakdown_kind"] == "unplanned"],
     }
 

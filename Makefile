@@ -52,6 +52,7 @@ check: test contracts   ## tests + contracts + the standing greps (D10 extractor
 	$(PY) tools/check_make_targets.py
 	@echo "--- ruff and mypy, the two quality gates of AC-NFR-01 and AC-NFR-02"
 	$(PY) -m ruff check .
+	$(PY) -m ruff format --check .
 	$(PY) -m mypy
 	$(PY) -m mypy tools
 

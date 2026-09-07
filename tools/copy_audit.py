@@ -10,6 +10,7 @@ of it, and a bare 0.62 carries no unit for UNIT_AFTER to catch), and an unescape
 that tokenises tags naively swallows along with the rest of the sentence, deleting a comparator from a setpoint.
 Exit 1 on any unmatched, mismatched or orphaned number.
 """
+
 import os
 import re
 import sys
@@ -23,17 +24,19 @@ HTML = os.path.join(ROOT, "thehub", "prd.html")
 # Plan Task 7.4's definition: a computed figure is a number followed by percent, hours, days, "of <population>",
 # or preceded by IDR. Physical corpus values (barg, degC, mm/s, kW, m3, rpm) are quoted evidence, not harness output,
 # and are exempt: they are checked by the golden set and the datasheet spot fixture instead.
-UNIT_AFTER = re.compile(r"(?<![\w.\-/])(\d[\d,]*(?:\.\d+)?)\s*(percent\b|%|hours?\b|h\b|of (?:211|57|56|31|23|8|98)\b|days?\b|d\b)")
+UNIT_AFTER = re.compile(
+    r"(?<![\w.\-/])(\d[\d,]*(?:\.\d+)?)\s*(percent\b|%|hours?\b|h\b|of (?:211|57|56|31|23|8|98)\b|days?\b|d\b)"
+)
 UNIT_BEFORE = re.compile(r"IDR\s+(\d[\d,]*(?:\.\d+)?)\s*(M|million|billion)?")
 # Style sheets, code spans, HTML comments, image/style attributes, figure filenames and explicitly marked
 # not-harness-output figures are not prose the fixture governs.
 EXEMPT_CONTEXT = re.compile(
-    r'<style>.*?</style>'          # style sheets
-    r'|<code>[^<]*</code>'         # code spans
-    r'|<!--.*?-->'                 # comments (fx directives are matched separately)
-    r'|style\s*=\s*"[^"]*"'       # inline style attributes
-    r'|<img[^>]*>'                 # image tags
-    r'|<span class="nonfx">[^<]*</span>',   # target / plan / external figure, marked at the point of use
+    r"<style>.*?</style>"  # style sheets
+    r"|<code>[^<]*</code>"  # code spans
+    r"|<!--.*?-->"  # comments (fx directives are matched separately)
+    r'|style\s*=\s*"[^"]*"'  # inline style attributes
+    r"|<img[^>]*>"  # image tags
+    r'|<span class="nonfx">[^<]*</span>',  # target / plan / external figure, marked at the point of use
     re.DOTALL,
 )
 ANY_FX = re.compile(r"<!--\s*fx:[^>]*-->")
@@ -74,13 +77,17 @@ def audit(path=HTML):
     t_txt = FX.fmt(FX.resolve(fx, "method.t"), "d2")
     for m in re.finditer(r"t\s*=\s*(" + re.escape(t_txt) + r")(?![\d])", scrub):
         if not covered(m.start(1)):
-            ctx = html[max(0, m.start() - 90): m.end() + 40].replace("\n", " ")
-            problems.append(f"no fx directive on the frozen threshold 't = {t_txt}' at ...{ctx}...")
+            ctx = html[max(0, m.start() - 90) : m.end() + 40].replace("\n", " ")
+            problems.append(
+                f"no fx directive on the frozen threshold 't = {t_txt}' at ...{ctx}..."
+            )
     # 4. a bare "<" in text content: HTML5 renders it, but any consumer that tokenises tags naively swallows from it to
     #    the next ">", which silently deletes a comparator and the rest of the sentence ("< 0.05 mm/100 mm").
     text = re.sub(r"<style>.*?</style>|<!--.*?-->", "", html, flags=re.DOTALL)
     for m in re.finditer(r"<(?![/!a-zA-Z])", text):
-        problems.append(f"unescaped '<' in text (use &lt;): ...{text[max(0, m.start() - 70): m.start() + 40]}...")
+        problems.append(
+            f"unescaped '<' in text (use &lt;): ...{text[max(0, m.start() - 70) : m.start() + 40]}..."
+        )
     # 5. unit-bearing numbers without a directive in the preceding 160 characters
 
     for rx in (UNIT_AFTER, UNIT_BEFORE):
@@ -92,11 +99,16 @@ def audit(path=HTML):
             if re.fullmatch(r"20(2[4-9]|30)", num):
                 continue
             # Section, chapter, requirement and figure references ("Chapter 19", "Figure 2", "SIL 1", "1oo2")
-            before = html[max(0, pos - 40): pos].lower()
-            if re.search(r"(chapter|section|figure|table|appendix|sil|phase|slide|beat|tier|round|level|rev)\s*$", before):
+            before = html[max(0, pos - 40) : pos].lower()
+            if re.search(
+                r"(chapter|section|figure|table|appendix|sil|phase|slide|beat|tier|round|level|rev)\s*$",
+                before,
+            ):
                 continue
-            ctx = html[max(0, pos - 90): pos + 40].replace("\n", " ")
-            problems.append(f"no fx directive: '{num} {m.group(2) or 'IDR'}' at ...{ctx}...")
+            ctx = html[max(0, pos - 90) : pos + 40].replace("\n", " ")
+            problems.append(
+                f"no fx directive: '{num} {m.group(2) or 'IDR'}' at ...{ctx}..."
+            )
     return problems
 
 

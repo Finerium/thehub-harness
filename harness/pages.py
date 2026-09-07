@@ -59,7 +59,8 @@ def render_pdf(path, out_dir):
                 img.width != WIDTH
             ):  # integer rounding of the transformed rectangle can land one pixel off
                 img = img.resize(
-                    (WIDTH, round(img.height * WIDTH / img.width)), Image.Resampling.LANCZOS
+                    (WIDTH, round(img.height * WIDTH / img.width)),
+                    Image.Resampling.LANCZOS,
                 )
             buf = io.BytesIO()
             img.save(buf, "WEBP", quality=QUALITY)

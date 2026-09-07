@@ -5,6 +5,7 @@ nothing is re-extracted here. Closes CF-03 (56 of 56 dates, median gap 1 d, mode
 DP-12 (EA-5601 pair anchored on WO-240110, not the planned WO-240119), HN-V-03 (pairing basis stated), and pins the
 HN-20 facts (lead time 34.0 h median, 64.5 % >= 24 h, range 1-72 h; workbook window; last breakdown 2025-11-28, 114 d).
 """
+
 import datetime
 import statistics
 from collections import Counter
@@ -26,8 +27,21 @@ PAIRING_BASIS = (
     "lesson's troubleshooting table; the labels file records the adjudicated status of every unplanned-failure record."
 )
 REGISTRY_FIELDS = (
-    "opl_id", "tag", "title", "discipline", "area_unit", "related_interlock", "seq", "pid_ref", "classification",
-    "date_of_sharing", "reviewed_by_id", "approved_by_id", "has_crossref_line", "foreign_crossref_tags", "hazard_note",
+    "opl_id",
+    "tag",
+    "title",
+    "discipline",
+    "area_unit",
+    "related_interlock",
+    "seq",
+    "pid_ref",
+    "classification",
+    "date_of_sharing",
+    "reviewed_by_id",
+    "approved_by_id",
+    "has_crossref_line",
+    "foreign_crossref_tags",
+    "hazard_note",
 )
 
 
@@ -93,18 +107,39 @@ def latency(parsed, rows):
     for tag, wo, opl in PAIRS:
         w = by_wo[wo]
         if w["Equipment_Tag"] != tag or opl not in parsed:
-            raise ValueError(f"latency pair does not match the corpus: {tag} {wo} {opl}")
-        fd, ds = w["Report_Date"].date(), datetime.date.fromisoformat(parsed[opl]["date_of_sharing"])
-        out.append({"tag": tag, "wo": wo, "failure_date": fd.isoformat(), "opl": opl,
-                    "date_of_sharing": ds.isoformat(), "days": (ds - fd).days})
+            raise ValueError(
+                f"latency pair does not match the corpus: {tag} {wo} {opl}"
+            )
+        fd, ds = (
+            w["Report_Date"].date(),
+            datetime.date.fromisoformat(parsed[opl]["date_of_sharing"]),
+        )
+        out.append(
+            {
+                "tag": tag,
+                "wo": wo,
+                "failure_date": fd.isoformat(),
+                "opl": opl,
+                "date_of_sharing": ds.isoformat(),
+                "days": (ds - fd).days,
+            }
+        )
     out.sort(key=lambda p: (p["days"], p["wo"]))
     days = [p["days"] for p in out]
-    return {"pairs": out, "days": days, "median_days": statistics.median(days), "pairing_basis": PAIRING_BASIS}
+    return {
+        "pairs": out,
+        "days": days,
+        "median_days": statistics.median(days),
+        "pairing_basis": PAIRING_BASIS,
+    }
 
 
 def lead_time(rows):
     """Notification lead time = Start_Date - Report_Date in hours over all rows (HN-20 pins: 34.0 h, 64.5 %, 1-72)."""
-    hours = {w["WO_Number"]: (w["Start_Date"] - w["Report_Date"]).total_seconds() / 3600 for w in rows}
+    hours = {
+        w["WO_Number"]: (w["Start_Date"] - w["Report_Date"]).total_seconds() / 3600
+        for w in rows
+    }
     xs = sorted(hours.values())
     ge24 = sum(1 for x in xs if x >= 24)
     by_type: dict[str, list[float]] = {}
@@ -130,7 +165,9 @@ def lessons(parsed):
     return {
         "registry": reg,
         "n": len(reg),
-        "classification": dict(sorted(Counter(r["classification"] for r in reg).items())),
+        "classification": dict(
+            sorted(Counter(r["classification"] for r in reg).items())
+        ),
         "discipline": dict(sorted(Counter(r["discipline"] for r in reg).items())),
         "approvers": dict(sorted(Counter(r["approved_by_id"] for r in reg).items())),
         "reviewers_per_set": {t: sorted(v) for t, v in sorted(reviewers.items())},

@@ -11,6 +11,7 @@ unplanned-failure work orders of asset e:
 The coefficients are a product decision (ASSUMPTION), not a measured quantity; they are printed with that label.
 Pure function of its inputs: assets sorted by tag, ids sorted, ties in the ranking broken by tag.
 """
+
 COEFFICIENTS = {"D": 0.4, "C": 0.3, "k": 0.2, "r": 0.1}
 COEFFICIENTS_BASIS = "product decision, ASSUMPTION"
 K_MAPPING = {"HIGH CRITICAL": 1.0, "LOW CRITICAL": 0.5, "NON CRITICAL": 0.25}
@@ -25,16 +26,31 @@ def rank(rows, uncovered_ids, criticality_by_tag, r_by_tag):
     by_wo = {w["WO_Number"]: w for w in rows}
     per = []
     for tag in sorted(criticality_by_tag):
-        mine = [by_wo[i] for i in sorted(uncovered_ids) if by_wo[i]["Equipment_Tag"] == tag]
-        per.append({
-            "tag": tag,
-            "uncovered_ids": [w["WO_Number"] for w in mine],
-            "D": sum((w["Downtime_Hours"] or 0.0 for w in mine if w["breakdown_kind"] == "unplanned"), 0.0),
-            "C": sum(w["Total_Cost_IDR"] or 0 for w in mine if w["closeout_complete"]),
-            "k": K_MAPPING[criticality_by_tag[tag]],
-            "r": r_by_tag[tag],
-            "incomplete_uncovered": sum(1 for w in mine if not w["closeout_complete"]),
-        })
+        mine = [
+            by_wo[i] for i in sorted(uncovered_ids) if by_wo[i]["Equipment_Tag"] == tag
+        ]
+        per.append(
+            {
+                "tag": tag,
+                "uncovered_ids": [w["WO_Number"] for w in mine],
+                "D": sum(
+                    (
+                        w["Downtime_Hours"] or 0.0
+                        for w in mine
+                        if w["breakdown_kind"] == "unplanned"
+                    ),
+                    0.0,
+                ),
+                "C": sum(
+                    w["Total_Cost_IDR"] or 0 for w in mine if w["closeout_complete"]
+                ),
+                "k": K_MAPPING[criticality_by_tag[tag]],
+                "r": r_by_tag[tag],
+                "incomplete_uncovered": sum(
+                    1 for w in mine if not w["closeout_complete"]
+                ),
+            }
+        )
     d_max = max(p["D"] for p in per)
     c_max = max(p["C"] for p in per)
     for p in per:
@@ -42,7 +58,9 @@ def rank(rows, uncovered_ids, criticality_by_tag, r_by_tag):
             COEFFICIENTS["D"] * (p["D"] / d_max if d_max else 0.0)
             + COEFFICIENTS["C"] * (p["C"] / c_max if c_max else 0.0)
             + COEFFICIENTS["k"] * p["k"]
-            + COEFFICIENTS["r"] * p["r"], 4)
+            + COEFFICIENTS["r"] * p["r"],
+            4,
+        )
     order = sorted(per, key=lambda p: (-p["score"], p["tag"]))
     return {
         "coefficients": dict(COEFFICIENTS, basis=COEFFICIENTS_BASIS),
@@ -50,7 +68,10 @@ def rank(rows, uncovered_ids, criticality_by_tag, r_by_tag):
         "D_max": d_max,
         "C_max": c_max,
         "per_asset": per,
-        "ranking": [{"rank": i + 1, "tag": p["tag"], "score": p["score"]} for i, p in enumerate(order)],
+        "ranking": [
+            {"rank": i + 1, "tag": p["tag"], "score": p["score"]}
+            for i, p in enumerate(order)
+        ],
     }
 
 
@@ -58,7 +79,9 @@ def compute(ctx):
     """Fixture key `debt` (CR-11). Besides rows/pops/opl/parsed/files, ctx carries the upstream fixture parts the formula
     reads: `coverage` (harness.coverage), `equipment_master` and `families` (harness.master) and `t` (default 0.62)."""
     t = ctx.get("t", 0.62)
-    row = next(r for r in ctx["coverage"]["generous"]["unplanned_failure"] if r["t"] == t)
+    row = next(
+        r for r in ctx["coverage"]["generous"]["unplanned_failure"] if r["t"] == t
+    )
     crit = {e["tag"]: e["criticality_datasheet"] for e in ctx["equipment_master"]}
     r_by_tag = {tag: v["r"] for tag, v in ctx["families"]["r_by_tag"].items()}
     out = rank(ctx["rows"], row["uncovered_ids"], crit, r_by_tag)

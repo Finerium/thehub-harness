@@ -17695,7 +17695,7 @@
   "labels_status": "machine_drafted_pending_human",
   "min_content_words": 3,
   "recipe": "A work-order narrative field is reduced to content words (lower-cased alphanumeric tokens, tag-like tokens such as VSHH-1201 kept whole, a fixed stop list removed, single-character tokens dropped, fields with fewer than three content words skipped). The same tokeniser is applied to the lesson text. Each same-asset lesson document is scanned separately with a window of twice the field's word count, one word at a time; the field's score is the largest share of its distinct words found inside one window; the work order's score is the best of its three fields; it is uncovered when that share does not exceed t = 0.62. Generous layer: the full lesson text. Strict layer: seven header fields rebuilt from the parsed lesson (lesson id, title, equipment name, area / unit, related interlock, P&ID reference, classification) plus sections 1 PURPOSE, 2 SAFETY PRECAUTIONS, 3 TOOLS & MATERIALS, 4 DETAILED PROCEDURE and 6 KEY LEARNING POINTS, composed from the parsed lesson, so that section 5 COMMON PROBLEMS & TROUBLESHOOTING, the page watermark and anything after it, and anything after the 'Prepared by' footer are excluded wherever the extractor places them.",
-  "recipe_sha256": "8ae343b0495b86ad347907006ce9701ceb9f7ea9d4e8fd6c7610de362a0bb7db",
+  "recipe_sha256": "964d739cea9a2a090421384716d546b7071ca60c85af5b99cd0478c73e2930d0",
   "recipe_sha256_of": "sha256 over the bytes of harness/coverage.py and harness/opl.py, in that order",
   "skip_rule": "fields with fewer than 3 content tokens skipped; work order with no scoreable field scores 0",
   "stop_list": [

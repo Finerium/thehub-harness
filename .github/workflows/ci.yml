@@ -29,8 +29,10 @@ jobs:
 
       - run: uv sync --frozen
 
-      - name: ruff, the lint gate (AC-NFR-02)
-        run: uv run ruff check .
+      - name: ruff, the lint and format gates (AC-NFR-02)
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
 
       - name: mypy, the type gate (AC-NFR-01)
         run: |

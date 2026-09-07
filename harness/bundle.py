@@ -29,7 +29,7 @@ from . import pdftext as P
 from . import workbook as W
 from .config import PACKAGES, ROOT
 
-BUNDLE_VERSION = "1.0.4"
+BUNDLE_VERSION = "1.0.5"
 CLASSES = ("datasheet", "ga_drawing", "interlock", "plot_plan")
 SPOT_CLASSES = ("datasheet", "ga_drawing", "plot_plan", "interlock", "pid")
 # (bundle path, repository path): byte copies
@@ -109,7 +109,11 @@ def sidecar_packages():
     for path in sorted(
         glob.glob(os.path.join(PACKAGES, "pid_sidecars", "set_??.json"))
     ):
-        n = int(P.must_match(re.search(r"set_(\d\d)\.json$", path), f"set number in {path}").group(1))
+        n = int(
+            P.must_match(
+                re.search(r"set_(\d\d)\.json$", path), f"set number in {path}"
+            ).group(1)
+        )
         transcript = path.replace(".json", ".transcript.json")
         out[n] = (
             read_json(path),

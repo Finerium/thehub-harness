@@ -115,7 +115,9 @@ def _steps(text, a, b):
         i, k = m.end(), k + 1
     if len(starts) < 2:
         raise ValueError("fewer than two step rows found")
-    return [(a + s, a + e) for s, e in zip(starts, [*starts[1:], len(body)], strict=True)]
+    return [
+        (a + s, a + e) for s, e in zip(starts, [*starts[1:], len(body)], strict=True)
+    ]
 
 
 def _opl_units(text):

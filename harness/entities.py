@@ -296,7 +296,9 @@ def datasheet_params(tag, text, rev_id, page_text, spans, claims):
         emit("header", label, label.rstrip(":"), h.group(key))
     starts = sorted((text.find(g), g) for g in DS_GROUPS if g in text)
     end = min(i for i in (text.find("NOTES:"), len(text)) if i >= 0)
-    for (pos, group), nxt in zip(starts, [*[s[0] for s in starts[1:]], end], strict=True):
+    for (pos, group), nxt in zip(
+        starts, [*[s[0] for s in starts[1:]], end], strict=True
+    ):
         block = text[pos + len(group) : nxt]
         for cut in (WATERMARK, PROJECT_LINE):
             k = block.find(cut)
@@ -331,7 +333,9 @@ def interlock_entities(tag, parsed, text, rev_id, spans, claims):
     )  # the sheet key the harness uses everywhere (harness.master, harness.rulepack): LOGIC No, else the tag
     notes = []
     # the LAST NOTES block of the sheet: an earlier one is a header echo the extractor repeats
-    found = list(re.finditer(r"NOTES: (1\. .+?)(?= This is sample data|$)", text, re.IGNORECASE))
+    found = list(
+        re.finditer(r"NOTES: (1\. .+?)(?= This is sample data|$)", text, re.IGNORECASE)
+    )
     m = found[-1] if found else None
     if m:
         for n, sentence in enumerate(re.split(r" (?=\d\. )", m.group(1)), start=1):
@@ -931,7 +935,9 @@ def opl_entities(oid, lp, raw, pages, rev_id, vocabulary, wos, spans, claims):
         "related_interlock_text": lp["related_interlock"],
         "pid_ref": lp["pid_ref"],
         "classification": lp["classification"],
-        "aspect": must_match(re.search(r"Aspect: (\S+)", page_text), f"Aspect line of {lp['opl_id']}").group(1),
+        "aspect": must_match(
+            re.search(r"Aspect: (\S+)", page_text), f"Aspect line of {lp['opl_id']}"
+        ).group(1),
         "sections": sections,
         "permit_lines": permit_lines,
         "footer": {

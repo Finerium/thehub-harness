@@ -368,7 +368,9 @@ def registry(fx, ctx, root):
             interlock_ref=fx["interlock_rows"][e["tag"]]["header"]["logic_no_text"],
             criticality=e["criticality_datasheet"],
             work_orders=e["wos"],
-            failure_rows=e["unplanned_failure_rows"],  # C.1 "Unplanned-failure rows" (sums to 57), the 10.4 item 1 target
+            failure_rows=e[
+                "unplanned_failure_rows"
+            ],  # C.1 "Unplanned-failure rows" (sums to 57), the 10.4 item 1 target
             breakdown_rows=e["breakdowns_flagged"],
             planned_rows=e["planned_flagged_rows"],
             unplanned_rows=e["unplanned_breakdowns"],

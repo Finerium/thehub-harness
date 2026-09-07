@@ -4,6 +4,7 @@ Usage: python3 tools/banned_strings.py FILE... ; --deliverables also bans '[TBD]
 The MOC rule: 'routed to MOC' is allowed only on a line that also says 'permanent' (one line, or this file fails itself).
 The rename carve-out (plan section 0): CHANGELOG.md may carry one line introducing the retired product name as former,
 identified by the words 'formerly called'; that one line is exempt, and the name fails anywhere else in the file."""
+
 import os
 import sys
 from pathlib import Path
@@ -23,11 +24,21 @@ def main(argv):
     include_docs = "--include-docs" in argv
     files = [a for a in argv if not a.startswith("--")]
     if not include_docs:
-        skipped = [f for f in files if any(os.path.relpath(f, ROOT).startswith(x) for x in EXCLUDED_PREFIXES)]
+        skipped = [
+            f
+            for f in files
+            if any(os.path.relpath(f, ROOT).startswith(x) for x in EXCLUDED_PREFIXES)
+        ]
         files = [f for f in files if f not in skipped]
         for f in skipped:
-            print(f"banned_strings: skipping {f} (audit trail; use --include-docs to scan it)")
-    banned = [l for l in Path(LIST).read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")]
+            print(
+                f"banned_strings: skipping {f} (audit trail; use --include-docs to scan it)"
+            )
+    banned = [
+        l
+        for l in Path(LIST).read_text(encoding="utf-8").splitlines()
+        if l.strip() and not l.startswith("#")
+    ]
     if deliverables:
         banned.append("[TBD]")
     hits = 0
@@ -51,7 +62,9 @@ def main(argv):
                     print(f"BANNED {f}:{i}: '{b}'")
                     hits += 1
             if "routed to MOC" in line and "permanent" not in line:
-                print(f"BANNED {f}:{i}: 'routed to MOC' outside the permanent-change sentence")
+                print(
+                    f"BANNED {f}:{i}: 'routed to MOC' outside the permanent-change sentence"
+                )
                 hits += 1
     print(f"banned_strings: {hits} hit(s) in {len(files)} file(s)")
     return 1 if hits else 0

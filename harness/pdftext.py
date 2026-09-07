@@ -4,6 +4,7 @@ Rule (Addendum A, D10): the single text extractor is `pdftotext -raw` (poppler >
 harness and by the product ingestion; `-layout` is never used outside legacy/. Canonical text form (PRD 19.5):
 NFKC, soft hyphens joined, whitespace collapsed to one space, trimmed; case and punctuation kept.
 """
+
 import hashlib
 import os
 import re
@@ -91,7 +92,9 @@ def must_match(m, what):
 
 
 def tag_of_opl(oid):
-    return must_match(TAG_IN_OPL.match(oid), f"equipment tag in lesson id {oid}").group(1)
+    return must_match(TAG_IN_OPL.match(oid), f"equipment tag in lesson id {oid}").group(
+        1
+    )
 
 
 def canonical(s):
@@ -108,7 +111,9 @@ def pdf_text(path, cache_dir=CACHE):
     if os.path.exists(cp):
         with open(cp, encoding="utf-8") as f:
             return f.read()
-    t = subprocess.run(["pdftotext", "-raw", path, "-"], capture_output=True, text=True, check=True).stdout
+    t = subprocess.run(
+        ["pdftotext", "-raw", path, "-"], capture_output=True, text=True, check=True
+    ).stdout
     tmp = cp + f".{os.getpid()}.tmp"
     with open(tmp, "w", encoding="utf-8") as f:
         f.write(t)
@@ -117,7 +122,9 @@ def pdf_text(path, cache_dir=CACHE):
 
 
 def pdf_pages(path):
-    out = subprocess.run(["pdfinfo", path], capture_output=True, text=True, check=True).stdout
+    out = subprocess.run(
+        ["pdfinfo", path], capture_output=True, text=True, check=True
+    ).stdout
     m = re.search(r"^Pages:\s+(\d+)", out, re.MULTILINE)
     return int(m.group(1)) if m else None
 
