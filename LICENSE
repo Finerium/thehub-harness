@@ -1,0 +1,41 @@
+The Hub, reference harness
+Copyright (c) 2026 Ghaisan Khoirul Badruzaman and Team 3V, Politeknik Negeri Bandung.
+All rights reserved.
+
+Source published for verification.
+
+This source code is published so that the judges, the organiser and any reader of the
+CALIBER 2026 submission can verify every claim the entry makes: read the code that
+enforces each guarantee, reproduce every number from the fixture, and audit the
+provenance of every artefact. Publication is for that purpose and no other.
+
+No licence is granted, expressly or by implication, to copy, modify, merge, publish,
+distribute, sublicense, sell, or create derivative works of this software or any part
+of it. Permission is granted only to:
+
+  1. read the source and its documentation;
+  2. clone the repository and run it locally, unmodified, for the sole purpose of
+     verifying the submission's claims;
+  3. quote short excerpts in a review, an evaluation or a report of the competition,
+     with attribution.
+
+THE ORGANISER'S DATA IS NOT COVERED BY THIS FILE AND IS NOT IN THIS REPOSITORY.
+The CALIBER 2026 Case 1 corpus is the property of PT Chandra Asri Pacific Tbk. It is
+used for this entry only, is never redistributed, and no run of its text longer than a
+citation appears in any public repository of this project. Nothing in this licence
+grants any right to that data.
+
+If the organiser's terms for submitted work require a different licence, this file is
+superseded by those terms for the submitted artefacts.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+THIS SOFTWARE IS NOT A CONTROL SYSTEM AND HAS NO WRITE PATH TOWARD ONE. It reads
+documents and records and answers questions about them. It must never be placed in any
+position where its output actuates, inhibits, bypasses or overrides a protective
+function, an interlock or any other plant equipment.
