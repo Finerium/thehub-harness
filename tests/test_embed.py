@@ -1,11 +1,24 @@
 """The pinned local embedding role (harness.embed; ADR-009, second branch): every case of
-contracts/fixtures/embedding_cases.json reproduces within 1e-4 per dimension, the vectors are unit norm and 384 wide,
-the three model files on disk hash to packages/embedding_pin.json, and a wrong pin fails closed before any inference.
+contracts/fixtures/embedding_cases.json reproduces, the vectors are unit norm and 384 wide, the three model files on
+disk hash to packages/embedding_pin.json, and a wrong pin fails closed before any inference.
+
+Reproduction is asserted twice, because the runtime is not bit-identical across processors. The recorded vectors were
+produced on arm64 macOS, where a fresh run reproduces them to 1e-4 per dimension. On x86-64 Linux the same model and
+the same input differ by up to 1.1e-2 on a component: the runtime picks a different kernel for the processor it finds,
+and the sum of many small products is not associative. What retrieval depends on is not the component, it is the
+direction, so the cosine between the fresh vector and the recorded one is asserted everywhere at 0.999, and the
+per-dimension bound is asserted at 1e-4 on the platform the cases were recorded on and at a measured 2e-2 elsewhere.
+0.999 is not a loose number here: on the seeded corpus the nearest chunk of a different lesson sits at a cosine of
+0.85 from the query, so a platform drift bounded at 0.001 is two orders of magnitude smaller than the gap that
+decides a retrieval, while a changed model or a changed input moves the cosine far further than that.
+A vector that fails the cosine bound is a changed model or a changed input, on any processor.
 """
 
 import json
 import math
 import os
+import platform
+import sys
 
 import pytest
 
@@ -24,6 +37,15 @@ with open(
 
 def norm(v):
     return math.sqrt(sum(x * x for x in v))
+
+
+def cosine(a, b):
+    return sum(x * y for x, y in zip(a, b)) / (norm(a) * norm(b))
+
+
+# The platform the cases were recorded on: the tight per-dimension bound holds here and nowhere else.
+RECORDED_ON = sys.platform == "darwin" and platform.machine() == "arm64"
+PER_DIMENSION = 1e-4 if RECORDED_ON else 2e-2
 
 
 @pytest.fixture(scope="module")
@@ -68,7 +90,8 @@ def test_cases_file_names_the_pin():
 def test_case_reproduces_within_tolerance(embedder, case):
     got = embedder.embed(case["text"], E.QUERY_PREFIX)
     assert len(got) == len(case["expected"]) == E.DIM == 384
-    assert max(abs(a - b) for a, b in zip(got, case["expected"])) <= 1e-4
+    assert cosine(got, case["expected"]) >= 0.999
+    assert max(abs(a - b) for a, b in zip(got, case["expected"])) <= PER_DIMENSION
     assert abs(norm(got) - 1.0) <= 1e-4 and abs(norm(case["expected"]) - 1.0) <= 1e-4
     assert all(round(x, E.DECIMALS) == x for x in got)
 
