@@ -59,7 +59,7 @@ def test_people():
         "EMP-0901": 28,
         "EMP-0912": 28,
     }
-    assert set(v["reviewed_by_id"] for v in D.values()) == {
+    assert {v["reviewed_by_id"] for v in D.values()} == {
         "EMP-1113",
         "EMP-1124",
         "EMP-1102",

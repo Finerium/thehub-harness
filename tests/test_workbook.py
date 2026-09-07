@@ -1,4 +1,5 @@
 from collections import Counter
+
 from harness import workbook as W
 
 ROWS = W.load()

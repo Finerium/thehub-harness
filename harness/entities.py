@@ -12,10 +12,12 @@ relation is read from the sheet that types it.
 
 import re
 from collections import Counter
+from typing import Any
 
 from .canonical import canonical, quote_hash
 from .documents import CORPUS_VERSION_ID, emp_alias
 from .integrity import RULES, canonical_lines
+from .pdftext import must_match
 from .workbook import NARR, OUTCOME_FIELDS
 
 # A tag token: 2 to 5 letters, 4 or 5 digits, an optional suffix letter, not glued into a longer hyphenated identifier
@@ -241,7 +243,9 @@ def ds_pairs(block):
     for phrase in DS_LABEL_WORD_VALUES:
         block = block.replace(phrase, phrase.replace(" ", "\x00"))
     toks = block.split()
-    used, pairs, i = set(), [], 0
+    used: set[str] = set()
+    pairs: list[tuple[str, list[str]]] = []
+    i = 0
     while i < len(toks):
         hit = None
         for label in DS_LABELS:
@@ -251,7 +255,7 @@ def ds_pairs(block):
                 break
         if hit:
             used.add(hit)
-            pairs.append([hit, []])
+            pairs.append((hit, []))
             i += len(hit.split())
         else:
             if pairs:
@@ -263,7 +267,7 @@ def ds_pairs(block):
 def datasheet_params(tag, text, rev_id, page_text, spans, claims):
     """DatasheetParam rows of one datasheet from its canonical text: the header block by DS_HEADER, the table blocks by
     ds_pairs over the label vocabulary, values cut at the watermark."""
-    out = []
+    out: list[dict[str, Any]] = []
 
     def emit(group, label, field, value):
         value = canonical(value)
@@ -292,7 +296,7 @@ def datasheet_params(tag, text, rev_id, page_text, spans, claims):
         emit("header", label, label.rstrip(":"), h.group(key))
     starts = sorted((text.find(g), g) for g in DS_GROUPS if g in text)
     end = min(i for i in (text.find("NOTES:"), len(text)) if i >= 0)
-    for (pos, group), nxt in zip(starts, [s[0] for s in starts[1:]] + [end]):
+    for (pos, group), nxt in zip(starts, [*[s[0] for s in starts[1:]], end], strict=True):
         block = text[pos + len(group) : nxt]
         for cut in (WATERMARK, PROJECT_LINE):
             k = block.find(cut)
@@ -326,11 +330,9 @@ def interlock_entities(tag, parsed, text, rev_id, spans, claims):
         seq or tag
     )  # the sheet key the harness uses everywhere (harness.master, harness.rulepack): LOGIC No, else the tag
     notes = []
-    m = None
-    for m in re.finditer(
-        r"NOTES: (1\. .+?)(?= This is sample data|$)", text, re.IGNORECASE
-    ):
-        pass
+    # the LAST NOTES block of the sheet: an earlier one is a header echo the extractor repeats
+    found = list(re.finditer(r"NOTES: (1\. .+?)(?= This is sample data|$)", text, re.IGNORECASE))
+    m = found[-1] if found else None
     if m:
         for n, sentence in enumerate(re.split(r" (?=\d\. )", m.group(1)), start=1):
             sid = spans.add(rev_id, 1, text, sentence)
@@ -432,7 +434,7 @@ def equipment_rows(master_rows, datasheets, drawings, plots, interlocks, resolve
 
 def area_rows(rows, aliases):
     """Area rows from the workbook's area code and name and the per-class names of packages/area_aliases.json."""
-    by_tag = {}
+    by_tag: dict[str, Counter[tuple[str, str]]] = {}
     for r in rows:
         by_tag.setdefault(r["Equipment_Tag"], Counter())[
             (str(r["Area_Code"]), r["Area_Name"])
@@ -522,7 +524,7 @@ def typed_tags(
             for t in sorted(tag_tokens(e["final_element"]))
         ]
         seen += [(t, "unknown") for t in sorted(tag_tokens(datasheet_texts[eq]))]
-        roles = {}
+        roles: dict[str, str] = {}
         for tag, role in seen:  # the first document that types a tag names its role
             if (
                 tag not in equipment_tags
@@ -556,7 +558,7 @@ def instrument_tags(typed, texts_by_class, opl_texts, sidecars, resolver):
 
     `typed` has already rejected the equipment families (see `typed_tags`), so this table holds instruments only and a
     plant item the corpus does not describe never resolves an asset for a question that names it."""
-    rows = {}
+    rows: dict[str, dict[str, Any]] = {}
     for eq in sorted(typed):
         for tag, role in typed[eq].items():
             r = rows.setdefault(
@@ -634,7 +636,7 @@ def bom_matches(rows, items):
     """BomMatch rows: a recorded spare-part string matches a same-asset BOM item when every content word of the string
     (a parenthetical or "x4" quantity dropped, GENERIC_PART_WORDS ignored) occurs in the item's part name plus material;
     two candidates are ordered by which one's remaining part-name text the work order's narrative mentions."""
-    by_tag = {}
+    by_tag: dict[str, list[Any]] = {}
     for it in items:
         by_tag.setdefault(it["equipment_tag"], []).append(it)
     out = []
@@ -764,7 +766,7 @@ def step_lines(raw):
 def acceptance_vocabulary(raw_texts):
     """The template acceptance phrases: trailing word runs (up to five words) that close a step line in at least
     ACCEPTANCE_MIN_LESSONS lessons; the longest such run of a line is its acceptance criterion."""
-    lessons_of = {}
+    lessons_of: dict[str, set[str]] = {}
     for oid, raw in raw_texts.items():
         for line in step_lines(raw):
             words = line.split()
@@ -834,7 +836,8 @@ def troubleshooting_rows(oid, raw, wos):
         return [], len(lines)
     text, breaks = canonical_lines("\n".join(lines[1:]))
     rest, rbreaks = canonical_lines(raw[raw.find(HEADING_LINE[5]) :])
-    rows, pos, skipped = [], 0, 0
+    rows: list[Any] = []
+    pos = skipped = 0
     while pos < len(text):
         best = None
         for w in wos:
@@ -928,7 +931,7 @@ def opl_entities(oid, lp, raw, pages, rev_id, vocabulary, wos, spans, claims):
         "related_interlock_text": lp["related_interlock"],
         "pid_ref": lp["pid_ref"],
         "classification": lp["classification"],
-        "aspect": re.search(r"Aspect: (\S+)", page_text).group(1),
+        "aspect": must_match(re.search(r"Aspect: (\S+)", page_text), f"Aspect line of {lp['opl_id']}").group(1),
         "sections": sections,
         "permit_lines": permit_lines,
         "footer": {
@@ -1207,11 +1210,25 @@ def _rule_key(rid):
     return int(rid[3:])
 
 
+def routing_recommendation(header):
+    """The register's only action statement (blueprint 9.4 and 11.2 AC-INT-02), carried by a finding that names a
+    protective function and by no other: where a correction that touches that function goes. It names a route, never
+    an owner, a date or a completion metric, and it repeats the rule pack's own Management of Change sentence rather
+    than inventing a second vocabulary. Its three values are the C&E sheet header the finding already cites."""
+    return (
+        f"{header['logic_no']} ({header['sil_text']}) is the protective function this finding names, defined by "
+        f"cause-and-effect sheet {header['doc_no']}. A correction that touches it goes through Management of Change "
+        "with re-validation of the function, never as a drafting correction alone; until that change is approved the "
+        "cause-and-effect sheet governs."
+    )
+
+
 def integrity_findings(fx, rows, opl_parsed, interlocks, resolver):
     """One finding per register item of the fixture's integrity block: the rule's own fields (name, severity, unit, basis,
     observation flag), the document the item is about, the discipline the record or lesson types, the LOGIC No of the
-    asset's sheet where the rule concerns it, and the item verbatim. span_id and routing_recommendation carry nothing
-    the data states (null); state is "open" for every finding of corpus version 1."""
+    asset's sheet where the rule concerns it, and the item verbatim. A finding that names a LOGIC No also carries the
+    routing recommendation for that function; span_id carries nothing the data states (null); state is "open" for every
+    finding of corpus version 1."""
     wo_disc = {w["WO_Number"]: w["Discipline"] for w in rows}
     pid_of_set = resolver.pid_by_set
     out = []
@@ -1250,6 +1267,8 @@ def integrity_findings(fx, rows, opl_parsed, interlocks, resolver):
             concerns_sheet = rid in ("CD-8", "CD-17") or (
                 rid == "CD-18" and item.get("sibling") == "interlock"
             )
+            header = interlocks[tag]["header"] if concerns_sheet and tag else None
+            function = header["logic_no"] if header else None
             out.append(
                 {
                     "id": f"{rid}-{i:03d}",
@@ -1263,10 +1282,10 @@ def integrity_findings(fx, rows, opl_parsed, interlocks, resolver):
                     "document_id": doc,
                     "span_id": None,
                     "state": "open",
-                    "safety_function": interlocks[tag]["header"]["logic_no"]
-                    if concerns_sheet and tag
+                    "safety_function": function,
+                    "routing_recommendation": routing_recommendation(header)
+                    if function
                     else None,
-                    "routing_recommendation": None,
                     "item": item,
                 }
             )

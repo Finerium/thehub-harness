@@ -8,6 +8,7 @@ HN-20 facts (lead time 34.0 h median, 64.5 % >= 24 h, range 1-72 h; workbook win
 import datetime
 import statistics
 from collections import Counter
+from itertools import pairwise
 
 # Plan Task 1.4 PAIRS, DP-12 applied (WO-240110 replaces the planned WO-240119).
 PAIRS = (
@@ -36,7 +37,7 @@ def _iso(d):
 
 def _gaps(isodates):
     ds = sorted(datetime.date.fromisoformat(x) for x in isodates)
-    return [(b - a).days for a, b in zip(ds, ds[1:])]
+    return [(b - a).days for a, b in pairwise(ds)]
 
 
 def dates(parsed, rows):
@@ -50,12 +51,13 @@ def dates(parsed, rows):
     series = sorted(dated.values())
     gaps = _gaps(series)
     mode, mode_n = Counter(gaps).most_common(1)[0]
-    by_tag = {}
+    by_tag: dict[str, list[str]] = {}
     for k, d in dated.items():
         by_tag.setdefault(parsed[k]["tag"], []).append(d)
     last_bd = max(w["Report_Date"] for w in rows if w["Breakdown"] == "Yes").date()
     first = datetime.date.fromisoformat(series[0])
     completion_last = max(w["Completion_Date"] for w in rows).date()
+    cadence_gaps = {g for v in by_tag.values() for g in _gaps(v)}
     return {
         "dated": len(dated),
         "undated": sorted(k for k in parsed if k not in dated),
@@ -71,8 +73,7 @@ def dates(parsed, rows):
         },
         "cadence": {t: _gaps(v) for t, v in sorted(by_tag.items())},
         # the one gap every set shares, or None if the sets ever disagree (so the prose claim cannot outlive the fact)
-        "cadence_days": (lambda vs: vs.pop() if len(vs) == 1 else None)(
-            {g for t, v in by_tag.items() for g in _gaps(v)}),
+        "cadence_days": next(iter(cadence_gaps)) if len(cadence_gaps) == 1 else None,
         "set_start": {t: min(v) for t, v in sorted(by_tag.items())},
         "last_breakdown_report": last_bd.isoformat(),
         "gap_to_first_lesson_days": (first - last_bd).days,
@@ -106,7 +107,7 @@ def lead_time(rows):
     hours = {w["WO_Number"]: (w["Start_Date"] - w["Report_Date"]).total_seconds() / 3600 for w in rows}
     xs = sorted(hours.values())
     ge24 = sum(1 for x in xs if x >= 24)
-    by_type = {}
+    by_type: dict[str, list[float]] = {}
     for w in rows:
         by_type.setdefault(w["Work_Type"], []).append(hours[w["WO_Number"]])
     return {
@@ -123,7 +124,7 @@ def lead_time(rows):
 def lessons(parsed):
     """Registry of every lesson's header/footer fields (ids only, no names: A2/A4) with the CF-03/HN-08/CF-12 counts."""
     reg = [{f: parsed[k][f] for f in REGISTRY_FIELDS} for k in sorted(parsed)]
-    reviewers = {}
+    reviewers: dict[str, set[str]] = {}
     for r in reg:
         reviewers.setdefault(r["tag"], set()).add(r["reviewed_by_id"])
     return {

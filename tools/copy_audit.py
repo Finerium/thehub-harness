@@ -13,6 +13,7 @@ Exit 1 on any unmatched, mismatched or orphaned number.
 import os
 import re
 import sys
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fx as FX
@@ -33,7 +34,7 @@ EXEMPT_CONTEXT = re.compile(
     r'|style\s*=\s*"[^"]*"'       # inline style attributes
     r'|<img[^>]*>'                 # image tags
     r'|<span class="nonfx">[^<]*</span>',   # target / plan / external figure, marked at the point of use
-    re.S,
+    re.DOTALL,
 )
 ANY_FX = re.compile(r"<!--\s*fx:[^>]*-->")
 # The frozen matching threshold is a fixture value (method.t). A bare "t = 0.62" carries no unit, so UNIT_AFTER
@@ -42,7 +43,7 @@ ANY_FX = re.compile(r"<!--\s*fx:[^>]*-->")
 
 
 def audit(path=HTML):
-    html = open(path, encoding="utf-8").read()
+    html = Path(path).read_text(encoding="utf-8")
     fx = FX.load()
     problems = []
     # 1. directive values must equal the formatted fixture value
@@ -77,7 +78,7 @@ def audit(path=HTML):
             problems.append(f"no fx directive on the frozen threshold 't = {t_txt}' at ...{ctx}...")
     # 4. a bare "<" in text content: HTML5 renders it, but any consumer that tokenises tags naively swallows from it to
     #    the next ">", which silently deletes a comparator and the rest of the sentence ("< 0.05 mm/100 mm").
-    text = re.sub(r"<style>.*?</style>|<!--.*?-->", "", html, flags=re.S)
+    text = re.sub(r"<style>.*?</style>|<!--.*?-->", "", html, flags=re.DOTALL)
     for m in re.finditer(r"<(?![/!a-zA-Z])", text):
         problems.append(f"unescaped '<' in text (use &lt;): ...{text[max(0, m.start() - 70): m.start() + 40]}...")
     # 5. unit-bearing numbers without a directive in the preceding 160 characters

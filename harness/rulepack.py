@@ -17,9 +17,10 @@ import json
 import os
 import re
 import sys
+from typing import Any
 
 from .config import ROOT
-from .pdftext import canonical, class_texts, opl_texts
+from .pdftext import canonical, class_texts, must_match, opl_texts
 
 DEFAULT = os.path.join(ROOT, "rulepack", "v1.json")
 TOKEN = re.compile(r"\*|[a-z]{1,4}-\d{2,6}[a-z]?|[a-z0-9]+")
@@ -92,8 +93,8 @@ def parse_interlocks(texts=None):
     rows = []
     for tag in sorted(texts):
         raw = texts[tag]
-        h = HDR.search(canonical(raw))
-        n = NOTE.search(canonical(raw))
+        h = must_match(HDR.search(canonical(raw)), f"cause-and-effect header of {tag}")
+        n = must_match(NOTE.search(canonical(raw)), f"cause-and-effect note of {tag}")
         lines = [canonical(line) for line in raw.splitlines()]
         seq = h.group(2) if h.group(2).startswith("SEQ-") else None
         rows.append(
@@ -182,7 +183,7 @@ def _gap(a, b):
     return max(b[0] - a[1], a[0] - b[1], 0)
 
 
-_COMPILED: dict[int, tuple[dict, dict]] = {}
+_COMPILED: dict[int, tuple[dict[str, Any], dict[str, Any]]] = {}
 
 
 def _compile(pack):

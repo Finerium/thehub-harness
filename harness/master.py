@@ -16,9 +16,10 @@ import os
 import re
 import sys
 from collections import Counter
+from typing import Any
 
 from .config import PACKAGES
-from .pdftext import class_texts
+from .pdftext import class_texts, must_match
 
 INSTR = r"[A-Z]{1,4}-\d{4,5}"
 
@@ -66,7 +67,7 @@ def parse_interlock(tag, text, hand=None):
     lost. The X count comes from the text, the X column identity from the hand file keyed by LOGIC No; every text field
     of the hand row must equal the parsed one or this raises (effects_basis "H+M").
     """
-    h = IL_HDR.search(text).groupdict()
+    h = must_match(IL_HDR.search(text), f"cause-and-effect header of {tag}").groupdict()
     sil = None if h["sil"].startswith("N/A") else int(h["sil"].split()[1])
     header = {
         "doc_no": h["doc_no"], "work_no": h["work_no"], "rev": int(h["rev"]),
@@ -83,15 +84,15 @@ def parse_interlock(tag, text, hand=None):
     effects = [{"id": i, "action": a} for i, a in IL_EFF.findall(eff_seg)]
     _agree(f"{seq} effects", [(e["id"], e["action"]) for e in effects],
            [(e["id"], e["final_element"]) for e in sheet["effects"]])
-    effects = [dict(e, final_element=f["final_element"]) for e, f in zip(effects, sheet["effects"])]
+    effects = [dict(e, final_element=f["final_element"]) for e, f in zip(effects, sheet["effects"], strict=True)]
 
     matrix = text[text.index("SET POINT VOTE ") + len("SET POINT VOTE "): text.index(" Legend:")]
-    n_cols = len(re.findall(r"EFF-\d+ ", matrix[: IL_ROW.search(matrix).start()]))
+    n_cols = len(re.findall(r"EFF-\d+ ", matrix[: must_match(IL_ROW.search(matrix), f"matrix rows of {seq}").start()]))
     _agree(f"{seq} n_effect_columns", n_cols, len(sheet["effects"]))
     parsed = list(IL_ROW.finditer(matrix))
     _agree(f"{seq} row ids", [m.group("id") for m in parsed], [r["id"] for r in sheet["rows"]])
     rows = []
-    for m, hr in zip(parsed, sheet["rows"]):
+    for m, hr in zip(parsed, sheet["rows"], strict=True):
         d = m.groupdict()
         n_x = d["xs"].count("X")
         val, unit = _setpoint(d["setpoint"])
@@ -110,7 +111,8 @@ def parse_interlock(tag, text, hand=None):
     perm_seg = text[text.index("# START PERMISSIVE (AND-gate) SIGNAL ") + len("# START PERMISSIVE (AND-gate) SIGNAL "): text.index(" => ALL permissives")]
     permissives = [{"n": int(p["n"]), "condition": p["condition"], "signal": p["signal"]} for p in IL_PERM.finditer(perm_seg)]
     _agree(f"{seq} permissives", permissives, sheet["permissives"])
-    gate = IL_GATE.search(text)  # the AND semantics of the set, verbatim; without it a renderer shows a checklist (PS-08)
+    # the AND semantics of the set, verbatim; without it a renderer shows a checklist (PS-08)
+    gate = must_match(IL_GATE.search(text), f"start-permissive AND gate of {seq}")
     _agree(f"{seq} gate tag", gate.group("tag"), tag)
     _agree(f"{seq} notes", [n for n in sheet["notes"] if n not in text], [])
     return {
@@ -134,7 +136,9 @@ HIST_ROW = re.compile(r"(?P<rev>[A-Z0-9]) (?P<desc>ISSUEDFOR[A-Z]+) (?P<by>[A-Z]
 
 def parse_datasheet(text):
     """Datasheet title block: doc_no, rev, issue status, area, functional location, criticality (A4, Task 1.7)."""
-    d, a, s = DS_DOC.search(text).groupdict(), DS_AREA.search(text).groupdict(), DS_STATUS.search(text).groupdict()
+    d = must_match(DS_DOC.search(text), "datasheet DOC NO block").groupdict()
+    a = must_match(DS_AREA.search(text), "datasheet AREA block").groupdict()
+    s = must_match(DS_STATUS.search(text), "datasheet REV block").groupdict()
     return {"doc_no": d["doc_no"], "rev": int(d["rev"]), "status": s["status"], "status_rev": int(s["rev"]),
             "area": a["area"], "floc": a["floc"], "criticality": a["crit"]}
 
@@ -144,9 +148,12 @@ def parse_drawing(text):
 
     Raw extraction drops the spaces inside ISSUEDFORREVIEW etc.; the description is re-spaced, dates are DD-MM-YYYY.
     """
-    d = DWG.search(text).groupdict()
+    d = must_match(DWG.search(text), "drawing title block").groupdict()
     hist = [{"rev": r, "description": desc.replace("ISSUEDFOR", "ISSUED FOR "), "by": by,
-             "date": datetime.datetime.strptime(dt, "%d-%m-%Y").date().isoformat()} for r, desc, by, dt in HIST_ROW.findall(text)]
+             # DTZ007 is suppressed below: a title-block revision date carries no time and no zone in the corpus,
+             # and inventing one would be a fact the sheet does not state.
+             "date": datetime.datetime.strptime(dt, "%d-%m-%Y").date().isoformat()}  # noqa: DTZ007
+            for r, desc, by, dt in HIST_ROW.findall(text)]
     cur = [h for h in hist if h["rev"] == d["rev"]]
     return {"dwg_no": d["dwg_no"], "rev": d["rev"], "status": cur[0]["description"] if cur else None, "history": hist}
 
@@ -167,7 +174,7 @@ def revision_spot(datasheets, drawings, plots, interlocks):
 # ---------------------------------------------------------------- equipment master (Task 1.7)
 def _majority(values):
     c = Counter(v for v in values if v not in (None, ""))
-    return sorted(c.items(), key=lambda kv: (-kv[1], str(kv[0])))[0][0] if c else None
+    return min(c.items(), key=lambda kv: (-kv[1], str(kv[0])))[0] if c else None
 
 
 def equipment_master(rows, datasheets, interlocks):
@@ -176,7 +183,7 @@ def equipment_master(rows, datasheets, interlocks):
     interlock_workbook = majority of Related_Interlock over populated rows ('-' -> null); interlock_sheet = LOGIC No of the
     C&E sheet (N/A -> null). Totals over the eight rows reconcile to the workbook (rows, flagged breakdowns, hours, cost).
     """
-    by = {}
+    by: dict[str, list[Any]] = {}
     for r in rows:
         by.setdefault(r["Equipment_Tag"], []).append(r)
     out = []
@@ -216,7 +223,7 @@ def equipment_master(rows, datasheets, interlocks):
 PROOF_CLASSES = (
     ("sis_proof_test", "Inspection", re.compile(r"SIS proof test of SEQ-")),
     ("sil_logic_proof_test", "Inspection", re.compile(r"SIL-[12] proof test")),
-    ("calibration_proof_test", "Calibration", re.compile(r"proof test", re.I)),
+    ("calibration_proof_test", "Calibration", re.compile(r"proof test", re.IGNORECASE)),
     ("psv_statutory_test", "Inspection", re.compile(r"PSV pop test|relief valve test")),
 )
 
@@ -224,7 +231,7 @@ PROOF_CLASSES = (
 def proof_tests(rows):
     """Work orders classified as SIS / SIL-logic / calibration proof tests and statutory PSV tests, with the last test
     date per asset and class (FR-116; Addendum P3 fixes the counts at 18 / 5 / 7 / 3 = 33)."""
-    out = {"classes": {}, "last_by_asset": {}, "total": 0}
+    out: dict[str, Any] = {"classes": {}, "last_by_asset": {}, "total": 0}
     tags = sorted({r["Equipment_Tag"] for r in rows})
     for name, wt, rx in PROOF_CLASSES:
         hits = sorted((r for r in rows if r["Work_Type"] == wt and rx.search(str(r["Problem_Description"] or ""))),
@@ -260,7 +267,8 @@ def personnel(rows, parsed):
     Names come from the workbook where the id appears there, else from the lesson footer. anomalies: a row whose
     reporter and executor are the same person, or whose column holder's id class is not the column's class.
     """
-    people, anomalies = {}, []
+    people: dict[str, Any] = {}
+    anomalies: list[Any] = []
     for r in sorted(rows, key=lambda r: r["WO_Number"]):
         ids, flags = {}, []
         for col, role, expect in WO_ROLES:
@@ -301,10 +309,11 @@ def personnel(rows, parsed):
 def families(rows, pops):
     """packages/families.json (analyst classification, Appendix C.4) checked against the workbook, plus r per asset =
     share of the asset's unplanned-failure rows that belong to any family (the recurrence term of CR-11)."""
-    fam = json.load(open(os.path.join(PACKAGES, "families.json"), encoding="utf-8"))
+    with open(os.path.join(PACKAGES, "families.json"), encoding="utf-8") as fh:
+        fam = json.load(fh)
     tag_of = {r["WO_Number"]: r["Equipment_Tag"] for r in rows}
     uf = {r["WO_Number"] for r in pops["unplanned_failure"]}
-    member_of = {}
+    member_of: dict[str, list[str]] = {}
     for f in fam:
         for w in f["member_wos"]:
             member_of.setdefault(w, []).append(f["family"])
@@ -323,10 +332,14 @@ def families(rows, pops):
     }
 
 
-LEXICON = sorted("""misalignment spalling spalled plugging plugged fouling fouled erosion eroded corrosion corroded wear worn
-cracked crack drift drifting leak leaking seized hardened degraded elongation slip slack vibration overheating imbalance
-fatigue fractured ruptured collapsed dislodged relaxed restricted clearance settlement overload hunting tuning saturated
-blocked burnt""".split() + ["end of life", "open circuit"])
+LEXICON = sorted([
+    "misalignment", "spalling", "spalled", "plugging", "plugged", "fouling", "fouled", "erosion", "eroded",
+    "corrosion", "corroded", "wear", "worn", "cracked", "crack", "drift", "drifting", "leak", "leaking", "seized",
+    "hardened", "degraded", "elongation", "slip", "slack", "vibration", "overheating", "imbalance", "fatigue",
+    "fractured", "ruptured", "collapsed", "dislodged", "relaxed", "restricted", "clearance", "settlement",
+    "overload", "hunting", "tuning", "saturated", "blocked", "burnt",
+    "end of life", "open circuit",
+])
 CHAIN_WINDOW_DAYS = 365
 
 
@@ -339,7 +352,7 @@ def chains(pops):
     """PRD 19.4 made reproducible (CR-12): a link A -> B exists between two failure records (Work_Type Corrective/Overhaul
     or Breakdown = Yes) of the same asset when B's Root_Cause or Problem_Description contains a LEXICON noun that also
     appears in A's Root_Cause and B is reported 1..365 days after A. The linking sentence is B's field text verbatim."""
-    links = []
+    links: list[dict[str, Any]] = []
     fail = sorted(pops["failure"], key=lambda r: (r["Equipment_Tag"], r["Report_Date"], r["WO_Number"]))
     for a in fail:
         na = _nouns(a["Root_Cause"])
@@ -362,7 +375,8 @@ def chains(pops):
 def datasheet_spot(datasheet_texts):
     """packages/datasheet_spot.json (CR-07: three typed values per asset) verified against the canonical datasheet text:
     an entry is `verified` when its quote occurs verbatim and its value_text occurs inside the quote."""
-    spot = json.load(open(os.path.join(PACKAGES, "datasheet_spot.json"), encoding="utf-8"))
+    with open(os.path.join(PACKAGES, "datasheet_spot.json"), encoding="utf-8") as fh:
+        spot = json.load(fh)
     out = []
     for e in sorted(spot, key=lambda e: (e["tag"], e["field"])):
         out.append(dict(e, verified=e["quote"] in datasheet_texts[e["tag"]] and e["value_text"] in e["quote"]))

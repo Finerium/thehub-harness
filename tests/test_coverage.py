@@ -151,7 +151,7 @@ def test_named_work_orders():
     sc = FX["coverage_scores"]
     assert len(sc) == 211 and all(set(v) == {"generous", "strict"} for v in sc.values())
     assert sc["WO-240060"]["generous"] == {"score": 1.0, "unit": ["Problem_Description", "OPL-DC-3401A-07"]}   # LD-06: covered by a pasted table only
-    assert sc["WO-240060"]["strict"]["score"] == 0.2 < 0.62
+    assert sc["WO-240060"]["strict"]["score"] == 0.2 < C.T
     # the strict leak this re-freeze closed: WO-240062's Root_Cause is a troubleshooting cell OPL-DC-3401A-07 repeats after
     # its footer, so the stripped layer scored it 1.0; composed from sections 1-4 and 6 it scores 0.6 and is uncovered
     assert sc["WO-240062"]["generous"] == {"score": 1.0, "unit": ["Problem_Description", "OPL-DC-3401A-07"]}
@@ -312,7 +312,8 @@ def test_draft_labels_agreement():
     assert (a["kappa"]["covered"], a["kappa"]["taught"]) == (1.0, 0.9647)
     d = FX["labelled_draft"]
     assert (d["n"], d["uncovered"], d["pct"]) == (57, 10, 17.5)   # the labels leave 10 uncovered, the proxy 14 (bands 14 / 27 / 16)
-    drafted = json.load(open(C.DRAFT_LABELS_PATH, encoding="utf-8"))
+    with open(C.DRAFT_LABELS_PATH, encoding="utf-8") as fh:
+        drafted = json.load(fh)
     assert len(drafted) == 57 and d["uncovered_ids"] == sorted(r["wo_number"] for r in drafted if not r["covered_by"])
     assert sum(r["agreed"] for r in drafted) == 56 and not any(r["adjudicated"] for r in drafted)
 

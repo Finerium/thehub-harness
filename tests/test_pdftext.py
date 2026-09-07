@@ -1,5 +1,6 @@
-from collections import Counter
 import os
+from collections import Counter
+
 from harness import pdftext as P
 
 

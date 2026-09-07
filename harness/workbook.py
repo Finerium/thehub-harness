@@ -15,7 +15,7 @@ OUTCOME_FIELDS = (
     "Breakdown", "Downtime_Hours", "Labor_Hours", "Labor_Cost_IDR", "Material_Cost_IDR", "Total_Cost_IDR",
     "Reported_By", "Executed_By", "Approved_By", "Related_Interlock", "Remarks",
 )
-PLANNED = re.compile(r"^(Scheduled|Statutory|Turnaround|Grid inspection)", re.I)
+PLANNED = re.compile(r"^(Scheduled|Statutory|Turnaround|Grid inspection)", re.IGNORECASE)
 
 
 def _num(v):
@@ -33,7 +33,7 @@ def load(path=WORKBOOK):
     hdr = [c.value for c in ws[1]]
     rows = []
     for r in ws.iter_rows(min_row=2, values_only=True):
-        d = dict(zip(hdr, r))
+        d = dict(zip(hdr, r, strict=True))
         d["Downtime_Hours"] = _num(d.get("Downtime_Hours"))
         d["Labor_Hours"] = _num(d.get("Labor_Hours"))
         for c in ("Labor_Cost_IDR", "Material_Cost_IDR", "Total_Cost_IDR"):

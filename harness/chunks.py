@@ -34,6 +34,7 @@ import os
 import re
 from collections import Counter
 from itertools import pairwise
+from typing import Any
 
 from .config import CORPUS
 from .documents import document_id, revision_id
@@ -98,7 +99,7 @@ def _segments(text, markers, base=0):
         if hit:
             cuts.add(hit.start())
     return [
-        (base + a, base + b) for a, b in pairwise(sorted(cuts) + [len(text)]) if b > a
+        (base + a, base + b) for a, b in pairwise([*sorted(cuts), len(text)]) if b > a
     ]
 
 
@@ -114,7 +115,7 @@ def _steps(text, a, b):
         i, k = m.end(), k + 1
     if len(starts) < 2:
         raise ValueError("fewer than two step rows found")
-    return [(a + s, a + e) for s, e in zip(starts, starts[1:] + [len(body)])]
+    return [(a + s, a + e) for s, e in zip(starts, [*starts[1:], len(body)], strict=True)]
 
 
 def _opl_units(text):
@@ -183,7 +184,8 @@ def chunk_document(path):
     for _, t in pages:
         starts.append(off)
         off += len(t) + 1
-    out, dropped = [], 0
+    out: list[dict[str, Any]] = []
+    dropped = 0
     for a, b, kind in found:
         a, b = _cut_watermark(text, a, b)
         s = text[a:b]
@@ -212,7 +214,11 @@ def chunk_document(path):
 
 def build(base=CORPUS):
     """Every chunk of every PDF in corpus order, plus a summary; two files under one document id is an error."""
-    rows, by_class, by_kind, dropped, seen = [], Counter(), Counter(), 0, {}
+    rows: list[dict[str, Any]] = []
+    by_class: Counter[str] = Counter()
+    by_kind: Counter[str] = Counter()
+    dropped = 0
+    seen: dict[str, str] = {}
     for p in corpus_files(base):
         if not p.lower().endswith(".pdf"):
             continue

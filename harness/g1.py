@@ -4,7 +4,9 @@
 
 Admits a bundle directory or names every violation, one line each, exit 1: every file the manifest lists exists with
 the recorded sha256 and size and nothing unlisted sits in the tree; every file validates against its contract through
-contracts/bundle_map.json; the fixture counts hold (98 files, 56 lessons, 211 work orders, register total 174);
+contracts/bundle_map.json; the fixture counts hold (98 files, 56 lessons, 211 work orders, register total 174); every
+register row carries the AC-INT-02 fields and no owner, due date or completion metric, and the findings that carry a
+routing recommendation are exactly the findings that name a protective function;
 every span_id, document_id, document_revision_id, wo_number, opl_id and bom_item_id resolves inside the bundle; every
 enum and entity binding is a member of its closed set; every quoted span's hash recomputes from the extracted page
 text of the corpus under the canonical form (and every chunk, step and section hash with it); seeded/* is required
@@ -13,6 +15,7 @@ tree lacks (a released tarball, D-17) is reported, not refused; where the corpus
 violation, never skipped.
 """
 
+import copy
 import json
 import os
 import re
@@ -27,6 +30,41 @@ from .validate import validate_bundle
 
 # the frozen corpus counts G1 admits on (blueprint 9.1, contracts/fixtures.schema.json)
 FILES_TOTAL, LESSONS, WORK_ORDERS, REGISTER_TOTAL = 98, 56, 211, 174
+# the register row of 11.2 AC-INT-02: what a finding carries, the two lifecycle states, the three severities, and the
+# route a finding that names a protective function carries. A field name holding one of CASE_MANAGEMENT would make the
+# register a work list with an owner, a due date or a completion metric, which the criterion refuses.
+REGISTER_FIELDS = (
+    "id",
+    "rule_id",
+    "rule",
+    "severity",
+    "discipline",
+    "observation_only",
+    "unit",
+    "basis",
+    "document_id",
+    "span_id",
+    "state",
+    "safety_function",
+    "routing_recommendation",
+    "item",
+)
+REGISTER_STATES = ("open", "resolved")
+SEVERITIES = ("high", "medium", "low")
+CASE_MANAGEMENT = (
+    "owner",
+    "assign",
+    "responsible",
+    "due",
+    "deadline",
+    "complet",
+    "progress",
+    "percent",
+    "sla",
+    "priority",
+    "closed_by",
+)
+MOC = "Management of Change"
 SEED_TIME = ("chunks.jsonl", "opls.json", "pages/", "text/")
 SEMVER = re.compile(r"^\d+\.\d+\.\d+$")
 CLAIM_KINDS = (
@@ -38,6 +76,51 @@ CLAIM_KINDS = (
     "title",
     "bom",
     "narrative",
+)
+
+
+def rebind_first_lesson_finding(reg):
+    """Point the first finding that names a lesson at the last one's document: both ids resolve, only the binding is
+    wrong, so nothing but the item-to-document check can catch it."""
+    lessons = [f for f in reg["findings"] if f["item"].get("opl_id")]
+    lessons[0]["document_id"] = lessons[-1]["document_id"]
+
+
+# 11.2 AC-INT-03: the red side of the register rules. One mutation each, with the check that must refuse it: deleting
+# or weakening one rule, dropping one defect finding, taking the route off a finding that names a protective function,
+# turning the register into a work list, and moving a finding onto the wrong document. `python -m harness.g1 bundle
+# --mutate-register` re-runs the pass that pins each over the shipped register and fails if any mutation admits.
+REGISTER_MUTATIONS = (
+    ("counts.register", "rules.CD-6 deleted", lambda reg: reg["rules"].pop("CD-6")),
+    (
+        "counts.register",
+        "rules.CD-6 weakened from 8 to 7",
+        lambda reg: reg["rules"].update({"CD-6": 7}),
+    ),
+    (
+        "counts.register",
+        "one defect finding dropped",
+        lambda reg: reg["findings"].remove(
+            next(f for f in reg["findings"] if not f["observation_only"])
+        ),
+    ),
+    (
+        "closed_set.register.routing",
+        "the routing recommendation taken off a finding that names a protective function",
+        lambda reg: next(f for f in reg["findings"] if f["safety_function"]).update(
+            {"routing_recommendation": None}
+        ),
+    ),
+    (
+        "closed_set.register.fields",
+        "an owner field added to a finding",
+        lambda reg: reg["findings"][0].update({"owner": "a name"}),
+    ),
+    (
+        "closure.register.item_document",
+        "a finding that names a lesson bound to another lesson's document",
+        rebind_first_lesson_finding,
+    ),
 )
 
 
@@ -103,7 +186,9 @@ class Gate:
             m["canonical_form_version"] == "1",
             "canonical_form_version 1",
         )
-        listed, bad, absent = set(), [], []
+        listed: set[str] = set()
+        bad: list[str] = []
+        absent: list[str] = []
         for f in m["files"]:
             listed.add(f["path"])
             p = self.path(f["path"])
@@ -157,7 +242,7 @@ class Gate:
         wos = self.load("work_orders.json") or []
         reg = self.load("integrity_findings.json") or {}
         opls = self.load("opls.json")
-        by_class = {}
+        by_class: dict[str, int] = {}
         for d in docs:
             by_class[d["class"]] = by_class.get(d["class"], 0) + 1
         self.expect(
@@ -195,10 +280,45 @@ class Gate:
             == fx["integrity"]["total"]
             == sum(reg.get("rules", {}).values())
             == defects,
-            f"register total {reg.get('total')}, {defects} defect findings, {len(findings) - defects} observations",
+            f"register total {reg.get('total')}, rules sum {sum(reg.get('rules', {}).values())}, {defects} defect "
+            f"findings, {len(findings) - defects} observations, fixture integrity.total {fx['integrity']['total']}",
+        )
+        keys = {k for f in findings for k in f}
+        states = {f["state"] for f in findings}
+        managed = sorted(k for k in keys for w in CASE_MANAGEMENT if w in k)
+        self.expect(
+            "closed_set.register.fields",
+            bool(findings)
+            and keys == set(REGISTER_FIELDS)
+            and states <= set(REGISTER_STATES)
+            and all(f["severity"] in SEVERITIES for f in findings)
+            and not managed,
+            f"{len(findings)} findings over {len(keys)} fields, states {sorted(states)}"
+            + (
+                f", case-management fields {managed}"
+                if managed
+                else ", no case-management field"
+            ),
+        )
+        routed = [f for f in findings if f["routing_recommendation"]]
+        marked = [f for f in findings if f["safety_function"]]
+        self.expect(
+            "closed_set.register.routing",
+            [f["id"] for f in routed] == [f["id"] for f in marked]
+            and all(
+                f["safety_function"] in f["routing_recommendation"]
+                and MOC in f["routing_recommendation"]
+                for f in routed
+            ),
+            f"{len(routed)} findings carry a routing recommendation, {len(marked)} name a protective function"
+            + (
+                f" (first: {marked[0]['id']} {marked[0]['safety_function']})"
+                if marked
+                else ""
+            ),
         )
         spot = self.load("datasheet_spot.json") or []
-        per_asset = {}
+        per_asset: dict[str, int] = {}
         for s in spot:
             per_asset[s["equipment_tag"]] = per_asset.get(s["equipment_tag"], 0) + 1
         self.expect(
@@ -612,6 +732,28 @@ class Gate:
             docs,
             "register findings document_id",
         )
+        # 11.2 AC-INT-05: a contextual chip lists the rules open against the document a citation names, so a finding
+        # that names a lesson or a P&ID file in its item must be bound to that very document and not to a sibling.
+        by_id = {d["id"]: d for d in self.load("documents.json") or []}
+        named = [
+            (f, f["item"].get("opl_id"), f["item"].get("file"))
+            for f in reg["findings"]
+            if isinstance(f["item"], dict)
+            and (f["item"].get("opl_id") or f["item"].get("file"))
+        ]
+        wrong = sorted(
+            f["id"]
+            for f, oid, name in named
+            if f["document_id"] not in by_id
+            or (oid and by_id[f["document_id"]]["doc_no"] != oid)
+            or (name and not by_id[f["document_id"]]["source_path"].endswith(name))
+        )
+        self.expect(
+            "closure.register.item_document",
+            not wrong,
+            f"{len(named)} findings name a lesson or a file in their item, {len(wrong)} bound elsewhere"
+            + (f" (first: {', '.join(wrong[:3])})" if wrong else ""),
+        )
         self.members(
             "closure.register.span",
             [f["span_id"] for f in reg["findings"] if f["span_id"]],
@@ -728,7 +870,7 @@ class Gate:
                 f"{len(opls['steps'])} step hashes and {6 * len(opls['lessons'])} section hashes recomputed, {len(steps) + len(sections)} mismatched",
             )
         if os.path.exists(self.path("chunks.jsonl")):
-            n, bad, unresolved = 0, 0, 0
+            n, bad_chunks, unresolved = 0, 0, 0
             with open(self.path("chunks.jsonl"), encoding="utf-8") as f:
                 for line in f:
                     c = json.loads(line)
@@ -742,11 +884,11 @@ class Gate:
                         or c["text"] not in text
                         or quote_hash(c["text"]) != c["quote_hash"]
                     ):
-                        bad += 1
+                        bad_chunks += 1
             self.expect(
                 "hashes.chunks",
-                bad == 0,
-                f"{n} chunks checked against their page text, {bad} mismatched, {unresolved} skipped (revision unresolved)",
+                bad_chunks == 0,
+                f"{n} chunks checked against their page text, {bad_chunks} mismatched, {unresolved} skipped (revision unresolved)",
             )
 
     def check_manifest_fields(self, m, fx):
@@ -796,8 +938,46 @@ class Gate:
         return not self.violations
 
 
+def mutate_register(bundle_dir, corpus=CORPUS):
+    """AC-INT-03 from its red side: run the counts pass over the shipped register with one rule deleted, one weakened,
+    one defect finding dropped, one route removed and one case-management field added. Returns the report lines and
+    whether every mutation was refused by the check that names it. A mutation that admits is the gate gone soft."""
+    base = Gate(bundle_dir, corpus)
+    fx, reg = base.load("fixtures.json"), base.load("integrity_findings.json")
+    if fx is None or reg is None:
+        return ["mutate: fixtures.json or integrity_findings.json missing"], False
+    lines, refused_all = [], True
+    for check, what, mutate in REGISTER_MUTATIONS:
+        g = Gate(bundle_dir, corpus)
+        g.cache["integrity_findings.json"] = copy.deepcopy(reg)
+        mutate(g.cache["integrity_findings.json"])
+        g.check_counts(fx)
+        if check.startswith("closure."):
+            g.check_closure()
+        refused = [v for v in g.violations if v.startswith(check + ":")]
+        refused_all = refused_all and bool(refused)
+        lines.append(
+            f"red   {what} -> {refused[0]}"
+            if refused
+            else f"ADMIT {what} -> {check} did not fire"
+        )
+    return lines, refused_all
+
+
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
+    if "--mutate-register" in argv:
+        argv = [a for a in argv if a != "--mutate-register"]
+        bundle_dir = os.path.abspath(argv[0] if argv else "bundle")
+        lines, refused_all = mutate_register(
+            bundle_dir, argv[1] if len(argv) > 1 else CORPUS
+        )
+        print("\n".join(lines))
+        print(
+            f"G1: {len(REGISTER_MUTATIONS)} register mutations, "
+            + ("every one refused" if refused_all else "SOME ADMITTED")
+        )
+        return 0 if refused_all else 1
     bundle_dir = os.path.abspath(argv[0] if argv else "bundle")
     corpus = argv[1] if len(argv) > 1 else CORPUS
     g = Gate(bundle_dir, corpus)

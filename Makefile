@@ -48,6 +48,12 @@ check: test contracts   ## tests + contracts + the standing greps (D10 extractor
 	@! grep -rn '\[ \\t\]' Makefile tools/ || { echo "FAIL: bracket-tab expression"; exit 1; }
 	@echo "--- A7: no run of corpus text longer than 200 characters in any tracked file; no un-drawn image"
 	$(PY) tools/no_corpus_in_repo.py
+	@echo "--- every Makefile target is documented and every documented target exists"
+	$(PY) tools/check_make_targets.py
+	@echo "--- ruff and mypy, the two quality gates of AC-NFR-01 and AC-NFR-02"
+	$(PY) -m ruff check .
+	$(PY) -m mypy
+	$(PY) -m mypy tools
 
 clean-cache:            ## drop the pdftotext cache and Python caches (the next run re-extracts every PDF)
 	rm -rf .cache .pytest_cache .ruff_cache .mypy_cache

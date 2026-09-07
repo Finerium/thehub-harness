@@ -18,6 +18,7 @@ r_detail, labels_status an enum beside labels_note); every value is the one obse
 
 import json
 import os
+from pathlib import Path
 
 import pytest
 
@@ -471,7 +472,7 @@ def test_golden_block_matches_the_file():
     yaml = pytest.importorskip(
         "yaml"
     )  # third cross-check only; the contract is stdlib + openpyxl
-    raw = open(os.path.join(ROOT, "golden", "cases.yaml"), encoding="utf-8").read()
+    raw = Path(ROOT, "golden", "cases.yaml").read_text(encoding="utf-8")
     cases = yaml.safe_load(raw)
     g = FX["golden"]
     assert (
@@ -515,7 +516,7 @@ def test_harness_readme_quick_map_matches_the_fixture():
     the fixture does not contain, twice. The two rows that drifted are pinned here against the fixture itself, so the
     README cannot state a strict headline or a band split the harness never printed. Observed by running `make fixtures`
     and cross-checked by the independent recomputation recorded in this module's docstring."""
-    readme = open(os.path.join(ROOT, "harness", "README.md"), encoding="utf-8").read()
+    readme = Path(ROOT, "harness", "README.md").read_text(encoding="utf-8")
     r = next(x for x in FX["coverage"]["strict"]["unplanned_failure"] if x["t"] == 0.62)
     strict = f"{r['uncovered']} ({r['pct']} %), {r['unplanned_bd']} breakdowns, {r['downtime_h']} h, IDR {r['cost_idr']:,}"
     assert strict in readme, strict

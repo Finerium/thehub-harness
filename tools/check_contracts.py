@@ -6,6 +6,7 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
 
 import jsonschema
 
@@ -36,11 +37,12 @@ def main():
     if not files:
         print("check_contracts: no schema files found under contracts/")
         return 1
-    ids, bad = {}, 0
+    ids: dict[str | None, str] = {}
+    bad = 0
     for path in files:
         rel = os.path.relpath(path, CDIR)
         try:
-            schema = json.load(open(path, encoding="utf-8"))
+            schema = json.loads(Path(path).read_text(encoding="utf-8"))
             jsonschema.Draft202012Validator.check_schema(schema)
         except Exception as ex:  # noqa: BLE001
             print(f"INVALID  {rel}: {str(ex)[:160]}")
@@ -51,7 +53,7 @@ def main():
             print(f"DUPLICATE $id  {rel} and {ids[sid]}: {sid}")
             bad += 1
         ids[sid] = rel
-        refs = []
+        refs: list[str] = []
         walk_refs(schema, refs)
         for r in refs:
             if r.startswith("#"):
@@ -63,7 +65,7 @@ def main():
                     print(f"DANGLING $ref  {rel}: {r} (file missing)")
                     bad += 1
                     continue
-                target_file = json.load(open(tpath, encoding="utf-8"))
+                target_file = json.loads(Path(tpath).read_text(encoding="utf-8"))
             if frag:
                 node = target_file
                 ok = True

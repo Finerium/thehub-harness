@@ -82,8 +82,16 @@ def opl_id(path):
     return m.group(1) if m else None
 
 
+def must_match(m, what):
+    """The match a parser requires. A corpus file that does not carry the pattern is a named data error, not a None
+    that surfaces later as an AttributeError on the caller's `.group`."""
+    if m is None:
+        raise ValueError(f"pattern not found in corpus text: {what}")
+    return m
+
+
 def tag_of_opl(oid):
-    return TAG_IN_OPL.match(oid).group(1)
+    return must_match(TAG_IN_OPL.match(oid), f"equipment tag in lesson id {oid}").group(1)
 
 
 def canonical(s):
@@ -110,7 +118,7 @@ def pdf_text(path, cache_dir=CACHE):
 
 def pdf_pages(path):
     out = subprocess.run(["pdfinfo", path], capture_output=True, text=True, check=True).stdout
-    m = re.search(r"^Pages:\s+(\d+)", out, re.M)
+    m = re.search(r"^Pages:\s+(\d+)", out, re.MULTILINE)
     return int(m.group(1)) if m else None
 
 

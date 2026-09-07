@@ -17,6 +17,7 @@ import json
 import os
 import re
 from collections import Counter
+from typing import Any
 
 from .config import PACKAGES
 from .opl import STRICT_SECTIONS, strict_texts
@@ -33,9 +34,13 @@ DRAFT_LABELS_PATH = os.path.join(PACKAGES, "coverage_labels.draft.json")   # WS1
 DRAFT_STATUS = ("machine-drafted labels present (packages/coverage_labels.draft.json); human adjudication pending (OQ-6); "
                 "deck numbers remain the proxy")
 # --- verbatim port of legacy/audit_reference/analyze_corpus.py (STOP, tokens) ---
-STOP = set("""the a an and or of to in on at for with by from is are was were be been as that this it its
-into after before during not no per via than then which when while under over out up down off all any each
-both has have had do does did but if so such also may can will would should must""".split())
+STOP = {
+    "the", "a", "an", "and", "or", "of", "to", "in", "on", "at", "for", "with", "by", "from", "is", "are", "was",
+    "were", "be", "been", "as", "that", "this", "it", "its", "into", "after", "before", "during", "not", "no", "per",
+    "via", "than", "then", "which", "when", "while", "under", "over", "out", "up", "down", "off", "all", "any",
+    "each", "both", "has", "have", "had", "do", "does", "did", "but", "if", "so", "such", "also", "may", "can",
+    "will", "would", "should", "must",
+}
 
 
 def tokens(s):
@@ -59,14 +64,14 @@ def contain_doc(ftoks, dtoks, mult=2):
         if not win[o]: del win[o]
         win[inn] += 1
         c = sum(1 for t in F if t in win)
-        if c > best: best = c
+        best = max(best, c)
         if best == len(F): break
     return best / len(F)
 
 
 def lessons_by_tag(texts):
     """{tag: [(opl_id, tokens)]} from {opl_id: text}, in sorted opl_id order (HN-04: no file-order dependence)."""
-    out = {}
+    out: dict[str, list[tuple[str, list[str]]]] = {}
     for oid in sorted(texts):
         out.setdefault(tag_of_opl(oid), []).append((oid, tokens(canonical(texts[oid]))))
     return out
@@ -121,10 +126,10 @@ def verbatim(rows, texts):
     """Exact-substring reuse: a canonical narrative field of >= VERBATIM_MIN_CHARS characters found in the concatenated
     canonical text of the same asset's lessons (plan 5.7 item 7, CF-V-01, HN-06). Counts by field, work orders with any
     field, sorted ids."""
-    by_tag = {}
+    by_tag: dict[str, str] = {}
     for oid in sorted(texts):
         by_tag[tag_of_opl(oid)] = by_tag.get(tag_of_opl(oid), "") + " " + canonical(texts[oid])
-    by_field, any_ids = Counter({f: 0 for f in NARR}), []
+    by_field, any_ids = Counter(dict.fromkeys(NARR, 0)), []
     for w in rows:
         hit = False
         for cf in NARR:
@@ -213,7 +218,7 @@ def best_ratio(f, corpus):
         if sm.real_quick_ratio()<best: continue
         if sm.quick_ratio()<best: continue
         r=sm.ratio()
-        if r>best: best=r
+        best = max(best, r)
         if best>0.95: break
     return best
 
@@ -221,7 +226,7 @@ def best_ratio(f, corpus):
 def legacy_corpus(texts):
     """validate_fix.py's per-tag concatenation (leading space per lesson, lower-cased, whitespace collapsed) built in sorted
     opl_id order instead of os.walk order (HN-04)."""
-    out = {}
+    out: dict[str, str] = {}
     for oid in sorted(texts):
         out[tag_of_opl(oid)] = out.get(tag_of_opl(oid), "") + " " + re.sub(r"\s+", " ", canonical(texts[oid]).lower())
     return out
@@ -266,7 +271,7 @@ def compute(ctx):
         by_type[w["Work_Type"]]["n"] += 1; by_type[w["Work_Type"]]["uncovered"] += unc
         if w["breakdown_kind"]:
             bd["n"] += 1; bd["uncovered"] += unc; bd[w["breakdown_kind"] + "_uncovered"] += unc
-    by_tag = {}
+    by_tag: dict[str, dict[str, Any]] = {}
     for w in pops["unplanned_failure"]:
         d = by_tag.setdefault(w["Equipment_Tag"], {"n_unplanned_failure": 0, "uncovered_generous": 0, "uncovered_strict": 0})
         d["n_unplanned_failure"] += 1

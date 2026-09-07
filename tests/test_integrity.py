@@ -7,7 +7,10 @@ over hand_verified.json for CD-2/7/8/9/18. Differences from the plan/addendum ba
 import json
 import os
 
-from harness import integrity as I, opl as O, pdftext as P, workbook as W
+from harness import integrity as I
+from harness import opl as O
+from harness import pdftext as P
+from harness import workbook as W
 from harness.config import CORPUS, ROOT
 
 ROWS = W.load()

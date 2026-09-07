@@ -20,4 +20,40 @@ dev = [
     "mypy>=2.3.1",
     "pytest>=9.1.1",
     "ruff>=0.16.5",
+    "types-jsonschema>=4.26.0.20260518",
+    "types-openpyxl>=3.1.5.20260827",
+    "types-pyyaml>=6.0.12.20260906",
 ]
+
+[tool.ruff]
+# legacy/ is the frozen v1.0 audit reference, kept for provenance only. It is already outside the test run
+# (pytest.ini norecursedirs) because it reads fixtures that exist only in that session's tree, and it is never
+# edited, so it is not linted either. Everything else in the repository is.
+exclude = ["legacy"]
+
+[tool.ruff.lint]
+# ruff's default selection for the pinned version, widened with every family that holds at zero findings across
+# harness/, tools/ and tests/, so the gate is a named set instead of whatever a future ruff decides to make default.
+# No rule is disabled to move a number: the only two suppressions in the tree are per line, each with its reason,
+# on the naive strptime of a corpus date that carries no time and no zone (DTZ007).
+extend-select = [
+    "A", "ASYNC", "BLE", "DTZ", "EXE", "FA", "FLY", "FURB", "G", "I", "INT", "ISC",
+    "LOG", "PGH", "PIE", "RET", "RUF", "TC", "TID", "UP", "YTT",
+]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["harness"]
+# check_untyped_defs is the flag that makes this gate able to fail: the harness's functions carry no annotations, so
+# without it mypy would skip every function body and report only unresolved imports. disallow_untyped_defs stays off
+# deliberately - annotating all 22 modules is a rewrite, not a gate, and it is not what blueprint 11 asks for.
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+extra_checks = true
+no_implicit_reexport = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_ignores = true

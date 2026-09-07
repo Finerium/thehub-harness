@@ -27,12 +27,13 @@ through the C&E sheet that types it (FR-106: nothing is derived from a tag numbe
 import os
 import re
 import zipfile
+from typing import Any
 
 import openpyxl
 
 from . import pdftext as P
 from .canonical import canonical, quote_hash
-from .config import WORKBOOK
+from .config import CORPUS, WORKBOOK
 
 CITATION_MAX_CHARS = 199
 CORPUS_VERSION_ID = "v1"  # the label of the first corpus version; the seed maps it to its deterministic id
@@ -215,7 +216,7 @@ def register(files, drawings, plots, datasheets, interlocks, sidecars_by_set):
     docs, facts = [], {}
     for path in files:
         cls, tag = P.doc_class(path), P.tag_of_path(path)
-        rel = os.path.relpath(path, P.CORPUS)
+        rel = os.path.relpath(path, CORPUS)
         low = path.lower()
         sha = P.file_sha256(path)
         did = document_id(sha)
@@ -363,7 +364,7 @@ class Resolver:
         self.by_opl = {
             facts[d["id"]]["opl_id"]: d["id"] for d in docs if d["class"] == "opl"
         }
-        self.opls_of = {}
+        self.opls_of: dict[str, list[Any]] = {}
         for oid in sorted(self.by_opl):
             self.opls_of.setdefault(P.tag_of_opl(oid), []).append(self.by_opl[oid])
         singles = {
@@ -376,8 +377,8 @@ class Resolver:
         self.pid_by_set = {
             facts[d["id"]]["set"]: d["id"] for d in docs if d["class"] == "pid"
         }
-        pid_no = {}
-        for oid, lp in opl_parsed.items():
+        pid_no: dict[str, set[str]] = {}
+        for lp in opl_parsed.values():
             pid_no.setdefault(lp["tag"], set()).add(lp["pid_ref"])
         self.by_pid_no = {}
         for tag, nos in pid_no.items():

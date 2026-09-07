@@ -5,8 +5,8 @@ The MOC rule: 'routed to MOC' is allowed only on a line that also says 'permanen
 The rename carve-out (plan section 0): CHANGELOG.md may carry one line introducing the retired product name as former,
 identified by the words 'formerly called'; that one line is exempt, and the name fails anywhere else in the file."""
 import os
-import re
 import sys
+from pathlib import Path
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIST = os.path.join(ROOT, "tools", "banned_strings.txt")
@@ -27,13 +27,13 @@ def main(argv):
         files = [f for f in files if f not in skipped]
         for f in skipped:
             print(f"banned_strings: skipping {f} (audit trail; use --include-docs to scan it)")
-    banned = [l.rstrip("\n") for l in open(LIST, encoding="utf-8") if l.strip() and not l.startswith("#")]
+    banned = [l for l in Path(LIST).read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")]
     if deliverables:
         banned.append("[TBD]")
     hits = 0
     for f in files:
         try:
-            lines = open(f, encoding="utf-8", errors="replace").read().split("\n")
+            lines = Path(f).read_text(encoding="utf-8", errors="replace").split("\n")
         except IsADirectoryError:
             continue
         # Plan section 0 permits the retired product name in exactly one place that ships: the

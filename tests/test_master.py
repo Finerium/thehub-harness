@@ -96,7 +96,7 @@ def test_cause_and_effect_columns(out):
     rows = {r["id"]: r for r in by_seq["SEQ-1201"]["rows"]}  # DP-31: min-flow FV-1201 does not open on a vibration trip
     assert (rows["T3"]["tag"], rows["T3"]["setpoint_text"], rows["T3"]["voting"]) == ("VSHH-1201", "> 7.1 mm/s RMS", "1oo2")
     assert rows["T3"]["effects"] == ["EFF-1", "EFF-2", "EFF-4", "EFF-5"] and "EFF-3" not in rows["T3"]["effects"]
-    assert [e for e in by_seq["SEQ-1201"]["effects"] if e["id"] == "EFF-3"][0]["final_element"] == "OPEN MIN-FLOW FV-1201"
+    assert next(e for e in by_seq["SEQ-1201"]["effects"] if e["id"] == "EFF-3")["final_element"] == "OPEN MIN-FLOW FV-1201"
 
     seq5500 = by_seq["SEQ-5500"]
     assert seq5500["tag"] == "YD-2301" and len(seq5500["rows"]) == 6

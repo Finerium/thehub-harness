@@ -1,0 +1,86 @@
+# The reference implementation's own checks (blueprint 11, AC-NFR-01 and AC-NFR-02): the lint gate, the type gate
+# and the test suite, on every push to main and every pull request. The suite reads the organiser's corpus, which
+# lives in a private repository and is cloned outside this workspace through the read-only deploy key, exactly as
+# the application's own workflow does; a pull request from a fork has no key, so the corpus leg is skipped there
+# and the two quality gates still run.
+name: Harness
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: harness-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.0.1
+        with:
+          enable-cache: true
+
+      - run: uv sync --frozen
+
+      - name: ruff, the lint gate (AC-NFR-02)
+        run: uv run ruff check .
+
+      - name: mypy, the type gate (AC-NFR-01)
+        run: |
+          uv run mypy
+          uv run mypy tools
+
+      - name: Every Makefile target is documented and every documented target exists
+        run: uv run python tools/check_make_targets.py
+
+      - name: The contracts are valid 2020-12 documents
+        run: uv run python tools/check_contracts.py
+
+  suite:
+    runs-on: ubuntu-latest
+    # The corpus deploy key is a repository secret, absent on a pull request from a fork.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.CORPUS_DEPLOY_KEY }}
+
+      - name: Clone the corpus outside the workspace (never inside this repository's tree)
+        run: |
+          mkdir -p ~/.ssh
+          curl -sS https://api.github.com/meta | jq -r '.ssh_keys[] | "github.com \(.)"' >> ~/.ssh/known_hosts
+          git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"
+
+      - name: Poppler 26.02.0, the extractor pin (ADR-005, D-11)
+        uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: poppler
+          create-args: poppler=26.02.0
+          init-shell: bash
+          cache-environment: true
+
+      - name: The extractor build must read 26.02.0
+        shell: bash -el {0}
+        run: pdftotext -v 2>&1 | head -1 | tee /dev/stderr | grep -F 'pdftotext version 26.02.0'
+
+      - uses: astral-sh/setup-uv@v10.0.1
+        with:
+          enable-cache: true
+
+      - run: uv sync --frozen
+
+      - name: pytest over the harness, the fixture, the rule pack and the contracts
+        shell: bash -el {0}
+        env:
+          CASE1_CORPUS: ${{ runner.temp }}/thehub-corpus/CALIBER-2026_The-Case/Supporting Data/Case 1_ Manufacturing Knowledge Hub
+        run: uv run pytest tests/ -q -p no:cacheprovider

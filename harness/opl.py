@@ -6,7 +6,7 @@ Closes CF-03 (all 56 dates parse once whitespace is collapsed), CF-V-02 (footer 
 import datetime
 import re
 
-from .pdftext import opl_texts, tag_of_opl
+from .pdftext import opl_texts
 
 MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
 DAYS = "Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday"
@@ -15,7 +15,7 @@ HEADER = re.compile(
     r"OPL No:\s*(?P<opl_no>OPL-[A-Z]{2}-\d{4}[A-Z]?-\d{2}).*?OPL Title\s+(?P<title>.+?)\s+Discipline\s+(?P<discipline>.+?)\s+"
     r"Equipment\s+(?P<tag>[A-Z]{2}-\d{4}[A-Z]?)\s+-\s+(?P<equipment>.+?)\s+Area / Unit\s+(?P<area>.+?)\s+"
     r"Related Interlock\s+(?P<interlock>.+?)\s+(?:P&ID;?\s*Ref\s+|Ref\s+)?(?P<pid_ref>TJC-LLD-PID-\d{4})\s+Classification:",
-    re.S,
+    re.DOTALL,
 )  # raw extraction sometimes drops the "P&ID Ref" label (Sets 5, 6): the label is optional
 CLASSES = (("Basic Knowledge", "Basic Knowledge"), ("Improvement", "Improvement"), ("Trouble Case", "Trouble Case"))
 PERSON = re.compile(r"([A-Z][a-z]+(?: [A-Z][a-z]+)*)\s*\(EMP-(\d{4})\)")
@@ -52,7 +52,8 @@ def parse(oid, text):
     h = m.groupdict()
     cls = [name for name, label in CLASSES if re.search(r"\[X\]\s*" + re.escape(label), text)]
     dm = DATE.search(text, text.find("Date of Sharing") if "Date of Sharing" in text else 0)
-    date = datetime.datetime.strptime(" ".join(dm.groups()), "%d %B %Y").date().isoformat() if dm else None
+    # DTZ007: "Date of Sharing" is a plain calendar date on the lesson; the corpus states no time and no zone.
+    date = datetime.datetime.strptime(" ".join(dm.groups()), "%d %B %Y").date().isoformat() if dm else None  # noqa: DTZ007
     tail = text[text.rfind("Prepared by"):] if "Prepared by" in text else text[-600:]
     people = PERSON.findall(tail)
     reviewed = [(n, e) for n, e in people if e.startswith("11")]
@@ -102,8 +103,8 @@ def parse_all(texts=None):
 # Naming it "identity header" made the published method irreproducible (V-02): a reader who slices everything before
 # "1. PURPOSE / OBJECTIVE" gets 186 uncovered of 211, not the figure the harness prints.
 STRICT_HEAD_FIELDS = ("opl_id", "title", "equipment", "area_unit", "related_interlock", "pid_ref", "classification")
-STRICT_SECTIONS = ("rebuilt header fields: lesson id, title, equipment name, area / unit, related interlock, "
-                   "P&ID reference, classification", "1. PURPOSE / OBJECTIVE", "2. SAFETY PRECAUTIONS",
+STRICT_SECTIONS = (("rebuilt header fields: lesson id, title, equipment name, area / unit, related interlock, "
+                   "P&ID reference, classification"), "1. PURPOSE / OBJECTIVE", "2. SAFETY PRECAUTIONS",
                    "3. TOOLS & MATERIALS REQUIRED", "4. DETAILED PROCEDURE / STEPS", "6. KEY LEARNING POINTS")
 
 
@@ -132,4 +133,4 @@ def strip_troubleshooting(text):
     Removes the '5. COMMON PROBLEMS & TROUBLESHOOTING' section from a whole lesson text. It cannot define the strict layer:
     anything the extractor emits outside that span survives it (see `strict_text`). Use `strict_text(parsed)` instead.
     """
-    return re.sub(r"5\.\s*COMMON PROBLEMS.*?6\.\s*KEY LEARNING", " 6. KEY LEARNING", text, flags=re.S | re.I)
+    return re.sub(r"5\.\s*COMMON PROBLEMS.*?6\.\s*KEY LEARNING", " 6. KEY LEARNING", text, flags=re.DOTALL | re.IGNORECASE)

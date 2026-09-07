@@ -55,14 +55,14 @@ def build(bundle, out):
                 tar.addfile(info, f)
     archive = os.path.join(out, name + ".tar.gz")
     with (
-        open(archive, "wb") as f,
-        gzip.GzipFile(filename="", mode="wb", fileobj=f, mtime=0) as gz,
+        open(archive, "wb") as gz_file,
+        gzip.GzipFile(filename="", mode="wb", fileobj=gz_file, mtime=0) as gz,
     ):
         gz.write(raw.getvalue())
-    with open(archive, "rb") as f:
-        digest = hashlib.sha256(f.read()).hexdigest()
-    with open(os.path.join(out, "SHA256SUMS"), "w", encoding="utf-8") as f:
-        f.write(f"{digest}  {name}.tar.gz\n")
+    with open(archive, "rb") as archive_file:
+        digest = hashlib.sha256(archive_file.read()).hexdigest()
+    with open(os.path.join(out, "SHA256SUMS"), "w", encoding="utf-8") as sums:
+        sums.write(f"{digest}  {name}.tar.gz\n")
     return {
         "archive": archive,
         "sha256": digest,

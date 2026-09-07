@@ -85,7 +85,8 @@ class Embedder:
                 raise SystemExit(
                     f"embedding pin mismatch on {want['path']}: file {got['sha256'][:12]}, pin {want['sha256'][:12]}"
                 )
-        import onnxruntime as ort
+        # onnxruntime ships no py.typed marker and publishes no stub package, so mypy cannot see its API.
+        import onnxruntime as ort  # type: ignore[import-untyped]
         from tokenizers import Tokenizer
 
         self.tok = Tokenizer.from_file(os.path.join(MODEL_DIR, "tokenizer.json"))

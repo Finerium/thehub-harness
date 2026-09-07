@@ -19,6 +19,7 @@ import os
 import re
 import shutil
 import subprocess
+from typing import Any
 
 from . import documents as D
 from . import entities as E
@@ -28,7 +29,7 @@ from . import pdftext as P
 from . import workbook as W
 from .config import PACKAGES, ROOT
 
-BUNDLE_VERSION = "1.0.3"
+BUNDLE_VERSION = "1.0.4"
 CLASSES = ("datasheet", "ga_drawing", "interlock", "plot_plan")
 SPOT_CLASSES = ("datasheet", "ga_drawing", "plot_plan", "interlock", "pid")
 # (bundle path, repository path): byte copies
@@ -108,7 +109,7 @@ def sidecar_packages():
     for path in sorted(
         glob.glob(os.path.join(PACKAGES, "pid_sidecars", "set_??.json"))
     ):
-        n = int(re.search(r"set_(\d\d)\.json$", path).group(1))
+        n = int(P.must_match(re.search(r"set_(\d\d)\.json$", path), f"set number in {path}").group(1))
         transcript = path.replace(".json", ".transcript.json")
         out[n] = (
             read_json(path),
@@ -253,7 +254,7 @@ def build(out):
     )
 
     # 9.5 lessons, coverage, debt
-    by_tag = {}
+    by_tag: dict[str, list[Any]] = {}
     for w in rows:
         by_tag.setdefault(w["Equipment_Tag"], []).append(w)
     vocab = E.acceptance_vocabulary(opl_r)

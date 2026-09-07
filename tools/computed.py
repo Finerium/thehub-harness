@@ -13,6 +13,7 @@ import json
 import os
 import re
 from collections import Counter
+from typing import Any
 
 import yaml
 
@@ -128,7 +129,7 @@ def golden_block():
 
 def golden_table():
     cases = _golden()
-    cats = {}
+    cats: dict[str, list[Any]] = {}
     for c in cases:
         cats.setdefault(c.get("category", "?"), []).append(c)
     order = {cat: n for n, cat in enumerate(category_order())}

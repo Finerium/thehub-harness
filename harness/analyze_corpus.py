@@ -199,7 +199,7 @@ def registry(fx, ctx, root):
     contract's shape and the older content moves to a sibling key (population_ids, r_detail, link_list,
     coefficients_by_factor, roster, strict_section_headings, labels_note)."""
     from harness import coverage, opl
-    from harness.pdftext import class_texts
+    from harness.pdftext import class_texts, must_match
 
     t = ctx["t"]
     m = fx["method"]
@@ -359,7 +359,7 @@ def registry(fx, ctx, root):
     }
 
     service = {
-        tag: DS_SERVICE.search(text).group(1)
+        tag: must_match(DS_SERVICE.search(text), f"SERVICE field of {tag}").group(1)
         for tag, text in class_texts("datasheet").items()
     }
     for e in fx["equipment_master"]:

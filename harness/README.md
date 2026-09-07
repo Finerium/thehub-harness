@@ -8,9 +8,19 @@ Addendum A D10). The corpus under `Supporting Data` is read-only and is never re
 
 ```bash
 export CASE1_CORPUS="/path/to/CALIBER 2026 - The Case/Supporting Data/Case 1_ Manufacturing Knowledge Hub"   # default in harness/config.py
-make fixtures            # python3 -m harness.analyze_corpus --out packages/fixtures.json   (about 20 s)
-make test                # python3 -m pytest tests/ -q
-make check               # tests + the standing greps (D10, P9, A7); WS2/WS3/WS7 steps print TODO until they land
+make setup               # uv sync --frozen, then print the extractor build so a mismatch is visible immediately
+make fixtures            # run the harness over the corpus and write packages/fixtures.json   (about 20 s)
+make packages            # rewrite the package artefacts that are pinned harness output (packages/chains.json)
+make test                # pytest over the harness, the fixture, the rule pack and the contracts
+make contracts           # every JSON Schema under contracts/ is a valid 2020-12 document; bundle/ validates when present
+make check               # test + contracts + the standing greps (D10 extractor rule, P9 sed pitfall, A7 no corpus text)
+make chunks              # structural chunks of the corpus PDFs into bundle/chunks.jsonl (seed-time, never tracked)
+make pages               # metadata-free page derivatives into bundle/pages (seed-time, never tracked)
+make embed               # add the pinned local embedding to every chunk
+make bundle              # chunks + pages + embed, then the bundle of blueprint 9.1 with its manifest, then G1 admission
+make g1                  # admit bundle/ or name every violation (exit 1)
+make release             # dist/thehub-bundle-<version>.tar.gz without the seed-time files (D-17), plus SHA256SUMS
+make clean-cache         # drop the pdftotext cache and the Python caches (the next run re-extracts every PDF)
 python3 harness/analyze_corpus.py --corpus DIR --out packages/fixtures.json [--t 0.62] [--legacy-window | --no-legacy-window]
 ```
 

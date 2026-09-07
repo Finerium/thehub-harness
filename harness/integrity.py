@@ -20,6 +20,7 @@ import os
 import re
 import statistics
 from collections import defaultdict
+from itertools import pairwise
 
 from . import pdftext as P
 from .config import PACKAGES
@@ -38,47 +39,47 @@ SEQ_NO = re.compile(r"SEQ-\d{4}")
 
 # id -> (rule, definition, unit, basis, severity, observation_only)
 RULES = {
-    "CD-1": ("Foreign cross-reference", "Lesson whose cross-reference line names another asset (every mention counted, "
-             "whitespace-normalised; harness.opl foreign_crossref_tags).", "lesson", "H", "high", False),
-    "CD-2": ("P&ID drawing number placeholder or absent", "P&ID title-block drawing number is the XXXX placeholder or "
-             "there is no title block / reference box.", "sheet", "M", "medium", False),
-    "CD-4": ("Incomplete closeout", "Work order with Status Completed, the eleven outcome fields empty and the three "
-             "narrative fields present; items carry Priority (A1).", "work order", "H", "high", False),
+    "CD-1": ("Foreign cross-reference", ("Lesson whose cross-reference line names another asset (every mention counted, "
+             "whitespace-normalised; harness.opl foreign_crossref_tags)."), "lesson", "H", "high", False),
+    "CD-2": ("P&ID drawing number placeholder or absent", ("P&ID title-block drawing number is the XXXX placeholder or "
+             "there is no title block / reference box."), "sheet", "M", "medium", False),
+    "CD-4": ("Incomplete closeout", ("Work order with Status Completed, the eleven outcome fields empty and the three "
+             "narrative fields present; items carry Priority (A1)."), "work order", "H", "high", False),
     "CD-5": ("No cross-reference line", "Lesson with no cross-reference line at all.", "lesson", "H", "medium", False),
-    "CD-6": ("Planned work flagged breakdown", "Planned work (Problem_Description starts Scheduled/Statutory/Turnaround/"
-             "Grid inspection) flagged Breakdown = Yes (workbook breakdown_kind == planned_flagged).", "work order", "H",
+    "CD-6": ("Planned work flagged breakdown", ("Planned work (Problem_Description starts Scheduled/Statutory/Turnaround/"
+             "Grid inspection) flagged Breakdown = Yes (workbook breakdown_kind == planned_flagged)."), "work order", "H",
              "medium", False),
     "CD-7": ("Wrong datasheet cited", "P&ID cites a datasheet number that is not the DOC NO of its asset's datasheet.",
              "sheet", "H+M", "high", False),
     "CD-8": ("Wrong interlock sequence cited", "P&ID cites a SEQ number that is not the LOGIC No of its asset's C&E sheet.",
              "sheet", "H+M", "high", False),
-    "CD-9": ("Foreign tags on P&ID", "P&ID carries instrument tags or equipment IDs of another asset. A foreign tag is "
+    "CD-9": ("Foreign tags on P&ID", ("P&ID carries instrument tags or equipment IDs of another asset. A foreign tag is "
              "an instrument tag or an equipment ID only: a line number or a free-text destination label carried over from "
              "another sheet is recorded in the set's notes and in the sidecar's foreign_tag defect, not counted here "
-             "(Addendum P8; the same rule sets the `foreign` flag in packages/pid_sidecars).", "sheet", "M",
+             "(Addendum P8; the same rule sets the `foreign` flag in packages/pid_sidecars)."), "sheet", "M",
              "high", False),
-    "CD-10": ("Criticality review candidate", "Datasheet criticality NON/LOW CRITICAL with unplanned-breakdown downtime "
-              "above the fleet median (8 assets; rows with breakdown_kind == unplanned).", "asset", "H", "medium", False),
-    "CD-11": ("GA drawing content inconsistent with class", "GA drawing carries drum vocabulary (WATER BOOT / MIST PAD / "
-              "HORIZONTAL DRUM) absent from the asset's datasheet, or its DRY WEIGHT field carries no number.", "drawing",
+    "CD-10": ("Criticality review candidate", ("Datasheet criticality NON/LOW CRITICAL with unplanned-breakdown downtime "
+              "above the fleet median (8 assets; rows with breakdown_kind == unplanned)."), "asset", "H", "medium", False),
+    "CD-11": ("GA drawing content inconsistent with class", ("GA drawing carries drum vocabulary (WATER BOOT / MIST PAD / "
+              "HORIZONTAL DRUM) absent from the asset's datasheet, or its DRY WEIGHT field carries no number."), "drawing",
               "H", "high", False),
-    "CD-12": ("Truncated troubleshooting cell", "Troubleshooting-table cell whose text is a strict prefix (>= 15 characters) "
+    "CD-12": ("Truncated troubleshooting cell", ("Troubleshooting-table cell whose text is a strict prefix (>= 15 characters) "
               "of a same-asset workbook narrative field that the lesson does not carry in full: the LONGEST such prefix at each "
               "occurrence, wherever in the line it starts, ending (after an optional full stop) at a line break or at the end of "
               "the text, and not itself a complete field of the same asset (P2). Counting every shorter line-aligned prefix as "
-              "well returns 79 cells, not 38.",
+              "well returns 79 cells, not 38."),
               "cell", "H", "medium", False),
-    "CD-13": ("Hazard limit absent from datasheet", "Hazard-note pressure (barg/bar/kg/cm2g) or temperature (degC) numeral "
-              "with no equal typed value of the same unit class in the asset's datasheet (P1).", "lesson", "H", "high", False),
+    "CD-13": ("Hazard limit absent from datasheet", ("Hazard-note pressure (barg/bar/kg/cm2g) or temperature (degC) numeral "
+              "with no equal typed value of the same unit class in the asset's datasheet (P1)."), "lesson", "H", "high", False),
     "CD-14": ("Cost arithmetic", "Labor_Cost + Material_Cost != Total_Cost on complete rows.", "work order", "H", "low", False),
-    "CD-15": ("Identifier chronology", "Notification number year != Report_Date year; WO numbering not chronological "
-              "(observation).", "work order", "H", "low", True),
-    "CD-16": ("Area vocabulary", "Area named differently across document classes (workbook, datasheet, plot-plan title block, "
-              "OPL header); alias table in packages/area_aliases.json (observation).", "area", "H", "low", True),
-    "CD-17": ("Trip boilerplate without trip rows", "C&E sheet carrying the trip/latch boilerplate while its matrix has no "
-              "voted trip row (rows typed control/alarm/mech).", "sheet", "H", "medium", False),
-    "CD-18": ("P&ID contradicts sibling document", "P&ID fact (footprint, revision, instrument identity) contradicts the plot "
-              "plan, GA drawing or C&E sheet; the sibling value is confirmed in the harness text.", "contradiction", "H+M",
+    "CD-15": ("Identifier chronology", ("Notification number year != Report_Date year; WO numbering not chronological "
+              "(observation)."), "work order", "H", "low", True),
+    "CD-16": ("Area vocabulary", ("Area named differently across document classes (workbook, datasheet, plot-plan title block, "
+              "OPL header); alias table in packages/area_aliases.json (observation)."), "area", "H", "low", True),
+    "CD-17": ("Trip boilerplate without trip rows", ("C&E sheet carrying the trip/latch boilerplate while its matrix has no "
+              "voted trip row (rows typed control/alarm/mech)."), "sheet", "H", "medium", False),
+    "CD-18": ("P&ID contradicts sibling document", ("P&ID fact (footprint, revision, instrument identity) contradicts the plot "
+              "plan, GA drawing or C&E sheet; the sibling value is confirmed in the harness text."), "contradiction", "H+M",
               "high", False),
 }
 
@@ -144,7 +145,7 @@ def cd1(parsed):
     """CD-1 (HN-08, CF-12): lesson whose cross-reference line names another asset."""
     items = [{"opl_id": k, "tag": v["tag"], "foreign_tags": v["foreign_crossref_tags"]}
              for k, v in sorted(parsed.items()) if v["foreign_crossref_tags"]]
-    by_tag = defaultdict(int)
+    by_tag: defaultdict[str, int] = defaultdict(int)
     for it in items:
         by_tag[it["tag"]] += 1
     return _rule("CD-1", items, by_tag=dict(sorted(by_tag.items())))
@@ -192,7 +193,7 @@ def truncated_cells(fields, text, breaks):
 def cd12(rows, raw_texts):
     """CD-12 (CF-11, Addendum P2): troubleshooting-table cells that are strict prefixes of a same-asset narrative field.
     The whole lesson is scanned because `-raw` emits some table cells after section 6 (OPL-DC-3401A-01..06)."""
-    fields = defaultdict(dict)
+    fields: defaultdict[str, dict[str, tuple[str, str]]] = defaultdict(dict)
     for w in sorted(rows, key=lambda w: w["WO_Number"]):
         for c in NARR:
             t = P.canonical(str(w[c] or ""))
@@ -220,7 +221,7 @@ def cd13(parsed, datasheets):
         if missing:
             items.append({"opl_id": oid, "tag": v["tag"], "missing": [[val, unit, UNIT_CLASS[unit]] for val, unit in missing],
                           "hazard_note": note})
-    by_tag = defaultdict(int)
+    by_tag: defaultdict[str, int] = defaultdict(int)
     for it in items:
         by_tag[it["tag"]] += 1
     return _rule("CD-13", items, by_tag=dict(sorted(by_tag.items())))
@@ -233,7 +234,7 @@ def cd4(rows):
               "report_date": w["Report_Date"].date().isoformat()}
              for w in sorted(rows, key=lambda w: w["WO_Number"])
              if all(w[c] in (None, "") for c in OUTCOME_FIELDS) and all(w[c] for c in NARR)]
-    by_type = defaultdict(int)
+    by_type: defaultdict[str, int] = defaultdict(int)
     for it in items:
         by_type[it["work_type"]] += 1
     return _rule("CD-4", items, by_work_type=dict(sorted(by_type.items())),
@@ -279,7 +280,7 @@ def cd15(rows):
         if m and int(m.group(1)) != w["Report_Date"].year:
             items.append({"wo": w["WO_Number"], "notification_no": w["Notification_No"], "report_year": w["Report_Date"].year})
     srt = sorted(rows, key=lambda w: w["WO_Number"])
-    out_of_order = sum(1 for a, b in zip(srt, srt[1:]) if b["Report_Date"] < a["Report_Date"])
+    out_of_order = sum(1 for a, b in pairwise(srt) if b["Report_Date"] < a["Report_Date"])
     return _rule("CD-15", items, non_chronological_pairs=out_of_order)
 
 
@@ -438,9 +439,10 @@ def compute(ctx, write_aliases=False):
 
 
 if __name__ == "__main__":
-    from . import opl as O, workbook as W
+    from . import opl as O
+    from . import workbook as W
     rows = W.load()
-    res = compute({"rows": rows, "pops": W.populations(rows), "opl": O.opl_texts(), "parsed": O.parse_all(), "files": P.corpus_files()})
+    res = compute({"rows": rows, "pops": W.populations(rows), "opl": P.opl_texts(), "parsed": O.parse_all(), "files": P.corpus_files()})
     for k in sorted(res, key=lambda k: (not k.startswith("CD-"), int(k[3:]) if k.startswith("CD-") else 0)):
         v = res[k]
         print(k, v["count"] if isinstance(v, dict) and "count" in v else v)
