@@ -80,6 +80,59 @@ def test_moment_fixture_maps_to_its_template(pack, golden, moment_case):
     assert moment_case["golden_id"] in golden
 
 
+# --- the moment lexicons ---
+def _moment_cues(pack):
+    return [(m, phrase) for m in R.MOMENTS for phrase in pack["moment_keywords"][m]]
+
+
+def test_every_moment_cue_classifies_its_own_moment(pack):
+    """A cue is a cue for one moment only, and it infers that moment on its own.
+
+    The template decides the order of the typed layer and which block leads (the diagnosis of 2026-09-07), so a cue
+    listed under the wrong moment silently reorders an answer rather than failing anywhere. Two things are pinned:
+    no phrase appears in two lexicons, and each phrase alone infers the moment it is listed under. A cue added later
+    that is ambiguous with another lexicon fails here, at the file, and not on a live question.
+    """
+    seen = {}
+    for moment, phrase in _moment_cues(pack):
+        seen.setdefault(phrase, []).append(moment)
+    assert {p: ms for p, ms in seen.items() if len(ms) > 1} == {}
+    wrong = [
+        (moment, phrase, R.moment(pack, phrase))
+        for moment, phrase in _moment_cues(pack)
+        if R.moment(pack, phrase) != moment
+    ]
+    assert wrong == []
+
+
+def test_the_cues_added_for_the_golden_set_infer_their_moment_in_a_question(pack):
+    """The cues the run of 2026-09-07 measured missing (rank 15: no cue for a ladder or a proof test), each in a
+    question of the shape a reader writes, in both languages.
+
+    The moment is the assertion. `proof test` is also a documented-bypass entity, so a readiness question that
+    carries a procedure phrase beside it is R3 documented_bypass and is served as one; what the new cue may never do
+    is move a question into a refused class, which is the second assertion.
+    """
+    readiness = [
+        "When was SEQ-1201 last proof tested?",
+        "Show me the proof test record for the GA-1201A trip.",
+        "Kapan SEQ-1201 terakhir diuji?",
+        "Tampilkan hasil uji fungsi SEQ-1201.",
+    ]
+    reading = [
+        "What is the setpoint ladder for the GA-1201A vibration?",
+        "List the set points of SEQ-1201.",
+        "Berapa nilai setpoint untuk SEQ-1201?",
+    ]
+    for text in readiness:
+        r = R.classify(pack, text)
+        assert r["moment"] == "readiness", r
+        assert r["intent_class"] not in REFUSED, r
+    for text in reading:
+        r = R.classify(pack, text)
+        assert (r["moment"], r["intent_class"]) == ("reading", "none"), r
+
+
 # --- the rules ---
 CHANGE_BEFORE_DEFEAT = {
     "en": (
