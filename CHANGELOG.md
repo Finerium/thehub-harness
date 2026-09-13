@@ -8,6 +8,19 @@ never what changed in the corpus itself, which belongs to the organiser and is n
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and every entry carries the tag it was
 released under. `git log --oneline` is the authority: nothing is listed here that is not in the history.
 
+## [1.0.6] - 2026-09-13
+
+### Added
+- The eight P&ID sets are images, and the page renderer only rendered PDFs, so no drawing ever had a page
+  derivative and the hotspot layer never drew the sheet it places its hotspots on. Images render to the same
+  1200-wide metadata-free derivative: 96 documents rendered, 2 skipped (the workbook and the organiser's deck).
+
+### Changed
+- The corpus-redistribution guard's window matches the harness's own citation cut, so the guard can fire on the
+  files it exists to guard.
+- The gateway role contract declares the optional `retries` key the two long-cut roles set (D-27), with the strict
+  check restored.
+
 ## [1.0.5] - 2026-09-08
 
 ### Changed

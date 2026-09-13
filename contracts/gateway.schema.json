@@ -7,7 +7,7 @@
   "$defs": {
     "GatewayRole": {
       "title": "GatewayRole",
-      "description": "One configuration row per model role. The per-role defaults are annotations (JSON Schema default) that follow ADR-001 as overridden by deviation D-05 (every product model role AG-1 to AG-4 runs glm-5.3-flash on the one provider, https://api.z.ai/api/paas/v4, OpenAI-compatible) and by the verified probe of 2026-09-03 (embedding-3 is not served on api.z.ai, so the embedding role is a hash-pinned local open-weights model run through ONNX, ADR-009 second branch). GLM reasoning cannot be disabled, so thinking is always_on and effort is the explicit per-role setting; every chat call sets response_format json_object (ADR-001).",
+      "description": "One configuration row per model role. additionalProperties is false and is the whole point of the row: the application parses every row of its ROLE_TABLE against this type at module load (src/gateway/config.ts), so a field outside this list is a load failure and not a silent pass. The per-role pins follow ADR-001 as overridden by deviation D-05 (every product model role AG-1 to AG-4 runs glm-5.3-flash on the one provider, https://api.z.ai/api/paas/v4, OpenAI-compatible, api_style openai_chat, thinking always_on, response_format json_object; effort high for AG-1 and AG-3, low for AG-2 and AG-4) and, for the embedding role, the verified probe of 2026-09-03 (embedding-3 is not served on api.z.ai, so the embedding role is a hash-pinned local open-weights model run through ONNX, ADR-009 second branch: provider local_embedding, api_style local_onnx, model_id the corpus version's pin corpus_version.embedding_model with embedding_dim and the model file hash, thinking n/a, effort n/a, response_format n/a, temperature null, prompt_version null). GLM reasoning cannot be disabled, so thinking is always_on and effort is the explicit per-role setting; every chat call sets response_format json_object (ADR-001). Those pins were carried until now as a five-branch allOf of if/then blocks whose then held nothing but JSON Schema default annotations, so it constrained nothing; json-schema-to-zod rendered each branch as an intersection with z.any(), and in Zod 4 an intersection with z.any() cancels the strict object, which turned the load-time check into a check that could not fail. The pins are stated here instead, as the annotation they always were, and the strictness they were quietly cancelling is back.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -27,6 +27,11 @@
           "description": "milliseconds; never above the Vercel Hobby function maximum duration of 300 s (verified 2026-09-03), which bounds every call including the waitUntil drafting work of ADR-004"
         },
         "prompt_version": { "type": ["string", "null"] },
+        "retries": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "OUTSIDE the GatewayRole key list of blueprint 9.13, and the only key here that is. Retries inside one logical call, on a timeout or a retryable provider error; absent means the gateway default MAX_RETRIES (src/gateway/index.ts). AG-3 and AG-4/redline set it to 0, buying a longer per-attempt cut by giving up their retries so the drafting round closes inside its lease. It is declared because the application's ROLE_TABLE carries it and this row is parsed at load: until the strictness above was restored it passed unseen, and the choice is to declare it or to drop it from the table. Not in required: a role that says nothing takes the default."
+        },
         "budget": {
           "type": "object",
           "additionalProperties": false,
@@ -51,79 +56,6 @@
         "timeout_ms",
         "prompt_version",
         "budget"
-      ],
-      "allOf": [
-        {
-          "if": { "properties": { "role": { "const": "AG-1" } }, "required": ["role"] },
-          "then": {
-            "properties": {
-              "provider": { "default": "zai" },
-              "base_url": { "default": "https://api.z.ai/api/paas/v4" },
-              "model_id": { "default": "glm-5.3-flash" },
-              "api_style": { "default": "openai_chat" },
-              "thinking": { "default": "always_on" },
-              "effort": { "default": "high" },
-              "response_format": { "default": "json_object" }
-            }
-          }
-        },
-        {
-          "if": { "properties": { "role": { "const": "AG-2" } }, "required": ["role"] },
-          "then": {
-            "properties": {
-              "provider": { "default": "zai" },
-              "base_url": { "default": "https://api.z.ai/api/paas/v4" },
-              "model_id": { "default": "glm-5.3-flash" },
-              "api_style": { "default": "openai_chat" },
-              "thinking": { "default": "always_on" },
-              "effort": { "default": "low" },
-              "response_format": { "default": "json_object" }
-            }
-          }
-        },
-        {
-          "if": { "properties": { "role": { "const": "AG-3" } }, "required": ["role"] },
-          "then": {
-            "properties": {
-              "provider": { "default": "zai" },
-              "base_url": { "default": "https://api.z.ai/api/paas/v4" },
-              "model_id": { "default": "glm-5.3-flash" },
-              "api_style": { "default": "openai_chat" },
-              "thinking": { "default": "always_on" },
-              "effort": { "default": "high" },
-              "response_format": { "default": "json_object" }
-            }
-          }
-        },
-        {
-          "if": { "properties": { "role": { "const": "AG-4" } }, "required": ["role"] },
-          "then": {
-            "properties": {
-              "provider": { "default": "zai" },
-              "base_url": { "default": "https://api.z.ai/api/paas/v4" },
-              "model_id": { "default": "glm-5.3-flash" },
-              "api_style": { "default": "openai_chat" },
-              "thinking": { "default": "always_on" },
-              "effort": { "default": "low" },
-              "response_format": { "default": "json_object" }
-            }
-          }
-        },
-        {
-          "if": { "properties": { "role": { "const": "embedding" } }, "required": ["role"] },
-          "then": {
-            "properties": {
-              "provider": { "default": "local_embedding" },
-              "model_id": { "description": "the corpus version's pin: corpus_version.embedding_model, with embedding_dim and the model file hash (ADR-009 second branch)" },
-              "api_style": { "default": "local_onnx" },
-              "thinking": { "default": "n/a" },
-              "effort": { "default": "n/a" },
-              "response_format": { "default": "n/a" },
-              "temperature": { "default": null },
-              "prompt_version": { "default": null }
-            }
-          }
-        }
       ]
     },
     "GatewayCall": {

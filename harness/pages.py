@@ -7,8 +7,9 @@ width, a second waits for a surface that needs it) to WebP at quality QUALITY, a
 profile, verified by walking the RIFF chunks of every file written. Output: bundle/pages/<document_id>/<n>.webp with an
 index.json per document (document id, source file digest, page count, width, and the height, sha256 and byte size of
 each render) and one bundle/pages/index.json listing the documents and the files that were skipped because they are
-not PDFs (the workbook, the deck and the eight P&ID images). Document ids are harness.chunks.identity, the ids of
-documents.json, and must be path-safe. The tree is corpus imagery and stays gitignored (blueprint 8.3).
+neither a PDF nor a raster sheet (the workbook and the deck). A supplied raster sheet (the eight P&ID sets) renders as
+one page the same way, so the hotspot layer has an underlay to draw. Document ids are harness.chunks.identity, the ids
+of documents.json, and must be path-safe. The tree is corpus imagery and stays gitignored (blueprint 8.3).
 """
 
 import argparse
@@ -27,6 +28,7 @@ from .config import CORPUS
 from .pdftext import corpus_files, file_sha256
 
 WIDTH, QUALITY = 1200, 80
+IMAGE_SUFFIXES = (".png", ".jpg", ".jpeg")
 PATH_SAFE = re.compile(r"[A-Za-z0-9._-]+")
 METADATA_CHUNKS = {b"EXIF", b"XMP ", b"ICCP"}
 
@@ -79,17 +81,49 @@ def render_pdf(path, out_dir):
     return pages
 
 
+def render_image(path, out_dir):
+    """Write 1.webp for one supplied raster sheet into out_dir; the same shape render_pdf returns.
+
+    Same width, quality and metadata walk as a PDF page. Transparency is flattened onto white first, so a drawing
+    stored with an alpha channel does not arrive on a black ground.
+    """
+    os.makedirs(out_dir, exist_ok=True)
+    with Image.open(path) as src:
+        flat = Image.new("RGBA", src.size, (255, 255, 255, 255))
+        img = Image.alpha_composite(flat, src.convert("RGBA")).convert("RGB")
+    if img.width != WIDTH:
+        img = img.resize(
+            (WIDTH, round(img.height * WIDTH / img.width)), Image.Resampling.LANCZOS
+        )
+    buf = io.BytesIO()
+    img.save(buf, "WEBP", quality=QUALITY)
+    data = buf.getvalue()
+    assert_metadata_free(data)
+    with open(os.path.join(out_dir, "1.webp"), "wb") as f:
+        f.write(data)
+    return [
+        {
+            "n": 1,
+            "height": img.height,
+            "sha256": hashlib.sha256(data).hexdigest(),
+            "bytes": len(data),
+        }
+    ]
+
+
 def build(out, base=CORPUS):
     documents, skipped = [], []
     for p in corpus_files(base):
-        if not p.lower().endswith(".pdf"):
+        low = p.lower()
+        if not low.endswith(".pdf") and not low.endswith(IMAGE_SUFFIXES):
             skipped.append(os.path.relpath(p, base))
             continue
         digest = file_sha256(p)
         did = identity(p)[0]
         if not PATH_SAFE.fullmatch(did):
             raise ValueError(f"document id is not a safe directory name: {did!r}")
-        pages = render_pdf(p, os.path.join(out, did))
+        render = render_pdf if low.endswith(".pdf") else render_image
+        pages = render(p, os.path.join(out, did))
         index = {
             "document_id": did,
             "source_sha256": digest,

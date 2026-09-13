@@ -39,9 +39,9 @@ def index(pages_dir):
     return read_json(os.path.join(pages_dir, "index.json"))
 
 
-def test_index_covers_every_pdf_and_skips_the_rest(index):
+def test_index_covers_every_pdf_and_image_and_skips_the_rest(index):
     files = corpus_files()
-    pdfs = [p for p in files if p.lower().endswith(".pdf")]
+    pdfs = [p for p in files if p.lower().endswith((".pdf", *PG.IMAGE_SUFFIXES))]
     assert (
         index["width"] == PG.WIDTH == 1200
         and index["format"] == "webp"
@@ -51,13 +51,21 @@ def test_index_covers_every_pdf_and_skips_the_rest(index):
         identity(p)[0] for p in pdfs
     ]
     assert index["skipped"] == [
-        os.path.relpath(p, CORPUS) for p in files if not p.lower().endswith(".pdf")
+        os.path.relpath(p, CORPUS)
+        for p in files
+        if not p.lower().endswith((".pdf", *PG.IMAGE_SUFFIXES))
     ]
+    # The eight drawings are images: a skipped entry may never end in an image suffix again.
+    assert not any(e.lower().endswith(PG.IMAGE_SUFFIXES) for e in index["skipped"])
     assert all(PG.PATH_SAFE.fullmatch(d["document_id"]) for d in index["documents"])
     by_id = {identity(p)[0]: p for p in pdfs}
     for d in index["documents"]:
         assert d["source_sha256"] == file_sha256(by_id[d["document_id"]])
-        assert d["page_count"] == pdf_pages(by_id[d["document_id"]]) >= 1
+        source = by_id[d["document_id"]]
+        expected_pages = (
+            1 if source.lower().endswith(PG.IMAGE_SUFFIXES) else pdf_pages(source)
+        )
+        assert d["page_count"] == expected_pages >= 1
 
 
 def test_every_render_is_1200_wide_metadata_free_and_hashed(pages_dir, index):

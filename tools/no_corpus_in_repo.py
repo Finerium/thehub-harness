@@ -8,6 +8,14 @@ without ever opening fixtures.json (CS-02). packages/text|claims|chunks are git-
 The window slides one character at a time: at a step of 40 a corpus run of 200 to 239 characters could start between two
 window starts and be missed.
 
+The window and the publishable-span cap are one interlock, and the interlock is checked here rather than assumed. Every
+span the harness publishes is cut at harness.documents.CITATION_MAX_CHARS, so the only thing that keeps a legal citation
+out of this report is that the cap sits below the window; and the only thing that lets this scan fire on the tracked
+files it exists to guard (bundle/claims.json in the application repository, 1,546 claims whose longest string is exactly
+the cap) is that same ordering. Today the margin is a single character, which is a working interlock and nowhere stated,
+so a run that finds nothing prints the margin it found nothing by, and a cap raised to the window or above is reported
+at its cause instead of as a thousand findings.
+
 Usable from any repository: `--repo PATH` enumerates that repository's working tree (tracked plus untracked, unignored
 files, listed from that root) and resolves every path against it; `--corpus PATH` names the corpus root and defaults to
 $CASE1_CORPUS. The harness modules are imported after the options are read because harness.config binds the corpus
@@ -95,6 +103,7 @@ def main(argv=None):
     from harness import pdftext as P
     from harness import workbook as W
     from harness.config import CORPUS
+    from harness.documents import CITATION_MAX_CHARS
 
     if not os.path.isdir(CORPUS):
         ap.error(
@@ -106,6 +115,8 @@ def main(argv=None):
     except subprocess.CalledProcessError:
         ap.error(f"not a git repository: {repo}")
     corpus = corpus_text(P, W)
+    # The interlock, before any scanning: a published span may not reach the window this scan looks for.
+    cap_ok = CITATION_MAX_CHARS < WIN
     bad = []
     # A7 also covers pictures of the corpus, which the text scan cannot see. Every figure this package draws goes through
     # fig_helpers.save(), which always writes the PNG and a .pdf twin; a rasterised corpus page (pdftoppm) has no twin.
@@ -139,11 +150,19 @@ def main(argv=None):
             f"CORPUS-IMAGE {f}: image with no .pdf twin, so not drawn by fig_helpers.save(); "
             f"if this is a rasterised corpus page it must not be published (A7) -- git rm --cached it and gitignore it"
         )
+    if not cap_ok:
+        print(
+            f"CITATION-CAP harness.documents.CITATION_MAX_CHARS is {CITATION_MAX_CHARS}, at or above this scan's "
+            f"{WIN}-character window: every published span now reaches the window, so the scan can no longer tell a "
+            f"legal citation from redistributed corpus text. Lower the cap below {WIN} or raise the window"
+        )
     print(
         f"no_corpus_in_repo: {len(bad)} file(s) with >= {WIN} chars of corpus text, "
-        f"{len(exhibits)} un-drawn image(s) in the publishable tree of {repo}"
+        f"{len(exhibits)} un-drawn image(s) in the publishable tree of {repo}; "
+        f"published spans are cut at {CITATION_MAX_CHARS} chars, "
+        f"{WIN - CITATION_MAX_CHARS} under the window"
     )
-    return 1 if (bad or exhibits) else 0
+    return 1 if (bad or exhibits or not cap_ok) else 0
 
 
 if __name__ == "__main__":
